@@ -83,4 +83,13 @@ rather than showcasing advanced software engineering expertise.
 
 ## License
 
-This project is intended for educational, learning, and portfolio purposes.
+Copyright © 2026 Ganesh.
+
+All Rights Reserved.
+
+This repository was created for educational, learning, portfolio, and DevOps practice purposes.
+
+The source code, documentation, architecture, and project materials contained in this repository may not be copied, redistributed, modified, republished, or used in any commercial or non-commercial project without prior written permission from the author.
+
+Unauthorized use of this project is strictly prohibited.
+
