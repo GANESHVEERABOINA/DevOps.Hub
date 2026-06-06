@@ -1,0 +1,15 @@
+# backend/.dockerignore
+# Ignore files that should not be sent to the Docker build context
+node_modules
+npm-debug.log
+.env
+.git
+.gitignore
+coverage
+.nyc_output
+*.md
+!README.md
+dist
+uploads
+logs
+*.log

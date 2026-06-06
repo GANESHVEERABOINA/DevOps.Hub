@@ -1,0 +1,36 @@
+version: '3.8'
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: devopshub
+      POSTGRES_USER: devopshub
+      POSTGRES_PASSWORD: securepass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+  backend:
+    build: ../backend
+    environment:
+      NODE_ENV: production
+      DB_HOST: postgres
+      DB_USER: devopshub
+      DB_PASSWORD: securepass
+      DB_NAME: devopshub
+      REDIS_HOST: redis
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+      - redis
+  frontend:
+    build: ../frontend
+    ports:
+      - "80:80"
+volumes:
+  pgdata:

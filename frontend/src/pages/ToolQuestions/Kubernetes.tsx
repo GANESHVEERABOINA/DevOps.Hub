@@ -1,0 +1,9 @@
+// frontend/src/pages/ToolQuestions/Kubernetes.tsx
+import React from 'react';
+import QuestionList from '../../components/questions/QuestionList';
+
+const Kubernetes: React.FC = () => (
+  <QuestionList categorySlug="kubernetes" title="Kubernetes Interview Questions" />
+);
+
+export default Kubernetes;

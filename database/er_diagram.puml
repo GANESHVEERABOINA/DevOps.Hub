@@ -1,0 +1,75 @@
+@startuml
+entity roles {
+  * id : INT <<PK>>
+  * name : VARCHAR(50) UNIQUE
+  description : TEXT
+}
+
+entity users {
+  * id : UUID <<PK>>
+  * email : VARCHAR(255) UNIQUE
+  password_hash : VARCHAR(255)
+  full_name : VARCHAR(100)
+  role_id : INT <<FK>>
+}
+
+entity categories {
+  * id : INT <<PK>>
+  * name : VARCHAR(100) UNIQUE
+  slug : VARCHAR(100) UNIQUE
+  parent_category_id : INT <<FK>>
+}
+
+entity questions {
+  * id : UUID <<PK>>
+  * category_id : INT <<FK>>
+  question_text : TEXT
+  difficulty : VARCHAR(20)
+  company_id : INT <<FK>>
+}
+
+entity roadmaps {
+  * id : INT <<PK>>
+  title : VARCHAR(200)
+}
+
+entity roadmap_topics {
+  * id : INT <<PK>>
+  * roadmap_id : INT <<FK>>
+  title : VARCHAR(200)
+  prerequisite_topic_ids : INT[]
+}
+
+entity projects {
+  * id : UUID <<PK>>
+  category : VARCHAR(50)
+}
+
+entity bookmarks {
+  * id : UUID <<PK>>
+  * user_id : UUID <<FK>>
+  item_type : VARCHAR(50)
+  item_id : VARCHAR(100)
+}
+
+entity mock_interviews {
+  * id : UUID <<PK>>
+  * user_id : UUID <<FK>>
+  score : DECIMAL
+}
+
+entity salary_data {
+  * id : INT <<PK>>
+  role : VARCHAR(100)
+  experience_level : VARCHAR(50)
+}
+
+roles ||--o{ users : "role_id"
+users ||--o{ bookmarks : "user_id"
+users ||--o{ mock_interviews : "user_id"
+categories ||--o{ questions : "category_id"
+categories ||--o{ categories : "parent_category_id"
+roadmaps ||--o{ roadmap_topics : "roadmap_id"
+companies ||--o{ company_questions : "company_id"
+questions ||--o{ company_questions : "question_id"
+@enduml
