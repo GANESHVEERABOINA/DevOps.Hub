@@ -18,7 +18,7 @@ export default function DashboardLayout() {
     transition: {
       duration: 20,
       repeat: Infinity,
-      ease: "easeInOut",
+      ease: "easeInOut" as const,
     }
   };
 

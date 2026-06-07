@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import InterviewQuestions from '../pages/InterviewQuestions';
 import Linux from '../pages/ToolQuestions/Linux';
 import Docker from '../pages/ToolQuestions/Docker';
+import Kubernetes from '../pages/ToolQuestions/Kubernetes';
 // Import all other tool pages similarly
 import Roadmaps from '../pages/Roadmaps';
 import Projects from '../pages/Projects';
@@ -20,6 +21,7 @@ import Settings from '../pages/Settings';
 import SearchResults from '../pages/SearchResults';
 import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
+import QuestionDetails from '../pages/QuestionDetails';
 
 const AppRouter = () => (
   <Routes>
@@ -30,6 +32,8 @@ const AppRouter = () => (
       <Route path="/questions" element={<InterviewQuestions />} />
       <Route path="/questions/linux" element={<Linux />} />
       <Route path="/questions/docker" element={<Docker />} />
+      <Route path="/questions/kubernetes" element={<Kubernetes />} />
+      <Route path="/questions/:id" element={<QuestionDetails />} />
       {/* ... all tool routes */}
       <Route path="/roadmaps" element={<Roadmaps />} />
       <Route path="/projects" element={<Projects />} />

@@ -1,0 +1,812 @@
+[
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is Kubernetes?",
+"simple_explanation": "Kubernetes is an open-source container orchestration platform.",
+"interview_answer": "Kubernetes automates the deployment, scaling, and management of containerized applications across a cluster of machines. It ensures high availability and optimal resource usage.",
+"real_world_example": "Scaling a web application from 2 to 20 containers automatically during Black Friday traffic.",
+"common_mistake": "Thinking Kubernetes is a container engine like Docker, rather than an orchestrator for containers."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Pod?",
+"simple_explanation": "A Pod is the smallest deployable computing unit in Kubernetes.",
+"interview_answer": "A Pod represents a single instance of a running process in your cluster. It can contain one or more containers that share the same network namespace, storage, and configuration.",
+"real_world_example": "Running a Node.js web server container and a log-forwarding sidecar container inside the same Pod.",
+"common_mistake": "Treating Pods like virtual machines and trying to SSH into them for permanent configuration changes."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Node?",
+"simple_explanation": "A Node is a worker machine in Kubernetes.",
+"interview_answer": "A Node can be a physical or virtual machine that runs the Kubernetes agent (kubelet) and container runtime. It provides the CPU and memory resources required to run Pods.",
+"real_world_example": "An AWS EC2 instance registered to an Amazon EKS cluster acting as a worker node.",
+"common_mistake": "Confusing a Node (the actual server) with a Cluster (the logical grouping of multiple nodes)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is the Control Plane?",
+"simple_explanation": "The Control Plane is the brain of the Kubernetes cluster.",
+"interview_answer": "It manages the overall state of the cluster, making global decisions like scheduling Pods and detecting node failures. It includes components like the API Server, Scheduler, and Controller Manager.",
+"real_world_example": "When you deploy an application, the Control Plane decides which worker nodes have enough memory to run it.",
+"common_mistake": "Running heavy application workloads on the Control Plane nodes instead of worker nodes."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is kubelet?",
+"simple_explanation": "Kubelet is the primary node agent that runs on each worker node.",
+"interview_answer": "It communicates with the Control Plane and ensures that containers are running and healthy inside the expected Pods. It interacts directly with the container runtime (like containerd).",
+"real_world_example": "If a container crashes, the kubelet restarts it to maintain the Pod's desired state.",
+"common_mistake": "Assuming kubelet handles network routing between Pods; that is kube-proxy's job."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is kube-proxy?",
+"simple_explanation": "Kube-proxy is a network proxy that runs on each node in the cluster.",
+"interview_answer": "It maintains network rules on nodes, allowing network communication to your Pods from network sessions inside or outside of your cluster.",
+"real_world_example": "Routing a user's web request from a Service IP directly to the specific backend Pod running the application.",
+"common_mistake": "Modifying iptables manually instead of letting kube-proxy manage the cluster networking rules."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is etcd?",
+"simple_explanation": "Etcd is a consistent and highly-available key-value store.",
+"interview_answer": "It is used as Kubernetes' backing store for all cluster data. It holds the desired state and current state of the entire cluster, making it the most critical component to backup.",
+"real_world_example": "When a deployment is created, its configuration details are saved in etcd.",
+"common_mistake": "Failing to set up automated backups for etcd, leading to total cluster loss during a catastrophic failure."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is kubectl?",
+"simple_explanation": "Kubectl is the command-line tool used to interact with Kubernetes clusters.",
+"interview_answer": "It uses the Kubernetes API to deploy applications, inspect cluster resources, and manage cluster infrastructure. It relies on a kubeconfig file for authentication.",
+"real_world_example": "Running 'kubectl get pods' to list all running application instances.",
+"common_mistake": "Not specifying a namespace with kubectl, causing confusion when expected resources aren't found in the default namespace."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a ReplicaSet?",
+"simple_explanation": "A ReplicaSet ensures a specified number of pod replicas are running at any given time.",
+"interview_answer": "It guarantees the availability of a specified number of identical Pods. If a Pod fails or is deleted, the ReplicaSet automatically creates a new one to replace it.",
+"real_world_example": "Ensuring there are always exactly 3 instances of an authentication service running to handle login requests.",
+"common_mistake": "Creating ReplicaSets directly instead of using Deployments, which manage ReplicaSets for you."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Deployment?",
+"simple_explanation": "A Deployment provides declarative updates for Pods and ReplicaSets.",
+"interview_answer": "It allows you to describe an application's life cycle, such as which images to use and how many replicas to run. Deployments enable rolling updates and easy rollbacks.",
+"real_world_example": "Updating an e-commerce app from v1.0 to v2.0 without any downtime using a rolling update strategy.",
+"common_mistake": "Deleting a Pod manually expecting it to stay deleted, without realizing the Deployment will immediately recreate it."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Service in Kubernetes?",
+"simple_explanation": "A Service provides a stable network endpoint to access a logical set of Pods.",
+"interview_answer": "Since Pod IP addresses change frequently when they are recreated, a Service provides a static IP and DNS name. It acts as an internal load balancer routing traffic to healthy Pods.",
+"real_world_example": "A frontend application communicating with a backend database using the service name 'db-service' regardless of pod restarts.",
+"common_mistake": "Forgetting to match the Service's selector labels exactly with the Pod's labels, resulting in no endpoints."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Namespace?",
+"simple_explanation": "Namespaces are virtual clusters backed by the same physical cluster.",
+"interview_answer": "They provide a mechanism for isolating groups of resources within a single cluster. This is particularly useful in multi-tenant environments or to separate dev, staging, and production environments.",
+"real_world_example": "Creating a 'qa' namespace to test new features without interfering with the 'production' namespace.",
+"common_mistake": "Assuming Namespaces provide total network isolation by default; they only provide logical naming isolation."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a ConfigMap?",
+"simple_explanation": "A ConfigMap is an API object used to store non-confidential data in key-value pairs.",
+"interview_answer": "It decouples environment-specific configuration from your container images. Pods can consume ConfigMaps as environment variables, command-line arguments, or as configuration files in a volume.",
+"real_world_example": "Storing the URL of a third-party API in a ConfigMap so it can be changed without rebuilding the application container.",
+"common_mistake": "Storing sensitive information like API keys or passwords in a ConfigMap instead of a Secret."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Secret?",
+"simple_explanation": "A Secret is an object that contains a small amount of sensitive data.",
+"interview_answer": "Secrets store data such as passwords, OAuth tokens, and SSH keys. Storing confidential information in a Secret is safer and more flexible than putting it verbatim in a Pod definition or image.",
+"real_world_example": "Injecting a database connection password securely into a backend Pod.",
+"common_mistake": "Assuming Secrets are heavily encrypted by default; they are only base64 encoded unless encryption at rest is configured."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What are Labels in Kubernetes?",
+"simple_explanation": "Labels are key/value pairs attached to objects like Pods.",
+"interview_answer": "They are intended to be used to specify identifying attributes of objects that are meaningful to users. Labels are fundamentally used by selectors to group and query subsets of objects.",
+"real_world_example": "Tagging Pods with 'env: production' and 'tier: frontend' to easily identify and manage them.",
+"common_mistake": "Using labels to store large amounts of non-identifying data, which should be stored in Annotations instead."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What are Selectors?",
+"simple_explanation": "Selectors are used to filter and group Kubernetes resources based on their labels.",
+"interview_answer": "The label selector is the core grouping primitive in Kubernetes. For example, a Service uses a label selector to know which Pods to route incoming network traffic to.",
+"real_world_example": "A Service directing traffic only to Pods that have the label 'app=payment-processor'.",
+"common_mistake": "Typing a typo in a selector, which silently fails to connect a Service to its intended Pods."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is Minikube?",
+"simple_explanation": "Minikube is a tool that lets you run Kubernetes locally.",
+"interview_answer": "It runs a single-node Kubernetes cluster inside a Virtual Machine or Docker container on your local computer. It is primarily used for learning and local development.",
+"real_world_example": "Testing a new deployment script on a developer's laptop before pushing it to the cloud environment.",
+"common_mistake": "Trying to use Minikube for production workloads; it lacks high availability and scalability features."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Volume in Kubernetes?",
+"simple_explanation": "A Volume provides a way to store data that persists beyond the life of a container.",
+"interview_answer": "Unlike a container's ephemeral filesystem, a Kubernetes Volume has an explicit lifetime tied to the Pod. It allows data to survive container restarts and be shared between containers in the same Pod.",
+"real_world_example": "An Nginx container and a log-rotate container in the same Pod accessing the same shared log volume.",
+"common_mistake": "Assuming standard Pod Volumes persist if the Pod itself is deleted; for true persistence, a PersistentVolume is needed."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a DaemonSet?",
+"simple_explanation": "A DaemonSet ensures that all eligible nodes run a copy of a specific Pod.",
+"interview_answer": "As nodes are added to the cluster, Pods are added to them. As nodes are removed, those Pods are garbage collected. It is typically used for cluster-level background tasks.",
+"real_world_example": "Deploying a logging agent like Fluentd or a monitoring agent like Prometheus Node Exporter on every single node.",
+"common_mistake": "Using a DaemonSet to deploy a web application backend, resulting in poor resource utilization compared to a Deployment."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a StatefulSet?",
+"simple_explanation": "A StatefulSet manages the deployment and scaling of stateful applications.",
+"interview_answer": "Unlike a Deployment, a StatefulSet maintains a sticky identity for each of its Pods. These pods are created from the same spec, but are not interchangeable, maintaining persistent identifiers across rescheduling.",
+"real_world_example": "Deploying a MongoDB cluster where each node requires a permanent hostname and dedicated, unshared persistent storage.",
+"common_mistake": "Using a StatefulSet for stateless web servers, needlessly complicating the deployment process."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is an Ingress?",
+"simple_explanation": "An Ingress is an API object that manages external access to services in a cluster.",
+"interview_answer": "It provides HTTP and HTTPS routing to services based on hostnames or URI paths. It acts as an intelligent router and load balancer at the edge of the cluster.",
+"real_world_example": "Routing traffic for 'api.example.com' to an API service and 'example.com' to the frontend service using a single IP address.",
+"common_mistake": "Creating an Ingress resource without installing an Ingress Controller (like Nginx), which means the rules will never be applied."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is Helm?",
+"simple_explanation": "Helm is a package manager for Kubernetes.",
+"interview_answer": "Helm helps you manage Kubernetes applications through 'Charts', which are packages of pre-configured Kubernetes resources. It simplifies installing, updating, and sharing complex applications.",
+"real_world_example": "Running 'helm install prometheus' to instantly deploy a full monitoring stack instead of writing dozens of YAML files manually.",
+"common_mistake": "Modifying resources deployed by Helm manually via kubectl, causing Helm to lose track of the desired state during the next upgrade."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is YAML?",
+"simple_explanation": "YAML is a human-readable data serialization language used for Kubernetes manifests.",
+"interview_answer": "Kubernetes uses YAML to define the desired state of resources declaratively. It allows version control of infrastructure and is converted to JSON before being processed by the API server.",
+"real_world_example": "Writing a 'deployment.yaml' file and checking it into Git so the entire team can review infrastructure changes.",
+"common_mistake": "Using tabs instead of spaces for indentation, which invalidates the YAML format and causes parsing errors."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a Job?",
+"simple_explanation": "A Job creates one or more Pods to perform a specific finite task.",
+"interview_answer": "A Job ensures that a specified number of Pods successfully terminate. When the task is complete, the Pods are not restarted, unlike ReplicaSets which keep Pods running continuously.",
+"real_world_example": "Running a database migration script once before deploying a new version of an application.",
+"common_mistake": "Using a Pod directly for a batch task; if the node dies, the Pod is lost. A Job ensures the task is retried."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is a CronJob?",
+"simple_explanation": "A CronJob executes a Job on a repeating schedule.",
+"interview_answer": "Similar to Linux cron, a CronJob runs background tasks periodically. It creates a Job object based on a schedule specified in cron format.",
+"real_world_example": "Scheduling an automated backup of a database to run every night at 2:00 AM.",
+"common_mistake": "Assuming a CronJob guarantees exactly one execution per schedule; due to complex failure modes, concurrent executions can happen if not configured properly."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What does the API Server do?",
+"simple_explanation": "The API Server acts as the front end for the Kubernetes control plane.",
+"interview_answer": "It exposes the Kubernetes API, receiving and validating all REST requests (from kubectl or applications). It is the only component that communicates directly with the etcd datastore.",
+"real_world_example": "When you type 'kubectl get pods', the request goes to the API server, which reads the pod status from etcd and returns it.",
+"common_mistake": "Thinking worker nodes bypass the API server to talk to each other directly for state updates."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What does the Kubernetes Scheduler do?",
+"simple_explanation": "The Scheduler assigns newly created Pods to appropriate worker nodes.",
+"interview_answer": "It watches for newly created Pods that have no Node assigned. It selects the optimal Node to run them on based on resource requirements, hardware constraints, affinity rules, and data locality.",
+"real_world_example": "The Scheduler putting a heavy machine-learning Pod specifically on a worker node that has GPU resources available.",
+"common_mistake": "Assuming the Scheduler executes the container; it only makes the placement decision, while the kubelet actually starts the container."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What is EKS, AKS, and GKE?",
+"simple_explanation": "They are managed Kubernetes services provided by major cloud vendors.",
+"interview_answer": "Amazon Elastic Kubernetes Service (EKS), Azure Kubernetes Service (AKS), and Google Kubernetes Engine (GKE) abstract the complexity of managing the control plane, making cluster provisioning much simpler.",
+"real_world_example": "Using AWS EKS to quickly provision a cluster without having to manually install etcd or API servers.",
+"common_mistake": "Thinking managed services eliminate all administration; you still have to manage worker nodes, RBAC, and workload configurations."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "How do you check cluster information via CLI?",
+"simple_explanation": "Use the 'kubectl cluster-info' command.",
+"interview_answer": "This command prints out the addresses of the Kubernetes master and cluster services. It is a quick way to verify that your kubectl is configured correctly and pointing to the right cluster.",
+"real_world_example": "Running 'kubectl cluster-info' after downloading a kubeconfig file to ensure you are connected.",
+"common_mistake": "Overlooking the cluster context and accidentally applying configurations to production instead of the dev cluster."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Easy",
+"question": "What does the 'apply' command do?",
+"simple_explanation": "It creates or updates resources declaratively from a file.",
+"interview_answer": "The 'kubectl apply -f' command sends the YAML definition to the API server. If the resource doesn't exist, it creates it. If it does, it updates the resource to match the file's configuration.",
+"real_world_example": "Running 'kubectl apply -f app.yaml' to update a deployment with a newly pushed container image.",
+"common_mistake": "Mixing imperative commands (kubectl create) with declarative commands (kubectl apply) on the same resource, causing configuration drift."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a ClusterIP Service?",
+"simple_explanation": "It exposes a Service on an internal IP address within the cluster.",
+"interview_answer": "ClusterIP is the default Service type. It makes the Service reachable only from within the Kubernetes cluster, preventing any external access to the Pods it routes traffic to.",
+"real_world_example": "Providing internal routing for a backend database that should never be accessed directly from the public internet.",
+"common_mistake": "Creating a ClusterIP service for a frontend web app and wondering why it cannot be accessed from a web browser."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a NodePort Service?",
+"simple_explanation": "It exposes a Service on a static port on each Node's IP.",
+"interview_answer": "A NodePort service allows external traffic to access a service by opening a specific port (usually between 30000-32767) on all worker nodes. It automatically creates a ClusterIP behind the scenes.",
+"real_world_example": "Accessing a legacy application over port 30500 directly via the public IP of an EC2 worker node.",
+"common_mistake": "Using NodePort in production without a firewall or load balancer in front of it, posing significant security risks."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a LoadBalancer Service?",
+"simple_explanation": "It exposes a Service externally using a cloud provider's load balancer.",
+"interview_answer": "When created in a cloud environment (like AWS or GCP), it automatically provisions a cloud load balancer (e.g., AWS ALB/NLB) and routes external traffic to the NodePort and then to the Pods.",
+"real_world_example": "Deploying a public-facing API where Kubernetes automatically provisions an AWS Network Load Balancer to handle incoming internet traffic.",
+"common_mistake": "Creating multiple LoadBalancer services for dozens of microservices, leading to massive cloud provider bills (use Ingress instead)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is the CrashLoopBackOff status?",
+"simple_explanation": "A state where a Pod repeatedly fails to start and Kubernetes delays restarting it.",
+"interview_answer": "It indicates that a container is starting, crashing immediately, and the kubelet is restarting it with an increasing backoff delay. It usually points to application misconfigurations or missing dependencies.",
+"real_world_example": "A Node.js app failing to start because the database connection string environment variable is missing, causing endless crash loops.",
+"common_mistake": "Assuming Kubernetes will eventually fix the CrashLoopBackOff on its own without investigating the pod logs."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "How do you troubleshoot a Pending Pod?",
+"simple_explanation": "Check cluster resources and use 'kubectl describe pod'.",
+"interview_answer": "A 'Pending' status means the Pod has been accepted by the cluster, but the Scheduler cannot find a suitable node. This is almost always caused by insufficient CPU/Memory or unsatisfied affinity/taint rules.",
+"real_world_example": "A Pod requesting 4GB of RAM remaining in a pending state because all nodes only have 2GB available.",
+"common_mistake": "Trying to view 'kubectl logs' on a pending Pod (logs only exist if the container has actually started)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is ImagePullBackOff?",
+"simple_explanation": "A status indicating Kubernetes cannot pull the requested container image.",
+"interview_answer": "This happens when the kubelet fails to download the container image from the registry. Causes include typos in the image name, wrong tags, or lack of authentication (imagePullSecrets).",
+"real_world_example": "A deployment failing because the developer tagged the image as 'v1.0' but specified 'latest' in the YAML.",
+"common_mistake": "Assuming the cluster has access to private Docker Hub repositories without configuring an imagePullSecret."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a Liveness Probe?",
+"simple_explanation": "A check to determine if a container is running properly.",
+"interview_answer": "The kubelet uses liveness probes to know when to restart a container. If an application is deadlocked and unresponsive, the liveness probe will fail, and the container will be killed and recreated.",
+"real_world_example": "Configuring an HTTP GET request to '/healthz'; if the app returns a 500 error, Kubernetes restarts the Pod.",
+"common_mistake": "Making the liveness probe check external dependencies (like a database), causing unnecessary restarts when the DB is slow."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a Readiness Probe?",
+"simple_explanation": "A check to determine if a container is ready to accept network traffic.",
+"interview_answer": "While Liveness probes restart containers, Readiness probes manage traffic routing. If a readiness probe fails, the endpoint controller removes the Pod's IP from all Services, stopping traffic from reaching it.",
+"real_world_example": "A Java application that takes 30 seconds to boot up; the readiness probe prevents users from hitting the pod until it is fully initialized.",
+"common_mistake": "Not setting a Readiness probe, causing Kubernetes to send traffic to a Pod that is still loading its configuration."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What are Requests and Limits?",
+"simple_explanation": "Mechanisms to manage CPU and memory usage for containers.",
+"interview_answer": "Requests specify the minimum resources guaranteed to a container, used by the scheduler for node placement. Limits define the absolute maximum resources a container can consume before being throttled (CPU) or killed (Memory).",
+"real_world_example": "Setting a request of 256Mi and limit of 512Mi to ensure an app has enough memory to run, but won't crash the host node if it leaks memory.",
+"common_mistake": "Setting limits lower than requests, which causes Kubernetes API validation errors."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is RBAC?",
+"simple_explanation": "Role-Based Access Control determines who can access Kubernetes API resources.",
+"interview_answer": "RBAC uses the 'rbac.authorization.k8s.io' API group to drive authorization decisions. It involves creating Roles (what actions are allowed) and RoleBindings (who is allowed to perform those actions).",
+"real_world_example": "Creating a Role that only allows reading Pods in the 'dev' namespace, and binding it to a Junior Developer's user account.",
+"common_mistake": "Granting 'cluster-admin' privileges to a CI/CD pipeline, creating a massive security vulnerability."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "Role vs ClusterRole?",
+"simple_explanation": "Roles apply to a specific namespace; ClusterRoles apply to the entire cluster.",
+"interview_answer": "A Role defines permissions within a single namespace (e.g., getting pods in 'default'). A ClusterRole defines cluster-wide permissions or access to non-namespaced resources (e.g., listing all Nodes).",
+"real_world_example": "Using a ClusterRole to allow a monitoring agent to view metrics across all namespaces in the cluster.",
+"common_mistake": "Trying to use a RoleBinding to bind a ClusterRole for non-namespaced resources, which requires a ClusterRoleBinding."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a ServiceAccount?",
+"simple_explanation": "An identity used by Pods to communicate with the Kubernetes API.",
+"interview_answer": "While regular Users are meant for humans interacting with the cluster, ServiceAccounts provide an identity for processes running in a Pod. Pods authenticate using a token mounted automatically at runtime.",
+"real_world_example": "Assigning a specific ServiceAccount to a Jenkins Pod so it has permission to create new Deployments.",
+"common_mistake": "Leaving the default ServiceAccount overly permissive, allowing any compromised pod to modify the cluster."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is an Init Container?",
+"simple_explanation": "A specialized container that runs before the main application containers start.",
+"interview_answer": "Init containers run sequentially and must complete successfully before the main Pod containers initialize. They are typically used for setup scripts, waiting for dependencies, or cloning repositories.",
+"real_world_example": "Using an init container to wait for a database to be available before starting the backend application container.",
+"common_mistake": "Configuring an init container with a continuous loop, which prevents the main application from ever starting."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What are Taints and Tolerations?",
+"simple_explanation": "A mechanism to repel Pods from certain Nodes unless they explicitly tolerate the taint.",
+"interview_answer": "Taints are applied to nodes to mark them for special purposes. Tolerations are applied to Pods to allow them to schedule on tainted nodes. It is commonly used for dedicating hardware to specific workloads.",
+"real_world_example": "Tainting GPU nodes with 'gpu=true:NoSchedule' so only machine learning Pods with the corresponding toleration run there.",
+"common_mistake": "Assuming Taints guarantee a pod *will* schedule on a node; they only determine if a pod *can* be scheduled. (Node Affinity is needed for attraction)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is Node Affinity?",
+"simple_explanation": "A rule that attracts Pods to schedule on specific nodes based on labels.",
+"interview_answer": "Node Affinity allows you to constrain which nodes your Pod is eligible to be scheduled on, based on node labels. It can be 'required' (hard rule) or 'preferred' (soft rule).",
+"real_world_example": "Using required Node Affinity to ensure an application specifically schedules on nodes located in the 'us-east-1a' availability zone.",
+"common_mistake": "Creating a strict hard requirement for a label that doesn't exist on any node, leaving the pod perpetually pending."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is Pod Affinity and Anti-Affinity?",
+"simple_explanation": "Rules that dictate how Pods are placed relative to other Pods.",
+"interview_answer": "Pod Affinity ensures certain pods are co-located (e.g., on the same node or in the same zone) to reduce network latency. Anti-Affinity ensures pods are separated to maximize high availability.",
+"real_world_example": "Using Pod Anti-Affinity to ensure three replicas of a web server are placed on completely different physical nodes to survive a node crash.",
+"common_mistake": "Applying excessive Pod Anti-Affinity rules in a small cluster, making it impossible to scale up the deployment."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is the Horizontal Pod Autoscaler (HPA)?",
+"simple_explanation": "A controller that automatically scales the number of Pod replicas based on metrics.",
+"interview_answer": "HPA adjusts the number of replicas in a Deployment, ReplicaSet, or StatefulSet based on observed CPU utilization or custom metrics. It relies on the metrics-server to gather performance data.",
+"real_world_example": "Configuring HPA to scale a frontend deployment from 2 to 10 pods if average CPU usage exceeds 80%.",
+"common_mistake": "Setting up HPA without defining CPU resource requests on the Pods, causing HPA to fail because it cannot calculate utilization."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is the Vertical Pod Autoscaler (VPA)?",
+"simple_explanation": "A controller that automatically adjusts the CPU and memory requests/limits of Pods.",
+"interview_answer": "Instead of adding more Pods (like HPA), VPA allocates more CPU or memory to existing Pods by analyzing historical usage. Currently, VPA requires restarting the Pods to apply the new resource sizes.",
+"real_world_example": "Using VPA on a monolithic database Pod to gradually increase its memory allocation as the dataset grows.",
+"common_mistake": "Using HPA and VPA together on the same metrics (like CPU), causing the two autoscalers to fight each other."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a PersistentVolumeClaim (PVC)?",
+"simple_explanation": "A request for storage by a user or Pod.",
+"interview_answer": "A PVC acts as a ticket requesting a specific size and access mode for persistent storage. The cluster binds the PVC to an available PersistentVolume (PV) that matches the criteria.",
+"real_world_example": "Creating a 10Gi PVC in the 'database' namespace so a PostgreSQL Pod can store its data securely.",
+"common_mistake": "Deleting a PVC without checking the reclaim policy, which might inadvertently destroy the underlying physical data volume."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a StorageClass?",
+"simple_explanation": "A way to dynamically provision storage for PersistentVolumes.",
+"interview_answer": "Administrators define StorageClasses to describe the 'classes' of storage offered (e.g., standard HDD vs fast SSD). When a PVC requests a StorageClass, a PV is automatically provisioned via cloud APIs.",
+"real_world_example": "Defining an 'aws-efs' StorageClass to dynamically create Elastic File Systems whenever a pod needs ReadWriteMany storage.",
+"common_mistake": "Forgetting to set a default StorageClass, causing PVCs to remain unbound unless specifically named."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "How do you view Pod logs?",
+"simple_explanation": "Use the 'kubectl logs' command.",
+"interview_answer": "The command outputs the standard error and standard output streams from a container. You can add the '-f' flag to tail the logs in real-time, or '-c' if there are multiple containers in the pod.",
+"real_world_example": "Running 'kubectl logs -f pod-name' to monitor an application's startup process live.",
+"common_mistake": "Trying to view logs for a pod that was completely deleted; you must use centralized logging (like ELK) for historical logs."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "How do you execute a command inside a container?",
+"simple_explanation": "Use the 'kubectl exec' command.",
+"interview_answer": "This command opens a shell or runs a specific command directly inside a running container. It is a vital tool for debugging network issues, inspecting filesystems, and verifying configurations locally.",
+"real_world_example": "Running 'kubectl exec -it pod-name -- /bin/sh' to open an interactive terminal session inside the container.",
+"common_mistake": "Forgetting the '--' separator before the command, causing kubectl to misinterpret flags meant for the container shell."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What does 'kubectl port-forward' do?",
+"simple_explanation": "It securely forwards local network traffic to a port on a Pod.",
+"interview_answer": "Port-forwarding bypasses Services and Ingress, allowing you to access internal cluster applications directly from your localhost via the Kubernetes API server tunnel.",
+"real_world_example": "Using 'kubectl port-forward svc/mysql 3306:3306' to connect a local database GUI to a cluster database temporarily.",
+"common_mistake": "Using port-forwarding as a permanent routing solution instead of properly configuring a Service or Ingress."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What does 'kubectl cordon' do?",
+"simple_explanation": "It marks a node as unschedulable for new Pods.",
+"interview_answer": "Cordoning a node prevents the Scheduler from placing any new Pods on it. However, it does not affect any Pods currently running on that node.",
+"real_world_example": "Cordoning a worker node before investigating a hardware issue so no new production workloads are impacted.",
+"common_mistake": "Cordoning a node and expecting it to immediately empty out; you must use 'kubectl drain' for that."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What does 'kubectl drain' do?",
+"simple_explanation": "It safely evicts all Pods from a node and marks it unschedulable.",
+"interview_answer": "Draining prepares a node for maintenance. It cordons the node and gracefully terminates all running Pods, allowing the Deployments and ReplicaSets to reschedule them onto other available nodes.",
+"real_world_example": "Draining a node prior to performing a kernel update and rebooting the underlying EC2 instance.",
+"common_mistake": "Running drain on a cluster with insufficient spare capacity, resulting in applications going offline due to lack of scheduling space."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is CoreDNS?",
+"simple_explanation": "The default DNS server for Kubernetes clusters.",
+"interview_answer": "CoreDNS automatically creates DNS records for Services and Pods. It allows applications within the cluster to resolve services by name (e.g., '[http://my-service.namespace.svc.cluster.local](https://www.google.com/search?q=http://my-service.namespace.svc.cluster.local)') rather than relying on dynamic IP addresses.",
+"real_world_example": "A backend service finding the database simply by pinging the hostname 'db-service'.",
+"common_mistake": "Hardcoding Pod IP addresses in application configurations instead of relying on CoreDNS service names."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a Network Policy?",
+"simple_explanation": "A specification of how groups of Pods are allowed to communicate.",
+"interview_answer": "Network Policies act as internal firewalls for the cluster. By default, all Pods can communicate with all other Pods. A Network Policy restricts traffic using label selectors and port rules.",
+"real_world_example": "Creating a Network Policy that prevents frontend pods from communicating with anything except the backend API pods.",
+"common_mistake": "Creating a Network Policy when the cluster's CNI plugin (like Flannel) does not support them, rendering the policy useless."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a CNI?",
+"simple_explanation": "The Container Network Interface provides networking connectivity between Pods.",
+"interview_answer": "CNI is a standardized interface that allows different network providers (like Calico, Cilium, or Weave) to assign IP addresses to Pods and manage the network routing across the cluster infrastructure.",
+"real_world_example": "Installing Calico as the CNI to provide high-performance pod-to-pod networking and enforce Network Policies.",
+"common_mistake": "Bootstrapping a new cluster and wondering why CoreDNS is stuck in a 'Pending' state (it requires a CNI to be installed first)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What are ResourceQuotas?",
+"simple_explanation": "Limits on aggregate resource consumption per namespace.",
+"interview_answer": "ResourceQuotas restrict the total amount of CPU, memory, and object counts (like number of Pods or PVCs) that can be created in a single namespace to prevent a single team from monopolizing the cluster.",
+"real_world_example": "Limiting the 'development' namespace to a maximum of 10 CPU cores and 20GB of RAM.",
+"common_mistake": "Applying a CPU ResourceQuota to a namespace and failing to define default Pod limits, preventing any pods from being created."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Medium",
+"question": "What is a LimitRange?",
+"simple_explanation": "A policy to constrain resource allocations for individual Pods or Containers.",
+"interview_answer": "While ResourceQuotas restrict the total namespace, a LimitRange enforces minimum and maximum CPU/Memory requests per Pod. It can also inject default resource requests and limits if a developer forgets to specify them.",
+"real_world_example": "Using LimitRange to ensure no developer creates a single Pod requesting more than 2GB of RAM in a shared environment.",
+"common_mistake": "Confusing LimitRange (per-pod constraints) with ResourceQuotas (namespace-wide constraints)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is an OOMKilled status?",
+"simple_explanation": "The container was terminated by the kernel because it exceeded its memory limit.",
+"interview_answer": "Out Of Memory (OOM) Killed occurs when a container tries to allocate more RAM than specified in its resource limits. The Linux kernel's OOM killer forcefully terminates the process to protect the host node.",
+"real_world_example": "A Java application experiencing a memory leak, hitting its 1Gi limit, and continuously being OOMKilled and restarted.",
+"common_mistake": "Increasing memory limits blindly without profiling the application to fix the underlying memory leak."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is a Headless Service?",
+"simple_explanation": "A Service without a ClusterIP that allows direct access to Pod IPs.",
+"interview_answer": "Setting 'clusterIP: None' creates a Headless Service. Instead of load balancing traffic to a single IP, the DNS query returns the A records for all backing Pods directly. It is essential for stateful applications.",
+"real_world_example": "Using a Headless Service so a Cassandra database cluster can discover the exact IP addresses of its peer nodes to form a cluster.",
+"common_mistake": "Trying to use a Headless Service for a standard frontend web app, which breaks standard load balancing."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How do you handle graceful shutdowns in Kubernetes?",
+"simple_explanation": "Use SIGTERM signals and preStop hooks.",
+"interview_answer": "When terminating a Pod, Kubelet sends a SIGTERM signal. The app must stop accepting connections, finish active requests, and exit cleanly within the terminationGracePeriodSeconds. A preStop hook can delay the SIGTERM if necessary.",
+"real_world_example": "Adding a 10-second sleep in a preStop hook to ensure kube-proxy has time to remove the pod from the routing tables before the app shuts down.",
+"common_mistake": "Hardcoding apps to exit abruptly on SIGTERM, causing in-flight user requests to fail immediately."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is a Pod Disruption Budget (PDB)?",
+"simple_explanation": "An API object that limits how many Pods can go down during voluntary disruptions.",
+"interview_answer": "A PDB ensures high availability during maintenance (like node upgrades). You can specify 'minAvailable' or 'maxUnavailable'. The eviction API will block node draining if it violates the PDB.",
+"real_world_example": "Setting a PDB with 'minAvailable: 2' on a 3-replica web app ensures cluster upgrades never take the app offline entirely.",
+"common_mistake": "Setting 'maxUnavailable: 0' (or minAvailable to 100%), which completely blocks administrators from updating or draining worker nodes."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What are Custom Resource Definitions (CRDs)?",
+"simple_explanation": "Extensions of the Kubernetes API that allow you to define custom objects.",
+"interview_answer": "CRDs allow you to create your own resource types (like 'Database' or 'Certificate') that behave exactly like native Pods or Services. They are the foundation of the Operator pattern.",
+"real_world_example": "Installing the Prometheus Operator which creates a 'ServiceMonitor' CRD to declaratively manage monitoring targets.",
+"common_mistake": "Creating a CRD without deploying a corresponding Custom Controller, meaning the API accepts the object but does absolutely nothing with it."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is the Operator Pattern?",
+"simple_explanation": "Software extensions that use custom resources to manage complex stateful applications.",
+"interview_answer": "An Operator encodes human operational knowledge into software. It watches a CRD and continuously reconciles the current state to the desired state, managing tasks like backups, upgrades, and failovers.",
+"real_world_example": "Using an Elasticsearch Operator to automatically provision, scale, and manage shard reallocation for a search cluster.",
+"common_mistake": "Building complex custom Operators for simple stateless apps where a basic Deployment and ConfigMap would suffice."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is a Validating Admission Webhook?",
+"simple_explanation": "An API interceptor that accepts or rejects resource creation requests.",
+"interview_answer": "Before the API server persists an object in etcd, the validating webhook evaluates it against custom rules. It enforces compliance and security policies synchronously.",
+"real_world_example": "Using Open Policy Agent (OPA) as a validating webhook to reject any Pod that tries to run as the root user.",
+"common_mistake": "Deploying a validating webhook with strict failure policies that blocks all pod creation if the webhook server itself crashes."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is a Mutating Admission Webhook?",
+"simple_explanation": "An API interceptor that modifies resource requests before they are saved.",
+"interview_answer": "Mutating webhooks intercept API requests and alter the object payloads dynamically. They are evaluated before validating webhooks to ensure the modified object is still compliant.",
+"real_world_example": "A service mesh (like Istio) using a mutating webhook to automatically inject an Envoy proxy sidecar container into every new Pod.",
+"common_mistake": "Creating circular mutating webhooks that constantly alter each other's changes, leading to unpredictable API behavior."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How does Kubernetes handle Split Brain in etcd?",
+"simple_explanation": "It prevents it using the Raft consensus algorithm which requires a strict quorum.",
+"interview_answer": "Etcd requires a majority (quorum) of nodes to agree on state changes. In a network partition, the partition without a quorum cannot elect a leader or commit data, inherently preventing split-brain scenarios.",
+"real_world_example": "Deploying 3 etcd nodes; if one loses network connectivity, the other 2 maintain quorum and the cluster remains fully operational.",
+"common_mistake": "Deploying an even number of etcd nodes (like 4), which provides the exact same fault tolerance as 3 but increases consensus overhead."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How do you encrypt Secrets at rest in Kubernetes?",
+"simple_explanation": "Configure an EncryptionConfiguration file for the API server.",
+"interview_answer": "By default, etcd stores Secrets in plaintext (base64). To secure them at the storage layer, you pass an encryption configuration flag to the kube-apiserver using providers like AES-CBC or a cloud KMS plugin.",
+"real_world_example": "Configuring AWS KMS to encrypt all Kubernetes secrets before they are committed to etcd on an EKS cluster.",
+"common_mistake": "Assuming RBAC restricts access to the underlying etcd disk; without encryption at rest, anyone with host file access can read all secrets."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is Cluster Autoscaler?",
+"simple_explanation": "A component that automatically provisions or removes worker nodes.",
+"interview_answer": "When the scheduler cannot find a node with sufficient capacity for a pending Pod, the Cluster Autoscaler requests a new node from the cloud provider. It also removes underutilized nodes to save costs.",
+"real_world_example": "AWS ASG spinning up three new EC2 instances during a traffic spike because the HPA requested 50 new Pods.",
+"common_mistake": "Confusing Cluster Autoscaler (scales hardware/nodes) with Horizontal Pod Autoscaler (scales software/pods)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is a Service Mesh?",
+"simple_explanation": "A dedicated infrastructure layer for managing service-to-service communication.",
+"interview_answer": "A Service Mesh (like Istio or Linkerd) injects a sidecar proxy into Pods to handle traffic management, observability, and security (mTLS) without requiring changes to the application code.",
+"real_world_example": "Implementing Istio to automatically encrypt all internal cluster traffic using mutual TLS and monitor failure rates.",
+"common_mistake": "Adopting a Service Mesh for a small architecture, introducing immense operational complexity for minimal benefit."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How do you troubleshoot a Node in 'NotReady' state?",
+"simple_explanation": "Inspect node events and check the kubelet logs on the host machine.",
+"interview_answer": "A NotReady state implies the API server cannot communicate with the kubelet. Use 'kubectl describe node' to check disk pressure or memory pressure. If unreachable, SSH into the node and inspect systemd logs ('journalctl -u kubelet').",
+"real_world_example": "Discovering a Node is NotReady because a runaway log file consumed 100% of the disk space, triggering an 'EvictionThreshold' failure.",
+"common_mistake": "Immediately deleting and recreating the node without diagnosing the root cause, which likely will happen again."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is Ephemeral Storage Exhaustion?",
+"simple_explanation": "When a container writes too much temporary data to its writable layer.",
+"interview_answer": "If a Pod consumes more local disk space than its ephemeral-storage limit allows (often via logging or temporary files), the kubelet will aggressively evict the Pod to protect the node's root filesystem.",
+"real_world_example": "An application writing massive debug files to '/tmp' causing Kubernetes to suddenly evict the Pod.",
+"common_mistake": "Failing to set ephemeral-storage limits, allowing one misbehaving Pod to crash the entire worker node's disk."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What are Static Pods?",
+"simple_explanation": "Pods managed directly by the kubelet on a specific node, bypassing the API server.",
+"interview_answer": "Static Pods are created by placing a YAML file in a specific directory monitored by the kubelet (e.g., /etc/kubernetes/manifests). They are used to bootstrap the control plane components themselves.",
+"real_world_example": "The kube-apiserver and etcd are run as Static Pods so the cluster can initialize before the API server is even available.",
+"common_mistake": "Trying to delete a Static Pod using 'kubectl delete'; it will instantly respawn until the YAML file is removed from the host node."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is the Persistent Volume Reclaim Policy?",
+"simple_explanation": "It dictates what happens to a PV when its associated PVC is deleted.",
+"interview_answer": "The policy can be Retain (keep the volume and data for manual cleanup), Delete (automatically destroy the cloud volume), or Recycle (scrub the data and make it available again).",
+"real_world_example": "Setting the policy to 'Retain' on a production database volume so accidental deletion of the PVC doesn't erase customer data.",
+"common_mistake": "Leaving the policy as 'Delete' (often the default for dynamic provisioning) on critical data stores."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How do you securely pass TLS certificates into Ingress?",
+"simple_explanation": "Store the certificates in a Kubernetes TLS Secret and reference it in the Ingress.",
+"interview_answer": "You create a secret of type 'kubernetes.io/tls' containing the certificate and private key. Then, in the Ingress rule, you specify a 'tls' section referencing that secret to terminate HTTPS traffic.",
+"real_world_example": "Using cert-manager to automatically fetch a Let's Encrypt certificate, save it as a TLS Secret, and attach it to an Ingress route.",
+"common_mistake": "Storing the certificate data in a standard Opaque secret instead of a TLS type, which the Ingress controller may fail to parse."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is a Sidecar Pattern?",
+"simple_explanation": "Deploying a helper container alongside a main application container in the same Pod.",
+"interview_answer": "The sidecar augments the primary app. Because they share the same network and storage namespace, the sidecar can easily proxy traffic, sync files, or forward logs without changing the main application code.",
+"real_world_example": "An Envoy proxy running as a sidecar to intercept and secure all network traffic for a legacy microservice.",
+"common_mistake": "Putting unrelated services (like a web server and a background processing queue) in the same pod using a sidecar pattern."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is Pod Security Admission (PSA)?",
+"simple_explanation": "A built-in controller that enforces pod security standards at the namespace level.",
+"interview_answer": "Replacing the deprecated PodSecurityPolicies (PSP), PSA applies security profiles (Privileged, Baseline, Restricted) via namespace labels to dictate what security contexts Pods can execute with.",
+"real_world_example": "Applying the 'restricted' profile to a namespace to prevent any pod from mounting host paths or running as root.",
+"common_mistake": "Applying strict PSA policies without testing first using 'warn' or 'audit' modes, breaking existing applications."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How does Kubernetes handle highly concurrent scheduling?",
+"simple_explanation": "It uses leader election to ensure only one active scheduler makes decisions.",
+"interview_answer": "In a highly available control plane, multiple instances of the kube-scheduler run, but only one acquires the 'leader' lease via an Endpoint or Lease resource. If the leader crashes, another instance instantly takes over.",
+"real_world_example": "Running three master nodes; if one goes offline, the remaining schedulers negotiate a new leader in seconds to continue assigning pods.",
+"common_mistake": "Assuming multiple schedulers work in active-active parallel mode; they work in active-standby to prevent placement conflicts."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What are Custom Metrics in HPA?",
+"simple_explanation": "Scaling applications based on business metrics rather than just CPU/Memory.",
+"interview_answer": "HPA can scale based on arbitrary external metrics by integrating tools like Prometheus Adapter. This allows scaling based on things like HTTP request rates, queue lengths, or active connections.",
+"real_world_example": "Scaling up a worker deployment based on the number of pending messages in a RabbitMQ queue rather than CPU usage.",
+"common_mistake": "Trying to configure custom metrics without properly installing and configuring the Custom Metrics API server."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is a Stale Endpoint issue?",
+"simple_explanation": "When a Service routes traffic to a Pod that has been terminated.",
+"interview_answer": "This occurs if kube-proxy iptables rules haven't updated or if the application doesn't gracefully handle termination. Traffic is sent to an IP that no longer hosts a running container, causing connection timeouts.",
+"real_world_example": "Rolling out a new deployment and seeing a 5% error rate because the old pods terminated before the load balancer updated its routes.",
+"common_mistake": "Blaming network latency instead of checking if the application lacks a preStop hook for graceful termination."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How do you back up and restore a Kubernetes cluster?",
+"simple_explanation": "Use tools like Velero or take direct snapshots of etcd.",
+"interview_answer": "Disaster recovery involves backing up etcd directly for control plane state, or using a tool like Velero to backup specific namespaces, resources, and Persistent Volumes to an external object store.",
+"real_world_example": "Using Velero to migrate an entire application and its persistent storage from an AWS cluster to a Google Cloud cluster.",
+"common_mistake": "Backing up etcd but failing to backup the cloud block storage volumes, meaning the data state is lost even if the config is restored."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is the Container Runtime Interface (CRI)?",
+"simple_explanation": "A plugin interface enabling kubelet to use different container runtimes.",
+"interview_answer": "CRI abstracts the container engine from Kubernetes. It allows cluster administrators to swap out Docker for runtimes like containerd or CRI-O without needing to recompile the Kubernetes source code.",
+"real_world_example": "Migrating a cluster from Docker to containerd to reduce overhead and comply with Kubernetes v1.24+ deprecation of dockershim.",
+"common_mistake": "Trying to use Docker CLI commands inside worker nodes on modern clusters that use containerd as their CRI."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is EndpointSlice?",
+"simple_explanation": "A scalable replacement for the original Endpoints resource.",
+"interview_answer": "As clusters grow, a single Endpoints object containing thousands of Pod IPs becomes a massive network bottleneck. EndpointSlices break this list into smaller, manageable chunks to improve API performance and reduce kube-proxy load.",
+"real_world_example": "Scaling a web app to 5,000 replicas without crashing the control plane network via massive endpoint propagation.",
+"common_mistake": "Writing custom controllers that only watch the legacy Endpoints API, causing them to fail on massive deployments."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is the difference between StatefulSet and Deployment for updates?",
+"simple_explanation": "Deployments update pods in a randomized rolling fashion; StatefulSets update them strictly sequentially.",
+"interview_answer": "A Deployment spins up new replicas and randomly terminates old ones. A StatefulSet performs updates in strict ordinal order (e.g., Pod-2, then Pod-1, then Pod-0) to ensure data synchronization consistency during upgrades.",
+"real_world_example": "Upgrading a Redis cluster where the primary (Pod-0) must be upgraded last after all replicas have successfully restarted.",
+"common_mistake": "Trying to force a StatefulSet to update multiple pods simultaneously using maxUnavailable settings."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is Distroless?",
+"simple_explanation": "Container images that contain only your application and its runtime dependencies, omitting shell tools.",
+"interview_answer": "Distroless images improve security by removing package managers and shells (like bash). If an attacker compromises a distroless container, it is significantly harder for them to explore the filesystem or download malware.",
+"real_world_example": "Deploying a Go API using the 'gcr.io/distroless/static' image, resulting in a tiny, highly secure 5MB container.",
+"common_mistake": "Trying to run 'kubectl exec -it pod -- bash' into a distroless container for debugging (it will fail since bash doesn't exist)."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How do you manage Kubernetes cluster upgrades via kubeadm?",
+"simple_explanation": "Upgrade the control plane nodes first, then the worker nodes.",
+"interview_answer": "Kubeadm requires upgrading kubeadm itself, running 'kubeadm upgrade apply' on the primary master, upgrading other masters, and finally draining and upgrading worker nodes sequentially to avoid downtime.",
+"real_world_example": "Carefully draining worker nodes and upgrading their kubelet and kubectl versions from v1.26 to v1.27 during a maintenance window.",
+"common_mistake": "Skipping minor versions (e.g., v1.25 to v1.27); Kubernetes only officially supports sequential minor version upgrades."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "What is Gateway API in Kubernetes?",
+"simple_explanation": "The modern, highly-configurable evolution of the Ingress API.",
+"interview_answer": "The Gateway API provides a more expressive, role-oriented, and extensible interface for routing traffic into a cluster. It separates concerns into GatewayClass, Gateway, and HTTPRoute objects to allow infrastructure teams and developers to collaborate securely.",
+"real_world_example": "An infrastructure team managing the core Gateway load balancer, while dev teams independently manage their own HTTPRoutes for their specific microservices.",
+"common_mistake": "Confusing standard Ingress definitions with the new Gateway API architecture, which uses completely different CRDs."
+},
+{
+"tool": "Kubernetes",
+"difficulty": "Hard",
+"question": "How do you identify a Kubernetes network partition?",
+"simple_explanation": "Nodes will report 'Unknown' status and Pods may enter 'Terminating' or 'Unknown' states.",
+"interview_answer": "If a network issue isolates worker nodes from the master, the kubelet cannot send heartbeats. After a timeout, the node enters 'NotReady', and the control plane attempts to evict its Pods, leading to split-brain risks if the pods are actually still serving traffic.",
+"real_world_example": "A switch failure isolating a rack of worker nodes, causing the scheduler to panic and try spinning up duplicate pods elsewhere.",
+"common_mistake": "Lowering the node-eviction timeout aggressively to recover faster, causing massive instability during minor network blips."
+}
+]

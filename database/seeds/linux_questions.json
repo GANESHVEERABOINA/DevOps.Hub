@@ -1,0 +1,902 @@
+[
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is Linux?",
+"simple_explanation": "Linux is an open-source operating system.",
+"interview_answer": "Linux is a Unix-like open-source operating system widely used in servers, cloud environments and DevOps infrastructure.",
+"real_world_example": "Most AWS EC2 servers run Linux.",
+"common_mistake": "Many beginners confuse Linux with a command line tool."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is the Linux kernel?",
+"simple_explanation": "The kernel is the core component of the Linux OS that interacts directly with hardware.",
+"interview_answer": "The kernel manages system resources, handles memory, CPU scheduling, and acts as a bridge between software applications and physical hardware.",
+"real_world_example": "When an app needs to save a file, it asks the kernel to write it to the SSD.",
+"common_mistake": "Thinking the kernel and the operating system (like Ubuntu) are the exact same thing."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is a shell?",
+"simple_explanation": "A shell is a command-line interpreter that executes user commands.",
+"interview_answer": "It is a user interface that takes text commands from the user, interprets them, and passes them to the kernel to execute.",
+"real_world_example": "Bash and Zsh are commonly used shells by developers to run scripts.",
+"common_mistake": "Confusing the terminal application with the shell itself."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is the root user?",
+"simple_explanation": "The root user is the superuser with absolute administrative privileges.",
+"interview_answer": "Root has unrestricted access to all files, commands, and system operations in Linux, capable of making system-wide changes.",
+"real_world_example": "Only root or a user with sudo privileges can install system-wide software.",
+"common_mistake": "Logging in as root for daily tasks, which can lead to accidental system damage."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What does the 'ls' command do?",
+"simple_explanation": "It lists the files and directories in a given path.",
+"interview_answer": "The 'ls' command displays the contents of a directory, and can be combined with flags like '-l' for detailed info and '-a' for hidden files.",
+"real_world_example": "Running 'ls -la' to check if a hidden .env file exists in your project folder.",
+"common_mistake": "Forgetting that 'ls' by default does not show hidden files."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What does the 'cd' command do?",
+"simple_explanation": "It changes the current working directory.",
+"interview_answer": "The 'cd' (change directory) command navigates through the Linux filesystem tree, moving the user from one folder to another.",
+"real_world_example": "Using 'cd /var/log' to navigate to the system logs directory.",
+"common_mistake": "Using 'cd' without spaces, like 'cd..', which fails in Linux."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What does the 'pwd' command do?",
+"simple_explanation": "It prints the present working directory.",
+"interview_answer": "It outputs the absolute path of the current directory you are in, starting from the root (/).",
+"real_world_example": "Typing 'pwd' to confirm you are in the correct folder before deleting files.",
+"common_mistake": "Assuming 'pwd' stands for password instead of present working directory."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you create a directory?",
+"simple_explanation": "You use the 'mkdir' command.",
+"interview_answer": "The 'mkdir' command creates new directories. You can use the '-p' flag to create nested parent directories all at once.",
+"real_world_example": "Running 'mkdir -p /app/src/components' to build a project structure.",
+"common_mistake": "Trying to create a nested directory without the '-p' flag, causing an error."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you remove a file?",
+"simple_explanation": "You use the 'rm' command.",
+"interview_answer": "The 'rm' command deletes files. For directories, you must use 'rm -r' to recursively delete the folder and its contents.",
+"real_world_example": "Using 'rm old_config.txt' to clean up a directory.",
+"common_mistake": "Running 'rm -rf /' which can destroy the entire system."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you copy files?",
+"simple_explanation": "You use the 'cp' command.",
+"interview_answer": "The 'cp' command duplicates files or directories from a source to a destination. Directories require the '-r' flag to be copied recursively.",
+"real_world_example": "Using 'cp config.yml config.yml.backup' before editing a file.",
+"common_mistake": "Forgetting the '-r' flag when trying to copy an entire folder."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you move or rename a file?",
+"simple_explanation": "You use the 'mv' command.",
+"interview_answer": "The 'mv' command moves files to a new location. If the destination is in the same directory but with a different name, it acts as a rename.",
+"real_world_example": "Using 'mv script.sh /usr/local/bin/' to make a script globally accessible.",
+"common_mistake": "Overwriting an existing file by moving a file with the same name into the directory."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What does the 'touch' command do?",
+"simple_explanation": "It creates an empty file or updates a file's timestamp.",
+"interview_answer": "The 'touch' command is primarily used to create a new, empty file quickly. If the file already exists, it updates its modification and access times.",
+"real_world_example": "Running 'touch .gitignore' to quickly create a git configuration file.",
+"common_mistake": "Using 'touch' to try and edit the contents of a file."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you view the contents of a file?",
+"simple_explanation": "You use the 'cat' command.",
+"interview_answer": "The 'cat' command concatenates and prints the entire contents of a file to the standard output on the terminal.",
+"real_world_example": "Using 'cat /etc/os-release' to check the Linux distribution version.",
+"common_mistake": "Using 'cat' on a massive log file, causing the terminal to freeze or scroll endlessly."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is the 'grep' command?",
+"simple_explanation": "It is a text search tool for finding specific patterns.",
+"interview_answer": "The 'grep' command searches through files or output for lines matching a specific string or regular expression, printing the matching lines.",
+"real_world_example": "Running 'grep \"ERROR\" /var/log/syslog' to find error messages.",
+"common_mistake": "Forgetting to use quotes around multi-word search patterns."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is the 'find' command?",
+"simple_explanation": "It searches for files and directories based on specific criteria.",
+"interview_answer": "The 'find' command recursively searches the filesystem for files matching conditions like name, size, modification date, or permissions.",
+"real_world_example": "Using 'find / -name nginx.conf' to locate a lost configuration file.",
+"common_mistake": "Running a broad find from the root directory without sudo, getting hundreds of 'Permission denied' errors."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you check command manuals?",
+"simple_explanation": "You use the 'man' command followed by the command name.",
+"interview_answer": "The 'man' command displays the comprehensive manual pager for a specific command, explaining its usage, flags, and syntax.",
+"real_world_example": "Typing 'man tar' to remember how to extract an archive.",
+"common_mistake": "Googling every command instead of quickly checking the built-in man pages."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you view previous commands?",
+"simple_explanation": "You use the 'history' command.",
+"interview_answer": "The 'history' command displays a numbered list of the most recent commands executed by the user in the current shell session.",
+"real_world_example": "Using 'history | grep ssh' to find an SSH command you ran yesterday.",
+"common_mistake": "Assuming history is shared between different users or concurrent terminal sessions."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is an alias?",
+"simple_explanation": "A custom shortcut for a longer command.",
+"interview_answer": "An alias allows a user to define a short, memorable string that the shell expands into a longer, more complex command.",
+"real_world_example": "Setting 'alias ll=\"ls -la\"' in your bashrc file.",
+"common_mistake": "Creating an alias in the terminal and wondering why it disappears after a reboot (needs to be in .bashrc)."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you print text to the terminal?",
+"simple_explanation": "You use the 'echo' command.",
+"interview_answer": "The 'echo' command prints text or variable values to the standard output, often used in scripts to display messages or write to files.",
+"real_world_example": "Running 'echo \"Hello World\" > test.txt' to create a file with specific text.",
+"common_mistake": "Using single quotes instead of double quotes when trying to expand a variable like $USER."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you archive files?",
+"simple_explanation": "You use the 'tar' command.",
+"interview_answer": "The 'tar' command bundles multiple files and directories into a single archive file, often without compression unless specific flags are used.",
+"real_world_example": "Using 'tar -cvf backup.tar /var/www/' to package a website's files.",
+"common_mistake": "Confusing archiving (tar) with compression (gzip)."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you compress files?",
+"simple_explanation": "You use commands like 'gzip' or 'zip'.",
+"interview_answer": "Compression tools reduce the size of files. 'gzip' is commonly used for single files, while 'tar.gz' handles compressed archives.",
+"real_world_example": "Using 'gzip logfile.txt' to save disk space on old logs.",
+"common_mistake": "Trying to gzip a directory directly without tarring it first."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you view basic system information?",
+"simple_explanation": "You use the 'uname' command.",
+"interview_answer": "The 'uname' command provides basic system information. Using 'uname -a' displays the kernel version, architecture, and hostname.",
+"real_world_example": "Running 'uname -r' to check which kernel version is currently running.",
+"common_mistake": "Expecting 'uname' to show OS distribution details instead of kernel details."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you check the current logged-in user?",
+"simple_explanation": "You use the 'whoami' command.",
+"interview_answer": "The 'whoami' command prints the effective username of the current user session, which is helpful when switching users.",
+"real_world_example": "Typing 'whoami' inside a script to ensure it is being executed as root.",
+"common_mistake": "Confusing 'whoami' with 'id', which gives more detailed group information."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you clear the terminal screen?",
+"simple_explanation": "You use the 'clear' command or Ctrl+L.",
+"interview_answer": "The 'clear' command scrolls the terminal down to hide previous output, giving you a clean slate to work on.",
+"real_world_example": "Typing 'clear' before starting a demonstration or running a complex script to make output readable.",
+"common_mistake": "Thinking 'clear' deletes command history; it only hides the visual output."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you exit a session?",
+"simple_explanation": "You type 'exit' or press Ctrl+D.",
+"interview_answer": "The 'exit' command closes the current shell session. If you are connected via SSH, it terminates the remote connection.",
+"real_world_example": "Typing 'exit' to log out of a server after finishing maintenance.",
+"common_mistake": "Closing the terminal window forcefully instead of safely using 'exit'."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What does 'sudo' mean?",
+"simple_explanation": "It stands for 'Superuser DO' and grants administrative privileges.",
+"interview_answer": "The 'sudo' command allows an authorized user to execute a command as the superuser (root) without needing the root password.",
+"real_world_example": "Running 'sudo apt update' to refresh package lists securely.",
+"common_mistake": "Preceding every single command with sudo out of habit, which is a security risk."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is a package manager?",
+"simple_explanation": "A tool to install, update, and remove software.",
+"interview_answer": "Package managers like APT (Debian/Ubuntu) or YUM/DNF (RHEL/CentOS) automate the process of resolving dependencies and managing software binaries.",
+"real_world_example": "Using 'apt install nginx' to set up a web server.",
+"common_mistake": "Trying to use 'apt' on a Red Hat based system, where it doesn't exist."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What are the three basic file permissions?",
+"simple_explanation": "Read (r), Write (w), and Execute (x).",
+"interview_answer": "Linux assigns permissions to the owner, group, and others. Read allows viewing, Write allows modifying, and Execute allows running a file as a program.",
+"real_world_example": "Granting execute permission to a shell script so it can be run.",
+"common_mistake": "Assuming read permission on a directory lets you view the files inside without execute permission (you need both)."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "What is the 'less' command used for?",
+"simple_explanation": "It views file contents one page at a time.",
+"interview_answer": "The 'less' command allows you to view large files cleanly by loading a page at a time, allowing backward and forward navigation without clogging the terminal.",
+"real_world_example": "Using 'less /var/log/syslog' to read a massive log file.",
+"common_mistake": "Trying to use the mouse to scroll in 'less' instead of arrow keys or page down/up."
+},
+{
+"tool": "Linux",
+"difficulty": "Easy",
+"question": "How do you see the first few lines of a file?",
+"simple_explanation": "You use the 'head' command.",
+"interview_answer": "The 'head' command outputs the first 10 lines of a file by default, but can be customized with the '-n' flag to show a specific number of lines.",
+"real_world_example": "Running 'head -n 5 /etc/passwd' to check the top entries of the user file.",
+"common_mistake": "Confusing 'head' with 'tail', which shows the end of the file."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you change file permissions?",
+"simple_explanation": "You use the 'chmod' command.",
+"interview_answer": "The 'chmod' command changes the read, write, and execute permissions of a file or directory using either absolute (numeric) mode or symbolic mode.",
+"real_world_example": "Running 'chmod 755 script.sh' to make a script executable by everyone but writable only by the owner.",
+"common_mistake": "Using 'chmod 777' as a lazy fix, which creates massive security vulnerabilities."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you change file ownership?",
+"simple_explanation": "You use the 'chown' command.",
+"interview_answer": "The 'chown' command changes the user and/or group ownership of a file or directory. It usually requires sudo privileges.",
+"real_world_example": "Using 'sudo chown www-data:www-data /var/www/html' to give the web server access to files.",
+"common_mistake": "Forgetting the colon when trying to change both user and group simultaneously."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you add a new user?",
+"simple_explanation": "You use the 'useradd' or 'adduser' command.",
+"interview_answer": "The 'useradd' command creates a new user account. 'adduser' is a friendlier, interactive frontend available on Debian-based systems.",
+"real_world_example": "Running 'sudo adduser devops' to create a new profile for a team member.",
+"common_mistake": "Using 'useradd' without flags, which often creates a user without a home directory."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you set or change a password?",
+"simple_explanation": "You use the 'passwd' command.",
+"interview_answer": "The 'passwd' command updates a user's authentication token. Root can change any user's password, while normal users can only change their own.",
+"real_world_example": "Running 'sudo passwd devops' to reset a forgotten password for a team member.",
+"common_mistake": "Typing the password and thinking the terminal is broken because no characters or asterisks appear."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you monitor system processes in real-time?",
+"simple_explanation": "You use the 'top' or 'htop' command.",
+"interview_answer": "The 'top' command provides a dynamic, real-time view of running processes, displaying CPU usage, memory usage, and load averages.",
+"real_world_example": "Running 'top' to see which application is causing the CPU fan to spin loudly.",
+"common_mistake": "Not knowing how to quit 'top' (pressing 'q' exits the tool)."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you list running processes statically?",
+"simple_explanation": "You use the 'ps' command.",
+"interview_answer": "The 'ps' command provides a snapshot of current processes. The common 'ps aux' flag combination shows processes for all users.",
+"real_world_example": "Running 'ps aux | grep node' to find the Process ID of a Node.js app.",
+"common_mistake": "Assuming 'ps' updates dynamically like 'top'."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you terminate a process?",
+"simple_explanation": "You use the 'kill' command with the Process ID (PID).",
+"interview_answer": "The 'kill' command sends a signal to a process. By default it sends SIGTERM (15) to ask the process to exit gracefully, but 'kill -9' forcefully terminates it.",
+"real_world_example": "Running 'kill -9 1234' to forcefully stop an unresponsive web server process.",
+"common_mistake": "Using 'kill -9' as the first option, which prevents the process from saving data and cleaning up."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you run a command in the background after logout?",
+"simple_explanation": "You use the 'nohup' command.",
+"interview_answer": "The 'nohup' (no hangup) command prevents a process from receiving the SIGHUP signal, allowing it to continue running even if the terminal is closed.",
+"real_world_example": "Running 'nohup python script.py &' to keep a data pipeline running overnight.",
+"common_mistake": "Forgetting the '&' at the end, which leaves the process running in the foreground."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you check disk space?",
+"simple_explanation": "You use the 'df' command.",
+"interview_answer": "The 'df' (disk free) command displays the amount of available and used disk space on mounted filesystems. 'df -h' makes it human-readable.",
+"real_world_example": "Running 'df -h' to see if the main root partition is out of space.",
+"common_mistake": "Confusing 'df' with 'du' and trying to use it to measure the size of a specific folder."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you check directory sizes?",
+"simple_explanation": "You use the 'du' command.",
+"interview_answer": "The 'du' (disk usage) command estimates the file space usage of directories. 'du -sh' provides a summary for a specific folder.",
+"real_world_example": "Using 'du -sh /var/log/' to check how much space logs are taking up.",
+"common_mistake": "Running 'du' without flags on the root directory, resulting in an unreadable flood of data."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you mount a filesystem?",
+"simple_explanation": "You use the 'mount' command.",
+"interview_answer": "The 'mount' command attaches a storage device or filesystem to a specific directory (mount point) so the system can access its contents.",
+"real_world_example": "Running 'sudo mount /dev/sdb1 /mnt/usb' to access a flash drive.",
+"common_mistake": "Trying to mount to a directory that doesn't exist yet."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is the /etc/fstab file?",
+"simple_explanation": "It defines how disk partitions should be mounted on boot.",
+"interview_answer": "The File Systems Table (fstab) is a configuration file that contains information about different partitions and storage devices, ensuring they mount automatically on startup.",
+"real_world_example": "Adding an entry to /etc/fstab so an attached EBS volume persists after an AWS EC2 reboot.",
+"common_mistake": "Making a syntax error in fstab, which can prevent the Linux system from booting completely."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you securely connect to a remote server?",
+"simple_explanation": "You use SSH (Secure Shell).",
+"interview_answer": "SSH provides a secure, encrypted connection to a remote machine, allowing you to execute commands, transfer files, and manage the server remotely.",
+"real_world_example": "Using 'ssh user@192.168.1.10' to access a database server.",
+"common_mistake": "Losing the private SSH key and permanently losing access to a cloud server."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you securely copy files over a network?",
+"simple_explanation": "You use the 'scp' command.",
+"interview_answer": "Secure Copy Protocol (scp) uses SSH to securely transfer files between a local host and a remote host or between two remote hosts.",
+"real_world_example": "Running 'scp backup.tar user@remote:/tmp/' to send a backup to another server.",
+"common_mistake": "Putting the destination path before the source path."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you synchronize files between servers?",
+"simple_explanation": "You use the 'rsync' command.",
+"interview_answer": "Rsync is a fast utility that synchronizes files across directories or networks by only transferring the changes (deltas), saving bandwidth and time.",
+"real_world_example": "Using 'rsync -avz /var/www/ user@backup:/var/www/' to mirror a website.",
+"common_mistake": "Misunderstanding how a trailing slash on the source directory changes rsync's behavior."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you test network connectivity?",
+"simple_explanation": "You use the 'ping' command.",
+"interview_answer": "The 'ping' command sends ICMP Echo Request packets to a target IP or domain to check if it is reachable and measures the round-trip time.",
+"real_world_example": "Running 'ping 8.8.8.8' to verify the server has outbound internet access.",
+"common_mistake": "Assuming a server is down just because it doesn't reply to pings (the firewall might be blocking ICMP)."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you check open ports and connections?",
+"simple_explanation": "You use 'netstat' or the newer 'ss' command.",
+"interview_answer": "These tools display active network connections, routing tables, and listening ports, helping identify what services are running on which ports.",
+"real_world_example": "Running 'ss -tuln' to verify that Nginx is listening on port 80 and 443.",
+"common_mistake": "Using 'netstat' on newer distributions where it has been deprecated and replaced by 'ss'."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is a firewall in Linux?",
+"simple_explanation": "A system that filters incoming and outgoing network traffic.",
+"interview_answer": "Linux firewalls use the kernel's netfilter framework. They are managed by tools like iptables, firewalld, or UFW to define rules for allowing or blocking traffic.",
+"real_world_example": "Using UFW to 'allow 22' so SSH traffic can enter the server.",
+"common_mistake": "Enabling a default-deny firewall without allowing port 22 first, locking yourself out of SSH."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you schedule recurring tasks?",
+"simple_explanation": "You use 'cron' and edit the crontab.",
+"interview_answer": "Cron is a time-based job scheduler. Users edit their crontab file using 'crontab -e' to specify commands and the exact time/interval they should execute.",
+"real_world_example": "Setting a cron job to run a database backup script every night at 2 AM.",
+"common_mistake": "Assuming cron has the same PATH variables as an interactive shell; cron environments are very limited."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you manage system services?",
+"simple_explanation": "You use the 'systemctl' command.",
+"interview_answer": "Systemctl is the primary tool to control the systemd system and service manager. It allows you to start, stop, restart, enable, or disable background services.",
+"real_world_example": "Running 'sudo systemctl restart nginx' after changing a configuration file.",
+"common_mistake": "Using 'start' instead of 'enable' and wondering why the service didn't survive a reboot."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you view system logs?",
+"simple_explanation": "You use the 'journalctl' command.",
+"interview_answer": "Journalctl queries the systemd journal, which aggregates logs from the kernel, services, and applications in a centralized, binary format.",
+"real_world_example": "Using 'journalctl -u sshd -f' to tail the SSH service logs in real-time.",
+"common_mistake": "Trying to view the journal with 'cat' instead of 'journalctl'."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is 'awk' used for?",
+"simple_explanation": "It is a text processing language for data extraction.",
+"interview_answer": "Awk is a powerful utility designed for processing structured data. It reads line by line, splits data into fields, and allows complex reporting and text manipulation.",
+"real_world_example": "Using 'awk '{print $1}' access.log' to extract just the IP addresses from a web log.",
+"common_mistake": "Overcomplicating simple text replacements with awk when sed would be easier."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is 'sed' used for?",
+"simple_explanation": "It is a stream editor used for modifying text.",
+"interview_answer": "Sed performs basic text transformations on an input stream. It is heavily used for find-and-replace operations within files without opening them in an editor.",
+"real_world_example": "Using 'sed -i 's/localhost/127.0.0.1/g' config.yml' to quickly patch a configuration.",
+"common_mistake": "Forgetting the '-i' flag and wondering why the original file wasn't actually changed."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is a soft link?",
+"simple_explanation": "A shortcut that points to the original file's path.",
+"interview_answer": "A soft (symbolic) link acts like a Windows shortcut. It contains the path to the target file. If the original file is deleted, the soft link breaks (becomes dangling).",
+"real_world_example": "Creating a soft link from '/var/log/nginx' to the user's home directory for easy access.",
+"common_mistake": "Creating a symlink with a relative path and then moving the symlink, breaking the reference."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is a hard link?",
+"simple_explanation": "A direct reference to the data on the disk (the inode).",
+"interview_answer": "A hard link points directly to the file's underlying inode. Even if the original file name is deleted, the hard link retains access to the data.",
+"real_world_example": "Using a hard link to maintain a backup of a file that shares exactly the same disk space.",
+"common_mistake": "Trying to create a hard link across different filesystems or partitions, which is not allowed."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is an inode?",
+"simple_explanation": "A data structure that stores metadata about a file.",
+"interview_answer": "An inode stores information like file size, ownership, permissions, and disk block locations, but it does NOT store the file's name or the actual data.",
+"real_world_example": "Running out of inodes because of millions of tiny files, causing 'disk full' errors even if space is available.",
+"common_mistake": "Assuming file names are stored in the inode (they are stored in directory entries)."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is umask?",
+"simple_explanation": "It sets the default permissions for newly created files.",
+"interview_answer": "Umask (user file-creation mode mask) defines which permissions are denied by default when a file or directory is created. It subtracts from the base permissions.",
+"real_world_example": "Setting umask to 027 ensures new files are readable by the owner, but inaccessible to 'others'.",
+"common_mistake": "Thinking umask grants permissions, rather than stripping them away."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What are environment variables?",
+"simple_explanation": "Dynamic values that affect how processes run.",
+"interview_answer": "Environment variables store data like paths, user preferences, and system configurations. They are inherited by child processes spawned by the shell.",
+"real_world_example": "Setting 'NODE_ENV=production' so a web app runs in optimized mode.",
+"common_mistake": "Setting a variable without 'export', meaning child scripts cannot access it."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is the PATH variable?",
+"simple_explanation": "A list of directories the shell searches for executable commands.",
+"interview_answer": "When you type a command like 'ls', the shell checks the directories listed in the PATH variable sequentially to find the executable binary.",
+"real_world_example": "Adding '/usr/local/go/bin' to PATH so you can compile Go programs from any directory.",
+"common_mistake": "Overwriting PATH completely (e.g., PATH=/my/folder) instead of appending to it ($PATH:/my/folder), breaking basic commands."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you continuously monitor a log file?",
+"simple_explanation": "You use 'tail -f'.",
+"interview_answer": "The 'tail' command outputs the last lines of a file. The '-f' (follow) flag keeps the stream open, outputting new lines in real-time as they are written.",
+"real_world_example": "Running 'tail -f /var/log/apache2/error.log' while refreshing a website to catch bugs.",
+"common_mistake": "Trying to edit a file in nano while another terminal has 'tail -f' running on it, causing confusion."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you view the kernel ring buffer?",
+"simple_explanation": "You use the 'dmesg' command.",
+"interview_answer": "The 'dmesg' command prints messages from the kernel. It is critical for troubleshooting hardware drivers, USB devices, and boot errors.",
+"real_world_example": "Running 'dmesg | grep sdb' to see if a newly plugged-in hard drive was detected.",
+"common_mistake": "Thinking dmesg shows application-level logs instead of kernel/hardware logs."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you list open files?",
+"simple_explanation": "You use the 'lsof' command.",
+"interview_answer": "The 'lsof' command lists all files currently opened by processes on the system, useful for finding what process is locking a file or listening on a port.",
+"real_world_example": "Running 'lsof -i :8080' to see which application is hogging port 8080.",
+"common_mistake": "Running lsof without sudo and getting an incomplete list."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "What is 'strace'?",
+"simple_explanation": "A diagnostic tool that intercepts and records system calls.",
+"interview_answer": "Strace monitors the interaction between a process and the Linux kernel, logging system calls, signals, and changes in process state.",
+"real_world_example": "Using 'strace -p ' to see exactly which file a frozen application is trying to read.",
+"common_mistake": "Running strace on a heavily loaded production database, which severely degrades its performance."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you download files via CLI?",
+"simple_explanation": "You use 'curl' or 'wget'.",
+"interview_answer": "Wget is designed specifically for downloading files and mirroring directories. Curl is a versatile tool for transferring data via various protocols and APIs.",
+"real_world_example": "Using 'wget [https://example.com/software.tar.gz](https://www.google.com/search?q=https://example.com/software.tar.gz)' to pull an installation package directly to a server.",
+"common_mistake": "Using curl without '-O' and having binary file garbage flood the terminal screen."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you test a web server response from CLI?",
+"simple_explanation": "You use the 'curl' command with the '-I' flag.",
+"interview_answer": "Using 'curl -I [http://domain.com](http://domain.com)' fetches only the HTTP headers. It allows you to quickly check the status code (e.g., 200 OK) and server type.",
+"real_world_example": "Running 'curl -I localhost:80' to confirm Nginx is returning a 200 status code.",
+"common_mistake": "Relying purely on a browser cache instead of using curl for a raw HTTP test."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you perform DNS lookups?",
+"simple_explanation": "You use 'dig' or 'nslookup'.",
+"interview_answer": "These tools query DNS name servers to resolve domains into IP addresses, fetch MX records, and troubleshoot DNS propagation issues.",
+"real_world_example": "Using 'dig google.com' to verify your server can successfully resolve domain names.",
+"common_mistake": "Assuming a website is down when actually only the server's local DNS resolution is broken."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you view network interfaces?",
+"simple_explanation": "You use the 'ip a' or 'ifconfig' command.",
+"interview_answer": "The 'ip' utility is the modern replacement for 'ifconfig'. 'ip addr' displays all network interfaces, their states, and assigned IP addresses.",
+"real_world_example": "Running 'ip a' to find the internal IP address of a virtual machine.",
+"common_mistake": "Trying to use 'ifconfig' on a minimal install where the net-tools package isn't installed."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you read the last lines of a file?",
+"simple_explanation": "You use the 'tail' command.",
+"interview_answer": "By default, 'tail' prints the last 10 lines of a file. It is the standard way to quickly check the most recent entries in configuration files or static logs.",
+"real_world_example": "Running 'tail -n 50 syslog' to see the 50 most recent system events.",
+"common_mistake": "Using 'cat' on a large file and trying to scroll all the way to the bottom instead of using 'tail'."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you find files modified in the last 24 hours?",
+"simple_explanation": "You use 'find' with the '-mtime' flag.",
+"interview_answer": "The find command can filter by modification time. 'find /path -mtime -1' locates files that have been modified within the last day.",
+"real_world_example": "Using 'find /var/www -mtime -1' to see which website files a developer changed today.",
+"common_mistake": "Confusing '-mtime' (days) with '-mmin' (minutes)."
+},
+{
+"tool": "Linux",
+"difficulty": "Medium",
+"question": "How do you extract a tar.gz file?",
+"simple_explanation": "You use the 'tar -xzf' command.",
+"interview_answer": "The flags stand for eXtract, Zip (gzip compression), and File. This uncompresses and unarchives the contents into the current directory.",
+"real_world_example": "Running 'tar -xzf nodejs.tar.gz' to unpack a downloaded binary.",
+"common_mistake": "Forgetting the 'z' flag and getting a compression error."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is load average?",
+"simple_explanation": "It represents system demand over 1, 5, and 15 minute intervals.",
+"interview_answer": "Load average shows the number of processes waiting for CPU time or disk I/O. A load of 1.0 on a single-core system means 100% utilization.",
+"real_world_example": "A load average of 8.0 on a 4-core machine indicates heavy CPU queuing and severe sluggishness.",
+"common_mistake": "Interpreting load average as a strict percentage without knowing the number of CPU cores."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is the OOM killer?",
+"simple_explanation": "The Out of Memory killer terminates processes when RAM is exhausted.",
+"interview_answer": "When the system runs critically low on physical memory and swap, the kernel invokes the OOM killer. It uses a heuristic algorithm to sacrifice processes (often the largest memory consumers) to prevent system panic.",
+"real_world_example": "A database mysteriously crashing because the OOM killer terminated it due to an unoptimized query eating all RAM.",
+"common_mistake": "Blaming the application for crashing without checking 'dmesg' to see if the OOM killer intervened."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is a zombie process?",
+"simple_explanation": "A process that has completed execution but still has an entry in the process table.",
+"interview_answer": "A zombie occurs when a child process exits, but its parent hasn't called 'wait()' to read its exit status. They consume no resources except a PID slot.",
+"real_world_example": "A buggy parent application failing to reap its children, eventually exhausting the PID table and stopping new processes from launching.",
+"common_mistake": "Trying to 'kill -9' a zombie process (you can't kill what is already dead; you must kill the parent)."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is an orphan process?",
+"simple_explanation": "A child process whose parent process has died or been terminated.",
+"interview_answer": "When a parent dies, its active child processes become orphans. The init system (PID 1) adopts these orphans and properly reaps them when they finish executing.",
+"real_world_example": "An SSH session dropping, but the background script continues running as an orphan adopted by systemd.",
+"common_mistake": "Confusing orphans (still executing) with zombies (dead but not reaped)."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you change process priority?",
+"simple_explanation": "You use the 'nice' and 'renice' commands.",
+"interview_answer": "The 'nice' value ranges from -20 (highest priority) to 19 (lowest). Only root can assign negative (higher) priorities. 'renice' changes an existing process priority.",
+"real_world_example": "Running a heavy backup script with 'nice -n 19' so it doesn't interrupt production web traffic.",
+"common_mistake": "Thinking a positive nice value means a positive priority boost (it means being 'nice' to other processes by yielding CPU)."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you monitor disk I/O performance?",
+"simple_explanation": "You use the 'iostat' or 'iotop' tools.",
+"interview_answer": "iostat reports CPU and input/output statistics for devices and partitions. iotop provides a top-like interface showing real-time disk I/O usage per process.",
+"real_world_example": "Using 'iotop' to discover a runaway logging script is utilizing 100% of the disk write throughput.",
+"common_mistake": "Looking at CPU load and ignoring iowait, not realizing the system is bottlenecked by the hard drive, not the processor."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you capture network packets?",
+"simple_explanation": "You use the 'tcpdump' command.",
+"interview_answer": "Tcpdump is a CLI packet sniffer that captures network traffic on an interface. It parses headers and payloads, helping diagnose network drops or inspect cleartext protocols.",
+"real_world_example": "Running 'tcpdump -i eth0 port 80' to verify HTTP requests are actually reaching the server.",
+"common_mistake": "Running tcpdump without filters on a busy server, generating gigabytes of output and crashing the terminal."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is LVM?",
+"simple_explanation": "Logical Volume Manager manages disk drives and partitions flexibly.",
+"interview_answer": "LVM abstracts physical storage into logical volumes. It allows administrators to resize, extend, or snapshot partitions on the fly without unmounting them.",
+"real_world_example": "Adding a new physical drive and expanding the logical root volume without taking the database offline.",
+"common_mistake": "Formatting a physical volume directly with a filesystem instead of creating a volume group and logical volume first."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is SELinux?",
+"simple_explanation": "Security-Enhanced Linux is a mandatory access control architecture.",
+"interview_answer": "SELinux strictly controls what files, network ports, and resources a process or user can access based on security contexts and policies, preventing privilege escalation.",
+"real_world_example": "SELinux blocking an exploited web server from writing a malicious script into the /tmp directory.",
+"common_mistake": "Disabling SELinux entirely instead of learning how to properly configure its booleans and contexts."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is RAID?",
+"simple_explanation": "Redundant Array of Independent Disks combines drives for performance or redundancy.",
+"interview_answer": "Linux uses software (mdadm) or hardware RAID. RAID 1 mirrors data, RAID 0 stripes for speed, and RAID 5/6 offer a balance of speed and parity against drive failures.",
+"real_world_example": "A drive dying in a RAID 1 array, but the database stays up because the data is perfectly mirrored on the second drive.",
+"common_mistake": "Thinking RAID is a substitute for offsite backups."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is swappiness?",
+"simple_explanation": "A kernel parameter dictating how aggressively it uses swap space.",
+"interview_answer": "Swappiness ranges from 0 to 100. A low value tells the kernel to avoid swapping RAM pages to disk unless absolutely necessary, improving performance for databases.",
+"real_world_example": "Lowering vm.swappiness to 1 or 10 on a Kubernetes node to prevent pod performance degradation.",
+"common_mistake": "Setting swappiness to 0 on modern kernels, which can unexpectedly trigger the OOM killer instead of just reducing swap."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is a chroot jail?",
+"simple_explanation": "An isolated environment changing the apparent root directory for a process.",
+"interview_answer": "Chroot isolates a process so it cannot access files outside its designated directory tree. It is an early form of containerization used for security and testing.",
+"real_world_example": "Putting an FTP server in a chroot jail so logged-in users cannot browse the system's /etc or /var folders.",
+"common_mistake": "Assuming chroot provides bulletproof security; root users can break out of it easily."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you set up SSH tunneling?",
+"simple_explanation": "You use the '-L' flag in SSH to forward local ports.",
+"interview_answer": "SSH tunneling forwards a local port securely to a remote destination through the SSH protocol. It bypasses firewalls and encrypts unencrypted traffic.",
+"real_world_example": "Using 'ssh -L 8080:localhost:3306 user@db-server' to securely connect a local GUI client to a remote MySQL database.",
+"common_mistake": "Mixing up local forwarding (-L) with remote forwarding (-R)."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is a fork bomb?",
+"simple_explanation": "A malicious script that endlessly replicates itself.",
+"interview_answer": "A fork bomb rapidly creates child processes until it exhausts the system's PID table or memory, effectively freezing the OS and requiring a hard reboot.",
+"real_world_example": "A student running ':(){ :|:& };:' in bash to see what happens, immediately crashing the server.",
+"common_mistake": "Failing to set ulimit configurations on multi-user systems to prevent fork bombs."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you recover a deleted file that is still open?",
+"simple_explanation": "You recover it via the /proc filesystem using lsof.",
+"interview_answer": "If a file is deleted but a process still holds it open, the inode exists. You can find the PID and file descriptor using 'lsof', then copy the data from /proc//fd/.",
+"real_world_example": "Accidentally deleting a production log file, but saving it by copying it out of the Nginx process file descriptor.",
+"common_mistake": "Restarting the service before recovering the file, which clears the file descriptor and destroys the data forever."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you troubleshoot high CPU usage?",
+"simple_explanation": "Use 'top' to identify the process, then 'strace' or 'perf' for deeper analysis.",
+"interview_answer": "First identify the PID using 'htop'. Check if the load is user space or system space (sy). If it is user space, use 'strace' or an application profiler to debug the code execution.",
+"real_world_example": "Finding a PHP process spinning at 100% CPU and using strace to realize it is stuck in an infinite loop.",
+"common_mistake": "Immediately restarting the server without capturing a core dump or process trace for root cause analysis."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you troubleshoot high memory usage?",
+"simple_explanation": "Check 'free -m' for RAM, 'top' for processes, and look for memory leaks.",
+"interview_answer": "Analyze 'free' to distinguish between active memory and page cache. Identify processes consuming Resident Set Size (RSS). Memory leaks require application-level debugging.",
+"real_world_example": "Discovering a Java application holding onto heap memory indefinitely, requiring garbage collection tuning.",
+"common_mistake": "Panicking over 'cached' memory being high; Linux uses free RAM to cache disk I/O efficiently."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "Why might 'df' show no space while 'du' shows plenty?",
+"simple_explanation": "Deleted files are still open by a running process.",
+"interview_answer": "When a large file is deleted but still held open by a process (like a web server writing to an old log), 'du' won't see it, but the filesystem still reserves the blocks, causing 'df' to show 100% full.",
+"real_world_example": "A 50GB log file was removed, but Apache wasn't reloaded. Restarting Apache frees the disk space.",
+"common_mistake": "Blindly deleting more files without checking 'lsof +L1' to see what is holding the phantom space."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you increase maximum open file descriptors?",
+"simple_explanation": "Edit limits.conf or modify systemd service limits.",
+"interview_answer": "Use 'ulimit -n' to check the current limit. To persist changes, edit /etc/security/limits.conf or, for systemd services, adjust 'LimitNOFILE' in the service unit file.",
+"real_world_example": "Increasing the limit for an Nginx server handling 10,000 concurrent websocket connections to avoid 'Too many open files' errors.",
+"common_mistake": "Changing limits in bashrc, which doesn't affect systemd services."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What causes a kernel panic?",
+"simple_explanation": "A critical hardware error or deep system failure the OS cannot recover from.",
+"interview_answer": "Kernel panics happen due to faulty hardware (RAM/CPU), corrupted filesystems, bad driver modules, or critical init process failures during boot.",
+"real_world_example": "A server panicking on boot because the initramfs image was corrupted during an interrupted kernel upgrade.",
+"common_mistake": "Ignoring hardware diagnostics (memtest) after recurrent kernel panics."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is the sticky bit?",
+"simple_explanation": "A permission that restricts file deletion in a shared directory.",
+"interview_answer": "When the sticky bit is set on a directory, only the file's owner, the directory's owner, or root can rename or delete files within it.",
+"real_world_example": "The /tmp directory has the sticky bit set so users can write temporary files, but cannot delete each other's files.",
+"common_mistake": "Applying the sticky bit to regular files; it is only effective on directories."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What are SUID and SGID?",
+"simple_explanation": "Special permissions allowing execution with the privileges of the file owner.",
+"interview_answer": "SUID (Set User ID) executes a file as the owner (often root). SGID executes it as the group. On directories, SGID forces new files to inherit the directory's group.",
+"real_world_example": "The 'passwd' command has SUID set so regular users can write to /etc/shadow temporarily to change their password.",
+"common_mistake": "Leaving SUID on custom scripts, creating massive security holes and privilege escalation vectors."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What are system calls?",
+"simple_explanation": "The interface between user applications and the Linux kernel.",
+"interview_answer": "Applications run in user space and cannot access hardware directly. They must make system calls (like open, read, write, fork) to request the kernel to perform tasks on their behalf.",
+"real_world_example": "A database calling 'fsync()' to guarantee data is flushed to the physical hard drive.",
+"common_mistake": "Confusing standard library functions (like printf) directly with system calls (like write)."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is IPC?",
+"simple_explanation": "Inter-Process Communication allows distinct processes to share data.",
+"interview_answer": "Linux supports multiple IPC mechanisms, including pipes, message queues, semaphores, shared memory, and Unix domain sockets, allowing coordination between applications.",
+"real_world_example": "Nginx communicating with PHP-FPM over a fast Unix domain socket instead of standard TCP.",
+"common_mistake": "Not tuning kernel shared memory limits (shmmax) for large database systems."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What are cgroups and namespaces?",
+"simple_explanation": "Kernel features that provide resource limitation and process isolation.",
+"interview_answer": "Namespaces limit what a process can see (networking, mount points, PIDs). Control Groups (cgroups) limit what a process can use (CPU limits, memory limits).",
+"real_world_example": "Docker uses namespaces and cgroups as the fundamental building blocks to run isolated containers.",
+"common_mistake": "Thinking containers are full virtual machines; they just heavily rely on cgroups and namespaces on a shared kernel."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you troubleshoot network latency?",
+"simple_explanation": "Use tools like 'mtr', 'traceroute', and 'iperf'.",
+"interview_answer": "Identify if latency is local or external. Use 'mtr' to find packet loss across hops, check interface errors via 'ifconfig', and measure raw throughput with 'iperf'.",
+"real_world_example": "Using 'mtr' to discover that a specific ISP router halfway across the country is dropping packets, causing slow DB replication.",
+"common_mistake": "Blaming application code before ruling out physical network bottlenecks."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is the difference between DROP and REJECT in iptables?",
+"simple_explanation": "DROP silently discards packets, REJECT sends back an error.",
+"interview_answer": "DROP ignores the packet completely, leaving the sender waiting until timeout. REJECT sends an ICMP error (port unreachable), politely informing the sender connection is refused.",
+"real_world_example": "Using DROP for internet-facing traffic to slow down port scanners, and REJECT for internal networks to speed up application failures.",
+"common_mistake": "Using REJECT on public-facing firewalls, giving attackers confirmation that a host exists."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "What is NIC bonding?",
+"simple_explanation": "Combining multiple network interfaces into a single logical interface.",
+"interview_answer": "Network bonding or teaming aggregates multiple physical network cards. It provides redundancy (active-backup) and increased throughput (Link Aggregation/LACP).",
+"real_world_example": "Bonding two 10Gbps interfaces on a hypervisor so if one switch fails, VMs do not lose connectivity.",
+"common_mistake": "Configuring LACP mode on the server without coordinating with the switch administrator, breaking the link."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "Describe the Linux boot process.",
+"simple_explanation": "BIOS -> Bootloader -> Kernel -> Init system.",
+"interview_answer": "The BIOS/UEFI initializes hardware. The Bootloader (GRUB) loads the kernel and initramfs into memory. The kernel initializes drivers and hands control to the Init system (systemd), which starts services.",
+"real_world_example": "Troubleshooting a boot failure by editing the GRUB menu to boot into single-user mode.",
+"common_mistake": "Assuming systemd handles the entire boot sequence; it only starts after the kernel executes."
+},
+{
+"tool": "Linux",
+"difficulty": "Hard",
+"question": "How do you diagnose a slow SSH login?",
+"simple_explanation": "Check DNS resolution and GSSAPI authentication.",
+"interview_answer": "Slow logins usually occur because SSH attempts reverse DNS lookups or GSSAPI authentication before timing out. Edit sshd_config to set 'UseDNS no' and 'GSSAPIAuthentication no'.",
+"real_world_example": "Running 'ssh -v' to trace the connection steps and noticing it hangs on 'Authenticating with GSSAPI'.",
+"common_mistake": "Assuming network latency is the issue without running ssh in verbose mode (-v) to see the exact hangup."
+}
+]
