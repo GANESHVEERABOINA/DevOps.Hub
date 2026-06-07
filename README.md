@@ -8,7 +8,7 @@ DEVOPS.HUB is a full-stack 3-tier web application created primarily for DevOps l
 
 The project focuses on understanding how a real-world application is structured across multiple layers and how DevOps engineers can build, deploy, automate, monitor, and manage such applications.
 
-This project was developed with the assistance of _AI tools_ and was used as a hands-on learning project to practice DevOps concepts including application deployment, containerization, CI/CD, infrastructure automation, cloud integration, and operational workflows.
+This project was developed with the assistance of **_AI tools_** and was used as a hands-on learning project to practice DevOps concepts including application deployment, containerization, CI/CD, infrastructure automation, cloud integration, and operational workflows.
 
 ## Architecture
 
