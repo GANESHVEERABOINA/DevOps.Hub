@@ -1,0 +1,902 @@
+[
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon EC2?",
+"simple_explanation": "Amazon EC2 provides scalable computing capacity in the AWS cloud.",
+"interview_answer": "Amazon EC2 is a web service providing resizable virtual servers known as instances. It is used to run applications without upfront hardware costs. A key point is that EC2 provides full administrative control over the OS.",
+"real_world_example": "Hosting a legacy Java web application on a Linux-based EC2 instance.",
+"common_mistake": "Thinking EC2 instances automatically scale up or down without configuring an Auto Scaling Group."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon S3?",
+"simple_explanation": "Amazon S3 is an object storage service built to store and retrieve any amount of data.",
+"interview_answer": "Amazon S3 is a highly durable object storage service used for backups, static files, and data lakes. It organizes data into containers called buckets. A key interview point is its 11 nines of data durability.",
+"real_world_example": "Storing user profile images and application log archives securely in an S3 bucket.",
+"common_mistake": "Confusing S3 object storage with block storage like EBS, and trying to install an operating system on it."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS IAM?",
+"simple_explanation": "AWS IAM securely manages access to AWS services and resources.",
+"interview_answer": "Identity and Access Management controls who is authenticated and authorized to use AWS resources. It is used to enforce the principle of least privilege. A vital interview point is that IAM is a global service.",
+"real_world_example": "Creating a DevOps user account with permissions restricted to only managing CloudFormation templates.",
+"common_mistake": "Using the AWS root account for daily operational tasks instead of creating isolated IAM users."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is an AWS VPC?",
+"simple_explanation": "A VPC is a logically isolated virtual network dedicated to your AWS account.",
+"interview_answer": "Virtual Private Cloud lets you provision a private network within AWS where you launch resources. It provides complete control over subnets, IP ranges, and gateways. A key point is that it isolates cloud infrastructure.",
+"real_world_example": "Launching database instances in an isolated private subnet within a production VPC.",
+"common_mistake": "Believing that instances in a VPC can access the internet automatically without an attached Internet Gateway."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon CloudWatch?",
+"simple_explanation": "Amazon CloudWatch is a monitoring and observability service for AWS resources.",
+"interview_answer": "CloudWatch collects monitoring and operational data in the form of logs, metrics, and events. It is used to track infrastructure performance and trigger automated actions. A key point is its role in setting up real-time alarms.",
+"real_world_example": "Monitoring EC2 CPU utilization and triggering an alert if it stays above 80% for ten minutes.",
+"common_mistake": "Assuming CloudWatch collects internal OS-level metrics like memory utilization by default without installing an agent."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS Lambda?",
+"simple_explanation": "AWS Lambda is a serverless compute service that runs code in response to events.",
+"interview_answer": "Lambda lets you run code without provisioning or managing servers, scaling automatically from zero requests. It is used to build event-driven architectures. An important point is that you pay only for the compute time consumed.",
+"real_world_example": "Automatically resizing an image file the moment it is uploaded to an Amazon S3 bucket.",
+"common_mistake": "Writing long-running processes inside Lambda, ignoring its strict 15-minute execution timeout limit."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon RDS?",
+"simple_explanation": "Amazon RDS makes it easy to set up, operate, and scale relational databases in the cloud.",
+"interview_answer": "Relational Database Service automates time-consuming administration tasks like patching, backups, and hardware scaling. It supports popular engines like PostgreSQL and MySQL. A key point is its built-in Multi-AZ high availability.",
+"real_world_example": "Deploying a production MySQL database with automated daily backups and point-in-time recovery.",
+"common_mistake": "Assuming RDS is a NoSQL database or thinking you have direct OS-level SSH access to the underlying server."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon Route 53?",
+"simple_explanation": "Amazon Route 53 is a highly available and scalable cloud Domain Name System service.",
+"interview_answer": "Route 53 is a managed DNS service that translates domain names into IP addresses. It is used to route global user traffic to AWS endpoints. A vital interview point is its support for health checks and failover routing.",
+"real_world_example": "Routing traffic for [www.company.com](https://www.company.com) to an Application Load Balancer with latency-based routing rules.",
+"common_mistake": "Thinking Route 53 only works for resources hosted inside AWS and cannot route to on-premise servers."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is an AWS Elastic Load Balancer (ELB)?",
+"simple_explanation": "ELB automatically distributes incoming application traffic across multiple targets.",
+"interview_answer": "ELB scales traffic across EC2 instances, containers, and IP addresses to ensure high availability and fault tolerance. A key point is that it handles SSL termination and performs health checks to isolate unhealthy targets.",
+"real_world_example": "Distributing internet web traffic evenly across three backend EC2 servers in different availability zones.",
+"common_mistake": "Configuring an ELB without configuring health checks, resulting in traffic routing to broken or frozen applications."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is an AWS Auto Scaling Group (ASG)?",
+"simple_explanation": "An ASG contains a collection of EC2 instances managed for automatic scaling and healing.",
+"interview_answer": "An Auto Scaling Group adjusts the number of EC2 instances based on demand or health status. It is used to maintain application availability and optimize costs. A critical point is that it enforces minimum, maximum, and desired capacity.",
+"real_world_example": "Spawning two extra EC2 instances automatically during a flash sale traffic spike to handle load.",
+"common_mistake": "Setting the maximum capacity equal to the desired capacity, preventing the cluster from scaling up during traffic shocks."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon SNS?",
+"simple_explanation": "Amazon SNS is a fully managed pub/sub messaging service for microservices and serverless apps.",
+"interview_answer": "Simple Notification Service delivers messages from publishers to multiple subscriber endpoints simultaneously. It is used for decoupling microservices and sending mobile alerts. A key point is its asynchronous, push-based delivery model.",
+"real_world_example": "Pushing a 'payment_completed' event to multiple processing systems and email alerting services at once.",
+"common_mistake": "Expecting SNS to store or queue messages for later retrieval; it is strictly a push-and-forget service."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon SQS?",
+"simple_explanation": "Amazon SQS is a fully managed message queuing service for decoupling distributed applications.",
+"interview_answer": "Simple Queue Service stores messages in a queue until consumer applications process and delete them. It ensures reliable asynchronous communication. A key point is that it offers standard (at-least-once) and FIFO (exactly-once) queues.",
+"real_world_example": "Queueing incoming background video processing jobs to prevent overloading the worker EC2 instances.",
+"common_mistake": "Forgetting to delete messages from the queue after processing, causing the same message to be reprocessed repeatedly."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is an IAM Role?",
+"simple_explanation": "An IAM role is an identity with permission policies that determines what the identity can do in AWS.",
+"interview_answer": "An IAM Role is an identity meant to be assumed by trusted entities, like EC2 instances or AWS services, instead of using permanent credentials. It generates temporary security tokens, which drastically enhances cloud security.",
+"real_world_example": "Assigning a role to an EC2 instance that allows it to read data from a specific S3 bucket without hardcoded keys.",
+"common_mistake": "Hardcoding IAM User access keys inside application code instead of assigning an IAM Role to the compute service."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is an IAM Policy?",
+"simple_explanation": "An IAM policy is an object that defines permissions when associated with an identity or resource.",
+"interview_answer": "An IAM Policy is a JSON document explicitly defining allowed or denied actions, resources, and conditions. It determines who has access to what. An important interview point is that explicit denies always override explicit allows.",
+"real_world_example": "Writing a JSON policy that explicitly permits read-only access to a single designated S3 data repository.",
+"common_mistake": "Using a wildcard asterisk (*) for actions and resources in production, violating the principle of least privilege."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon EBS?",
+"simple_explanation": "Amazon EBS provides block-level storage volumes for use with EC2 instances.",
+"interview_answer": "Elastic Block Store acts as a virtual hard drive directly attached to an EC2 instance. It is used for data that persists independently of the instance lifespan. A key point is that EBS volumes are replicated within an Availability Zone.",
+"real_world_example": "Mounting a 100GB EBS General Purpose SSD volume to host a database's primary data directory.",
+"common_mistake": "Assuming a standard EBS volume can be attached to multiple EC2 instances simultaneously across different zones."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon EFS?",
+"simple_explanation": "Amazon EFS provides a serverless, fully managed file system for use with AWS compute services.",
+"interview_answer": "Elastic File System provides shared, network-attached storage using the NFS protocol. It is used when multiple instances require simultaneous read and write access to a common filesystem. A key point is its cross-AZ availability.",
+"real_world_example": "Configuring a cluster of WordPress EC2 instances to share a central uploads media folder via EFS.",
+"common_mistake": "Using EFS for high-performance database workloads where low-latency block storage like EBS is required."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS CloudTrail?",
+"simple_explanation": "AWS CloudTrail tracks user activity and API usage across your AWS infrastructure.",
+"interview_answer": "CloudTrail records all API calls made within an AWS account as log events. It is used for security auditing, compliance tracking, and governance. A vital interview point is that it provides a detailed history of 'who did what and when.'",
+"real_world_example": "Auditing logs to discover which specific IAM user terminated a production server at 2:00 AM.",
+"common_mistake": "Disabling CloudTrail to save minimal costs, leaving the infrastructure without any security or operational audit trail."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is the AWS CLI?",
+"simple_explanation": "The AWS CLI is a unified tool to manage your AWS services from the command line.",
+"interview_answer": "The AWS Command Line Interface allows automated control of cloud infrastructure via scripts. It is essential for DevOps automation, removing the need for manual console clicking. A key point is its configuration via access keys.",
+"real_world_example": "Running 'aws s3 sync' in a bash script to automate nightly uploads of backup directories.",
+"common_mistake": "Committing the AWS CLI configuration file containing secret keys into public version control repositories."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is Amazon DynamoDB?",
+"simple_explanation": "Amazon DynamoDB is a fully managed, serverless NoSQL database service.",
+"interview_answer": "DynamoDB provides single-digit millisecond performance at any scale. It is used for high-throughput, key-value, and document workloads. A crucial interview point is that it handles automatic partitioning and horizontal scaling.",
+"real_world_example": "Storing real-time user session tokens and shopping cart data for a high-traffic gaming application.",
+"common_mistake": "Treating DynamoDB like a relational database and attempting complex multi-table joins which it does not support."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS CodeCommit?",
+"simple_explanation": "AWS CodeCommit is a secure, highly scalable managed source control service.",
+"interview_answer": "CodeCommit hosts private Git repositories in the AWS cloud. It eliminates the need to manage your own Git hardware or scaling. A key point is its native integration with IAM for repository access control.",
+"real_world_example": "DevOps teams committing application source code and infrastructure scripts directly to a secure cloud Git repo.",
+"common_mistake": "Using generic root credentials to clone a CodeCommit repository instead of configuring IAM Git credentials."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS CodeBuild?",
+"simple_explanation": "AWS CodeBuild compiles source code, runs tests, and produces software packages.",
+"interview_answer": "CodeBuild is a fully managed build service that scales continuously and processes multiple builds concurrently. It eliminates the need to maintain dedicated Jenkins servers. A key point is that it charges based on build minutes used.",
+"real_world_example": "Compiling a TypeScript application and running unit tests inside a temporary docker container during a build phase.",
+"common_mistake": "Forgetting to include the buildspec.yml file in the source code root directory, causing the build job to fail immediately."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS CodeDeploy?",
+"simple_explanation": "AWS CodeDeploy automates software deployments to various compute services.",
+"interview_answer": "CodeDeploy automates code deployments to EC2, Fargate, Lambda, or on-premises servers. It avoids manual application deployment errors and handles zero-downtime rollouts. A key point is its support for rolling or blue/green strategies.",
+"real_world_example": "Deploying a new version of a Python application across a fleet of 20 EC2 instances without causing service downtime.",
+"common_mistake": "Misconfiguring the appspec.yml lifecycle hooks, leading to hung deployments that time out after hours."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS CodePipeline?",
+"simple_explanation": "AWS CodePipeline is a continuous delivery service for fast and reliable application updates.",
+"interview_answer": "CodePipeline orchestrates the build, test, and deploy phases of your release process every time there is a code change. It binds CodeCommit, CodeBuild, and CodeDeploy together. A key point is its support for manual approval actions.",
+"real_world_example": "Automatically triggering a build and staging deployment whenever a developer merges code into the master branch.",
+"common_mistake": "Forgetting to configure artifacts passing between stages, causing downstream deployment steps to miss the build outputs."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS CloudFormation?",
+"simple_explanation": "AWS CloudFormation is an Infrastructure as Code (IaC) tool for provisioning AWS resources.",
+"interview_answer": "CloudFormation allows you to define your entire cloud infrastructure using declarative JSON or YAML templates. It automates safe resource creation, updates, and deletions. A fundamental point is that it treats infrastructure as a single stack.",
+"real_world_example": "Writing a YAML template to consistently spin up identical Dev, QA, and Production environments.",
+"common_mistake": "Manually modifying resources in the AWS Console that were created by CloudFormation, creating configuration drift."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS Elastic Beanstalk?",
+"simple_explanation": "Elastic Beanstalk is an easy-to-use PaaS service for deploying and scaling web applications.",
+"interview_answer": "Elastic Beanstalk handles the deployment, provisioning, load balancing, auto-scaling, and health monitoring of applications. A key point is that developers just upload code, while maintaining full control over underlying infrastructure.",
+"real_world_example": "Quickly deploying a Node.js zip package to the cloud without manually setting up VPCs, load balancers, or EC2 instances.",
+"common_mistake": "Assuming Elastic Beanstalk is a unique compute engine; it simply orchestrates standard services like EC2 and ELB."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS KMS?",
+"simple_explanation": "AWS KMS is a managed service to create and control cryptographic encryption keys.",
+"interview_answer": "Key Management Service secures data at rest across AWS services using hardware security modules. It integrates tightly with IAM for key access rules. A vital interview point is its automatic rotation capability for master keys.",
+"real_world_example": "Encrypting data volumes on EBS or objects in S3 using a customer-managed KMS master key.",
+"common_mistake": "Deleting a KMS key thinking it can be recreated instantly, which permanently corrupts all data encrypted by that key."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS Secrets Manager?",
+"simple_explanation": "AWS Secrets Manager helps you rotate, manage, and retrieve database credentials and API keys.",
+"interview_answer": "Secrets Manager replaces hardcoded secrets in code with runtime API calls to retrieve credentials securely. A main interview benefit is its native ability to automatically rotate database credentials without application downtime.",
+"real_world_example": "Retrieving production RDS PostgreSQL passwords securely during application startup without saving them in files.",
+"common_mistake": "Storing secrets in plain text environment variables within your application code or source control instead of fetching them."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS Systems Manager (SSM)?",
+"simple_explanation": "AWS Systems Manager is a management service to centralize operational data and automate tasks.",
+"interview_answer": "SSM provides visibility and control over cloud and on-premises infrastructure. It allows grouping resources, viewing operational data, and executing automated actions across fleets. A key point is its agent-driven architecture.",
+"real_world_example": "Viewing real-time inventory and operating system patch levels across a fleet of 50 multi-region servers.",
+"common_mistake": "Trying to manage EC2 instances via Systems Manager without installing the SSM Agent or granting the required IAM role."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is AWS Trusted Advisor?",
+"simple_explanation": "Trusted Advisor is an online tool providing real-time recommendations to optimize AWS infrastructure.",
+"interview_answer": "Trusted Advisor inspects your AWS environment to help you follow best practices across five categories: cost optimization, security, fault tolerance, performance, and service limits. It helps eliminate waste and close security gaps.",
+"real_world_example": "Running a scan to identify completely idle EBS volumes that are incurring unnecessary monthly costs.",
+"common_mistake": "Ignoring security warnings about wide-open security groups, assuming the cloud is secure by default."
+},
+{
+"tool": "AWS",
+"difficulty": "Easy",
+"question": "What is an AWS Artifact?",
+"simple_explanation": "AWS Artifact provides on-demand access to AWS compliance documentation and agreements.",
+"interview_answer": "Artifact is a central repository for downloading AWS security and compliance reports, such as SOC and PCI documentation. It is used to prove to auditors that the underlying AWS infrastructure meets strict regulatory standards.",
+"real_world_example": "Downloading the AWS ISO 27001 certification report during an external company security compliance audit.",
+"common_mistake": "Confusing AWS Artifact (compliance documentation) with software build artifacts generated by compilation tools like CodeBuild."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is VPC Peering?",
+"simple_explanation": "VPC Peering connects two VPCs to route traffic between them using private IPs.",
+"interview_answer": "VPC Peering establishes a direct network relationship between two VPCs. Instances communicate as if they are on the same local network. A key point is that routing is non-transitive; if A is peered to B, and B to C, A cannot reach C.",
+"real_world_example": "Connecting a core corporate shared-services VPC to isolated development and testing team VPCs.",
+"common_mistake": "Attempting to peer two VPCs that have overlapping CIDR blocks, which causes routing conflicts and immediate failure."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is an AWS NAT Gateway?",
+"simple_explanation": "A NAT Gateway allows instances in a private subnet to connect to the internet safely.",
+"interview_answer": "NAT Gateway translates private subnet traffic to a public IP to facilitate outbound updates while blocking inbound connections from the internet. A crucial interview point is that it must be physically deployed inside a public subnet.",
+"real_world_example": "Allowing backend app servers in a private subnet to securely pull external package updates from GitHub.",
+"common_mistake": "Placing a NAT Gateway inside a private subnet, which traps internet-bound traffic completely inside the network."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is an S3 Bucket Policy?",
+"simple_explanation": "An S3 Bucket Policy is a resource-based policy used to grant access permissions to a bucket.",
+"interview_answer": "Bucket Policies are JSON documents attached directly to an S3 bucket to control user and public access. They scale cross-account access rules. An important interview detail is that they regulate access at the entire bucket layer.",
+"real_world_example": "Enforcing a policy that completely denies any object uploads that do not explicitly incorporate server-side encryption.",
+"common_mistake": "Using a loose bucket policy that accidentally exposes sensitive private corporate files to the public internet."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are S3 Lifecycle Policies?",
+"simple_explanation": "Lifecycle policies automate object transitions between different S3 storage classes.",
+"interview_answer": "S3 Lifecycle configurations use rules to automatically transition objects to cheaper tiers like Glacier or delete them entirely after a set period. It optimizes storage costs automatically. A key point is balancing retrieval costs.",
+"real_world_example": "Moving production application log objects to S3 Glacier Flexible Retrieval automatically after 30 days of storage.",
+"common_mistake": "Moving very small files frequently to Glacier tiers, where minimal object size fees can actually increase costs."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is EC2 User Data?",
+"simple_explanation": "User Data is a script executed automatically during the initial boot of an EC2 instance.",
+"interview_answer": "User Data automates bootstrap tasks like installing software package dependencies, configuring parameters, or updating the OS. An important interview point is that it executes exactly once by default, during the first boot.",
+"real_world_example": "Automating the installation of Docker and starting an Nginx service the exact moment an EC2 instance initializes.",
+"common_mistake": "Expecting User Data scripts to re-execute every single time an instance is manually stopped and restarted."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are AWS Launch Templates?",
+"simple_explanation": "A Launch Template specifies configuration parameters used to launch EC2 instances.",
+"interview_answer": "Launch Templates define AMI IDs, instance types, key pairs, security groups, and storage layouts. They support versioning, allowing teams to roll back configurations. They are the preferred foundation for Auto Scaling Groups.",
+"real_world_example": "Standardizing an enterprise golden image configuration so multiple Auto Scaling Groups deploy identical server baselines.",
+"common_mistake": "Deleting an active version of a launch template that an Auto Scaling Group still actively depends on for node replacements."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are CloudWatch Alarms?",
+"simple_explanation": "CloudWatch Alarms trigger automated actions based on sustained metric thresholds.",
+"interview_answer": "Alarms monitor a single metric over a specified time window. They transition through OK, ALARM, and INSUFFICIENT_DATA states, and can trigger SNS alerts or Auto Scaling actions. A key point is configuring the evaluation periods correctly.",
+"real_world_example": "Triggering an automated pager notification if database connection errors exceed 5 failures within three consecutive minutes.",
+"common_mistake": "Setting an alarm evaluation period too low, resulting in flapping alerts from normal, short-lived spikes in traffic."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are AWS Lambda Layers?",
+"simple_explanation": "Lambda Layers are ZIP archives containing supplementary code, libraries, or dependencies.",
+"interview_answer": "Layers promote code reuse by separating large dependencies from the core deployment package. They keep deployment packages small, speeding up development and deployment loops. A key point is that a function can use up to 5 layers.",
+"real_world_example": "Extracting heavy libraries like NumPy into a single reusable layer shared across ten distinct Lambda functions.",
+"common_mistake": "Including duplicate library files inside both the core zip deployment package and the attached Lambda Layer."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are Amazon RDS Read Replicas?",
+"simple_explanation": "Read Replicas provide asynchronous duplicates of an RDS database to offload read traffic.",
+"interview_answer": "Read Replicas allow horizontal scaling of read-heavy workloads across different zones or regions. They use asynchronous replication from the primary engine. A vital point is that they can be promoted to standalone master databases.",
+"real_world_example": "Routing intensive analytical reporting dashboard queries to a replica, keeping the primary database clear for writes.",
+"common_mistake": "Directing transactional write queries to a Read Replica instance, which immediately results in an engine error."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is an Amazon RDS Multi-AZ Deployment?",
+"simple_explanation": "Multi-AZ provisions a synchronous standby replica database in a separate availability zone.",
+"interview_answer": "Multi-AZ is designed strictly for high availability and automated disaster recovery, not performance scaling. Replication is completely synchronous. A core point is that AWS automates failover without requiring application code updates.",
+"real_world_example": "An availability zone losing power, prompting RDS to seamlessly swap DNS records to the standby replica within seconds.",
+"common_mistake": "Confusing Multi-AZ with Read Replicas, and trying to route application read queries to the passive standby node."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is the difference between an AWS ALB and an NLB?",
+"simple_explanation": "ALB handles HTTP/HTTPS routing at Layer 7; NLB handles high-throughput TCP/UDP at Layer 4.",
+"interview_answer": "Application Load Balancers inspect headers and paths to route web traffic intelligently. Network Load Balancers process millions of raw packets at ultra-low latency. A key difference is that NLBs support static IP assignments.",
+"real_world_example": "Using an ALB to route requests based on path URLs (/api vs /static) to separate backend target fleets.",
+"common_mistake": "Deploying an ALB to handle millions of sudden, erratic non-HTTP network socket connections, causing load bottlenecks."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is an AWS Target Group?",
+"simple_explanation": "A Target Group routes load balancer requests to registered backends like EC2 or containers.",
+"interview_answer": "Target Groups define where a load balancer routes traffic and specify how health checks are evaluated for those specific targets. An important interview point is that a single load balancer rule can evaluate multiple target groups.",
+"real_world_example": "Registering a dynamic collection of microservice container tasks into a target group mapped to port 8080.",
+"common_mistake": "Forgetting to open target group security groups to allow traffic coming from the load balancer's internal security group."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are AWS ASG Lifecycle Hooks?",
+"simple_explanation": "Lifecycle Hooks pause Auto Scaling actions during instance creation or termination.",
+"interview_answer": "Lifecycle hooks let you perform custom build or teardown actions (like downloading logs or installing agents) before an instance joins or leaves the fleet. A key point is that instances wait in a 'Pending:Wait' state.",
+"real_world_example": "Pausing an instance termination to cleanly drain active consumer sessions and extract localized service logs to S3.",
+"common_mistake": "Failing to send a success signal back to the Auto Scaling controller, leaving the instance hanging until timeout."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are Route 53 Routing Policies?",
+"simple_explanation": "Routing policies dictate how Route 53 responds to DNS queries based on specific logic.",
+"interview_answer": "Policies include Simple, Weighted, Latency-based, Geolocation, and Failover. They determine where global user traffic is routed. A key point is that Geolocation targets location, while Latency targets network speed.",
+"real_world_example": "Using Weighted routing to send 10% of global web requests to a newly deployed pilot application cluster.",
+"common_mistake": "Configuring Latency-based routing and expecting it to perfectly mirror the geographical location of users every single time."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are AWS CloudFormation Change Sets?",
+"simple_explanation": "Change Sets let you preview how a template update will impact running resources.",
+"interview_answer": "Change sets allow you to view a dry-run delta of proposed modifications before executing an update. It prevents accidental resource deletions or modifications. A critical point is that it increases operational safety.",
+"real_world_example": "Generating a preview to confirm if a database property change will trigger an accidental database replacement.",
+"common_mistake": "Executing CloudFormation updates blindly in production environments without verifying the generated Change Set first."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are AWS CloudFormation Nested Stacks?",
+"simple_explanation": "Nested Stacks are stacks created as part of other CloudFormation templates.",
+"interview_answer": "Nested Stacks enable modular infrastructure as code by allowing common components (like VPC or IAM setups) to be called from a master template. It overcomes template size limits and promotes resource reusability.",
+"real_world_example": "Instantiating a standard, pre-approved security group template across multiple independent application deployments.",
+"common_mistake": "Failing to pass outputs from a child nested stack correctly into the parenting master stack template parameters."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is the purpose of the CodeBuild buildspec.yml file?",
+"simple_explanation": "The buildspec.yml file defines the collection of build commands and phases run by CodeBuild.",
+"interview_answer": "Buildspec.yml is a YAML configuration placed in the source root that breaks execution down into install, pre_build, build, and post_build phases. It dictates dependencies and output artifact locations for the build runner.",
+"real_world_example": "Defining commands to install npm packages, execute tests, and export compiled build directory folders.",
+"common_mistake": "Misaligning spaces and indentation in the YAML file, which causes immediate build parse failures before code runs."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is the purpose of the CodeDeploy appspec.yml file?",
+"simple_explanation": "The appspec.yml file maps source files to deployment paths and orchestrates lifecycle hooks.",
+"interview_answer": "Appspec.yml instructs CodeDeploy where to copy application files and schedules hook scripts to run at various deployment checkpoints (like BeforeInstall or AfterInstall). A key point is its layout difference between EC2 and ECS.",
+"real_world_example": "Running a custom shell script to validate that an Apache web service is running cleanly after code is copied.",
+"common_mistake": "Using the wrong file naming convention or putting the appspec.yml in a subdirectory instead of the source root folder."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are CodeDeploy Deployment Configurations?",
+"simple_explanation": "They define how fast code updates propagate across a target server fleet.",
+"interview_answer": "Configurations like CodeDeployDefault.AllAtOnce, HalfAtATime, or Canary specify the rate and safety metrics of a rollout. They balance update speed against user downtime risk. A key point is monitoring health alarms during rollout.",
+"real_world_example": "Using a Canary configuration to expose only 10% of instances to new code for a 5-minute stabilization window.",
+"common_mistake": "Choosing an AllAtOnce deployment configuration for production systems, causing global user downtime if bugs are present."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is an Amazon ECS Task Definition?",
+"simple_explanation": "A Task Definition is a blueprint file that describes how to run application containers.",
+"interview_answer": "Task Definitions are JSON files that specify CPU, memory, Docker images, port mappings, and logging targets for containers in Elastic Container Service. A crucial interview point is that it serves as the container's deployment template.",
+"real_world_example": "Specifying that a container should use the official Node image, run on port 3000, and use 512MB of dedicated RAM.",
+"common_mistake": "Hardcoding database passwords inside the Task Definition text instead of linking them to Systems Manager Parameter Store."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are Amazon EKS Managed Node Groups?",
+"simple_explanation": "Managed Node Groups automate the provisioning and lifecycle management of Kubernetes worker nodes.",
+"interview_answer": "Managed Node Groups orchestrate EC2 instance creation, drain nodes cleanly during patching, and execute automated updates for the EKS cluster. A key point is that they abstract away standard Kubernetes OS management overhead.",
+"real_world_example": "Upgrading an EKS cluster's underlying Kubernetes version and letting AWS roll out updated EC2 workers safely.",
+"common_mistake": "Manually deleting worker EC2 instances directly from the console, bypassing the EKS node group lifecycle scaling tools."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are IAM Policy Conditions?",
+"simple_explanation": "Conditions specify restrictions for when an IAM policy block is active.",
+"interview_answer": "The 'Condition' block adds fine-grained control to IAM policies based on context like source IP, time of day, or MFA status. A key point is that it prevents broad authorization abuse.",
+"real_world_example": "Allowing an administrator to terminate EC2 instances only if the request originates from the corporate office IP range.",
+"common_mistake": "Forgetting that string checks are case-sensitive, which can lock out legitimate requests or cause unintended authorization."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is AWS KMS Envelope Encryption?",
+"simple_explanation": "Envelope encryption uses a master key to encrypt a localized data encryption key.",
+"interview_answer": "KMS generates a Data Encryption Key (DEK) to encrypt large files locally, then encrypts the DEK itself using a KMS Customer Master Key (CMK). It optimizes performance by avoiding sending huge files over network APIs.",
+"real_world_example": "Encrypting a multi-gigabyte video asset locally using a DEK, then storing the encrypted DEK alongside the asset in S3.",
+"common_mistake": "Sending large file contents directly via the raw 'Encrypt' API call, which hits strict payload limit blocks."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is SSM Parameter Store vs Secrets Manager?",
+"simple_explanation": "Parameter Store stores configuration values; Secrets Manager manages encrypted secrets with auto-rotation.",
+"interview_answer": "Parameter Store is cost-effective and suited for standard app configs and basic secrets. Secrets Manager is a premium service designed for secure data like database passwords, offering built-in cross-account rotation and pricing per secret.",
+"real_world_example": "Storing a public API URL in Parameter Store, but storing production database credentials in Secrets Manager.",
+"common_mistake": "Using Secrets Manager for hundreds of standard non-sensitive configurations, generating an unnecessarily high AWS bill."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is AWS Systems Manager Run Command?",
+"simple_explanation": "Run Command lets you securely execute scripts remotely across EC2 fleets without SSH.",
+"interview_answer": "Run Command manages configurations across a fleet without opening inbound ports or maintaining bastion hosts. Commands are tracked and audited via CloudTrail. A key point is that it uses the outbound SSM Agent.",
+"real_world_example": "Executing a shell command to patch a security vulnerability on 100 Linux servers simultaneously via the console.",
+"common_mistake": "Opening port 22 in a security group for remote administration, unaware that Run Command does it over outbound HTTPS."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is an AWS VPC Endpoint?",
+"simple_explanation": "VPC Endpoints privately connect your VPC to supported AWS services without internet routing.",
+"interview_answer": "Endpoints establish secure internal routes to AWS services, bypassing Internet and NAT Gateways. They come in two types: Interface Endpoints (using private IPs) and Gateway Endpoints (routing targets for S3 and DynamoDB).",
+"real_world_example": "Routing heavy internal data pipeline traffic from private EC2 nodes straight into S3 without paying NAT Gateway data fees.",
+"common_mistake": "Configuring an Interface Endpoint but neglecting to enable Private DNS, preventing apps from resolving the internal endpoint."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is AWS Transit Gateway?",
+"simple_explanation": "Transit Gateway acts as a cloud router to simplify network interconnections.",
+"interview_answer": "Transit Gateway centralizes connections across thousands of VPCs and on-premises networks. It eliminates complex point-to-point VPC peering meshes. A key advantage is its hub-and-spoke architecture for enterprise network routing.",
+"real_world_example": "Connecting 50 different internal company VPCs and corporate on-premise VPNs to a single centralized network hub.",
+"common_mistake": "Continuing to manage dozens of separate VPC Peering connections manually, leading to an unmanageable routing table mess."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is an SQS Dead Letter Queue (DLQ)?",
+"simple_explanation": "A DLQ isolates messages that cannot be successfully processed by consumer applications.",
+"interview_answer": "A Dead Letter Queue receives messages that failed a specified number of delivery attempts. It prevents unparseable 'poison pill' messages from clogging the main processing pipeline. A key interview point is troubleshooting consumer bugs.",
+"real_world_example": "Routing a corrupted JSON payload to a DLQ so developers can inspect it without breaking the worker processing fleet.",
+"common_mistake": "Failing to set up alarms on the DLQ, allowing failed, corrupted customer transactions to build up completely unobserved."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is SQS Visibility Timeout?",
+"simple_explanation": "Visibility Timeout hides a message from other consumers while one consumer is processing it.",
+"interview_answer": "When a worker pulls a message, the visibility timeout locks it so others can't see it. If the worker fails and doesn't delete it before the timeout expires, the message reappears. A key point is aligning it to application processing time.",
+"real_world_example": "Setting a 5-minute timeout for a job that takes 2 minutes to ensure no duplicate worker processes it simultaneously.",
+"common_mistake": "Setting the visibility timeout shorter than application execution time, causing multiple workers to process the same task."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is the Amazon SNS Fanout Pattern?",
+"simple_explanation": "The Fanout Pattern pushes one SNS message into multiple parallel SQS queues.",
+"interview_answer": "Fanout occurs when an SNS topic broadcasts a single message out to multiple subscribed SQS queues simultaneously. It isolates separate microservice architectures while reacting to the same event. It is essential for event-driven systems.",
+"real_world_example": "An order event triggering immediate inventory reduction, shipping prep, and invoicing updates via individual queues.",
+"common_mistake": "Subscribing an application directly to an SNS topic instead of placing an SQS queue in front of it to handle traffic spikes."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is the AWS Unified CloudWatch Agent?",
+"simple_explanation": "The Unified Agent is software installed on instances to collect advanced logs and system metrics.",
+"interview_answer": "The CloudWatch Agent runs inside the operating system to collect internal metrics like RAM utilization and disk space, alongside application log files. A key interview point is that it pushes this data out to CloudWatch.",
+"real_world_example": "Configuring an EC2 fleet to stream internal /var/log/nginx/error.log records straight into CloudWatch logs.",
+"common_mistake": "Searching for server memory statistics inside the standard CloudWatch console without installing the required agent software."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are CloudWatch Metric Filters?",
+"simple_explanation": "Metric Filters extract numeric metrics from text log files as they stream into CloudWatch.",
+"interview_answer": "Metric Filters scan incoming text logs for specific patterns (like 'ERROR' or '404') and convert them into numerical data points on a graph. This lets you set alarms on raw application logs without altering code.",
+"real_world_example": "Creating a real-time graph of application 'NullPointerException' counts by parsing standard server log files.",
+"common_mistake": "Writing an overly restrictive filter pattern that fails to catch minor variations in application log formatting."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is AWS Backup?",
+"simple_explanation": "AWS Backup is a fully managed service to centralize and automate data backups across services.",
+"interview_answer": "AWS Backup provides a single dashboard to configure backup policies across EBS volumes, RDS databases, DynamoDB tables, and EFS. It ensures compliance by enforcing retention and lifecycle schedules from a central governance point.",
+"real_world_example": "Enforcing a corporate backup plan that takes daily, encrypted snapshots of all company data stores with a 90-day retention.",
+"common_mistake": "Managing snapshot creation scripts independently inside individual services, leading to fragmented backup visibility."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is Amazon EventBridge?",
+"simple_explanation": "EventBridge is a serverless event bus that connects application data from various sources.",
+"interview_answer": "EventBridge (formerly CloudWatch Events) routes events from AWS services, SaaS apps, or custom code to targets like Lambda or SQS. It uses JSON rules to filter and match events, making it the core engine of serverless automation.",
+"real_world_example": "Triggering a custom security Lambda function automatically whenever an IAM user creates a new Access Key.",
+"common_mistake": "Creating infinite logic loops where an event triggers a function that inadvertently creates the exact same event."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is Amazon Inspector?",
+"simple_explanation": "Amazon Inspector is an automated vulnerability management service that scans AWS workloads.",
+"interview_answer": "Inspector automatically scans EC2 instances, ECR container images, and Lambda functions for software vulnerabilities and unintended network exposure. It outputs clear risk ratings to remediate exposures.",
+"real_world_example": "Scanning a newly pushed Docker image in ECR and flagging outdated packages containing critical CVE vulnerabilities.",
+"common_mistake": "Assuming Amazon Inspector acts as an active web application firewall; it is purely a security vulnerability scanner."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is AWS Config?",
+"simple_explanation": "AWS Config monitors and records configuration changes of your AWS resources.",
+"interview_answer": "AWS Config provides an inventory history and evaluates configuration states against desired security compliance rules. A key feature is its ability to trigger automated rollbacks or notifications when drift occurs.",
+"real_world_example": "Flagging an alert the moment a developer changes an S3 bucket setting from private to public, violating compliance.",
+"common_mistake": "Confusing AWS Config (resource configuration state) with AWS CloudTrail (user API tracking history)."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are EC2 Placement Groups?",
+"simple_explanation": "Placement Groups influence the physical placement of instances to meet performance or isolation needs.",
+"interview_answer": "Placement Groups offer three strategies: Cluster (low-latency, single AZ), Spread (isolated hardware racks), and Partition (grouped isolated racks). A key point is choosing Cluster for intensive distributed computing.",
+"real_world_example": "Launching a high-performance cluster computing array inside a Cluster placement group to maximize network speed.",
+"common_mistake": "Attempting to mix completely different instance types inside a Cluster placement group, which triggers launching errors."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is AWS WAF?",
+"simple_explanation": "AWS WAF is a web application firewall that protects apps from common web exploits.",
+"interview_answer": "WAF monitors HTTP/HTTPS requests forwarding to ALBs, CloudFront, or API Gateways. It blocks attacks like SQL injection and cross-site scripting based on customizable rules, helping protect against application layer exploits.",
+"real_world_example": "Deploying an OWASP Top 10 rule set on a public load balancer to block malicious web scanner traffic.",
+"common_mistake": "Deploying AWS WAF without testing rules in 'Count' mode first, accidentally blocking legitimate customer traffic."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What is CloudFront Origin Access Control (OAC)?",
+"simple_explanation": "OAC secures an S3 bucket origin by permitting access only from an AWS CloudFront distribution.",
+"interview_answer": "OAC prevents users from bypassing your CDN and accessing S3 data directly. It signs requests automatically using AWS SigV4, ensuring that your content bucket stays private and protected from direct web entry.",
+"real_world_example": "Restricting an S3 media bucket so assets are accessible exclusively via the global CloudFront edge network caching layer.",
+"common_mistake": "Enabling OAC on CloudFront but forgetting to update the corresponding S3 Bucket Policy to allow the distribution access."
+},
+{
+"tool": "AWS",
+"difficulty": "Medium",
+"question": "What are AWS Organizations Service Control Policies (SCPs)?",
+"simple_explanation": "SCPs are organization policies used to manage permissions across multiple AWS accounts.",
+"interview_answer": "SCPs establish central access guardrails that restrict the maximum available permissions across an entire AWS Organization or OU. A vital point is that they restrict even the root user of member accounts.",
+"real_world_example": "Applying an SCP that blocks member accounts from creating resources in any AWS region except us-east-1.",
+"common_mistake": "Assuming an SCP grants permissions directly; it only acts as a filter over existing IAM permissions."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you implement active-passive DNS failover in Route 53?",
+"simple_explanation": "Active-passive failover routes traffic to a primary resource unless it fails a health check, then switches to backup.",
+"interview_answer": "You configure a Route 53 Failover record mapping a primary endpoint tied to a health check and a secondary passive endpoint. If the health check fails, Route 53 dynamically updates DNS queries to return the backup IP.",
+"real_world_example": "Automatically shifting global traffic from a failed primary server in Virginia to a static standby page in Oregon.",
+"common_mistake": "Setting a high DNS TTL on the failover record, causing browsers to cache the broken primary IP long after failover occurs."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you troubleshoot a cross-region RDS replication lag failure?",
+"simple_explanation": "Identify network bottlenecks, source write saturation, or target instance resource constraints.",
+"interview_answer": "I examine CloudWatch metrics for WriteIOPS on the master and ReadIOPS/CPU on the replica. Heavy transactions or cross-region network congestion cause lag. Mitigations include upgrading the instance size or optimizing heavy batch writes.",
+"real_world_example": "Resolving a 2-hour replica lag caused by a massive daily database batch update overloading a small replica instance tier.",
+"common_mistake": "Rebooting the replica database blindly, which can interrupt data streams and increase the total replication recovery time."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you mitigate rapid flapping scaling inside an Auto Scaling Group?",
+"simple_explanation": "Tune target tracking policies, increase cooldown periods, or widen metric alarms.",
+"interview_answer": "Flapping occurs when scale-up actions trigger immediate scale-downs. I resolve this by increasing the ASG Cooldown period or scale-in warm-up timers, and using target tracking thresholds that ignore minor transient load spikes.",
+"real_world_example": "Increasing a cooldown timer to 300 seconds to give newly created instances time to initialize before scaling again.",
+"common_mistake": "Configuring immediate scale-down rules on aggressive alarms, which can cause instances to constantly cycle on and off."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "What is CloudFormation Drift Detection and how do you resolve flagged resources?",
+"simple_explanation": "Drift detection identifies manual modifications made outside of CloudFormation management.",
+"interview_answer": "Drift detection compares the running configuration against the template state. To resolve it, you either manually revert the resource to match the template or update the CloudFormation code to incorporate the changes safely.",
+"real_world_example": "Detecting that someone manually opened port 80 on a firewall stack, then updating the template to authorize it officially.",
+"common_mistake": "Running a stack update while drifted resources exist, which can cause unexpected deletions or update failures."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "When and how do you use CloudFormation Custom Resources?",
+"simple_explanation": "Custom Resources let you write templates that trigger external logic during stack actions.",
+"interview_answer": "Custom Resources are used to manage non-AWS resources or execute specific scripts during deployment by sending events to an AWS Lambda function. The function executes the task and returns a success signal to CloudFormation.",
+"real_world_example": "Using a template to trigger a Lambda function that seeds an external database schema during infrastructure provisioning.",
+"common_mistake": "Failing to return a JSON response object back to the signed pre-authenticated S3 URL, locking the stack in 'CREATE_IN_PROGRESS'."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you optimize AWS CodeBuild performance using custom Docker images?",
+"simple_explanation": "Pre-pack all heavy tools and language runtimes into a custom image stored in ECR.",
+"interview_answer": "Instead of downloading dependencies during the install phase of every single build, you pre-bake tools into a custom image. CodeBuild pulls this image from ECR, reducing build initialization time significantly.",
+"real_world_example": "Shaving 3 minutes off node project build times by creating a custom container with specific node modules pre-installed.",
+"common_mistake": "Using a massive multi-gigabyte custom image, which introduces a slow image download phase that negates the optimization."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you implement a safe rollback strategy in production using CodeDeploy?",
+"simple_explanation": "Link deployments to CloudWatch alarms and configure automatic rollbacks on threshold failure.",
+"interview_answer": "I configure CodeDeploy to track error metrics via CloudWatch alarms during rollout. If an alarm fires, CodeDeploy halts traffic shifting and instantly routes user traffic back to the previous stable version without service downtime.",
+"real_world_example": "Rolling back a deployment automatically because HTTP 500 error codes spiked over 5% during a canary rollout.",
+"common_mistake": "Forgetting to monitor application-level health metrics, causing a buggy deployment to finish because CPU stayed low."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you orchestrate a cross-account AWS CodePipeline deployment?",
+"simple_explanation": "Use a central KMS key and cross-account IAM roles to grant multi-account permissions.",
+"interview_answer": "The pipeline resides in Account A and assumes an IAM deployment role in Account B. Artifacts are held in an S3 bucket encrypted with a Customer Managed KMS Key accessible by both accounts via bucket and key policies.",
+"real_world_example": "Deploying build artifacts from a centralized tooling account into separate, isolated production AWS environments.",
+"common_mistake": "Using the default AWS-managed S3 key for encryption, which cannot be shared across external AWS accounts."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you execute an Amazon ECS Blue/Green deployment using CodeDeploy?",
+"simple_explanation": "Provision a secondary green task set and swap traffic at the ALB target group level.",
+"interview_answer": "CodeDeploy launches new container versions as a separate 'Green' task set. It runs health checks, then updates the Application Load Balancer production listener to point traffic away from Blue to Green over a specified time.",
+"real_world_example": "Shifting production web traffic seamlessly from container v1 to container v2 via ALB routing rules.",
+"common_mistake": "Using a single target group, which prevents CodeDeploy from performing isolated green task testing before routing traffic."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "What is EKS IAM Roles for Service Accounts (IRSA) and how does it function?",
+"simple_explanation": "IRSA provides fine-grained AWS IAM permission credentials to individual Kubernetes Pods.",
+"interview_answer": "IRSA couples an IAM Role with a Kubernetes service account using an OpenID Connect (OIDC) identity provider. The EKS mutating webhook injects temporary AWS tokens into specific pods, avoiding node-level credential sharing.",
+"real_world_example": "Restricting an S3 reader pod so only that specific microservice container can interact with a company bucket.",
+"common_mistake": "Granting administrative permissions to the underlying worker EC2 node instance role instead of isolating permissions via IRSA."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you use S3 Object Lock for strict regulatory compliance?",
+"simple_explanation": "Enable Object Lock in compliance mode to prevent file deletion or modification by anyone.",
+"interview_answer": "S3 Object Lock enforces WORM (Write Once, Read Many) protection. In Compliance Mode, the retention date cannot be altered or bypassed by any user, including the AWS root account, ensuring total immutability.",
+"real_world_example": "Locking financial transaction logs for a fixed 7-year window to comply with legal auditing mandates.",
+"common_mistake": "Testing Compliance Mode in a production bucket under the impression that an administrative user can delete files if needed."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you configure S3 Cross-Region Replication for KMS-encrypted objects?",
+"simple_explanation": "Enable CRR, select target KMS keys, and grant replication roles decrypt/encrypt access.",
+"interview_answer": "You must explicitly enable replication of KMS-encrypted objects in the S3 replication configuration. The IAM execution role requires permission to decrypt from the source KMS key and encrypt using the destination KMS key.",
+"real_world_example": "Replicating encrypted data from London to Tokyo while switching from a London KMS key to a Tokyo KMS key.",
+"common_mistake": "Assuming standard S3 replication handles KMS objects automatically; it silently skips them without explicit setup."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "What security risks occur during AWS KMS Key Rotation and how do you handle them?",
+"simple_explanation": "Key rotation preserves old material for decryption, ensuring no access loss or risk.",
+"interview_answer": "AWS managed backing key rotation is completely safe because older backing keys are kept indefinitely to decrypt legacy data. The only risk occurs if you delete manual keys, which corrupts past data tied to them.",
+"real_world_example": "Enabling automatic annual key rotation on an enterprise master key without modifying application code.",
+"common_mistake": "Manually deleting an old KMS key after creating a new one, permanently locking yourself out of historical backups."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you enforce an IAM Permission Boundary?",
+"simple_explanation": "Set an advanced policy that defines the maximum permissions an IAM identity can obtain.",
+"interview_answer": "A Permission Boundary is a managed policy used to restrict permissions. Even if a user is granted an Administrator policy, they can only execute actions permitted by both the identity policy and the boundary policy.",
+"real_world_example": "Allowing junior admins to create IAM roles but forcing them to attach a boundary that blocks administrative access.",
+"common_mistake": "Confusing boundaries with standard identity policies and expecting them to grant permissions on their own."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you debug an intermittent VPC MTU path discovery failure?",
+"simple_explanation": "Check if ICMP Type 3 Code 4 messages are blocked by intervening firewalls.",
+"interview_answer": "Path MTU Discovery relies on ICMP Type 3 Code 4 packets to communicate size constraints. If firewalls or NACLs block ICMP traffic, packets exceeding MTU are dropped silently, causing TCP connections to hang indefinitely.",
+"real_world_example": "Fixing an application that stalls during large database transfers by opening outbound ICMP rules in security groups.",
+"common_mistake": "Blocking all ICMP traffic under a security banner, which breaks standard MTU sizing detection mechanisms."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you troubleshoot BGP route flapping over AWS Direct Connect?",
+"simple_explanation": "Analyze BGP hold-time settings, physical link quality, and configuration alignment.",
+"interview_answer": "I inspect the Direct Connect connection logs and monitor BGP session states. Flapping occurs due to physical link drops or mismatched BGP hold timers. Aligning timers and enabling Bidirectional Forwarding Detection (BFD) ensures fast failover.",
+"real_world_example": "Configuring BFD on a hybrid on-premise router to detect physical fiber micro-drops before BGP loops occur.",
+"common_mistake": "Assuming BGP flapping is an AWS cloud routing software issue without investigating on-premise edge router hardware health."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you optimize AWS Lambda cold start latency in a VPC?",
+"simple_explanation": "Use Provisioned Concurrency, reduce deployment size, or choose lightweight programming runtimes.",
+"interview_answer": "Cold starts in a VPC are optimized by AWS using pre-allocated Hyperplane ENIs. To optimize further, I minimize dependencies, choose fast runtimes like Go or Python over Java, and configure Provisioned Concurrency for critical paths.",
+"real_world_example": "Allocating provisioned concurrency to a checkout API Lambda function to maintain sub-second response times.",
+"common_mistake": "Including heavy, unused library modules inside a Lambda zip file, which increases package download time during cold starts."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "When and why do you choose Lambda Provisioned Concurrency over standard scaling?",
+"simple_explanation": "Choose it for latency-sensitive APIs to eliminate initial container initialization delays.",
+"interview_answer": "Provisioned Concurrency keeps a specified number of execution containers warm and ready to respond instantly. It is used for production APIs where cold start spikes cannot be tolerated. A trade-off is its continuous cost model.",
+"real_world_example": "Keeping 50 Lambda instances warm during a scheduled live marketing broadcast to handle immediate concurrent api calls.",
+"common_mistake": "Enabling Provisioned Concurrency across every single internal development Lambda, generating high idle compute charges."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you identify and remediate a DynamoDB Hot Partition issue?",
+"simple_explanation": "Analyze CloudWatch partition metrics, use high-cardinality partition keys, or add write sharding.",
+"interview_answer": "Hot partitions occur when traffic hits a single partition key too heavily, triggering throttling. I fix this by redesigning the partition key to be unique (e.g., UUID) or appending random suffixes to distribute writes across partitions.",
+"real_world_example": "Fixing a multi-tenant database by combining tenant IDs with date stamps to break up data placement chunks.",
+"common_mistake": "Using low-cardinality attributes like 'Status' or 'Gender' as the primary partition key for high-throughput tables."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "What happens when RDS storage auto-scaling reaches its maximum configuration limit?",
+"simple_explanation": "The database stops growing, turns read-only, or crashes due to disk exhaustion.",
+"interview_answer": "When maximum auto-scaling storage is reached, RDS cannot allocate further disk space. New transactions fail, and the database may freeze. Remediation requires manually altering storage types, purging old data, or scaling out tables.",
+"real_world_example": "A log table growing unchecked and exhausting an allocated 10TB maximum auto-scaling threshold, crashing the application.",
+"common_mistake": "Failing to set up low-disk space CloudWatch alerts under the assumption that auto-scaling guarantees infinite growth."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you diagnose an HTTP 502 Bad Gateway error on an AWS ALB?",
+"simple_explanation": "The ALB received an invalid response or unexpected disconnect from the backend application.",
+"interview_answer": "An HTTP 502 means the ALB reached the backend server, but the application returned an unreadable response or dropped the TCP connection prematurely. I check application server logs and verify target keep-alive timeout settings.",
+"real_world_example": "Fixing a 502 error caused by an underlying Node.js service crashing under memory pressure right after receiving an ALB request.",
+"common_mistake": "Assuming an ALB 502 means the server is completely unreachable, which is actually indicated by an HTTP 504 timeout error."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you diagnose an HTTP 504 Gateway Timeout error on an AWS ALB?",
+"simple_explanation": "The backend application failed to respond within the load balancer's idle timeout window.",
+"interview_answer": "An HTTP 504 means the backend server accepted the connection but took too long to process the request. I resolve this by increasing the ALB idle timeout configuration or optimization of slow database queries on the backend.",
+"real_world_example": "A reporting query taking 90 seconds to run, exceeding a standard 60-second ALB idle timeout and triggering a 504 error.",
+"common_mistake": "Increasing the ALB idle timeout parameter without optimizing the slow backend application processing code first."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you design a multi-region multi-primary database topology on AWS?",
+"simple_explanation": "Deploy Amazon Aurora Global Database or DynamoDB Global Tables with multi-region active routing.",
+"interview_answer": "For relational data, I use Amazon Aurora Global Databases with managed write forwarding. For NoSQL, I leverage DynamoDB Global Tables to provide fully replicated, multi-master write capabilities across multiple regions with built-in conflict resolution.",
+"real_world_example": "Building a global checkout system where users in Asia and Europe write to local endpoints with automated replication.",
+"common_mistake": "Trying to coordinate cross-region database writes across standard RDS engines manually using custom code synchronization script layers."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you automate compliance remediation using AWS Config?",
+"simple_explanation": "Link an AWS Config compliance rule directly to an AWS Systems Manager Automation document.",
+"interview_answer": "When AWS Config flags a resource as non-compliant, it triggers an execution target via Systems Manager or EventBridge. The automated SSM document runs script logic to modify or shut down the violating resource immediately.",
+"real_world_example": "Automatically detaching an unapproved Internet Gateway the moment a developer launches it in a restricted network zone.",
+"common_mistake": "Configuring destructive automated remediations without alerting engineering teams, causing confusion during unexpected resource rollbacks."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you investigate a GuardDuty threat detection alert indicating EC2 crypto-mining?",
+"simple_explanation": "Isolate the network node, capture memory snapshots, and review CloudTrail API access records.",
+"interview_answer": "I isolate the compromised EC2 instance by attaching a quarantine security group. I analyze network logs for communication with known mining pools and evaluate CloudTrail for compromised credentials used to launch the workload.",
+"real_world_example": "Quarantining an instance after GuardDuty flagged communication with a known Bitcoin mining domain on port 80.",
+"common_mistake": "Terminating the flagged EC2 instance immediately, destroying forensic evidence needed to determine how the breach occurred."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you resolve EKS CoreDNS scaling bottlenecks during sudden traffic spikes?",
+"simple_explanation": "Implement CoreDNS autoscaling, enable NodeLocal DNSCache, or increase replica baselines.",
+"interview_answer": "Sudden spikes overload default CoreDNS pods, causing DNS timeouts. I resolve this by deploying the cluster-proportional-autoscaler for CoreDNS, adjusting compute resources, and implementing NodeLocal DNSCache to cache queries on the nodes.",
+"real_world_example": "Mitigating intermittent API errors in an microservice cluster by enabling local worker node DNS resolution caching layers.",
+"common_mistake": "Scaling application pods up by hundreds without scaling CoreDNS pods, causing applications to fail due to failed DNS resolutions."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you optimize ephemeral storage performance inside ECS Fargate tasks?",
+"simple_explanation": "Configure storage allocations correctly and tune application read/write block operations.",
+"interview_answer": "ECS Fargate provides configurable ephemeral storage up to 200GB. To optimize performance, I align application IO sizes, avoid deep disk indexing loops, and leverage high-performance storage configurations within the task definition definitions.",
+"real_world_example": "Allocating 100GB of ephemeral space for local extraction of compressed zip archives inside a serverless container container task.",
+"common_mistake": "Assuming Fargate tasks share a central persistent file storage layer when ephemeral data is actually destroyed at task stop."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you prevent Systems Manager API throttling across large enterprise EC2 fleets?",
+"simple_explanation": "Implement randomized execution jitters and increase API rate limits via AWS Support.",
+"interview_answer": "Large server fleets executing simultaneous SSM actions can saturate default API limits. I mitigate this by staggering cron run executions using randomized sleep delays (jitter) and organizing targets into smaller inventory groups.",
+"real_world_example": "Staggering a patch command execution across 5,000 servers over a 2-hour window instead of executing all at once.",
+"common_mistake": "Triggering global fleet commands across thousands of instances at exactly midnight, causing massive SSM API throttling failures."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you optimize CloudFront error caching for high-availability web backends?",
+"simple_explanation": "Configure Custom Error Responses and adjust Error Caching Minimum TTL settings.",
+"interview_answer": "By default, CloudFront caches server errors (like 500 or 503) for 5 minutes, which can prolong user outages after a backend recovers. I reduce the error caching TTL to 5 seconds and serve custom static error pages from S3 instead.",
+"real_world_example": "Serving a cached maintenance page to users while a backend server recovers from a brief 10-second crash.",
+"common_mistake": "Setting error caching TTL to zero during high-traffic backend failures, which allows user traffic to crash the recovery attempt."
+},
+{
+"tool": "AWS",
+"difficulty": "Hard",
+"question": "How do you architecture log aggregation across hundreds of isolated corporate AWS accounts?",
+"simple_explanation": "Stream CloudWatch logs via Kinesis Data Firehose into a centralized security account S3 bucket.",
+"interview_answer": "I configure subscription filters on local CloudWatch log groups to forward events to an Amazon Kinesis Data Firehose delivery stream. This stream centralizes, compresses, and writes the log payloads into an encrypted S3 bucket in a dedicated security account.",
+"real_world_example": "Consolidating audit trails from 200 global developer accounts into a single secure compliance data bucket.",
+"common_mistake": "Granting cross-account IAM write access directly to hundreds of local S3 buckets instead of using central ingestion streams."
+}
+]

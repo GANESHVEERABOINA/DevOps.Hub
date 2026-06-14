@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+/* Apple Premium Deep Glow Effect Global Background */
+@layer base {
+  body {
+    background-color: #050505;
+    color: #ffffff;
+    background-image: radial-gradient(
+      ellipse 80% 80% at 50% -20%, 
+      rgba(120, 119, 198, 0.15), 
+      rgba(255, 255, 255, 0)
+    );
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+}

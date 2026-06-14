@@ -1,0 +1,812 @@
+[
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is Nginx?",
+"simple_explanation": "Nginx is a highly scalable open-source web server and reverse proxy.",
+"interview_answer": "Nginx is an open-source, high-performance web server, reverse proxy, and load balancer. It is used to handle high-traffic websites efficiently. An important point is its asynchronous, event-driven architecture.",
+"real_world_example": "Serving static assets like HTML and images for a high-traffic e-commerce website.",
+"common_mistake": "Confusing Nginx solely with a load balancer rather than a full-fledged web server."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "How is Nginx different from Apache?",
+"simple_explanation": "Nginx is event-driven and non-blocking, while Apache is process-driven.",
+"interview_answer": "Nginx uses an asynchronous, event-driven architecture, making it highly memory efficient. It is used when high concurrency is required. Unlike Apache, Nginx does not natively process dynamic content like PHP.",
+"real_world_example": "Replacing Apache with Nginx to handle thousands of simultaneous connections on a low-memory server.",
+"common_mistake": "Assuming Nginx processes PHP natively without needing PHP-FPM."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "How do you start Nginx?",
+"simple_explanation": "You start Nginx using the systemd service manager.",
+"interview_answer": "You can start Nginx using the systemctl start nginx command on modern Linux distributions. It is used to initialize the master and worker processes. Verifying the status immediately afterward is a best practice.",
+"real_world_example": "Running systemctl start nginx after installing the package on an Ubuntu server.",
+"common_mistake": "Running the raw nginx binary directly instead of using systemd, which breaks process tracking."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "How do you stop Nginx safely?",
+"simple_explanation": "You stop Nginx using the systemctl stop command.",
+"interview_answer": "Nginx is stopped via systemctl stop nginx or nginx -s quit. The quit signal is used to gracefully shut down worker processes after finishing current requests. This prevents connection dropping.",
+"real_world_example": "Running nginx -s quit to ensure ongoing file downloads complete before the server shuts down.",
+"common_mistake": "Using kill -9 to forcefully stop Nginx, which abruptly terminates active user connections."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "How do you apply configuration changes without downtime?",
+"simple_explanation": "You use the reload command.",
+"interview_answer": "You apply changes using systemctl reload nginx or nginx -s reload. It is used to start new worker processes with the updated configuration while gracefully shutting down old ones. This ensures zero downtime.",
+"real_world_example": "Reloading Nginx after adding a new SSL certificate to apply it without dropping current users.",
+"common_mistake": "Using the restart command instead of reload, causing brief service interruptions."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the default port for Nginx HTTP traffic?",
+"simple_explanation": "The default port for HTTP traffic is 80.",
+"interview_answer": "Nginx listens on TCP port 80 for unencrypted HTTP traffic by default. It is used as the standard entry point for web browsing. You must ensure port 80 is open in your server firewall.",
+"real_world_example": "A user typing a website URL without HTTPS connects to Nginx on port 80.",
+"common_mistake": "Forgetting to open port 80 in the AWS Security Group, leading to connection timeouts."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "Where is the main Nginx configuration file located?",
+"simple_explanation": "It is typically located at /etc/nginx/nginx.conf.",
+"interview_answer": "The primary configuration file is located at /etc/nginx/nginx.conf on Linux systems. It is used to define global settings, worker processes, and HTTP blocks. All other configurations are usually included from this file.",
+"real_world_example": "Editing /etc/nginx/nginx.conf to increase the global worker_connections limit.",
+"common_mistake": "Editing files in /usr/share/nginx instead of the /etc/nginx configuration directory."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is a Master Process in Nginx?",
+"simple_explanation": "The main process that reads configurations and manages worker processes.",
+"interview_answer": "The master process runs as root to bind to privileged ports and read configuration files. It is used to spawn and manage unprivileged worker processes. It does not handle actual client requests.",
+"real_world_example": "The master process binds to port 80 and then delegates incoming HTTP requests to worker processes.",
+"common_mistake": "Assuming the master process serves web traffic directly to end users."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is a Worker Process in Nginx?",
+"simple_explanation": "The process that actually handles network connections and client requests.",
+"interview_answer": "Worker processes do the actual heavy lifting of processing HTTP requests and managing connections. They are used to handle concurrency efficiently. By default, Nginx spawns one worker process per CPU core.",
+"real_world_example": "A 4-core server running 4 worker processes to serve thousands of concurrent web socket connections.",
+"common_mistake": "Running worker processes as root, which is a major security risk."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "How do you verify Nginx configuration syntax?",
+"simple_explanation": "Use the nginx -t command.",
+"interview_answer": "The nginx -t command parses the configuration files and checks for syntax errors. It is used to validate changes before reloading the server. A crucial point is it prevents breaking the live server.",
+"real_world_example": "Running nginx -t in a CI/CD pipeline to ensure valid syntax before deploying the configuration.",
+"common_mistake": "Reloading Nginx without testing the syntax first, which can cause the service to fail to restart."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the purpose of the server block?",
+"simple_explanation": "It defines a virtual server to handle specific domain requests.",
+"interview_answer": "A server block defines configuration for a specific virtual host, matching domains and ports. It is used to host multiple websites on a single Nginx instance. It acts similarly to Apache VirtualHosts.",
+"real_world_example": "Configuring separate server blocks for api.example.com and [www.example.com](https://www.google.com/search?q=https://www.example.com).",
+"common_mistake": "Missing a semicolon inside the server block, causing syntax errors."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is a Reverse Proxy?",
+"simple_explanation": "A server that sits in front of backend servers and forwards client requests to them.",
+"interview_answer": "A reverse proxy accepts client requests and routes them to upstream backend servers. It is used to increase security, balance load, and cache content. Nginx is an industry-standard reverse proxy.",
+"real_world_example": "Nginx receiving port 80 traffic and proxying it to a Node.js app running on port 3000.",
+"common_mistake": "Confusing a reverse proxy (protects servers) with a forward proxy (protects clients)."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is Load Balancing?",
+"simple_explanation": "Distributing network traffic across multiple servers.",
+"interview_answer": "Load balancing spreads incoming requests across a group of backend servers. It is used to ensure high availability and prevent single points of failure. Nginx supports this seamlessly via the upstream module.",
+"real_world_example": "Distributing user logins evenly across three different authentication microservices.",
+"common_mistake": "Configuring load balancing without setting up health checks for the backend servers."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the location block?",
+"simple_explanation": "It defines how to process requests for specific URIs.",
+"interview_answer": "The location block routes requests based on the requested URL path. It is used to apply different rules, like proxying or serving static files, depending on the endpoint. It supports regex matching.",
+"real_world_example": "Using a location /images/ block to serve static files directly, bypassing the application server.",
+"common_mistake": "Misunderstanding the priority of location block matching (exact match vs regex vs prefix)."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What does the listen directive do?",
+"simple_explanation": "It specifies the IP address and port the server block accepts requests on.",
+"interview_answer": "The listen directive tells Nginx which port and IP to monitor for incoming connections. It is used to bind virtual servers to specific network interfaces. You can also specify SSL or HTTP/2 here.",
+"real_world_example": "Using listen 443 ssl to configure a server block for secure HTTPS traffic.",
+"common_mistake": "Assigning the exact same listen port and server_name in two different server blocks."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the server_name directive?",
+"simple_explanation": "It defines the domain names that the server block responds to.",
+"interview_answer": "The server_name directive matches the HTTP Host header sent by the client. It is used to direct traffic to the correct virtual host when multiple domains share an IP. It supports wildcards.",
+"real_world_example": "Setting server_name myapp.com *.myapp.com to handle the root domain and all subdomains.",
+"common_mistake": "Forgetting to configure a default_server, leading to unpredictable routing for unknown domains."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "Where are Nginx error logs located by default?",
+"simple_explanation": "They are typically located at /var/log/nginx/error.log.",
+"interview_answer": "The error log records diagnostic information, configuration errors, and runtime issues. It is used primarily for troubleshooting failing requests or startup crashes. The log level can be customized.",
+"real_world_example": "Checking /var/log/nginx/error.log to see why a 502 Bad Gateway error occurred.",
+"common_mistake": "Looking at access logs instead of error logs when troubleshooting server crashes."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "Where are Nginx access logs located by default?",
+"simple_explanation": "They are typically located at /var/log/nginx/access.log.",
+"interview_answer": "The access log records every HTTP request processed by the server, including client IP, timestamp, and status code. It is used for traffic analytics and security auditing. Format is highly customizable.",
+"real_world_example": "Parsing access.log to identify which IP address is causing a sudden spike in traffic.",
+"common_mistake": "Leaving access logs enabled for static assets on high-traffic sites, exhausting disk space."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What does the root directive do?",
+"simple_explanation": "It specifies the document root directory for serving files.",
+"interview_answer": "The root directive sets the base filesystem path for requests. Nginx appends the requested URI to this path to locate the file. It is used to serve static HTML, CSS, and JS files.",
+"real_world_example": "Setting root /var/www/html so a request for /index.html serves /var/www/html/index.html.",
+"common_mistake": "Placing the root directive inside every location block instead of defining it once at the server block level."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What does the index directive do?",
+"simple_explanation": "It defines the default file to serve when a directory is requested.",
+"interview_answer": "The index directive lists files Nginx should search for when a client requests a directory path. It is used to load default entry points. Nginx checks the files in the order they are listed.",
+"real_world_example": "Setting index index.html index.php so Nginx serves index.html first if it exists.",
+"common_mistake": "Requesting a directory without an index directive or autoindex enabled, resulting in a 403 Forbidden error."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the alias directive?",
+"simple_explanation": "It maps a URL path to a specific filesystem path, replacing the location part.",
+"interview_answer": "Unlike the root directive which appends the URI, alias replaces the location path with the specified directory. It is used to serve files from directories that do not match the URL structure.",
+"real_world_example": "Using alias /data/images/ for location /img/ to serve an image without including /img/ in the file path.",
+"common_mistake": "Forgetting the trailing slash on the alias path, causing file resolution errors."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the HTTP context in Nginx?",
+"simple_explanation": "A configuration block that holds directives for handling web traffic.",
+"interview_answer": "The HTTP context encompasses all web-related configurations, including server blocks, upstreams, and global web settings. It is used to define how HTTP traffic is processed. It sits within the main context.",
+"real_world_example": "Defining custom log formats and gzip compression settings inside the global HTTP context.",
+"common_mistake": "Placing HTTP directives like server blocks outside the HTTP context, causing syntax errors."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the events context?",
+"simple_explanation": "A block that configures global connection processing rules.",
+"interview_answer": "The events context sets connection processing parameters, such as the maximum number of connections a worker can handle. It is used to tune network performance. This block is mandatory in nginx.conf.",
+"real_world_example": "Setting worker_connections 1024 inside the events block to allow 1024 concurrent connections per worker.",
+"common_mistake": "Omitting the events block entirely, which prevents Nginx from starting."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What does the include directive do?",
+"simple_explanation": "It pulls in configurations from external files.",
+"interview_answer": "The include directive imports configurations from other files or directories into the current context. It is used to modularize configurations, keeping the main nginx.conf clean and readable.",
+"real_world_example": "Using include /etc/nginx/sites-enabled/*; to load all individual virtual host configurations.",
+"common_mistake": "Using a wildcard include path that accidentally imports non-configuration files or backups."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "How do you check the Nginx version?",
+"simple_explanation": "Use the nginx -v or nginx -V command.",
+"interview_answer": "The nginx -v command outputs the software version. Using the uppercase -V outputs the version along with compiler arguments and configured modules. It is used to verify installed features.",
+"real_world_example": "Running nginx -V to check if the server was compiled with the HTTP/2 module enabled.",
+"common_mistake": "Using generic package manager commands to check module support instead of relying on nginx -V."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is HTTPS in Nginx?",
+"simple_explanation": "Serving web traffic securely encrypted via SSL/TLS.",
+"interview_answer": "HTTPS ensures data between the client and Nginx is encrypted. It is used to secure sensitive data like passwords. Nginx acts as the SSL termination point, decrypting traffic before proxying it.",
+"real_world_example": "Configuring listen 443 ssl to securely serve a banking application.",
+"common_mistake": "Configuring HTTPS but failing to provide the correct paths to the SSL certificate and private key."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is a Nginx Daemon?",
+"simple_explanation": "A background process that runs continuously without a terminal.",
+"interview_answer": "Nginx runs as a daemon by default, meaning it executes in the background independent of user sessions. It is used so the server remains active after the administrator logs out.",
+"real_world_example": "Configuring daemon off; only when running Nginx inside a Docker container so the container stays alive.",
+"common_mistake": "Running daemon on; inside Docker, causing the container to exit immediately after starting."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is the Main Context?",
+"simple_explanation": "The global scope of the Nginx configuration file.",
+"interview_answer": "The main context is the topmost level of nginx.conf, outside any blocks. It is used to define core parameters like the worker_processes, user, and global PID file location.",
+"real_world_example": "Defining the 'user www-data;' directive in the main context to dictate process ownership.",
+"common_mistake": "Placing HTTP-specific directives directly in the main context."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is a 502 Bad Gateway error?",
+"simple_explanation": "It means Nginx received an invalid response from a backend server.",
+"interview_answer": "A 502 error occurs when Nginx acts as a reverse proxy and cannot communicate successfully with the upstream server. It is usually caused by the backend application crashing, restarting, or not running.",
+"real_world_example": "Seeing a 502 error because the Node.js application process behind Nginx crashed.",
+"common_mistake": "Blaming Nginx for a 502 error when the fault lies entirely with the upstream backend service."
+},
+{
+"tool": "Nginx",
+"difficulty": "Easy",
+"question": "What is a 504 Gateway Timeout error?",
+"simple_explanation": "It means the backend server took too long to respond to Nginx.",
+"interview_answer": "A 504 error occurs when Nginx forwards a request to a backend server, but the backend fails to respond within the configured proxy timeout window. It is used to prevent clients from hanging indefinitely.",
+"real_world_example": "A 504 error triggering because a database query took 90 seconds, exceeding the 60-second Nginx timeout.",
+"common_mistake": "Increasing the Nginx timeout infinitely instead of fixing the slow backend application performance."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "Describe the event-driven architecture of Nginx.",
+"simple_explanation": "Nginx handles multiple connections within a single thread using non-blocking I/O.",
+"interview_answer": "Instead of creating a new process per connection like Apache, Nginx uses an asynchronous, event-driven loop (like epoll). This allows a single worker to manage thousands of concurrent connections efficiently. It drastically reduces memory usage.",
+"real_world_example": "A single Nginx worker processing 10,000 idle websocket connections using minimal RAM.",
+"common_mistake": "Tuning Nginx by spawning hundreds of worker processes, which actually degrades performance."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is an upstream block?",
+"simple_explanation": "A configuration block that defines a pool of backend servers.",
+"interview_answer": "The upstream block defines a logical group of servers for load balancing. It is used to distribute requests proxied by Nginx across multiple application instances. It sits within the HTTP context.",
+"real_world_example": "Defining an upstream backend group containing three internal IP addresses running Python API servers.",
+"common_mistake": "Placing the upstream block inside a server block instead of the parent HTTP context."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What does proxy_pass do?",
+"simple_explanation": "It forwards requests to a specified proxied server.",
+"interview_answer": "The proxy_pass directive routes an incoming HTTP request to a backend server or upstream group. It is the fundamental directive used for setting up Nginx as a reverse proxy. It modifies headers implicitly.",
+"real_world_example": "Using proxy_pass http://localhost:8080 to send web traffic to a local Tomcat server.",
+"common_mistake": "Adding a trailing slash to the proxy_pass URL unexpectedly, which changes how the URI is appended."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is Round Robin load balancing?",
+"simple_explanation": "The default method where requests are distributed sequentially across backend servers.",
+"interview_answer": "Round robin passes each new request to the next server in the upstream list in order. It is used to distribute load evenly when all servers have similar processing capacities. No specific directive is needed.",
+"real_world_example": "Distributing 30 requests equally so Server A, B, and C each process exactly 10 requests.",
+"common_mistake": "Using round robin for stateful applications without sticky sessions, causing users to lose their login state."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is IP Hash load balancing?",
+"simple_explanation": "A method that routes requests from the same client IP to the same backend server.",
+"interview_answer": "IP Hash uses the client's IP address to calculate a hash, determining which backend server receives the request. It is used to achieve session persistence (sticky sessions) without relying on application cookies.",
+"real_world_example": "Using the ip_hash directive so a shopping cart application remembers the user's selected items.",
+"common_mistake": "Using IP Hash behind a CDN or NAT where all clients share the same IP, destroying load distribution."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is Least Connected load balancing?",
+"simple_explanation": "A method that routes traffic to the backend server with the fewest active connections.",
+"interview_answer": "The least_conn directive evaluates the number of active connections on each server. It is used when requests take varying amounts of time to process, preventing slower servers from being overwhelmed with new requests.",
+"real_world_example": "Using least_conn for heavy video processing endpoints where some requests take seconds and others take minutes.",
+"common_mistake": "Using least_conn when backend servers have vastly different hardware capacities without applying weight parameters."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you configure Gzip compression?",
+"simple_explanation": "By enabling the gzip directive in the HTTP or server context.",
+"interview_answer": "Gzip compresses HTTP responses before sending them to the client. It is used to drastically reduce bandwidth consumption and improve page load speeds. You must specify which MIME types to compress.",
+"real_world_example": "Setting gzip_types text/css application/javascript to shrink frontend asset sizes.",
+"common_mistake": "Compressing already compressed formats like JPEG or MP4, which wastes CPU and actually increases response time."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is client_max_body_size?",
+"simple_explanation": "A directive that limits the maximum allowed size of the client request body.",
+"interview_answer": "This directive sets the maximum file size a client can upload. If exceeded, Nginx returns a 413 Request Entity Too Large error. It is used to prevent denial-of-service attacks via massive file uploads.",
+"real_world_example": "Setting client_max_body_size 50M to allow users to upload high-resolution images.",
+"common_mistake": "Leaving the default limit of 1MB and wondering why application file uploads keep failing."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you redirect HTTP to HTTPS?",
+"simple_explanation": "By using a return 301 directive in the port 80 server block.",
+"interview_answer": "You create a dedicated server block listening on port 80 that issues a 301 Permanent Redirect to the HTTPS version of the requested URL. This is used to enforce secure encrypted connections universally.",
+"real_world_example": "return 301 https://$host$request_uri; redirecting all insecure traffic to TLS.",
+"common_mistake": "Using rewrite instead of return, which is less efficient for simple redirects."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What does try_files do?",
+"simple_explanation": "It checks the existence of files in sequence and serves the first one found.",
+"interview_answer": "The try_files directive attempts to serve files matching the URI. If none exist, it falls back to a specified final URI or returns an error. It is heavily used in Single Page Applications (SPAs) and PHP frameworks.",
+"real_world_example": "try_files $uri $uri/ /index.html; routing all missing React routes to the main index file.",
+"common_mistake": "Causing an infinite loop by making the fallback URI route back to the same try_files block."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is the difference between rewrite and return?",
+"simple_explanation": "Return sends an immediate HTTP status; rewrite alters the URI using regex internally.",
+"interview_answer": "Return stops processing and immediately sends a status code and URL to the client. Rewrite modifies the requested URI internally using regular expressions before continuing processing. Return is faster and preferred when possible.",
+"real_world_example": "Using rewrite to silently strip /api/v1/ from a URL before sending it to an upstream backend.",
+"common_mistake": "Using complex rewrite regex rules for simple domain redirects instead of the highly optimized return directive."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you set up caching in Nginx?",
+"simple_explanation": "Using proxy_cache_path and proxy_cache directives.",
+"interview_answer": "Nginx can cache responses from backend servers to disk. It is used to dramatically improve response times and reduce upstream server load for repetitive requests. The cache path and memory zone must be defined globally.",
+"real_world_example": "Caching API responses for 10 minutes so identical queries don't hit the database.",
+"common_mistake": "Forgetting to set cache expiration parameters (proxy_cache_valid), leading to stale data being served forever."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is rate limiting in Nginx?",
+"simple_explanation": "Restricting the number of requests a client can make in a given timeframe.",
+"interview_answer": "Rate limiting is configured using limit_req_zone and limit_req. It utilizes the leaky bucket algorithm to throttle traffic. It is used to prevent brute-force attacks and mitigate DDoS attempts on APIs.",
+"real_world_example": "Limiting requests to a login endpoint to 5 requests per second per IP address.",
+"common_mistake": "Applying global rate limits without exclusions, blocking internal services or monitoring health checks."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you configure IP whitelisting or blacklisting?",
+"simple_explanation": "By using the allow and deny directives.",
+"interview_answer": "The ngx_http_access_module uses allow and deny rules evaluated sequentially. It is used to restrict access to sensitive locations like admin panels to specific IP ranges. Processing stops at the first match.",
+"real_world_example": "Using deny all; after allow 192.168.1.0/24; to secure an internal dashboard.",
+"common_mistake": "Putting allow all; before a deny rule, meaning the deny rule is never reached."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you implement Basic Authentication?",
+"simple_explanation": "Using auth_basic and auth_basic_user_file directives.",
+"interview_answer": "Basic Auth restricts access by requiring a username and password. You specify a realm string and point Nginx to a file generated by htpasswd containing hashed credentials. It is used for quick, simple access control.",
+"real_world_example": "Protecting a staging environment so it is hidden from the public but accessible to QA testers.",
+"common_mistake": "Transmitting basic authentication over plain HTTP instead of HTTPS, allowing credentials to be intercepted easily."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is worker_connections?",
+"simple_explanation": "The maximum number of simultaneous connections each worker process can handle.",
+"interview_answer": "This directive sits in the events block. Total maximum connections equal worker_processes multiplied by worker_connections. It is used to tune server capacity. Note that a reverse proxy setup uses two connections per client.",
+"real_world_example": "Setting worker_connections to 1024, enabling 4 workers to handle 4096 simultaneous connections.",
+"common_mistake": "Setting worker_connections higher than the operating system's open file descriptor limit (ulimit), causing dropped connections."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How does FastCGI proxying work?",
+"simple_explanation": "Nginx passes HTTP requests to an application server using the FastCGI protocol.",
+"interview_answer": "Since Nginx cannot execute dynamic scripts like PHP, it uses fastcgi_pass to forward requests to a FastCGI process manager (like PHP-FPM). It is used to decouple the web server from application execution.",
+"real_world_example": "Routing requests ending in .php to a backend PHP-FPM socket over fastcgi.",
+"common_mistake": "Forgetting to include fastcgi_params, causing the backend to receive missing variable environments."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is autoindex in Nginx?",
+"simple_explanation": "A module that generates a directory listing automatically.",
+"interview_answer": "When a requested directory lacks an index file, autoindex on; generates an HTML list of files and folders. It is used to share files quickly over HTTP, like an FTP alternative.",
+"real_world_example": "Enabling autoindex on an internal repository so developers can browse and download build artifacts.",
+"common_mistake": "Leaving autoindex enabled on public web directories, exposing sensitive source code or config files."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you configure custom error pages?",
+"simple_explanation": "Using the error_page directive to map status codes to specific HTML files.",
+"interview_answer": "The error_page directive intercepts HTTP error codes and redirects the client to a custom URI. It is used to provide user-friendly branded error pages instead of Nginx's default raw text pages.",
+"real_world_example": "Mapping error_page 404 /custom_404.html to show users a friendly 'Page Not Found' screen.",
+"common_mistake": "Failing to define a location block for the custom error page, resulting in an infinite error loop."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What does the sendfile directive do?",
+"simple_explanation": "It optimizes static file serving by copying data directly within the kernel.",
+"interview_answer": "Sendfile enables zero-copy file transfer. Instead of reading a file into user space and writing it back to the network socket, it transfers data directly between file descriptors in the OS kernel. This massively reduces CPU usage.",
+"real_world_example": "Enabling sendfile to drastically increase throughput when serving heavy video assets.",
+"common_mistake": "Leaving sendfile disabled on heavy media servers, causing extremely high CPU load."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is the tcp_nopush directive?",
+"simple_explanation": "It optimizes network packets by sending HTTP response headers in one packet.",
+"interview_answer": "Used alongside sendfile, tcp_nopush forces Nginx to wait and send the HTTP headers and the start of the file in a single, full TCP packet. It is used to reduce network overhead and optimize bandwidth.",
+"real_world_example": "Serving large software downloads where packing maximum data per frame reduces latency.",
+"common_mistake": "Enabling tcp_nopush without enabling sendfile first; it relies entirely on sendfile being active."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is keepalive_timeout?",
+"simple_explanation": "The time a persistent connection is kept open for subsequent requests.",
+"interview_answer": "Keepalive prevents the overhead of establishing a new TCP connection for every HTTP request. keepalive_timeout determines how many seconds Nginx will keep an idle connection open waiting for a new request. It balances speed vs memory.",
+"real_world_example": "Setting keepalive_timeout 65 to allow a browser to download HTML, CSS, and JS over one connection.",
+"common_mistake": "Setting keepalive too high on high-traffic sites, causing Nginx to run out of worker connections due to idle clients."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "Why use the X-Forwarded-For header?",
+"simple_explanation": "To pass the original client's IP address to the backend server.",
+"interview_answer": "When Nginx acts as a proxy, backend servers see Nginx's IP, not the user's. The X-Forwarded-For header preserves the original client IP. It is vital for backend logging, rate limiting, and geo-location.",
+"real_world_example": "Using proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for; so a Django app can log real user IPs.",
+"common_mistake": "Failing to configure this, causing the backend to falsely flag Nginx's IP as a malicious spammer."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "Why set the Host header via proxy_set_header?",
+"simple_explanation": "To ensure backend servers receive the correct domain name requested by the client.",
+"interview_answer": "By default, Nginx sets the Host header to the upstream proxy target. Setting proxy_set_header Host $host ensures the backend virtual host routes the request correctly, which is critical for multi-tenant backend environments.",
+"real_world_example": "Forwarding the Host header so a backend Apache server knows whether to serve Site A or Site B.",
+"common_mistake": "Skipping the Host header setup, resulting in backend servers serving their default or fallback page."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "Who should own the Nginx worker processes?",
+"simple_explanation": "An unprivileged system user, typically www-data or nginx.",
+"interview_answer": "The user directive in the main context defines the OS user running the worker processes. For security, this must be an unprivileged user. It ensures that if a vulnerability is exploited, the attacker has limited system access.",
+"real_world_example": "Running workers as www-data to safely restrict access to only the web directory files.",
+"common_mistake": "Running worker processes as root, which can lead to total server compromise if Nginx is exploited."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you define a custom log format?",
+"simple_explanation": "Using the log_format directive in the HTTP context.",
+"interview_answer": "The log_format directive creates named templates utilizing internal variables. You apply this template by referencing its name in the access_log directive. It is used to generate JSON logs or add timing metrics for monitoring.",
+"real_world_example": "Creating a JSON log format so the ELK stack can easily parse incoming Nginx access logs.",
+"common_mistake": "Trying to define a log_format inside a server block; it must be defined globally in the HTTP block."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is an Nginx Dynamic Module?",
+"simple_explanation": "A module that is loaded at runtime rather than compiled into the binary.",
+"interview_answer": "Dynamic modules are loaded using the load_module directive in the main configuration context. They are used to add features (like GeoIP or image filters) without needing to recompile Nginx from source.",
+"real_world_example": "Loading the ModSecurity dynamic module to add WAF capabilities to an existing Nginx installation.",
+"common_mistake": "Placing the load_module directive inside the HTTP block; it must reside at the very top of nginx.conf."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is the difference between Nginx Open Source and Nginx Plus?",
+"simple_explanation": "Nginx Plus is the commercial version with advanced features and support.",
+"interview_answer": "Nginx Plus adds enterprise capabilities like active health checks, dynamic reconfiguration via API, JWT authentication, and commercial support. Open Source is free but lacks these advanced out-of-the-box features.",
+"real_world_example": "An enterprise purchasing Nginx Plus to utilize its active health checks and live activity monitoring dashboard.",
+"common_mistake": "Trying to use active health check directives (health_check) in the open-source version, which will cause syntax errors."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "How do you upgrade Nginx without dropping connections?",
+"simple_explanation": "By sending a USR2 signal to the master process.",
+"interview_answer": "You can perform an on-the-fly binary upgrade by sending SIGUSR2 to the master process. It spawns a new master and workers with the new binary. Old workers finish their requests and are then shut down via WINCH.",
+"real_world_example": "Upgrading the Nginx binary during peak business hours with zero dropped customer checkouts.",
+"common_mistake": "Using a standard restart command during an upgrade, which completely drops all active user sessions."
+},
+{
+"tool": "Nginx",
+"difficulty": "Medium",
+"question": "What is the client_body_buffer_size directive?",
+"simple_explanation": "It sets the buffer size for reading client request bodies.",
+"interview_answer": "This directive defines how much of the client's payload is held in memory. If a request exceeds this size, the rest is written to a temporary disk file. It is used to optimize memory usage against disk I/O.",
+"real_world_example": "Increasing the buffer size for an API that primarily receives massive JSON payloads to avoid disk writes.",
+"common_mistake": "Setting this buffer excessively high globally, which can exhaust RAM during heavy concurrent traffic."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is Microcaching?",
+"simple_explanation": "Caching dynamic, personalized content for very short periods (e.g., 1 second).",
+"interview_answer": "Microcaching caches dynamic content (like a heavily hit API or homepage) for a tiny window. It is used to absorb immense traffic spikes while serving relatively fresh content. It completely shields the backend database from thundering herds.",
+"real_world_example": "Caching a dynamic news homepage for 1 second, turning 10,000 backend queries into just 1 backend query.",
+"common_mistake": "Microcaching user-specific pages (like a shopping cart), serving User A's private data to User B."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How does ssl_session_cache improve performance?",
+"simple_explanation": "It stores SSL handshake parameters to speed up subsequent connections.",
+"interview_answer": "TLS handshakes consume significant CPU. ssl_session_cache stores session parameters in shared memory. When a client reconnects, the handshake is skipped, reducing CPU load and improving latency drastically.",
+"real_world_example": "Configuring ssl_session_cache shared:SSL:10m; to hold roughly 40,000 sessions in memory.",
+"common_mistake": "Using the built-in cache instead of a shared cache, preventing worker processes from sharing session data."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is OCSP Stapling?",
+"simple_explanation": "A mechanism to check SSL certificate revocation status quickly.",
+"interview_answer": "OCSP Stapling allows Nginx to fetch and cache the certificate's revocation status from the Certificate Authority. Nginx 'staples' this response to the TLS handshake. It improves privacy and reduces client-side connection latency.",
+"real_world_example": "Enabling ssl_stapling on; to prevent mobile browsers from making slow secondary DNS lookups during TLS negotiation.",
+"common_mistake": "Enabling OCSP stapling without configuring a DNS resolver (resolver directive), causing the status fetch to fail."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you implement Mutual TLS (mTLS) in Nginx?",
+"simple_explanation": "By verifying client certificates against a trusted CA using ssl_verify_client.",
+"interview_answer": "mTLS requires both the client and server to authenticate each other. In Nginx, you configure ssl_client_certificate to point to a CA and set ssl_verify_client on. It is used in Zero Trust architectures to secure microservice communications.",
+"real_world_example": "Securing an internal payment API so only authorized internal microservices with valid certs can reach it.",
+"common_mistake": "Deploying mTLS on a public-facing domain, blocking normal web browsers from accessing the site."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is the C10K problem?",
+"simple_explanation": "The challenge of optimizing network sockets to handle 10,000 concurrent connections.",
+"interview_answer": "C10K is a historic performance bottleneck where traditional process-per-connection servers (like Apache) exhausted memory. Nginx was explicitly created to solve this using an event-driven, non-blocking architecture, easily scaling to millions of connections.",
+"real_world_example": "Nginx serving thousands of slow, idle WebSockets concurrently without consuming massive amounts of RAM.",
+"common_mistake": "Trying to solve C10K by simply buying more RAM instead of adopting event-driven architectural patterns."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you tune worker_processes and CPU affinity?",
+"simple_explanation": "Set worker_processes to auto and optionally pin workers to specific CPU cores.",
+"interview_answer": "worker_processes auto automatically spawns one worker per CPU core. For extreme performance optimization, worker_cpu_affinity binds specific workers to specific physical cores to maximize L1/L2 CPU cache hit rates and reduce context switching.",
+"real_world_example": "Pinning 8 workers to 8 dedicated cores on a high-frequency trading proxy server to eliminate microsecond latencies.",
+"common_mistake": "Manually assigning more worker processes than physical CPU cores, causing heavy context switching overhead."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What does open_file_cache do?",
+"simple_explanation": "It caches metadata about open files, directories, and file errors.",
+"interview_answer": "This directive caches file descriptors, sizes, and modification times. It does not cache file contents. It is heavily used to optimize performance on high-traffic servers serving millions of small static assets by avoiding redundant filesystem stat calls.",
+"real_world_example": "Enabling open_file_cache max=1000 to serve thumbnails incredibly fast by bypassing repetitive disk lookups.",
+"common_mistake": "Caching file descriptors for too long during active development, serving ghost metadata for deleted files."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is the map block used for?",
+"simple_explanation": "It creates dynamic variables based on the value of other variables.",
+"interview_answer": "The map block sits in the HTTP context and evaluates a source variable to define a new variable. It is a highly efficient way to handle complex conditional logic without using expensive if statements.",
+"real_world_example": "Using a map to set a variable $backend_pool depending on the client's X-Country-Code header.",
+"common_mistake": "Placing the map block inside a server or location block, causing a syntax error."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is the split_clients block?",
+"simple_explanation": "It routes traffic dynamically based on hashed percentages for A/B testing.",
+"interview_answer": "The split_clients block hashes a string (like a user's IP or cookie) and distributes traffic deterministically into defined percentage buckets. It is the native, highly optimized method for implementing A/B testing directly at the proxy layer.",
+"real_world_example": "Routing 10% of users to a new experimental Node.js backend while keeping 90% on the stable backend.",
+"common_mistake": "Using random variables instead of a deterministic client identifier (like an IP), causing users to randomly bounce between A and B versions."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How is Lua scripting used in Nginx?",
+"simple_explanation": "Using OpenResty to embed Lua logic directly into Nginx request processing.",
+"interview_answer": "Through the ngx_http_lua_module (popularized by OpenResty), developers can write highly performant Lua scripts to execute during specific Nginx phases. It is used to implement complex authentication, dynamic routing, and API gateway logic without hitting a backend.",
+"real_world_example": "Validating JWT tokens directly inside Nginx using Lua before proxying traffic to backend microservices.",
+"common_mistake": "Using blocking I/O calls inside a Lua script, which freezes the entire Nginx event loop."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you mitigate DDoS attacks using Nginx?",
+"simple_explanation": "Combine rate limiting, connection limiting, and strict timeout configurations.",
+"interview_answer": "Mitigation involves setting limit_req (throttling bursts), limit_conn (limiting total connections per IP), dropping slow clients with client_body_timeout, and using GeoIP modules to block malicious regions entirely.",
+"real_world_example": "Creating a zone to limit a single IP to 1 request per second to prevent automated login brute-forcing.",
+"common_mistake": "Applying strict global rate limits that accidentally block entire corporate offices sharing a single NAT IP."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you mitigate Slowloris attacks?",
+"simple_explanation": "By aggressively tuning client buffer and timeout directives.",
+"interview_answer": "Slowloris holds connections open by sending data incredibly slowly. Mitigate this by strictly lowering client_body_timeout and client_header_timeout, limiting concurrent connections, and using the limit_req module to drop stalled clients.",
+"real_world_example": "Setting client_header_timeout 10s; to forcibly disconnect malicious bots trying to exhaust connection pools.",
+"common_mistake": "Increasing timeout limits to 'help' slow clients, inadvertently making the server more vulnerable to the attack."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you tune Nginx buffers?",
+"simple_explanation": "By adjusting client_body_buffer_size and fastcgi_buffers to prevent disk I/O.",
+"interview_answer": "If payloads exceed buffer limits, Nginx writes data to temporary disk files, destroying performance. Tuning these directives ensures request bodies and proxy responses are handled entirely in RAM, crucial for high-performance APIs.",
+"real_world_example": "Increasing fastcgi_buffers to handle massive JSON responses from PHP applications entirely in memory.",
+"common_mistake": "Setting buffer sizes arbitrarily large, which can rapidly exhaust server RAM under high concurrency."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is epoll and why is it important?",
+"simple_explanation": "Epoll is a highly scalable I/O event notification mechanism in Linux.",
+"interview_answer": "Nginx relies on the epoll method to monitor thousands of file descriptors asynchronously. Unlike older select/poll methods, epoll performance does not degrade as connections scale, allowing Nginx to achieve its signature concurrency capabilities.",
+"real_world_example": "Nginx using the 'use epoll;' directive in the events block on an Ubuntu server to manage network sockets efficiently.",
+"common_mistake": "Attempting to force Nginx to use older methods like 'select' on modern Linux systems."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is upstream keepalive?",
+"simple_explanation": "Maintaining persistent connections between Nginx and backend servers.",
+"interview_answer": "By default, Nginx opens a new connection to the upstream server for every request. Configuring the keepalive directive in the upstream block caches connection pools, drastically reducing latency and TCP handshake overhead.",
+"real_world_example": "Keeping 32 connections alive to an internal REST API to eliminate millisecond TCP setup delays.",
+"common_mistake": "Enabling keepalive but forgetting to clear the 'Connection: close' header using proxy_set_header, breaking the persistence."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "Active vs Passive Health Checks?",
+"simple_explanation": "Passive checks rely on failed client traffic; Active checks send continuous probe requests.",
+"interview_answer": "Open-source Nginx uses passive checks (max_fails, fail_timeout), dropping servers only after client requests fail. Nginx Plus uses active checks, proactively probing specific endpoints to remove bad servers before users are impacted.",
+"real_world_example": "A passive health check removing a backend server from rotation for 30 seconds after it drops 3 user requests.",
+"common_mistake": "Configuring passive checks with a massive fail_timeout, sending users to dead servers repeatedly."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is Server Name Indication (SNI)?",
+"simple_explanation": "An extension to TLS allowing multiple SSL certificates to be served on one IP address.",
+"interview_answer": "During the TLS handshake, SNI allows the client to explicitly request a domain name. This enables Nginx to look up and serve the correct SSL certificate when multiple HTTPS domains are hosted on a single IP.",
+"real_world_example": "Hosting siteA.com and siteB.com on IP 1.2.3.4, both with their own distinct SSL certificates.",
+"common_mistake": "Supporting legacy clients that lack SNI capabilities, resulting in them receiving the default server certificate."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is proxy_cache_bypass?",
+"simple_explanation": "It tells Nginx to skip the cache and fetch fresh data from the backend.",
+"interview_answer": "The proxy_cache_bypass directive defines conditions under which the response will not be taken from the cache. It is crucial for respecting client cache-control headers, debugging, or forcing a cache refresh via specific cookies.",
+"real_world_example": "Bypassing the cache automatically if the client's request includes a 'Cache-Control: no-cache' header.",
+"common_mistake": "Bypassing the cache based on easily spoofed headers without validating, allowing attackers to DDoS the backend."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you reverse proxy WebSockets in Nginx?",
+"simple_explanation": "By explicitly upgrading the connection headers to support WebSocket protocols.",
+"interview_answer": "WebSockets require upgrading standard HTTP connections. In Nginx, you must pass the 'Upgrade' and 'Connection' headers via proxy_set_header to correctly inform the backend server to keep the bidirectional TCP socket open.",
+"real_world_example": "Proxying traffic to a real-time chat application powered by Socket.io.",
+"common_mistake": "Failing to increase proxy_read_timeout, causing idle WebSocket connections to be dropped after 60 seconds."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you configure HTTP/2 in Nginx?",
+"simple_explanation": "Add the 'http2' parameter to the listen directive.",
+"interview_answer": "HTTP/2 provides multiplexing, header compression, and server push. To enable it, append 'http2' to the HTTPS listen directive. It is used to dramatically speed up page load times for modern web browsers.",
+"real_world_example": "listen 443 ssl http2; enabling modern protocols for a secure web application.",
+"common_mistake": "Trying to enable HTTP/2 over unencrypted HTTP, which is technically possible but rejected by all modern browsers."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you configure HTTP/3 (QUIC) in Nginx?",
+"simple_explanation": "Listen on UDP port 443 with the quic parameter and set the Alt-Svc header.",
+"interview_answer": "HTTP/3 runs over UDP instead of TCP, solving head-of-line blocking. You configure Nginx to listen on UDP 443 with the 'quic' parameter and advertise support to clients by injecting the 'Alt-Svc' HTTP header.",
+"real_world_example": "Enabling HTTP/3 to ensure video streaming loads seamlessly for users switching between mobile and Wi-Fi networks.",
+"common_mistake": "Forgetting to open UDP port 443 on the server firewall, as HTTP historically only used TCP."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How does the 'if' directive behave in Nginx?",
+"simple_explanation": "It evaluates conditions but is notoriously unpredictable inside location blocks.",
+"interview_answer": "The 'if' directive inside location blocks evaluates dynamically, but due to internal execution phasing, it can cause unpredictable behaviors and bypass other directives (known as 'If Is Evil'). Standard practice is to use try_files or map blocks instead.",
+"real_world_example": "Using an if statement purely for simple return/rewrite logic, completely avoiding it for proxy_pass logic.",
+"common_mistake": "Using 'if' to evaluate complex routing conditions inside a location block, causing requests to 404 unexpectedly."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you solve the Thundering Herd problem in caching?",
+"simple_explanation": "Enable the proxy_cache_lock directive.",
+"interview_answer": "When a cache expires, multiple clients might request the same resource simultaneously, hammering the backend. proxy_cache_lock allows only the first request to pass to the backend, holding the rest until the cache is populated.",
+"real_world_example": "Protecting a slow CMS system from crashing if its viral homepage cache expires under heavy load.",
+"common_mistake": "Ignoring the problem, resulting in immediate backend database crashes during high-traffic cache invalidations."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "What is the difference between proxy_connect_timeout and proxy_read_timeout?",
+"simple_explanation": "Connect timeout is for establishing TCP connections; read timeout is for waiting for data.",
+"interview_answer": "proxy_connect_timeout defines how long Nginx waits to establish a network connection with the backend. proxy_read_timeout dictates how long Nginx waits for the backend to return the actual payload after the connection is established.",
+"real_world_example": "Setting connect to 5s to fail fast on dead servers, but setting read to 60s for slow database queries.",
+"common_mistake": "Increasing proxy_connect_timeout to solve application slowness, tying up Nginx worker threads uselessly."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you implement Content Security Policy (CSP) in Nginx?",
+"simple_explanation": "By injecting the Content-Security-Policy HTTP response header using add_header.",
+"interview_answer": "CSP mitigates Cross-Site Scripting (XSS) by restricting where resources can be loaded from. In Nginx, you use the add_header directive to append the policy. It is critical for defending modern web applications.",
+"real_world_example": "add_header Content-Security-Policy \"default-src 'self'\"; to strictly limit scripts to the origin domain.",
+"common_mistake": "Using add_header in a child block which accidentally overwrites parent headers instead of appending."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you configure CORS in Nginx?",
+"simple_explanation": "By handling HTTP OPTIONS requests and setting Access-Control headers.",
+"interview_answer": "Cross-Origin Resource Sharing is configured by intercepting preflight OPTIONS requests to return an empty 204 response. Standard GET/POST requests must have the Access-Control-Allow-Origin header added to permit access from external domains.",
+"real_world_example": "Allowing a React frontend hosted on siteA.com to securely request data from an Nginx API on siteB.com.",
+"common_mistake": "Setting Access-Control-Allow-Origin to '*' in production APIs with cookies, which browsers explicitly reject."
+},
+{
+"tool": "Challenges",
+"difficulty": "Hard",
+"question": "How do you use the GeoIP module?",
+"simple_explanation": "It maps client IP addresses to geographic locations.",
+"interview_answer": "The GeoIP module reads MaxMind databases to create variables like $geoip_country_code. It is used to implement regional blocking, redirect users to localized servers, or inject location data into backend headers.",
+"real_world_example": "Returning a 403 Forbidden status for all IP addresses originating from an embargoed country.",
+"common_mistake": "Failing to use the X-Forwarded-For IP when Nginx sits behind a CDN, thus misidentifying the CDN as the client."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you force Nginx to dynamically resolve upstream DNS?",
+"simple_explanation": "By defining a resolver and using variables in the proxy_pass directive.",
+"interview_answer": "By default, Nginx resolves upstream DNS only upon startup. In dynamic cloud environments, IP changes break routing. Using a variable in proxy_pass forces Nginx to respect DNS TTL and query the specified resolver block continually.",
+"real_world_example": "Proxying traffic to an AWS internal load balancer whose underlying IP addresses change frequently.",
+"common_mistake": "Hardcoding domain names directly into proxy_pass without a resolver, causing severe outages when cloud IPs cycle."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you send Nginx logs directly to Syslog?",
+"simple_explanation": "Specify the syslog protocol string in the access_log or error_log directive.",
+"interview_answer": "Nginx can stream logs directly over UDP/TCP to a central syslog server without writing them to disk. It is heavily used in containerized environments or large clusters for centralized security and auditing analysis.",
+"real_world_example": "access_log syslog:server=192.168.1.10:514,facility=local7,tag=nginx,severity=info;",
+"common_mistake": "Relying on UDP for compliance-critical logs where packet loss could result in missing audit data."
+},
+{
+"tool": "Nginx",
+"difficulty": "Hard",
+"question": "How do you enable core dumps in Nginx for deep debugging?",
+"simple_explanation": "Configure worker_rlimit_core and working_directory directives.",
+"interview_answer": "To debug segmentation faults or crashes, configure Nginx to generate core dumps. Set working_directory to a writable path and set worker_rlimit_core to a large size. Developers use tools like GDB to analyze the resulting dump files.",
+"real_world_example": "Troubleshooting a severe bug in a third-party C module that is crashing Nginx worker processes unexpectedly.",
+"common_mistake": "Failing to grant write permissions to the specified core dump directory, resulting in missing diagnostic files."
+}
+]

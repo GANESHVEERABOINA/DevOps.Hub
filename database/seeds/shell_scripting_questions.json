@@ -1,0 +1,812 @@
+[
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is a Shebang (#!)?",
+"simple_explanation": "It defines the interpreter used to execute the script.",
+"interview_answer": "A shebang is the first line of a script specifying the absolute path to the interpreter. It is used so the OS knows how to execute the file. An important point is it must be the absolute first characters.",
+"real_world_example": "Adding #!/bin/bash at the top of a DevOps deployment script.",
+"common_mistake": "Putting a blank line or space before the shebang."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you define a variable in shell scripting?",
+"simple_explanation": "You assign a value to a name without spaces.",
+"interview_answer": "A variable is a named storage location for data. It is used to store dynamic values like file paths or credentials. A crucial point is that there must be no spaces around the equals sign.",
+"real_world_example": "Setting APP_DIR=/var/www/html to reuse the path across the script.",
+"common_mistake": "Adding spaces, like MY_VAR = 10, which causes an error."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is the difference between single and double quotes?",
+"simple_explanation": "Double quotes allow variable expansion, single quotes do not.",
+"interview_answer": "Single quotes preserve the literal value of all characters inside them. Double quotes preserve literal values but allow variable and command expansion. This is important when printing dynamic data safely.",
+"real_world_example": "Using echo \"User is $USER\" prints the username, while echo 'User is $USER' prints the literal string.",
+"common_mistake": "Using single quotes when trying to evaluate a variable."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does the echo command do?",
+"simple_explanation": "It prints text or variables to the standard output.",
+"interview_answer": "The echo command displays lines of text or variable values. It is used heavily for debugging and displaying script progress to the user. Using the -e flag enables escape characters like newlines.",
+"real_world_example": "Using echo \"Deployment completed successfully\" to notify the CI/CD pipeline.",
+"common_mistake": "Forgetting to quote variables containing spaces, causing weird formatting."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you capture user input?",
+"simple_explanation": "By using the read command.",
+"interview_answer": "The read command takes input from the user or standard input and assigns it to a variable. It is used to make scripts interactive. Using read -p allows you to show a prompt message.",
+"real_world_example": "Using read -p 'Enter environment: ' ENV to ask the user where to deploy.",
+"common_mistake": "Forgetting the variable name after the read command."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What are positional parameters?",
+"simple_explanation": "They are variables assigned to arguments passed to the script.",
+"interview_answer": "Positional parameters like $1, $2 represent arguments provided when running the script. They are used to make scripts reusable with different inputs. The $0 variable always holds the script name.",
+"real_world_example": "Running ./backup.sh /var/log where /var/log becomes $1 in the script.",
+"common_mistake": "Assuming $10 works natively; it evaluates as $1 followed by 0 unless bracketed as ${10}."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does $? mean?",
+"simple_explanation": "It holds the exit status of the last executed command.",
+"interview_answer": "The $? variable stores a numeric exit code from the most recent command. It is used to check if a command succeeded (0) or failed (non-zero). This is the foundation of script error handling.",
+"real_world_example": "Checking if [ $? -eq 0 ] after a curl command to verify an API is reachable.",
+"common_mistake": "Running another command before checking $?, overwriting the exit status."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does $# represent?",
+"simple_explanation": "It represents the total number of arguments passed to the script.",
+"interview_answer": "The $# variable contains the count of positional parameters passed. It is used to validate user input before executing script logic. If a script requires two arguments, $# must equal 2.",
+"real_world_example": "Using if [ $# -ne 2 ] to exit the script if the user forgets required arguments.",
+"common_mistake": "Confusing $# (count of arguments) with $@ (the arguments themselves)."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is the difference between $* and $@?",
+"simple_explanation": "Both represent all arguments, but behave differently when quoted.",
+"interview_answer": "Both variables hold all positional parameters. However, when double-quoted, \"$*\" treats all arguments as a single string, whereas \"$@\" treats them as separate individual strings. \"$@\" is almost always preferred.",
+"real_world_example": "Using for arg in \"$@\" to iterate safely through all provided script arguments.",
+"common_mistake": "Using \"$*\" in a loop, which processes all arguments as one giant word."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is Command Substitution?",
+"simple_explanation": "It allows the output of a command to replace the command itself.",
+"interview_answer": "Command substitution is performed using $(command) or backticks. It is used to assign the output of a shell command to a variable. The $(...) syntax is highly preferred because it supports nesting.",
+"real_world_example": "Setting CURRENT_DATE=$(date +%F) to dynamically generate backup filenames.",
+"common_mistake": "Using deprecated backticks which are hard to read and difficult to nest."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you write an if statement?",
+"simple_explanation": "Use if, then, elif, else, and fi.",
+"interview_answer": "An if statement executes blocks of code conditionally based on test commands. It is used to create decision-making logic in scripts. Every if block must be strictly closed with a fi keyword.",
+"real_world_example": "Using an if statement to check if a user is root before installing packages.",
+"common_mistake": "Forgetting the spaces inside the test brackets, like if[$a -eq $b]."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How does a for loop work?",
+"simple_explanation": "It iterates over a list of items or a range of numbers.",
+"interview_answer": "A for loop repeats a block of code for every item in a list. It is used for batch processing tasks like renaming multiple files or looping through server IP addresses.",
+"real_world_example": "Using for host in web1 web2; do ssh $host 'uptime'; done to check fleet status.",
+"common_mistake": "Iterating over the output of ls instead of using globbing (for file in *)."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is a while loop?",
+"simple_explanation": "It executes a block of code as long as a condition is true.",
+"interview_answer": "A while loop runs repeatedly while its test condition evaluates to true (0). It is primarily used for reading files line-by-line or waiting for a specific service state to change.",
+"real_world_example": "Using a while loop to read a CSV file line by line to create user accounts.",
+"common_mistake": "Creating an infinite loop by forgetting to update the condition variable inside the loop."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is a case statement?",
+"simple_explanation": "It is a simpler alternative to multiple if-elif statements.",
+"interview_answer": "A case statement matches a variable against multiple patterns to execute specific code blocks. It is used for handling script menus, arguments, or starting/stopping service daemons efficiently.",
+"real_world_example": "Using a case statement to handle start|stop|restart arguments for a custom service script.",
+"common_mistake": "Forgetting the double semicolons (;;) at the end of each pattern block."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you define a function?",
+"simple_explanation": "Use the function name followed by parentheses and curly braces.",
+"interview_answer": "A function is a reusable block of code within a script. It is used to keep scripts DRY (Don't Repeat Yourself). Functions take arguments just like scripts, using $1, $2.",
+"real_world_example": "Creating a check_status() function that evaluates exit codes and prints standard error messages.",
+"common_mistake": "Trying to define return values like Python; bash functions return exit status codes, not data."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you add comments?",
+"simple_explanation": "By placing a hash symbol (#) at the beginning of the text.",
+"interview_answer": "Comments are ignored by the interpreter and exist purely for human readers. They are used to explain complex logic or script requirements. Good scripts use comments to explain the 'why', not the 'what'.",
+"real_world_example": "Adding # Restarting Nginx to apply new TLS certificates above a systemctl command.",
+"common_mistake": "Over-commenting obvious commands instead of explaining the business logic."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does the export command do?",
+"simple_explanation": "It makes a variable available to child processes.",
+"interview_answer": "The export command marks an environment variable to be passed to child processes spawned by the shell. It is used to configure environments for other applications running from the script.",
+"real_world_example": "Exporting AWS_ACCESS_KEY_ID so the AWS CLI can authenticate securely.",
+"common_mistake": "Assigning a variable without export and wondering why a Python script called later cannot see it."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you perform basic arithmetic?",
+"simple_explanation": "Use double parentheses $(( expression )).",
+"interview_answer": "Arithmetic expansion evaluates basic math expressions like addition, subtraction, and multiplication natively in Bash. It is used for counters and simple calculations. Note that it only supports integer math.",
+"real_world_example": "Using $((COUNT + 1)) to increment a retry counter in a while loop.",
+"common_mistake": "Trying to do floating-point math (like 1.5 + 2) inside $(()), which causes a syntax error."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is the logical AND (&&) operator?",
+"simple_explanation": "It executes the second command only if the first succeeds.",
+"interview_answer": "The && operator chains commands together conditionally. It is used to ensure a dependent action only happens if the prerequisite action was successful (exit code 0).",
+"real_world_example": "Running make build && make install to ensure installation only happens if the build succeeds.",
+"common_mistake": "Assuming && guarantees the second command runs; it completely aborts if the first fails."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is the logical OR (||) operator?",
+"simple_explanation": "It executes the second command only if the first fails.",
+"interview_answer": "The || operator provides a fallback mechanism. It is used to execute error handling or alternative commands if the preceding command returns a non-zero exit status.",
+"real_world_example": "Running mkdir /app/data || echo 'Failed to create directory' to handle errors gracefully.",
+"common_mistake": "Chaining complex && and || without grouping them, leading to unpredictable order of operations."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does the sleep command do?",
+"simple_explanation": "It pauses the execution of a script for a specified time.",
+"interview_answer": "The sleep command delays the next command by seconds, minutes, or hours. It is used to wait for services to start, APIs to become responsive, or to rate-limit loops.",
+"real_world_example": "Using sleep 5 inside a loop while waiting for a database container to initialize.",
+"common_mistake": "Using a massive sleep instead of actively polling for a service's readiness, making scripts slow."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does the break statement do?",
+"simple_explanation": "It exits the current loop immediately.",
+"interview_answer": "The break statement forces a premature exit from a for, while, or until loop. It is used to stop processing once a desired condition is met, saving time and resources.",
+"real_world_example": "Breaking out of a retry loop as soon as an API returns a 200 OK status.",
+"common_mistake": "Using break to exit an if statement; break only escapes loops."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does the continue statement do?",
+"simple_explanation": "It skips the rest of the current loop iteration and moves to the next.",
+"interview_answer": "The continue statement bypasses the remaining commands in a loop block and jumps to the next iteration. It is used to filter out specific items during batch processing without stopping the entire loop.",
+"real_world_example": "Using continue to skip empty lines or commented lines while parsing a configuration file.",
+"common_mistake": "Using continue outside of a loop structure, causing syntax errors."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you test if a file exists?",
+"simple_explanation": "Use the [ -f filename ] or [ -e filename ] test operators.",
+"interview_answer": "File test operators check filesystem attributes. The -f flag checks if a file exists and is a regular file. It is heavily used before trying to read configurations or move data.",
+"real_world_example": "Checking if [ -f /etc/nginx/nginx.conf ] before trying to restart the web server.",
+"common_mistake": "Using -f to check for a directory. You must use -d to test if a directory exists."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you test if a string is empty?",
+"simple_explanation": "Use the [ -z \"$string\" ] test operator.",
+"interview_answer": "The -z flag returns true if the length of a string is zero. It is used to validate user input or check if an environment variable has been initialized before proceeding.",
+"real_world_example": "Using if [ -z \"$DB_PASSWORD\" ] to fail a script if the database password is missing.",
+"common_mistake": "Forgetting to wrap the string variable in double quotes, which causes bash test evaluation errors."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "How do you compare numbers?",
+"simple_explanation": "Use operators like -eq, -ne, -lt, and -gt.",
+"interview_answer": "Numeric comparison operators evaluate integers. Unlike strings (which use = and !=), numbers require flag-based operators like -gt (greater than) and -lt (less than). They are essential for counter loops.",
+"real_world_example": "Using if [ $CPU_LOAD -gt 80 ] to trigger an automated alert scale-out.",
+"common_mistake": "Using standard math symbols like > or < for numbers inside single brackets, which bash interprets as file redirection."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does the exit command do?",
+"simple_explanation": "It terminates the script and returns a status code.",
+"interview_answer": "The exit command stops script execution immediately and passes an integer exit code back to the parent process. It is used to signal success (exit 0) or failure (exit 1-255).",
+"real_world_example": "Using exit 1 after an error message so the CI/CD pipeline knows the script failed.",
+"common_mistake": "Using exit 0 after an error, which falsely tells the system the script succeeded."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is the shift command?",
+"simple_explanation": "It moves positional parameters to the left.",
+"interview_answer": "The shift command drops $1, moves $2 to $1, $3 to $2, and decreases $# by one. It is used in while loops to parse complex command-line arguments and flags dynamically.",
+"real_world_example": "Parsing a script called with multiple flags like ./deploy.sh --env prod --force using shift.",
+"common_mistake": "Calling shift when $# is 0, which can cause script termination if strict mode is enabled."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What is $$ in a shell script?",
+"simple_explanation": "It holds the Process ID (PID) of the current script.",
+"interview_answer": "The $$ variable stores the numeric PID of the currently running shell. It is used to create unique temporary file names or lock files specific to the current script execution.",
+"real_world_example": "Creating a temporary file named /tmp/backup_$$.log to avoid conflicts between concurrent script executions.",
+"common_mistake": "Using $$ for highly secure cryptography seeds, as PIDs are predictable and easily guessed."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Easy",
+"question": "What does an until loop do?",
+"simple_explanation": "It executes commands as long as a condition is false.",
+"interview_answer": "An until loop is the exact opposite of a while loop. It continues running the code block until the test condition evaluates to true (exit status 0). It is used to wait for successful connections.",
+"real_world_example": "Looping until ping -c 1 8.8.8.8 succeeds to ensure network connectivity before proceeding.",
+"common_mistake": "Confusing the condition logic with a while loop, causing the loop to exit immediately."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is output redirection (> and >>)?",
+"simple_explanation": "It sends the output of a command to a file instead of the screen.",
+"interview_answer": "The > operator overwrites a file with command output, while >> appends to it. This is heavily used to generate logs, configurations, or capture script reports without spamming the terminal.",
+"real_world_example": "Using echo \"Deploy Started\" >> deployment.log to keep a persistent record of deployments.",
+"common_mistake": "Using > when you meant to append, accidentally wiping out an entire configuration file."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does 2>&1 mean?",
+"simple_explanation": "It redirects standard error to standard output.",
+"interview_answer": "In bash, file descriptor 1 is stdout and 2 is stderr. 2>&1 merges the error stream into the standard output stream. It is used so both logs and errors are written to the same file.",
+"real_world_example": "Running ./script.sh > output.log 2>&1 to capture all output and errors for debugging.",
+"common_mistake": "Placing 2>&1 before the > redirection, which causes standard error to print to the screen instead of the file."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is /dev/null?",
+"simple_explanation": "A special file that discards all data written to it.",
+"interview_answer": "/dev/null is the Linux 'black hole'. Writing to it silently discards the output. It is used to hide unwanted verbose output or error messages from commands running in a script.",
+"real_world_example": "Running ping -c 1 8.8.8.8 > /dev/null to hide the ping text but keep the exit status.",
+"common_mistake": "Trying to read from /dev/null to get blank data; while it works, it's inefficient compared to touching an empty file."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does a pipe (|) do?",
+"simple_explanation": "It passes the output of one command as the input to another.",
+"interview_answer": "A pipe connects the stdout of the left command to the stdin of the right command. It is fundamental to shell scripting, allowing you to chain small, single-purpose utilities into powerful workflows.",
+"real_world_example": "Using cat access.log | grep ERROR | wc -l to count the number of errors.",
+"common_mistake": "Trying to pipe into a command that doesn't accept standard input, requiring tools like xargs."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the xargs command do?",
+"simple_explanation": "It converts standard input into command-line arguments.",
+"interview_answer": "Xargs reads items from standard input and executes a command with those items as arguments. It is used when piping data into commands that do not natively support standard input, like 'rm' or 'cp'.",
+"real_world_example": "Running find . -name ","*.tmp":" | xargs rm to efficiently delete thousands of temp files.",
+"common_mistake": "Failing to use the -print0 and -0 flags in find/xargs, which breaks on filenames with spaces."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is awk used for in scripts?",
+"simple_explanation": "A programming language used for advanced text processing and extraction.",
+"interview_answer": "Awk processes text line by line and splits it into fields. It is heavily used in DevOps to parse structured data like logs, extract specific columns, and perform mathematical operations on text data.",
+"real_world_example": "Using awk '{print $1}' access.log to extract only the IP addresses from an Apache web log.",
+"common_mistake": "Overcomplicating simple text replacements with awk when sed would be much more readable."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is sed used for?",
+"simple_explanation": "A stream editor used to parse and transform text.",
+"interview_answer": "Sed is primarily used for finding and replacing text strings within a file or stream without opening an interactive editor. The -i flag edits files in-place, making it perfect for automated config changes.",
+"real_world_example": "Using sed -i 's/localhost/127.0.0.1/g' config.yml to update a server IP during deployment.",
+"common_mistake": "Forgetting the 'g' (global) flag, which causes sed to only replace the first occurrence on a line."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the cut command do?",
+"simple_explanation": "It extracts sections from each line of a file.",
+"interview_answer": "Cut extracts specific bytes, characters, or fields (columns) from a text file based on a delimiter. It is used to quickly parse well-structured files like CSVs or /etc/passwd.",
+"real_world_example": "Running cut -d':' -f1 /etc/passwd to list all usernames on a Linux system.",
+"common_mistake": "Using cut to parse data with variable amounts of whitespace; awk is better suited for that."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is a Here Document (<<EOF)?",
+"simple_explanation": "It allows multi-line text input into a command.",
+"interview_answer": "A Here Document (Heredoc) passes a block of multi-line strings directly to a command like cat or ssh. It is used to write configuration files or execute multi-line remote scripts dynamically.",
+"real_world_example": "Using a Heredoc to inject a multi-line JSON configuration directly into a target settings file.",
+"common_mistake": "Adding trailing whitespace after the final EOF marker, which breaks the script parser."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you declare and use an array in Bash?",
+"simple_explanation": "Use parentheses for declaration and ${array[index]} to access.",
+"interview_answer": "Bash supports one-dimensional indexed arrays. They are used to store multiple related values, like a list of IP addresses or package names, and loop through them efficiently without string splitting issues.",
+"real_world_example": "SERVERS=(web1 web2 web3); for s in \"${SERVERS[@]}\"; do ping -c 1 $s; done",
+"common_mistake": "Using commas to separate array elements (SERVERS=(a,b)) instead of spaces."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What are associative arrays in Bash?",
+"simple_explanation": "Arrays that use string keys instead of integer indices.",
+"interview_answer": "Associative arrays act as key-value dictionaries. They must be explicitly declared using declare -A. They are used to map relationships, like linking server names to IP addresses directly in memory.",
+"real_world_example": "declare -A IPS; IPS[web1]=192.168.1.10; echo ${IPS[web1]}",
+"common_mistake": "Forgetting to use declare -A before assignment, which makes bash treat it as a normal variable."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you read a file line by line?",
+"simple_explanation": "Use a while read loop fed by input redirection.",
+"interview_answer": "The most efficient and safe way to process files is using a while loop combined with the read command, redirecting the file into the loop. It prevents memory exhaustion on large files.",
+"real_world_example": "while read line; do echo 'Processing $line'; done < input.txt",
+"common_mistake": "Using a for loop (for line in $(cat file)), which breaks on spaces and loads the whole file into RAM."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is a subshell?",
+"simple_explanation": "A separate child shell process created by enclosing commands in parentheses.",
+"interview_answer": "Commands inside ( ) execute in a child shell environment. Variables changed inside a subshell do not affect the parent script. It is used to execute commands in different directories without changing the main script's state.",
+"real_world_example": "Running (cd /var/log && tar -czf logs.tar.gz .) to archive logs without leaving the current working directory.",
+"common_mistake": "Expecting a variable updated inside a subshell or a piped while-loop to persist in the main script."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you use local variables in functions?",
+"simple_explanation": "Prefix the variable assignment with the 'local' keyword.",
+"interview_answer": "By default, all variables in Bash are global. Using the 'local' keyword inside a function restricts the variable's scope to that function. This prevents accidental overwriting of global variables, making scripts safer.",
+"real_world_example": "local TEMP_DIR=\"/tmp/workspace\" inside a function to avoid altering a global TEMP_DIR.",
+"common_mistake": "Forgetting the local keyword, leading to unpredictable bugs when functions overwrite global state."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the trap command do?",
+"simple_explanation": "It intercepts and handles operating system signals.",
+"interview_answer": "The trap command catches signals like SIGINT (Ctrl+C) or EXIT. It is vital for ensuring scripts clean up temporary files or release locks even if they are unexpectedly terminated by a user or error.",
+"real_world_example": "Using trap 'rm -f /tmp/lockfile' EXIT to ensure a lock file is always deleted when the script finishes.",
+"common_mistake": "Setting a trap after creating the temporary resources, leaving a brief window where an interruption bypasses cleanup."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you run a script in the background?",
+"simple_explanation": "Append an ampersand (&) to the end of the command.",
+"interview_answer": "Adding & runs the command asynchronously as a background job, immediately returning control to the terminal or script. It is used to execute multiple long-running tasks concurrently within a script.",
+"real_world_example": "Running ./database_backup.sh & to start a backup without pausing the rest of the deployment script.",
+"common_mistake": "Running a background script that relies on user input (stdin), causing it to immediately suspend."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the wait command do?",
+"simple_explanation": "It pauses the script until background jobs finish.",
+"interview_answer": "The wait command halts execution until all background processes (started with &) have completed. It is essential for managing concurrency, ensuring dependent steps only run after parallel tasks finish.",
+"real_world_example": "Running three parallel downloads with &, then using wait before merging the files together.",
+"common_mistake": "Forgetting to use wait, causing the script to exit successfully while background tasks are still running."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the nohup command do?",
+"simple_explanation": "It keeps a command running even after the user logs out.",
+"interview_answer": "Nohup ignores the SIGHUP (hangup) signal sent when a terminal session closes. It is used to execute long-running administrative scripts that must survive SSH disconnections. Output defaults to nohup.out.",
+"real_world_example": "Running nohup ./migration_script.sh & to safely execute a 5-hour database migration.",
+"common_mistake": "Forgetting the & at the end, meaning the process still blocks the terminal even though it resists hangups."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you integrate cron with a shell script?",
+"simple_explanation": "Add the script's absolute path to the crontab file.",
+"interview_answer": "Cron is the Linux job scheduler. You use crontab -e to schedule a script to run automatically at specific times. A key point is that cron runs in a minimal environment, so scripts must use absolute paths.",
+"real_world_example": "Adding 0 2 * * * /opt/scripts/backup.sh to run a backup at 2:00 AM daily.",
+"common_mistake": "Assuming standard environment variables (like $PATH or $USER) are available inside the cron execution."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is the difference between .bashrc and .bash_profile?",
+"simple_explanation": ".bash_profile runs for login shells, .bashrc runs for non-login interactive shells.",
+"interview_answer": ".bash_profile executes once when you log in via SSH or a TTY. .bashrc executes every time you open a new terminal window. You use .bash_profile for environment variables and .bashrc for aliases.",
+"real_world_example": "Sourcing .bashrc inside .bash_profile so all aliases load when you SSH into a server.",
+"common_mistake": "Putting heavy initialization scripts in .bashrc, slowing down every single terminal window opened."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What do dirname and basename do?",
+"simple_explanation": "They extract the directory path and file name from a full path.",
+"interview_answer": "Basename strips the directory path and returns just the filename. Dirname strips the filename and returns just the directory path. They are used to reliably isolate path components dynamically inside scripts.",
+"real_world_example": "Using dirname /var/log/syslog returns /var/log, which can be used to check disk space on that specific partition.",
+"common_mistake": "Assuming these commands check if the file actually exists; they only parse the string."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What is the tee command?",
+"simple_explanation": "It reads standard input and writes it to both standard output and files.",
+"interview_answer": "Tee splits output in two directions: to the screen and to a file simultaneously. It is highly useful in scripts to display progress to the operator while simultaneously generating an audit log file.",
+"real_world_example": "Running echo \"Update :complete\" | tee -a deploy.log to log the message and print it to the user.",
+"common_mistake": "Forgetting the -a (append) flag, causing tee to overwrite existing log files."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you count lines, words, and characters?",
+"simple_explanation": "Use the wc (word count) command.",
+"interview_answer": "The wc command counts lines, words, and bytes. Using wc -l is the standard way to count lines. It is heavily used to count the number of processes, files, or matches returned by other commands.",
+"real_world_example": "Running grep ERROR app.log | wc -l to count exactly how many errors occurred today.",
+"common_mistake": "Running wc -l on a file without understanding it counts newline characters, missing the last line if it lacks one."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you extract the first or last few lines of a file?",
+"simple_explanation": "Use the head and tail commands.",
+"interview_answer": "Head outputs the top lines, while tail outputs the bottom lines of a file. They are used to quickly inspect files. Tail -f is invaluable for continuously following growing log files in real-time.",
+"real_world_example": "Using tail -n 50 /var/log/syslog to fetch the 50 most recent system events.",
+"common_mistake": "Using cat on a massive log file and scrolling to the bottom instead of just using tail."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the sort command do?",
+"simple_explanation": "It sorts lines of text files.",
+"interview_answer": "Sort organizes text alphabetically or numerically. It is used to order data sets before processing or analyzing them. Use the -n flag for numerical sorting and -r for reverse order.",
+"real_world_example": "Sorting a list of user IDs numerically to find the highest UID allocated on a system.",
+"common_mistake": "Trying to sort numbers without the -n flag, causing '10' to sort before '2' alphabetically."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the uniq command do?",
+"simple_explanation": "It filters out adjacent duplicate lines.",
+"interview_answer": "Uniq removes repeated lines from a text stream, but it only works if the duplicates are adjacent. Therefore, it is almost always paired with the sort command. The -c flag counts occurrences.",
+"real_world_example": "Running cat IPs.txt | sort | uniq -c to find out how many times each IP hit the server.",
+"common_mistake": "Using uniq on an unsorted file, which fails to remove duplicates scattered throughout the text."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you manipulate the field separator in awk?",
+"simple_explanation": "Use the -F flag or set the FS variable.",
+"interview_answer": "By default, awk splits fields by whitespace. Using the -F flag allows you to define a custom delimiter, like a comma or colon. This is essential for parsing structured data formats like CSV.",
+"real_world_example": "Using awk -F',' '{print $2}' users.csv to extract the second column of a comma-separated file.",
+"common_mistake": "Forgetting to quote the delimiter (e.g., -F, instead of -F',') which can cause parsing errors."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "What does the tr command do?",
+"simple_explanation": "It translates or deletes characters.",
+"interview_answer": "The tr utility replaces or removes specific characters from a text stream. It is commonly used for converting lowercase to uppercase, or stripping out unwanted characters like carriage returns.",
+"real_world_example": "Running cat file.txt | tr 'a-z' 'A-Z' to convert all text to uppercase.",
+"common_mistake": "Trying to use tr to replace full words or strings; tr only maps single characters to single characters."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you perform a simple HTTP request in a script?",
+"simple_explanation": "Use the curl command.",
+"interview_answer": "Curl is a command-line tool for transferring data via URLs. It is heavily used in scripting to interact with REST APIs, download files, or check if web services are responsive.",
+"real_world_example": "Using curl -s -o /dev/null -w \"%{http_code}\" [http://api.com](http://api.com) to purely extract the HTTP status code.",
+"common_mistake": "Forgetting the -s (silent) flag in scripts, causing curl progress bars to corrupt log files."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Medium",
+"question": "How do you archive and compress a folder via script?",
+"simple_explanation": "Use the tar command with the -czf flags.",
+"interview_answer": "Tar bundles files into an archive, and the 'z' flag routes it through gzip for compression. It is the standard method for scripting automated file backups to save disk space.",
+"real_world_example": "Running tar -czf backup_$(date +%F).tar.gz /var/www to create a daily compressed website backup.",
+"common_mistake": "Putting the archive name after the target directory, causing tar to try and compress the folder into itself."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is set -e?",
+"simple_explanation": "It causes the script to exit immediately if any command fails.",
+"interview_answer": "The 'set -e' (errexit) option ensures a script halts the moment a command returns a non-zero exit status. It prevents a script from continuing blindly after a critical failure, averting data corruption.",
+"real_world_example": "Placing set -e at the top of a deployment script so it doesn't attempt to start a service if the build failed.",
+"common_mistake": "Using set -e but failing to handle expected non-zero exits (like a failed grep), crashing the script prematurely."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is set -u?",
+"simple_explanation": "It treats unset variables as an error.",
+"interview_answer": "The 'set -u' (nounset) option forces the script to exit if it encounters a variable that hasn't been defined. It protects against destructive operations caused by empty variable evaluations.",
+"real_world_example": "Preventing rm -rf /$TARGET_DIR from wiping the root partition if TARGET_DIR is accidentally empty.",
+"common_mistake": "Failing to initialize variables, causing immediate script termination on valid edge cases."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is set -x?",
+"simple_explanation": "It enables debug mode by printing each command before executing it.",
+"interview_answer": "The 'set -x' (xtrace) option prints commands and their expanded arguments to standard error. It is the most vital tool for debugging complex scripts to see exactly what logic is executing.",
+"real_world_example": "Wrapping a failing block of code with set -x and set +x to isolate and debug a specific variable expansion.",
+"common_mistake": "Leaving set -x active in production, which heavily clutters logs and can expose passwords in clear text."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is set -o pipefail?",
+"simple_explanation": "It ensures piped commands return a failure if any part of the pipe fails.",
+"interview_answer": "By default, a pipeline's exit status is only the status of the last command. 'set -o pipefail' changes this so the pipeline fails if any command within it fails. This is crucial for strict error handling.",
+"real_world_example": "Using pipefail so curl api.com | grep ERROR fails if curl cannot reach the API, rather than grep returning true.",
+"common_mistake": "Combining pipefail with set -e and grep, where grep failing to find a match halts the entire script."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is Bash Strict Mode?",
+"simple_explanation": "Combining set -euo pipefail at the top of a script.",
+"interview_answer": "Bash Strict Mode is an unofficial standard combining 'set -e', 'set -u', and 'set -o pipefail'. It enforces robust error handling, making scripts fail fast and visibly, reducing silent catastrophic failures in production.",
+"real_world_example": "Adding set -euo pipefail to every CI/CD bash script to ensure absolute safety during automated infrastructure deployments.",
+"common_mistake": "Applying strict mode to legacy scripts without testing, instantly breaking them due to previously ignored sloppy variables."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you provide a default value for a variable?",
+"simple_explanation": "Use Parameter Expansion like ${VAR:-default}.",
+"interview_answer": "Parameter expansion securely handles unset variables. If the variable is empty or unset, it substitutes the specified default value. This guarantees the script has valid data to work with without crashing.",
+"real_world_example": "Setting DB_PORT=${PORT:-3306} to use 3306 if the user didn't explicitly provide a PORT environment variable.",
+"common_mistake": "Confusing ${VAR:-default} (substitutes value) with ${VAR:=default} (substitutes and permanently assigns the value)."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you replace substrings natively in Bash?",
+"simple_explanation": "Use Parameter Expansion like ${VAR/find/replace}.",
+"interview_answer": "Bash allows native string replacement without spawning external processes like sed. Single slash replaces the first occurrence, double slash (${VAR//find/replace}) replaces all occurrences. It is significantly faster than piping to external tools.",
+"real_world_example": "Converting a file path variable from .txt to .bak using NEW_FILE=${FILE/.txt/.bak}.",
+"common_mistake": "Attempting to use complex regular expressions; bash parameter expansion only supports basic glob patterns."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is Process Substitution?",
+"simple_explanation": "Treating the output of a command as a temporary file.",
+"interview_answer": "Process substitution <(...) allows the output of a command to be passed to another command that explicitly expects a file argument, not standard input. It prevents writing temporary files to disk.",
+"real_world_example": "Comparing two distant directories dynamically using diff <(ls dir1) <(ls dir2).",
+"common_mistake": "Adding a space between the redirect and parenthesis, like < (...), which causes a syntax error."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you ensure a script only runs one instance at a time?",
+"simple_explanation": "Use the flock (file lock) command.",
+"interview_answer": "Flock manages file locking from within shell scripts. It ensures that cron jobs or redundant triggers do not spawn parallel instances of a script, which could corrupt databases or consume all memory.",
+"real_world_example": "Running flock -n /tmp/backup.lock ./backup.sh to abort the script if another backup is already in progress.",
+"common_mistake": "Using simple 'touch file.lock' logic, which suffers from race conditions and fails to clean up on crashes."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you safely iterate over filenames containing spaces?",
+"simple_explanation": "Use a while loop with IFS= and read -r.",
+"interview_answer": "For loops break on spaces and tabs by default. Using 'find -print0' piped into 'while IFS= read -r -d '' file' ensures complete file paths are read securely without word splitting issues.",
+"real_world_example": "Safely moving user-uploaded files containing spaces into an archive directory without parsing errors.",
+"common_mistake": "Using 'for file in $(ls)' which completely fractures filenames containing spaces into separate loop iterations."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you parse JSON safely in a shell script?",
+"simple_explanation": "Use the 'jq' command-line JSON processor.",
+"interview_answer": "Jq is an external, highly powerful tool designed to slice, filter, and map JSON data. It prevents the fragile and dangerous practice of using grep or awk to parse strict JSON structures.",
+"real_world_example": "Running VERSION=$(curl [api.com/info](https://www.google.com/search?q=https://api.com/info) | jq -r '.version') to securely extract a version number for deployment.",
+"common_mistake": "Using grep to extract JSON values, which breaks immediately if the API changes key order or formatting."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you prompt for a password securely?",
+"simple_explanation": "Use the read command with the -s (silent) flag.",
+"interview_answer": "The 'read -s' flag hides the user's keystrokes from the terminal. It is used to capture sensitive data like passwords or API keys interactively without exposing them to shoulder-surfing.",
+"real_world_example": "Using read -s -p \"Enter DB Password: \" DBPASS to configure a local test database.",
+"common_mistake": "Assuming read -s hides the password from the bash history; it hides typing, but you must avoid passing it via CLI arguments."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you prevent script injection vulnerabilities?",
+"simple_explanation": "Sanitize input, quote variables, and avoid the eval command.",
+"interview_answer": "Script injection occurs when malicious user input alters the intended command structure. Prevent it by rigorously quoting all variables, validating input formats, and completely avoiding the 'eval' command which blindly executes strings.",
+"real_world_example": "Validating an IP address variable matches a regex pattern before passing it to a ping command.",
+"common_mistake": "Using eval to build dynamic commands based on external user input, granting full remote code execution."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you limit the execution time of a command?",
+"simple_explanation": "Use the timeout command.",
+"interview_answer": "The timeout utility executes a command and forcefully kills it if it exceeds a specified time limit. It is vital for preventing scripts from hanging indefinitely due to unresponsive networks or deadlocked processes.",
+"real_world_example": "Running timeout 10s curl api.com to ensure a health check script doesn't freeze if the API drops packets.",
+"common_mistake": "Assuming standard bash has built-in execution timers; timeout is a coreutils program required for this."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is an idempotent shell script?",
+"simple_explanation": "A script that produces the same result no matter how many times it runs.",
+"interview_answer": "Idempotency ensures running a script twice does not cause errors or duplicate configurations. It requires checking system state before applying changes, making scripts incredibly safe for CI/CD and configuration management loops.",
+"real_world_example": "Checking if a user exists in /etc/passwd before running useradd, preventing failure on repeated executions.",
+"common_mistake": "Using >> to append to a config file without checking first, creating duplicate entries on every run."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you avoid memory leaks in while read loops?",
+"simple_explanation": "Redirect files directly into the loop instead of piping cat.",
+"interview_answer": "Piping commands like 'cat file | while read' creates a subshell, which isolates variables and consumes extra process memory. Redirecting using 'done < file' executes the loop in the current shell context efficiently.",
+"real_world_example": "Processing a 5GB log file efficiently by keeping the variable updates inside the main shell process.",
+"common_mistake": "Using a pipe, updating a counter inside the loop, and finding the counter is 0 after the loop finishes."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you daemonize a shell script?",
+"simple_explanation": "Use systemd or double fork to detach it from the TTY.",
+"interview_answer": "Daemonizing detaches a script from the controlling terminal so it runs as a background service. While nohup is basic, creating a standard systemd service unit file is the modern, robust way to daemonize scripts securely.",
+"real_world_example": "Writing a custom my_script.service file so a python monitoring script starts automatically on server boot.",
+"common_mistake": "Running a long process with & and closing the terminal without nohup or systemd, killing the process."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is an advanced trap cleanup pattern?",
+"simple_explanation": "Using trap to trigger a dedicated cleanup function on exit signals.",
+"interview_answer": "Instead of executing a single command, trap can call a full cleanup function on EXIT, SIGINT, or SIGTERM. This securely removes temporary files, closes ports, and releases locks regardless of how the script terminates.",
+"real_world_example": "Defining function finish { rm -f lock; } and assigning trap finish EXIT at the top of the script.",
+"common_mistake": "Trying to trap SIGKILL (kill -9), which the Linux kernel strictly prohibits and intercepts before the script."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you extract multiple lines between two patterns using sed?",
+"simple_explanation": "Use the range operator in sed: sed -n '/start/,/end/p'.",
+"interview_answer": "Sed can isolate blocks of text by defining a start and end regex pattern. This is incredibly useful for extracting specific XML/JSON blocks or multi-line configuration stanzas from massive unstructured text files.",
+"real_world_example": "Running sed -n '//,/<\/VirtualHost>/p' httpd.conf to extract an entire site configuration block.",
+"common_mistake": "Forgetting the -n (quiet) and p (print) flags, causing sed to print the entire file alongside the match."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you use multi-dimensional logic in awk?",
+"simple_explanation": "Awk simulates multi-dimensional arrays by concatenating indices.",
+"interview_answer": "Awk natively supports associative arrays and can simulate multiple dimensions using a comma between subscripts, array[x,y]. It is powerful for calculating matrix data, aggregating server metrics, and complex log groupings.",
+"real_world_example": "Using awk to aggregate total HTTP response codes per IP address by storing counts in array[IP, STATUS].",
+"common_mistake": "Assuming awk arrays are sequentially indexed lists; they are entirely hash-table based dictionaries."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you execute complex commands over SSH in a script?",
+"simple_explanation": "Use SSH with a Here Document (Heredoc).",
+"interview_answer": "Executing multiple remote commands using ssh 'cmd1; cmd2' gets messy with quoting. Piping a Heredoc into SSH ensures safe, clear execution of complex multi-line bash logic on a remote server.",
+"real_world_example": "ssh user@host << 'EOF' \n systemctl stop app \n rm -rf /cache/* \n EOF",
+"common_mistake": "Failing to quote the EOF marker (<< 'EOF'), which causes local variable expansion instead of remote expansion."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is a Restricted Shell (rbash)?",
+"simple_explanation": "A shell that severely limits what commands a user can run.",
+"interview_answer": "Rbash prevents users from changing directories (cd), altering the PATH, or using absolute path execution. It is used to lock down service accounts or external users to a very specific set of safe commands.",
+"real_world_example": "Providing a contractor SSH access but restricting them entirely to executing a single log-viewing script.",
+"common_mistake": "Allowing restricted users to run commands like awk or vi, which have built-in shell escapes, bypassing the restriction."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What are Named Pipes (FIFOs)?",
+"simple_explanation": "Special files acting as a persistent pipe for inter-process communication.",
+"interview_answer": "Created with mkfifo, named pipes exist on the filesystem but hold no data. They pause writers until a reader connects. They are used to pass data streams between independent scripts without writing to physical disks.",
+"real_world_example": "Streaming a live database dump directly into a compression script running in a different terminal via a FIFO.",
+"common_mistake": "Assuming named pipes act like queues holding data; they strictly block until both ends are open."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you manipulate file descriptors using exec?",
+"simple_explanation": "Exec assigns files to numbered descriptors for custom read/write streams.",
+"interview_answer": "Beyond stdout (1) and stderr (2), exec can open custom file descriptors (like 3 or 4) for reading and writing. This is used in complex scripts to log to multiple files simultaneously or manage custom input streams.",
+"real_world_example": "Running exec 3>&1 1>log.txt to save the original stdout, redirect current output, and restore it later.",
+"common_mistake": "Failing to close custom file descriptors (exec 3>&-) leading to resource leaks in long-running daemon scripts."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is Indirect Variable Referencing?",
+"simple_explanation": "Accessing a variable using the value of another variable as its name.",
+"interview_answer": "In Bash, using ${!VAR} allows you to treat the string inside VAR as the name of the actual variable to evaluate. It is an advanced technique used to build highly dynamic and configurable meta-scripts.",
+"real_world_example": "Setting ENV=\"PROD\" and using ${!ENV} to dynamically pull the value of a variable named PROD.",
+"common_mistake": "Relying heavily on indirect references instead of associative arrays, making the script exceptionally hard to debug."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What is ShellCheck?",
+"simple_explanation": "A static analysis linting tool for shell scripts.",
+"interview_answer": "ShellCheck automatically parses bash scripts to find syntax errors, deprecations, quoting issues, and edge-case bugs. Integrating it into CI/CD pipelines guarantees script quality and enforces standard best practices across DevOps teams.",
+"real_world_example": "Running shellcheck deploy.sh in a GitHub Action to block merging if variables are unquoted.",
+"common_mistake": "Ignoring ShellCheck warnings instead of explicitly disabling false positives using a # shellcheck disable directive."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "Why is the eval command considered dangerous?",
+"simple_explanation": "Eval executes dynamic strings as shell commands, inviting code injection.",
+"interview_answer": "Eval parses a string twice: first for variable expansion, then as an executed command. If evaluating unsanitized external input, an attacker can effortlessly inject malicious commands. It should be avoided in modern scripting.",
+"real_world_example": "Using eval strictly to parse trusted internal configuration generators where the input is 100% controlled.",
+"common_mistake": "Using eval to parse user-supplied arguments, creating an immediate and fatal Remote Code Execution vulnerability."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "What are Bash Coprocesses (coproc)?",
+"simple_explanation": "A feature linking a background process's input and output to the parent shell.",
+"interview_answer": "The coproc command runs an asynchronous background command and sets up two-way pipes automatically attached to an array. It is used to maintain a persistent connection to stateful daemons directly from a bash script.",
+"real_world_example": "Using coproc to spawn a persistent database connection and sending queries to it repeatedly without reconnecting.",
+"common_mistake": "Writing to a coprocess without managing stream buffers, easily causing the script to deadlock."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you profile a bash script to find performance bottlenecks?",
+"simple_explanation": "Set the PS4 variable and use set -x with timestamps.",
+"interview_answer": "By altering the PS4 prompt to include nanosecond timestamps (PS4='+ $(date ","+%s.%N":") ') and enabling set -x, you trace exactly how long every single command takes to execute, pinpointing slow loops or network calls.",
+"real_world_example": "Profiling a 10-minute CI build script to discover a single sleep command inside a loop is consuming 8 minutes.",
+"common_mistake": "Relying purely on the 'time' command for the entire script instead of profiling at the command execution level."
+},
+{
+"tool": "Shell Scripting",
+"difficulty": "Hard",
+"question": "How do you handle background job concurrency limits?",
+"simple_explanation": "Track job counts using 'jobs -p' and 'wait -n'.",
+"interview_answer": "Spawning unlimited background jobs (&) will exhaust system memory. Advanced scripts enforce concurrency limits by checking the count of active PIDs using 'jobs -p' and using 'wait -n' to pause until a slot opens up.",
+"real_world_example": "Writing a backup loop that restricts simultaneous database exports to a maximum of 4 parallel background jobs.",
+"common_mistake": "Flooding a server with 10,000 background jobs instantly, triggering the Linux OOM Killer to destroy the host."
+}
+]

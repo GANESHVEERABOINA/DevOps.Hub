@@ -1,0 +1,722 @@
+[
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What is DevSecOps?",
+"simple_explanation": "Integrating security practices seamlessly into the DevOps lifecycle.",
+"interview_answer": "DevSecOps integrates security into CI/CD pipelines from the beginning. It ensures security is a shared responsibility. A key point is it shifts security left without slowing down software delivery.",
+"real_world_example": "Running automated vulnerability scans on every GitHub pull request.",
+"common_mistake": "Treating security as a final gatekeeper instead of a continuous process."
+},
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What does 'Shift Left' mean?",
+"simple_explanation": "Moving security testing earlier in the software development lifecycle.",
+"interview_answer": "Shift Left means testing code for vulnerabilities during the coding and build phases rather than post-production. It reduces the cost and effort to fix bugs. It empowers developers to own security.",
+"real_world_example": "Using an IDE plugin to detect insecure code as it is typed.",
+"common_mistake": "Shifting tools left without providing adequate security training to developers."
+},
+{
+"tool": "SAST",
+"difficulty": "Easy",
+"question": "What is SAST?",
+"simple_explanation": "Static Application Security Testing analyzes source code for vulnerabilities.",
+"interview_answer": "SAST scans source code, bytecode, or binaries without executing the program. It helps identify flaws like SQL injection early. An important point is that it is highly language-dependent.",
+"real_world_example": "Using SonarQube in a Jenkins pipeline to block builds with critical vulnerabilities.",
+"common_mistake": "Ignoring false positives, causing developer frustration and alert fatigue."
+},
+{
+"tool": "DAST",
+"difficulty": "Easy",
+"question": "What is DAST?",
+"simple_explanation": "Dynamic Application Security Testing analyzes running applications for vulnerabilities.",
+"interview_answer": "DAST simulates external attacks against a running application to identify runtime vulnerabilities like XSS. It is technology-agnostic. A key point is it validates how the application behaves in a deployed state.",
+"real_world_example": "Using OWASP ZAP to scan a staging environment for authentication bypass flaws.",
+"common_mistake": "Running aggressive DAST scans against a live production database, potentially corrupting data."
+},
+{
+"tool": "SCA",
+"difficulty": "Easy",
+"question": "What is SCA (Software Composition Analysis)?",
+"simple_explanation": "Scanning open-source libraries for known vulnerabilities and license issues.",
+"interview_answer": "SCA tools identify third-party dependencies in your codebase and check them against vulnerability databases (like NVD). It is vital because modern apps use heavy open-source components. It also tracks license compliance.",
+"real_world_example": "Using Snyk to detect an outdated, vulnerable version of Log4j in a Java project.",
+"common_mistake": "Only scanning the direct dependencies and ignoring transitive (nested) dependencies."
+},
+{
+"tool": "Vulnerability Management",
+"difficulty": "Easy",
+"question": "What is a CVE?",
+"simple_explanation": "Common Vulnerabilities and Exposures is a database of publicly disclosed security flaws.",
+"interview_answer": "A CVE provides a standardized identifier for a specific vulnerability. It allows security tools and professionals to share information consistently. Knowing how to track and remediate CVEs is fundamental to DevSecOps.",
+"real_world_example": "Tracking CVE-2021-44228 to identify and patch the Log4Shell vulnerability.",
+"common_mistake": "Assuming a system is secure just because a scanner reports zero CVEs."
+},
+{
+"tool": "Vulnerability Management",
+"difficulty": "Easy",
+"question": "What is CVSS?",
+"simple_explanation": "Common Vulnerability Scoring System provides a numerical score reflecting vulnerability severity.",
+"interview_answer": "CVSS calculates the severity of a CVE on a scale from 0 to 10. It helps teams prioritize patching efforts. A key point is it evaluates exploitability and impact, not business context.",
+"real_world_example": "Prioritizing a patch for a CVSS 9.8 vulnerability over a CVSS 4.3 issue.",
+"common_mistake": "Treating CVSS as a direct measure of actual risk to your specific business environment."
+},
+{
+"tool": "Secrets Management",
+"difficulty": "Easy",
+"question": "What is Secrets Management?",
+"simple_explanation": "Securely storing, transmitting, and auditing sensitive credentials.",
+"interview_answer": "Secrets management involves protecting passwords, API keys, and certificates from unauthorized access. It prevents secrets from being hardcoded in source code. Centralized management simplifies rotation and auditing.",
+"real_world_example": "Fetching a database password dynamically from HashiCorp Vault at application runtime.",
+"common_mistake": "Committing base64-encoded secrets into Git, mistakenly thinking they are encrypted."
+},
+{
+"tool": "IAM",
+"difficulty": "Easy",
+"question": "What is the Principle of Least Privilege?",
+"simple_explanation": "Granting users and services only the minimum permissions needed to function.",
+"interview_answer": "Least privilege minimizes the blast radius of a security breach. If an entity is compromised, the attacker's access is restricted. It is enforced using strict IAM policies and RBAC.",
+"real_world_example": "Configuring an AWS EC2 role to only allow read access to a single S3 bucket.",
+"common_mistake": "Using generic administrator roles for convenience during development and leaving them in production."
+},
+{
+"tool": "IAM",
+"difficulty": "Easy",
+"question": "What is RBAC (Role-Based Access Control)?",
+"simple_explanation": "Restricting network access based on the roles of individual users within an enterprise.",
+"interview_answer": "RBAC assigns permissions to roles rather than individuals, simplifying access management. It is widely used in Kubernetes and cloud providers. A key point is it scales efficiently as organizations grow.",
+"real_world_example": "Creating a 'Read-Only' role in Kubernetes for developers to view pod logs without modifying deployments.",
+"common_mistake": "Creating too many custom roles, leading to role explosion and unmanageable permissions."
+},
+{
+"tool": "Supply Chain Security",
+"difficulty": "Easy",
+"question": "What is an SBOM?",
+"simple_explanation": "A Software Bill of Materials is an inventory of all components in an application.",
+"interview_answer": "An SBOM lists all open-source and third-party dependencies used to build a software artifact. It is crucial for supply chain security. It allows rapid identification of affected systems when new vulnerabilities emerge.",
+"real_world_example": "Generating a JSON SBOM using Syft to verify compliance before deploying a Docker container.",
+"common_mistake": "Generating an SBOM but failing to store it centrally for rapid query during an incident."
+},
+{
+"tool": "Docker Security",
+"difficulty": "Easy",
+"question": "What is Container Image Scanning?",
+"simple_explanation": "Analyzing Docker images for known vulnerabilities and misconfigurations.",
+"interview_answer": "Image scanning parses the layers of a container image to detect vulnerable OS packages and libraries. It is a mandatory CI/CD gate. A key point is it prevents deploying known bad artifacts.",
+"real_world_example": "Using Trivy in a GitHub Action to block a container build if critical CVEs are found.",
+"common_mistake": "Scanning images only once during the build, ignoring newly discovered vulnerabilities in running containers."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Easy",
+"question": "What is Immutable Infrastructure?",
+"simple_explanation": "Infrastructure that is never modified after it is deployed.",
+"interview_answer": "Immutable infrastructure replaces servers entirely rather than updating them in place. It prevents configuration drift and ensures consistency. From a security perspective, it mitigates persistent malware installations.",
+"real_world_example": "Replacing an old AWS Auto Scaling group with a new AMI instead of running SSH patch scripts.",
+"common_mistake": "SSH-ing into an immutable container to make a quick hotfix, destroying the immutability guarantee."
+},
+{
+"tool": "Network Security",
+"difficulty": "Easy",
+"question": "What is a WAF (Web Application Firewall)?",
+"simple_explanation": "A firewall that filters, monitors, and blocks HTTP traffic to and from a web application.",
+"interview_answer": "A WAF protects web applications from application-layer attacks like SQL injection and XSS. It inspects traffic based on predefined rules. It is an essential perimeter defense mechanism in DevSecOps.",
+"real_world_example": "Using AWS WAF to block malicious requests attempting to exploit a known WordPress vulnerability.",
+"common_mistake": "Deploying a WAF in blocking mode without tuning, immediately dropping legitimate customer traffic."
+},
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What is Penetration Testing?",
+"simple_explanation": "An authorized simulated cyberattack to evaluate the security of a system.",
+"interview_answer": "Penetration testing identifies vulnerabilities that automated scanners miss, such as business logic flaws. It is used to validate security posture. In DevSecOps, automated pen-testing is increasingly integrated into CD pipelines.",
+"real_world_example": "Hiring ethical hackers to test a new payment gateway before its public release.",
+"common_mistake": "Relying entirely on annual penetration tests instead of implementing continuous automated security scanning."
+},
+{
+"tool": "Compliance",
+"difficulty": "Easy",
+"question": "What is Compliance as Code?",
+"simple_explanation": "Automating the implementation and checking of compliance rules using code.",
+"interview_answer": "Compliance as Code turns regulatory requirements (like HIPAA or SOC2) into automated tests. It is used to prevent non-compliant infrastructure from being provisioned. It translates legal policies into executable scripts.",
+"real_world_example": "Using InSpec to reject Terraform plans that attempt to create unencrypted databases.",
+"common_mistake": "Writing compliance checks manually in spreadsheets instead of automating them in the pipeline."
+},
+{
+"tool": "CI/CD Security",
+"difficulty": "Easy",
+"question": "What is a Security Gate in CI/CD?",
+"simple_explanation": "An automated check that fails a pipeline if security standards are not met.",
+"interview_answer": "A security gate enforces policies automatically, halting deployment if vulnerabilities exceed a threshold. It ensures no high-risk code reaches production. It is the core enforcement mechanism of DevSecOps.",
+"real_world_example": "A Jenkins pipeline failing because SonarQube detected a newly introduced SQL injection vulnerability.",
+"common_mistake": "Setting security gates too strictly on day one, stalling all development and frustrating engineering teams."
+},
+{
+"tool": "IAM",
+"difficulty": "Easy",
+"question": "What is Multi-Factor Authentication (MFA)?",
+"simple_explanation": "Requiring two or more verification methods to grant user access.",
+"interview_answer": "MFA requires something you know (password) and something you have (token). It drastically reduces the risk of credential compromise. It is a mandatory security baseline for all cloud and code repositories.",
+"real_world_example": "Requiring an OTP from Google Authenticator to log into the AWS Management Console.",
+"common_mistake": "Enabling MFA for users but forgetting to require it for highly privileged service accounts or APIs."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Easy",
+"question": "What is Patch Management?",
+"simple_explanation": "The process of distributing and applying updates to software.",
+"interview_answer": "Patch management mitigates vulnerabilities by keeping operating systems and libraries up to date. In DevSecOps, patching is automated through immutable infrastructure, rebuilding base images rather than updating live servers.",
+"real_world_example": "Automatically rebuilding a Docker base image every week to include the latest Alpine Linux security patches.",
+"common_mistake": "Delaying critical patches because 'it might break the app', leaving systems vulnerable to known exploits."
+},
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What is Threat Modeling?",
+"simple_explanation": "A structured process to identify potential security threats and design mitigations.",
+"interview_answer": "Threat modeling analyzes an architecture to uncover design-level security flaws before code is written. It answers 'what can go wrong?' Integrating this early saves massive redesign costs later.",
+"real_world_example": "Using the STRIDE framework to analyze a new microservice architecture during the design phase.",
+"common_mistake": "Treating threat modeling as a one-time task rather than updating it as the architecture evolves."
+},
+{
+"tool": "IaC Security",
+"difficulty": "Easy",
+"question": "What is Infrastructure as Code (IaC) Security?",
+"simple_explanation": "Scanning infrastructure configuration files for misconfigurations before deployment.",
+"interview_answer": "IaC security scans tools like Terraform or CloudFormation for risks, such as open ports or unencrypted buckets. It prevents cloud misconfigurations from ever reaching production. It shifts cloud security left.",
+"real_world_example": "Running Checkov on a pull request to block the creation of an overly permissive AWS Security Group.",
+"common_mistake": "Only scanning live cloud environments instead of catching misconfigurations at the IaC template level."
+},
+{
+"tool": "Git Security",
+"difficulty": "Easy",
+"question": "Why shouldn't you commit secrets to Git?",
+"simple_explanation": "Git history is permanent; exposed secrets can be easily exploited by attackers.",
+"interview_answer": "Once a secret is committed, it remains in the Git history even if deleted in a later commit. Attackers heavily monitor public and private repos for leaked credentials to compromise infrastructure.",
+"real_world_example": "A developer accidentally committing an AWS access key, leading to a massive unauthorized crypto-mining bill.",
+"common_mistake": "Removing the secret in a new commit and thinking it is safe, without rewriting the Git history."
+},
+{
+"tool": "Docker Security",
+"difficulty": "Easy",
+"question": "What is Docker Bench for Security?",
+"simple_explanation": "A script that checks for common best practices around deploying Docker containers.",
+"interview_answer": "Docker Bench automates checks against the CIS Docker Benchmark. It verifies host configuration, daemon settings, and container runtime security. It is a quick way to baseline container environment security.",
+"real_world_example": "Running Docker Bench on a CI/CD runner to ensure the underlying Docker daemon is securely configured.",
+"common_mistake": "Running it once and ignoring it, rather than integrating it into continuous compliance monitoring."
+},
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What is a False Positive in security scanning?",
+"simple_explanation": "An alert that incorrectly indicates a vulnerability is present.",
+"interview_answer": "False positives occur when scanners flag safe code as malicious. They are a major challenge in DevSecOps because they cause alert fatigue. Tuning rules and baselining scans mitigates this issue.",
+"real_world_example": "A SAST tool flagging a hardcoded test string as a leaked database password.",
+"common_mistake": "Forcing developers to fix every single alert without providing a mechanism to suppress false positives."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Easy",
+"question": "What is an AWS Security Group?",
+"simple_explanation": "A virtual firewall that controls inbound and outbound traffic for EC2 instances.",
+"interview_answer": "Security Groups operate at the instance level. They are stateful, meaning returning traffic is automatically allowed. Properly configuring them is the most fundamental step in securing AWS network boundaries.",
+"real_world_example": "Creating a Security Group that only allows inbound HTTPS traffic on port 443.",
+"common_mistake": "Opening SSH port 22 to the world (0.0.0.0/0) instead of restricting it to a corporate IP."
+},
+{
+"tool": "Network Security",
+"difficulty": "Easy",
+"question": "What is a Reverse Proxy?",
+"simple_explanation": "A server that sits in front of web servers, forwarding client requests.",
+"interview_answer": "A reverse proxy (like Nginx) hides backend infrastructure, handles SSL termination, and distributes load. In security, it acts as a chokepoint to inspect traffic and shield origin servers from direct attacks.",
+"real_world_example": "Using Nginx to accept HTTPS requests and forward them as HTTP to an internal Node.js app.",
+"common_mistake": "Exposing the backend application servers directly to the internet alongside the reverse proxy."
+},
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What is the OWASP Top 10?",
+"simple_explanation": "A globally recognized awareness document representing the most critical web application security risks.",
+"interview_answer": "The OWASP Top 10 highlights severe risks like Broken Access Control and Injection. It serves as a foundational checklist for developers and security teams. DevSecOps tools align their scanning rules with it.",
+"real_world_example": "Configuring a SAST tool to strictly fail a build if it detects any OWASP Top 10 vulnerabilities.",
+"common_mistake": "Treating the OWASP Top 10 as an exhaustive list of all possible security threats."
+},
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What is Cross-Site Scripting (XSS)?",
+"simple_explanation": "A vulnerability where malicious scripts are injected into trusted websites.",
+"interview_answer": "XSS allows attackers to execute scripts in a victim's browser. It is typically prevented by encoding and sanitizing user input. DAST tools are frequently used to detect XSS in running applications.",
+"real_world_example": "An attacker injecting a JavaScript payload into a blog comment section to steal user session cookies.",
+"common_mistake": "Relying solely on client-side validation to prevent XSS instead of sanitizing inputs on the server."
+},
+{
+"tool": "DevSecOps",
+"difficulty": "Easy",
+"question": "What is SQL Injection (SQLi)?",
+"simple_explanation": "An attack that interferes with the queries an application makes to its database.",
+"interview_answer": "SQLi allows attackers to view or modify database data by manipulating input fields. It is mitigated by using parameterized queries or ORMs. SAST tools effectively catch SQLi flaws in source code.",
+"real_world_example": "Typing ' OR 1=1 -- into a login field to bypass authentication and access admin records.",
+"common_mistake": "Attempting to filter out specific SQL keywords manually instead of using prepared statements."
+},
+{
+"tool": "HashiCorp Vault",
+"difficulty": "Easy",
+"question": "What is HashiCorp Vault?",
+"simple_explanation": "A centralized tool for securely managing and storing secrets.",
+"interview_answer": "Vault secures, stores, and tightly controls access to tokens, passwords, and certificates. It is used to eliminate secret sprawl. A key DevSecOps feature is its ability to generate dynamic, short-lived credentials.",
+"real_world_example": "An application authenticating with Vault to retrieve a database password that expires in 1 hour.",
+"common_mistake": "Storing the Vault unseal keys in plain text on the vault server itself."
+},
+{
+"tool": "SAST/DAST",
+"difficulty": "Medium",
+"question": "How does SAST differ from DAST?",
+"simple_explanation": "SAST tests source code from the inside; DAST tests running applications from the outside.",
+"interview_answer": "SAST requires access to source code and finds vulnerabilities early (White-box). DAST requires a running application and finds vulnerabilities via simulated attacks (Black-box). DevSecOps requires both for comprehensive coverage.",
+"real_world_example": "SAST finding an un-sanitized variable in Python, while DAST finds an exploitable XSS endpoint on staging.",
+"common_mistake": "Relying exclusively on SAST and missing deployment-specific misconfigurations that DAST would catch."
+},
+{
+"tool": "IAST",
+"difficulty": "Medium",
+"question": "What is IAST (Interactive Application Security Testing)?",
+"simple_explanation": "A testing method that analyzes code from within the application during runtime.",
+"interview_answer": "IAST combines the benefits of SAST and DAST. It uses an agent instrumented inside the application to monitor traffic and execution flow in real-time, providing highly accurate vulnerability detection with fewer false positives.",
+"real_world_example": "Deploying a Contrast Security agent in a QA environment to monitor vulnerabilities during automated functional testing.",
+"common_mistake": "Deploying IAST agents in production environments, which can introduce unacceptable performance overhead."
+},
+{
+"tool": "RASP",
+"difficulty": "Medium",
+"question": "What is RASP (Runtime Application Self-Protection)?",
+"simple_explanation": "Security technology that resides inside an application to detect and block attacks in real-time.",
+"interview_answer": "RASP intercepts calls from the app to the system, analyzing context. If it detects a malicious payload like SQLi, it blocks the execution natively. It protects legacy apps that cannot be patched immediately.",
+"real_world_example": "A Java RASP agent blocking an exploit payload attempting to trigger the Log4Shell vulnerability in production.",
+"common_mistake": "Confusing RASP (runs inside the app) with a WAF (runs on the network perimeter)."
+},
+{
+"tool": "Supply Chain Security",
+"difficulty": "Medium",
+"question": "What is Dependency Confusion?",
+"simple_explanation": "An attack tricking a package manager into downloading a malicious public package instead of a private one.",
+"interview_answer": "Attackers publish malicious packages on public registries with the exact names of internal corporate packages, but with higher version numbers. Package managers default to the higher version, importing malware into the corporate build.",
+"real_world_example": "An npm build pulling a malicious 'internal-auth' package from the public registry instead of the private Nexus repo.",
+"common_mistake": "Failing to scope private packages or securely configure package manager registries to prioritize internal sources."
+},
+{
+"tool": "Supply Chain Security",
+"difficulty": "Medium",
+"question": "What is Typosquatting in software supply chains?",
+"simple_explanation": "Publishing malicious packages with names deliberately similar to popular legitimate packages.",
+"interview_answer": "Attackers rely on developers making typographical errors when installing libraries. The malicious package executes code upon installation. In DevSecOps, this is mitigated by SCA tools and strict package locking mechanisms.",
+"real_world_example": "A developer typing 'pip install requests' as 'pip install requesst', installing a malicious keylogger.",
+"common_mistake": "Not verifying package authors and download counts before adding a new dependency to a project."
+},
+{
+"tool": "Docker Security",
+"difficulty": "Medium",
+"question": "How do you secure a Dockerfile?",
+"simple_explanation": "By minimizing layers, using trusted base images, and running as non-root.",
+"interview_answer": "Secure Dockerfiles start with slim, verified base images (like Alpine or distroless). They omit unnecessary packages, avoid hardcoded secrets, use the USER directive to drop root privileges, and utilize multi-stage builds.",
+"real_world_example": "Adding 'USER 1001' to a Dockerfile so the Node.js application cannot modify host files if compromised.",
+"common_mistake": "Using the 'latest' tag for base images, causing unpredictable and unrepeatable security baselines."
+},
+{
+"tool": "Docker Security",
+"difficulty": "Medium",
+"question": "Why should you avoid running containers as root?",
+"simple_explanation": "If a container is compromised, a root user can more easily escape to the host.",
+"interview_answer": "By default, Docker containers run as root. If an attacker breaches the container and a vulnerability exists in the container runtime, they gain root access to the underlying host server. Enforce unprivileged execution.",
+"real_world_example": "An attacker escaping a root container via a volume mount to overwrite the host's SSH keys.",
+"common_mistake": "Assuming Docker inherently isolates the root user in the container from the root user on the host."
+},
+{
+"tool": "Kubernetes Security",
+"difficulty": "Medium",
+"question": "What is Kubernetes Security Posture Management (KSPM)?",
+"simple_explanation": "Automated tools that ensure Kubernetes clusters are configured securely and remain compliant.",
+"interview_answer": "KSPM scans Kubernetes manifests and cluster configurations against CIS benchmarks. It identifies overly permissive RBAC, missing network policies, and insecure pod configurations, continuously monitoring the cluster's security health.",
+"real_world_example": "Using Aqua Security to detect that a production namespace allows containers to run with elevated privileges.",
+"common_mistake": "Focusing only on container image scanning while completely ignoring the underlying cluster configuration security."
+},
+{
+"tool": "Kubernetes Security",
+"difficulty": "Medium",
+"question": "What is a Kubernetes Network Policy?",
+"simple_explanation": "A specification of how groups of pods are allowed to communicate with each other.",
+"interview_answer": "Network Policies act as internal firewalls within Kubernetes. By default, all pods can talk to all other pods. Implementing a 'default deny' network policy enforces zero-trust traffic segmentation within the cluster.",
+"real_world_example": "A policy preventing the frontend web pod from communicating directly with the internal payment database pod.",
+"common_mistake": "Deploying Network Policies in a cluster whose CNI (like basic Flannel) does not support enforcing them."
+},
+{
+"tool": "Kubernetes Security",
+"difficulty": "Medium",
+"question": "What is a Pod Security Admission (PSA)?",
+"simple_explanation": "A built-in controller that enforces security standards on Pods at the namespace level.",
+"interview_answer": "Replacing the deprecated Pod Security Policies (PSP), PSA applies profiles (Privileged, Baseline, Restricted) to namespaces. It prevents the creation of insecure pods, such as those attempting to mount host paths or run as root.",
+"real_world_example": "Enforcing the 'Restricted' profile on the 'finance' namespace to prevent any privilege escalation.",
+"common_mistake": "Applying strict admission policies globally without testing, instantly breaking legitimate legacy workloads."
+},
+{
+"tool": "HashiCorp Vault",
+"difficulty": "Medium",
+"question": "How does HashiCorp Vault dynamically generate secrets?",
+"simple_explanation": "Vault integrates with databases/clouds to create short-lived credentials on demand.",
+"interview_answer": "Vault's secret engines generate unique, time-bound credentials when an application requests access. Once the TTL expires, Vault automatically revokes the credential. This completely mitigates the risk of long-lived, leaked passwords.",
+"real_world_example": "Vault generating a temporary AWS IAM user that deletes itself exactly 60 minutes after creation.",
+"common_mistake": "Configuring dynamic secrets but setting an infinite Time-To-Live (TTL), defeating the security benefit."
+},
+{
+"tool": "Secrets Management",
+"difficulty": "Medium",
+"question": "What is the 'Secret Zero' problem?",
+"simple_explanation": "The challenge of securely delivering the initial credential needed to authenticate to a secret vault.",
+"interview_answer": "To get secrets from Vault, an app needs a token. But how does it get that first token securely? This is solved using trusted platform identities, like AWS IAM roles or Kubernetes Service Accounts.",
+"real_world_example": "Using Kubernetes Auth in Vault so a pod uses its native JWT to authenticate, avoiding hardcoded tokens.",
+"common_mistake": "Hardcoding the initial Vault authentication token inside the application source code."
+},
+{
+"tool": "Git Security",
+"difficulty": "Medium",
+"question": "What is GitGuardian?",
+"simple_explanation": "An automated tool that detects and remediates secrets leaked in source code.",
+"interview_answer": "GitGuardian scans Git repositories in real-time for leaked API keys, passwords, and certificates. It integrates into CI/CD pipelines to block commits containing secrets, protecting the software supply chain from credential theft.",
+"real_world_example": "A GitHub Action running GitGuardian to block a PR because a Stripe API key was found in a config file.",
+"common_mistake": "Scanning only the current state of the repo and ignoring the historical commits where secrets might hide."
+},
+{
+"tool": "Git Security",
+"difficulty": "Medium",
+"question": "How do you implement a pre-commit hook for security?",
+"simple_explanation": "By configuring local Git hooks or tools like 'pre-commit' to run security checks before committing.",
+"interview_answer": "Pre-commit hooks run scripts automatically on the developer's machine before code is committed. Tools like Talisman or Yelp's detect-secrets evaluate the payload and block the commit if sensitive data is found.",
+"real_world_example": "A local developer trying to commit an AWS key, but the pre-commit hook rejects the action locally.",
+"common_mistake": "Relying entirely on local pre-commit hooks, which developers can easily bypass using 'git commit --no-verify'."
+},
+{
+"tool": "Policy as Code",
+"difficulty": "Medium",
+"question": "What is Open Policy Agent (OPA)?",
+"simple_explanation": "A unified, open-source policy engine for enforcing policies across the cloud native stack.",
+"interview_answer": "OPA decouples policy decision-making from application logic. It evaluates structured data against policies written in Rego. It is heavily used in Kubernetes (via Gatekeeper) to enforce admission control and in CI/CD pipelines.",
+"real_world_example": "Using OPA Gatekeeper to prevent any Kubernetes Pod from pulling images from untrusted registries.",
+"common_mistake": "Writing overly complex OPA policies that create severe performance bottlenecks during API evaluation."
+},
+{
+"tool": "Policy as Code",
+"difficulty": "Medium",
+"question": "What is Rego?",
+"simple_explanation": "The declarative query language used by Open Policy Agent (OPA).",
+"interview_answer": "Rego is purpose-built for expressing complex hierarchical data policies. It allows administrators to write logic that answers authorization queries, such as whether an API request is allowed or if a Terraform plan is compliant.",
+"real_world_example": "Writing a Rego rule that denies the creation of AWS S3 buckets if encryption is not enabled.",
+"common_mistake": "Treating Rego like an imperative programming language instead of understanding its declarative, rule-based nature."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Medium",
+"question": "What is Cloud Security Posture Management (CSPM)?",
+"simple_explanation": "Automated tools that identify and remediate cloud infrastructure misconfigurations.",
+"interview_answer": "CSPM continuously monitors cloud environments against security frameworks like SOC2 or CIS. It detects risks like public S3 buckets or open security groups. It enforces compliance across dynamic, multi-cloud architectures.",
+"real_world_example": "AWS Security Hub automatically flagging an alert when an engineer disables CloudTrail logging.",
+"common_mistake": "Performing manual quarterly security audits instead of using real-time automated CSPM monitoring."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Medium",
+"question": "What is an AWS IAM Policy?",
+"simple_explanation": "A JSON document defining allowed or denied actions on AWS resources.",
+"interview_answer": "IAM Policies dictate what an identity (user or role) can do. They evaluate 'Effect', 'Action', 'Resource', and 'Condition'. A critical DevSecOps point is that an explicit 'Deny' always overrides an explicit 'Allow'.",
+"real_world_example": "A policy allowing an EC2 role to 's3:GetObject' strictly on the 'company-configs' bucket.",
+"common_mistake": "Using wildcard asterisks (*) for Actions and Resources, violating the principle of least privilege."
+},
+{
+"tool": "CI/CD Security",
+"difficulty": "Medium",
+"question": "How do you secure a CI/CD pipeline against poisoning?",
+"simple_explanation": "By strictly controlling repository access, enforcing signed commits, and using ephemeral runners.",
+"interview_answer": "Pipeline poisoning occurs when attackers inject malicious code into the build process. Prevent this by enforcing multi-person code reviews, protecting critical branches, pinning dependencies to exact hashes, and isolating CI runner environments.",
+"real_world_example": "Requiring two distinct developer approvals on a PR before the Jenkins deployment pipeline will execute.",
+"common_mistake": "Allowing untrusted public forks to execute CI pipelines that have access to production deployment secrets."
+},
+{
+"tool": "SAST",
+"difficulty": "Medium",
+"question": "What is SonarQube?",
+"simple_explanation": "A continuous inspection tool for code quality and security.",
+"interview_answer": "SonarQube performs automatic static code analysis to detect bugs, code smells, and vulnerabilities. It defines a 'Quality Gate' that can automatically fail a CI/CD pipeline if the code does not meet security standards.",
+"real_world_example": "A GitLab pipeline failing because SonarQube detected a critical Cross-Site Scripting (XSS) vulnerability in new code.",
+"common_mistake": "Ignoring the Quality Gate status and forcing builds to deploy regardless of the SonarQube findings."
+},
+{
+"tool": "Network Security",
+"difficulty": "Medium",
+"question": "What is Server-Side Request Forgery (SSRF)?",
+"simple_explanation": "A vulnerability where an attacker forces a server to make unauthorized HTTP requests.",
+"interview_answer": "SSRF allows attackers to abuse server functionality to access internal-only systems. In cloud environments, SSRF is exceptionally dangerous because it can be used to query the instance metadata service (IMDS) and steal IAM credentials.",
+"real_world_example": "An attacker providing a malicious URL to an image-fetching API to access `http://169.254.169.254` (AWS IMDS).",
+"common_mistake": "Failing to implement IMDSv2 in AWS, which requires session tokens and prevents basic SSRF exploitation."
+},
+{
+"tool": "Network Security",
+"difficulty": "Medium",
+"question": "What is mTLS (Mutual TLS)?",
+"simple_explanation": "A protocol where both the client and server verify each other's identities using certificates.",
+"interview_answer": "In standard TLS, only the client verifies the server. mTLS requires both parties to present certificates, ensuring encrypted communication and strict identity verification between microservices. It is a cornerstone of Zero Trust architecture.",
+"real_world_example": "A billing microservice refusing a connection from a frontend service because it lacks a valid client certificate.",
+"common_mistake": "Implementing mTLS without an automated certificate rotation mechanism, leading to massive outages when certificates expire."
+},
+{
+"tool": "Network Security",
+"difficulty": "Medium",
+"question": "How does a Service Mesh improve security?",
+"simple_explanation": "By abstracting security and routing logic away from application code.",
+"interview_answer": "A service mesh (like Istio) manages service-to-service communication. It automatically enforces mTLS encryption, provides deep observability, and implements granular access control policies without requiring developers to write complex security logic into their apps.",
+"real_world_example": "Using Istio to transparently encrypt all network traffic between 50 Kubernetes microservices.",
+"common_mistake": "Deploying a complex service mesh for a simple monolith, adding massive overhead for minimal security benefit."
+},
+{
+"tool": "Runtime Security",
+"difficulty": "Medium",
+"question": "What is Falco?",
+"simple_explanation": "A cloud-native runtime security threat detection engine.",
+"interview_answer": "Falco parses Linux system calls at runtime to detect anomalous behavior in containers and nodes. Using customizable rules, it alerts on activities like unauthorized shell spawning, unexpected file modifications, or privilege escalations.",
+"real_world_example": "Falco triggering a Slack alert because a user executed `/bin/bash` inside a running production database container.",
+"common_mistake": "Deploying Falco but failing to tune the default rules, resulting in an unmanageable flood of false positives."
+},
+{
+"tool": "Policy as Code",
+"difficulty": "Medium",
+"question": "What is Kyverno?",
+"simple_explanation": "A Kubernetes-native policy engine that manages policies as standard Kubernetes resources.",
+"interview_answer": "Unlike OPA which requires learning Rego, Kyverno allows administrators to write validation and mutation policies using familiar Kubernetes YAML. It makes securing clusters simpler for DevOps teams already familiar with Kubernetes manifests.",
+"real_world_example": "Applying a Kyverno policy that automatically injects standard security labels into every newly created Pod.",
+"common_mistake": "Running mutation policies that silently alter deployments, causing debugging confusion for application developers."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Medium",
+"question": "How do you secure an AWS S3 bucket?",
+"simple_explanation": "Block public access, enforce encryption, and apply strict bucket policies.",
+"interview_answer": "S3 security requires enabling 'Block Public Access' at the account level. Additionally, enforce TLS in transit via bucket policies, enable Server-Side Encryption (KMS), turn on versioning, and restrict access using the principle of least privilege.",
+"real_world_example": "Writing a bucket policy that denies all `s3:PutObject` requests if the `s3:x-amz-server-side-encryption` header is missing.",
+"common_mistake": "Relying on obscure bucket names for security instead of enforcing proper IAM and Bucket Policies."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Medium",
+"question": "What is AWS Macie?",
+"simple_explanation": "A data security service that uses machine learning to discover sensitive data in S3.",
+"interview_answer": "Macie automatically scans S3 buckets to identify and classify Personally Identifiable Information (PII), such as credit card numbers or API keys. It provides visibility into data security posture and alerts on exposed sensitive data.",
+"real_world_example": "Macie generating an alert because a developer accidentally uploaded unencrypted customer social security numbers to a log bucket.",
+"common_mistake": "Scanning massive, low-risk data lakes continuously with Macie, incurring exceptionally high cloud bills."
+},
+{
+"tool": "CI/CD Security",
+"difficulty": "Medium",
+"question": "What is a CI/CD runner attack?",
+"simple_explanation": "When an attacker gains control of the server executing the pipeline.",
+"interview_answer": "Runners execute code and hold high-privileged credentials to deploy to production. If an attacker submits a malicious Pull Request that executes code on the runner, they can steal deployment keys or pivot into the corporate network.",
+"real_world_example": "A malicious test script extracting AWS production keys from the Jenkins runner's memory and exfiltrating them.",
+"common_mistake": "Using self-hosted runners to execute untrusted code from public repository forks."
+},
+{
+"tool": "Compliance",
+"difficulty": "Medium",
+"question": "What is SOC2 compliance in DevSecOps?",
+"simple_explanation": "An auditing standard evaluating how securely an organization manages customer data.",
+"interview_answer": "SOC2 focuses on security, availability, processing integrity, confidentiality, and privacy. In DevSecOps, achieving SOC2 requires proving continuous monitoring, strict access controls, automated vulnerability management, and immutability in deployment logs.",
+"real_world_example": "Providing a SOC2 auditor with automated AWS CloudTrail logs to prove no unauthorized infrastructure changes occurred.",
+"common_mistake": "Treating SOC2 as a one-time checklist rather than implementing continuous, automated compliance monitoring."
+},
+{
+"tool": "Docker Security",
+"difficulty": "Medium",
+"question": "What is Container Escape?",
+"simple_explanation": "When an attacker breaks out of a container to gain access to the host OS.",
+"interview_answer": "Container escape occurs due to kernel vulnerabilities, misconfigurations (like running as privileged), or mounted sensitive host paths (like the Docker socket). Mitigation requires minimizing kernel capabilities and enforcing strict security profiles like Seccomp.",
+"real_world_example": "An attacker exploiting a privileged container to mount the host's `/etc` directory and alter the host's passwords.",
+"common_mistake": "Assuming containers provide the same robust hardware-level isolation as full virtual machines."
+},
+{
+"tool": "Zero Trust",
+"difficulty": "Hard",
+"question": "What is Zero Trust Architecture?",
+"simple_explanation": "A security model requiring strict identity verification for every person and device.",
+"interview_answer": "Zero Trust discards the concept of a 'trusted internal network'. Every request, whether internal or external, is authenticated, authorized, and encrypted continuously. It relies heavily on micro-segmentation and robust Identity and Access Management (IAM).",
+"real_world_example": "Requiring a developer to use MFA and a verified device certificate just to SSH into an internal dev server.",
+"common_mistake": "Assuming that placing resources behind a corporate VPN constitutes a Zero Trust architecture."
+},
+{
+"tool": "Kubernetes Security",
+"difficulty": "Hard",
+"question": "How do you implement Zero Trust in Kubernetes?",
+"simple_explanation": "Through Network Policies, mTLS, strict RBAC, and admission controllers.",
+"interview_answer": "Zero Trust in K8s means pods cannot trust each other by default. You enforce a 'default deny' Network Policy, utilize a Service Mesh for mTLS service-to-service encryption, and use OPA Gatekeeper to restrict pod capabilities.",
+"real_world_example": "Using Istio to enforce mTLS so a compromised frontend pod cannot impersonate an admin pod to the database.",
+"common_mistake": "Relying purely on namespace separation for security, ignoring that networking across namespaces is open by default."
+},
+{
+"tool": "eBPF",
+"difficulty": "Hard",
+"question": "What is eBPF (Extended Berkeley Packet Filter)?",
+"simple_explanation": "A technology allowing secure, sandbox execution of code directly in the Linux kernel.",
+"interview_answer": "eBPF enables high-performance observability, networking, and security tooling without changing kernel source code or loading modules. It executes sandboxed programs in response to kernel events, providing unprecedented visibility into runtime behaviors.",
+"real_world_example": "Using eBPF to trace exactly which process inside a container initiated an unauthorized outbound network connection.",
+"common_mistake": "Assuming eBPF is just a packet sniffer like tcpdump, ignoring its powerful security enforcement capabilities."
+},
+{
+"tool": "eBPF",
+"difficulty": "Hard",
+"question": "How does Cilium use eBPF for security?",
+"simple_explanation": "It replaces iptables to provide highly scalable and identity-aware network security.",
+"interview_answer": "Cilium uses eBPF to enforce network policies at the kernel level based on Kubernetes identities (labels), not IP addresses. This makes security enforcement drastically faster, more scalable, and transparent to the application.",
+"real_world_example": "Enforcing a Layer 7 network policy to allow a pod to make an HTTP GET request, but explicitly blocking POST requests.",
+"common_mistake": "Trying to debug Cilium network policies using legacy iptables commands, which do not reflect eBPF maps."
+},
+{
+"tool": "Supply Chain Security",
+"difficulty": "Hard",
+"question": "What is Sigstore?",
+"simple_explanation": "An open-source project making cryptographic software signing accessible and secure.",
+"interview_answer": "Sigstore eliminates the pain of managing long-lived cryptographic keys. It uses short-lived certificates based on OpenID Connect identities (like an email address) and a transparent public ledger to sign and verify software artifacts.",
+"real_world_example": "A GitHub Action automatically signing a newly built container image using a developer's OIDC identity before pushing it.",
+"common_mistake": "Relying on traditional PGP keys for container signing, creating a massive key management and rotation burden."
+},
+{
+"tool": "Supply Chain Security",
+"difficulty": "Hard",
+"question": "How does Cosign work for container signing?",
+"simple_explanation": "It securely signs OCI containers and verifies them before deployment.",
+"interview_answer": "Part of the Sigstore ecosystem, Cosign signs container images and stores the signature directly in the OCI registry alongside the image. Kubernetes admission controllers use Cosign to verify the signature, blocking untampered deployments.",
+"real_world_example": "Configuring Kyverno to block any Pod deployment if the container image lacks a valid Cosign signature.",
+"common_mistake": "Signing the image tag instead of the immutable image digest, leaving the deployment vulnerable to tag mutability."
+},
+{
+"tool": "Supply Chain Security",
+"difficulty": "Hard",
+"question": "What is SLSA (Supply-chain Levels for Software Artifacts)?",
+"simple_explanation": "A security framework providing guidelines to prevent tampering in the software supply chain.",
+"interview_answer": "SLSA defines levels (1-4) of supply chain security maturity. It mandates practices like automated builds, generating provenance (metadata about how an artifact was built), and ensuring ephemeral, isolated build environments to prevent tampering.",
+"real_world_example": "Reaching SLSA Level 3 by ensuring CI/CD runners are strictly ephemeral and generate cryptographic build provenance data.",
+"common_mistake": "Assuming generating an SBOM automatically makes an organization SLSA compliant."
+},
+{
+"tool": "IAM",
+"difficulty": "Hard",
+"question": "What is a Confused Deputy Attack?",
+"simple_explanation": "When an attacker tricks a highly privileged service into performing actions on their behalf.",
+"interview_answer": "This occurs when a service with broad permissions is manipulated into accessing resources the attacker shouldn't see. In AWS, cross-account roles are vulnerable if not secured. It bypasses direct authentication controls.",
+"real_world_example": "Tricking a cloud backup service into reading a competitor's private database because the service has universal read access.",
+"common_mistake": "Granting services broad internal permissions without strict contextual validation of the requesting user."
+},
+{
+"tool": "IAM",
+"difficulty": "Hard",
+"question": "How do you prevent Confused Deputy Attacks in AWS?",
+"simple_explanation": "By utilizing the `aws:SourceArn` and `aws:SourceAccount` condition keys in IAM policies.",
+"interview_answer": "To prevent a service from acting maliciously on behalf of another account, trust policies must explicitly define which specific resource (SourceArn) and account (SourceAccount) is authorized to trigger the privileged service assumption.",
+"real_world_example": "Modifying an S3 bucket policy to only allow CloudTrail to write logs if the `SourceAccount` matches your corporate ID.",
+"common_mistake": "Relying entirely on obfuscated ARNs instead of hardcoded conditional IAM trust boundaries."
+},
+{
+"tool": "Zero Trust",
+"difficulty": "Hard",
+"question": "What is SPIFFE?",
+"simple_explanation": "A standard providing universal identity to software services across dynamic environments.",
+"interview_answer": "Secure Production Identity Framework for Everyone (SPIFFE) assigns cryptographically verifiable identities (SVIDs) to workloads. It abstracts identity away from IP addresses, enabling secure authentication (mTLS) across diverse platforms like Kubernetes, AWS, and on-premise servers.",
+"real_world_example": "An on-premise database using SPIFFE to securely authenticate an AWS Lambda function without using API passwords.",
+"common_mistake": "Attempting to use static IP addresses for identity in dynamic cloud environments, which breaks immediately upon scaling."
+},
+{
+"tool": "Zero Trust",
+"difficulty": "Hard",
+"question": "What is SPIRE?",
+"simple_explanation": "The production-ready implementation of the SPIFFE identity standard.",
+"interview_answer": "SPIRE acts as a control plane that issues and rotates short-lived cryptographic identities (certificates) to workloads. It performs node and workload attestation, verifying exactly what software is running before granting it an identity.",
+"real_world_example": "SPIRE issuing an X.509 certificate to a validated Kubernetes pod, allowing it to authenticate to a secure Kafka topic.",
+"common_mistake": "Confusing SPIFFE (the specification/API standard) with SPIRE (the actual software implementation)."
+},
+{
+"tool": "Kubernetes Security",
+"difficulty": "Hard",
+"question": "How do you secure a multi-tenant Kubernetes cluster?",
+"simple_explanation": "Using strict RBAC, Network Policies, Resource Quotas, and Node isolation.",
+"interview_answer": "True multi-tenancy is difficult. It requires isolating tenants via Namespaces, enforcing default-deny Network Policies, restricting CPU/Memory via Quotas, applying Pod Security Standards to prevent root access, and utilizing node taints to separate workloads.",
+"real_world_example": "Ensuring Team A cannot query the CoreDNS records of Team B by utilizing deep network policy segmentation.",
+"common_mistake": "Assuming Namespaces provide total security isolation; without Network Policies, traffic can flow freely between them."
+},
+{
+"tool": "CI/CD Security",
+"difficulty": "Hard",
+"question": "What is OIDC Federation in CI/CD?",
+"simple_explanation": "A secure method for pipelines to authenticate with cloud providers without static secrets.",
+"interview_answer": "OpenID Connect allows a CI platform (like GitHub Actions) to generate a short-lived token. The cloud provider validates this token cryptographically and grants temporary IAM access. It entirely eliminates the risk of long-lived, leaked credentials.",
+"real_world_example": "A GitHub Action securely assuming an AWS IAM Role via OIDC to upload files to an S3 bucket.",
+"common_mistake": "Configuring the cloud trust policy too broadly, allowing any repository in the organization to assume the production role."
+},
+{
+"tool": "Cloud Security",
+"difficulty": "Hard",
+"question": "How does AWS KMS Envelope Encryption work?",
+"simple_explanation": "Using a master key to encrypt a localized data encryption key.",
+"interview_answer": "KMS generates a plaintext Data Encryption Key (DEK) to encrypt large files locally, and provides a ciphered version of that DEK encrypted by the Customer Master Key (CMK). It optimizes performance by avoiding sending huge files over the network API.",
+"real_world_example": "Encrypting a 5GB video file locally using a DEK, then storing the encrypted DEK alongside the video in S3.",
+"common_mistake": "Sending large file contents directly via the raw KMS 'Encrypt' API call, which hits strict payload limit blocks."
+},
+{
+"tool": "Network Security",
+"difficulty": "Hard",
+"question": "How do you mitigate BGP hijacking?",
+"simple_explanation": "By implementing Resource Public Key Infrastructure (RPKI) and strict route filtering.",
+"interview_answer": "BGP hijacking occurs when malicious routers advertise false paths for your IP blocks. Mitigation requires RPKI, which cryptographically signs route announcements, allowing backbone ISPs to reject invalid or spoofed routing advertisements automatically.",
+"real_world_example": "An ISP rejecting an invalid BGP announcement that attempted to reroute Amazon's DNS traffic to a malicious server.",
+"common_mistake": "Ignoring route validation on edge routers, trusting all internet BGP advertisements blindly."
+},
+{
+"tool": "Docker Security",
+"difficulty": "Hard",
+"question": "What is a Distroless Container Image?",
+"simple_explanation": "An image containing only your application and its runtime dependencies, omitting shell tools.",
+"interview_answer": "Maintained by Google, distroless images completely lack package managers, shells (like bash), and standard Linux utilities. This radically reduces the attack surface, security scanning noise, and overall image size for production workloads.",
+"real_world_example": "Deploying a Go API using `gcr.io/distroless/static`, resulting in a tiny, highly secure 5MB container.",
+"common_mistake": "Trying to run `docker exec -it` to open a bash shell in a distroless container for debugging (it will fail)."
+},
+{
+"tool": "Kubernetes Security",
+"difficulty": "Hard",
+"question": "How do you secure Kubernetes etcd?",
+"simple_explanation": "Implement mTLS, restrict network access, and enable encryption at rest.",
+"interview_answer": "etcd contains the entire cluster state, including unencrypted Secrets. Secure it using mutual TLS (mTLS) for peer communication, restrict firewall access strictly to the API Server, and enable the Kubernetes `EncryptionConfiguration` to encrypt data on disk.",
+"real_world_example": "Configuring AWS KMS as the encryption provider to encrypt all Kubernetes Secrets before they are committed to etcd.",
+"common_mistake": "Securing the network but leaving data unencrypted on disk, allowing anyone with host access to steal cluster secrets."
+},
+{
+"tool": "Incident Response",
+"difficulty": "Hard",
+"question": "How do you perform forensic analysis on a compromised container?",
+"simple_explanation": "Pause the container, snapshot the filesystem/memory, and analyze it offline.",
+"interview_answer": "Do not terminate the container. Pause it using `docker pause` to freeze volatile memory. Capture a snapshot of the container's filesystem and dump memory. Analyze the artifacts offline using forensic tools to determine the attack vector without alerting the attacker.",
+"real_world_example": "Taking a snapshot of an infected Pod's filesystem to extract the malicious payload dropped in `/tmp`.",
+"common_mistake": "Killing or restarting the container immediately, permanently destroying valuable RAM and ephemeral filesystem forensic evidence."
+},
+{
+"tool": "Threat Modeling",
+"difficulty": "Hard",
+"question": "What is the STRIDE threat modeling framework?",
+"simple_explanation": "A methodology to identify security threats during the design phase.",
+"interview_answer": "Created by Microsoft, STRIDE stands for Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, and Elevation of Privilege. It forces engineers to systematically evaluate architectures against these specific threat categories to implement proactive mitigations.",
+"real_world_example": "Identifying that an unencrypted internal API is vulnerable to 'Information Disclosure' during a STRIDE workshop.",
+"common_mistake": "Applying STRIDE only after the application is fully built, when architectural changes are extremely costly."
+},
+{
+"tool": "Runtime Security",
+"difficulty": "Hard",
+"question": "How do you handle a zero-day vulnerability in production?",
+"simple_explanation": "Apply WAF rules, isolate the workload, and disable vulnerable features until a patch exists.",
+"interview_answer": "A zero-day has no immediate patch. Mitigation requires immediate defense-in-depth: deploying virtual patches via Web Application Firewalls (WAF), blocking malicious indicators of compromise (IoCs), isolating network segments, or gracefully degrading application functionality.",
+"real_world_example": "Blocking the specific JNDI string payload at the WAF level immediately after the Log4Shell zero-day was announced.",
+"common_mistake": "Waiting passively for the vendor to release an official patch while the application remains actively exploitable."
+}
+]

@@ -1,0 +1,848 @@
+[
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is Git?",
+"simple_explanation": "Git is a distributed version control system.",
+"interview_answer": "Git is a tool used to track changes in source code over time. It allows multiple developers to collaborate seamlessly. A key point is its distributed nature, meaning every developer has a full local copy of the repository history.",
+"real_world_example": "A team of developers using Git to work on different features of a web app simultaneously.",
+"common_mistake": "Confusing Git (the tool) with GitHub (the hosting service)."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is a Git repository?",
+"simple_explanation": "A storage space where your project's files and history are kept.",
+"interview_answer": "A repository (repo) contains all project files and the entire revision history. It is used to manage and version-control code. An important point is that it contains a hidden .git folder that tracks all changes.",
+"real_world_example": "Hosting a React project's source code and commit history in a local folder.",
+"common_mistake": "Deleting the hidden .git folder, which permanently destroys the version history."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does the 'git init' command do?",
+"simple_explanation": "It creates a new, empty Git repository.",
+"interview_answer": "The git init command initializes a new Git repository in a specific directory. It creates a hidden .git subdirectory to track version history. You only need to run this command once per project.",
+"real_world_example": "Running 'git init' in a new project folder before making the first code commit.",
+"common_mistake": "Running git init inside an already initialized repository, creating nested tracking issues."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does the 'git clone' command do?",
+"simple_explanation": "It creates a local copy of a remote Git repository.",
+"interview_answer": "Git clone downloads an existing remote repository to your local machine. It is used to start contributing to an existing project. It automatically sets up a remote connection called 'origin'.",
+"real_world_example": "Running 'git clone [https://github.com/user/repo.git](https://github.com/user/repo.git)' to download a project to your laptop.",
+"common_mistake": "Cloning a repo and then running 'git init' inside it."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is the Git working directory?",
+"simple_explanation": "The directory containing the files you are currently modifying.",
+"interview_answer": "The working directory consists of the files you see and edit on your computer. It holds the current state of the project before files are staged. Changes here are not yet tracked by Git's history.",
+"real_world_example": "Opening a Python file in VS Code and making code changes.",
+"common_mistake": "Assuming changes made in the working directory are automatically saved to Git history."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is the Git staging area?",
+"simple_explanation": "A preparation zone where files are queued before a commit.",
+"interview_answer": "The staging area (or index) holds changes that are ready to be committed. It allows developers to group related changes together. A key point is it lets you selectively choose which modified files go into the next commit.",
+"real_world_example": "Staging only the frontend UI changes while leaving backend changes for a separate commit.",
+"common_mistake": "Skipping the staging area and wondering why 'git commit' says there is nothing to commit."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git add' do?",
+"simple_explanation": "It moves changes from the working directory to the staging area.",
+"interview_answer": "The git add command stages modified or new files, preparing them for the next commit. It tells Git that you want to include updates to a particular file. Using 'git add .' stages all current changes.",
+"real_world_example": "Running 'git add index.html' to stage a newly updated webpage.",
+"common_mistake": "Using 'git add .' blindly and accidentally staging unwanted sensitive files or logs."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git commit' do?",
+"simple_explanation": "It saves staged changes to the local repository history.",
+"interview_answer": "Git commit takes a snapshot of the staging area and saves it permanently in the local Git directory. It requires a descriptive message. A key point is that commits are only saved locally until pushed.",
+"real_world_example": "Running 'git commit -m \"Fix login bug\"' to document a specific code fix.",
+"common_mistake": "Writing vague commit messages like 'fixed stuff', making history hard to understand."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git status' do?",
+"simple_explanation": "It displays the current state of the working directory and staging area.",
+"interview_answer": "Git status shows which files are modified, staged, or untracked. It is used continuously to understand what changes are pending. A crucial point is that it does not show project history, only the current state.",
+"real_world_example": "Running 'git status' to check if you remembered to stage a new database config file.",
+"common_mistake": "Ignoring the output of git status and accidentally committing the wrong files."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git push' do?",
+"simple_explanation": "It uploads local repository commits to a remote repository.",
+"interview_answer": "Git push transfers your committed local changes to a remote server like GitHub or GitLab. It allows team members to access your work. You must have network access and permissions to push.",
+"real_world_example": "Running 'git push origin main' to share your completed feature with the rest of the team.",
+"common_mistake": "Trying to push without committing first, resulting in 'everything up-to-date'."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git pull' do?",
+"simple_explanation": "It fetches and merges changes from a remote repository.",
+"interview_answer": "Git pull downloads new data from a remote repository and immediately integrates it into your current local branch. It is essentially a 'git fetch' followed by a 'git merge'. It ensures your local code is up-to-date.",
+"real_world_example": "Running 'git pull' in the morning to get all the code changes your colleagues made overnight.",
+"common_mistake": "Running git pull while having uncommitted local changes, which can cause complex merge conflicts."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git log' do?",
+"simple_explanation": "It displays the commit history of the repository.",
+"interview_answer": "Git log lists all commits made in the repository in reverse chronological order. It shows the author, date, and commit message. It is vital for auditing changes and finding specific past versions.",
+"real_world_example": "Running 'git log --oneline' to quickly see the last ten commit messages.",
+"common_mistake": "Forgetting to press 'q' to exit the git log pager when the output is long."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is a Git branch?",
+"simple_explanation": "A separate, parallel line of development in a repository.",
+"interview_answer": "A branch is a movable pointer to a commit. It is used to isolate new features or bug fixes from the main codebase. A key point is that branching in Git is extremely lightweight and fast.",
+"real_world_example": "Creating a 'feature/dark-mode' branch so you don't break the stable 'main' branch while coding.",
+"common_mistake": "Making experimental changes directly on the main branch instead of creating a dedicated feature branch."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git checkout' do?",
+"simple_explanation": "It switches between different branches or restores files.",
+"interview_answer": "Git checkout updates the files in the working directory to match the version stored in the specified branch or commit. It is used to navigate the project's history. The newer alternative for branching is 'git switch'.",
+"real_world_example": "Running 'git checkout dev' to switch your working directory to the development branch.",
+"common_mistake": "Checking out an old commit and making changes without creating a new branch, causing a detached HEAD state."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git merge' do?",
+"simple_explanation": "It combines changes from one branch into another.",
+"interview_answer": "Git merge takes the commits from a source branch and integrates them into the current active branch. It is used to finalize features. A key point is that it creates a special 'merge commit' if histories have diverged.",
+"real_world_example": "Merging a completed 'feature-login' branch into the 'main' branch for deployment.",
+"common_mistake": "Being on the wrong branch when running the merge command, merging main into the feature branch by accident."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is 'HEAD' in Git?",
+"simple_explanation": "A pointer to the currently checked-out commit or branch.",
+"interview_answer": "HEAD is a reference indicating your current location in the repository. It usually points to the latest commit of the active branch. If you checkout a specific older commit, it becomes a 'detached HEAD'.",
+"real_world_example": "Looking at 'HEAD -> main' in git log, showing you are currently viewing the tip of the main branch.",
+"common_mistake": "Thinking HEAD is a specific branch rather than just a dynamic pointer."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is 'origin' in Git?",
+"simple_explanation": "The default name given to the primary remote repository.",
+"interview_answer": "When you clone a repository, Git automatically names the remote source 'origin'. It acts as a shorthand alias for the remote URL. You can use it to push or pull without typing the full web address.",
+"real_world_example": "Running 'git push origin main', where 'origin' represents the GitHub repository URL.",
+"common_mistake": "Assuming 'origin' is a reserved keyword; it can actually be renamed to anything, like 'upstream'."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is the 'main' or 'master' branch?",
+"simple_explanation": "The default branch created when a Git repository is initialized.",
+"interview_answer": "Main (or historically master) is the default branch that acts as the definitive, stable version of a project. All feature branches eventually merge back here. It is industry standard to keep this branch deployable at all times.",
+"real_world_example": "Deploying the production website directly from the 'main' branch.",
+"common_mistake": "Committing broken or untested code directly to the main branch."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git rm' do?",
+"simple_explanation": "It removes a file from the working directory and stages the deletion.",
+"interview_answer": "Git rm deletes a file and immediately stages its removal for the next commit. It is used to safely stop tracking a file. Using '--cached' removes it from Git but keeps the local file on your disk.",
+"real_world_example": "Running 'git rm old_script.js' to delete a deprecated file from the project history.",
+"common_mistake": "Deleting a file via the OS file manager, which leaves the deletion unstaged in Git."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git mv' do?",
+"simple_explanation": "It renames or moves a file and stages the change.",
+"interview_answer": "Git mv changes a file's name or location and automatically queues the change in the staging area. It is exactly equivalent to moving the file with the OS and then running 'git add'.",
+"real_world_example": "Running 'git mv app.js server.js' to rename the main application file.",
+"common_mistake": "Renaming a file manually in the OS, which makes Git see it as one deleted file and one untracked new file."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git diff' do?",
+"simple_explanation": "It shows the exact line-by-line differences in your files.",
+"interview_answer": "Git diff compares the working directory to the staging area to show unsaved changes. It is used to review code before adding it. A key point is 'git diff --staged' shows changes already added to the index.",
+"real_world_example": "Running 'git diff' to see exactly which line of code you altered in a configuration file.",
+"common_mistake": "Running git diff after staging a file, seeing no output, and assuming the file is empty."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git show' do?",
+"simple_explanation": "It displays information about a specific Git object, usually a commit.",
+"interview_answer": "Git show outputs the metadata and the exact code diff of a specific commit. It is used to inspect what changes were introduced in a historical commit. By default, it shows the HEAD commit.",
+"real_world_example": "Running 'git show 1a2b3c' to review the code changes made in a specific past commit.",
+"common_mistake": "Confusing git show (shows diff of one commit) with git log (shows a list of commit messages)."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What are untracked files?",
+"simple_explanation": "Files in your working directory that Git has not yet started tracking.",
+"interview_answer": "Untracked files are new files that exist on your disk but have never been added to Git's index. They will not be included in a commit until you explicitly run 'git add' on them.",
+"real_world_example": "Creating a new 'notes.txt' file that appears in red as 'untracked' when you run git status.",
+"common_mistake": "Assuming all files in a folder are automatically backed up by Git upon creation."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What are modified files?",
+"simple_explanation": "Tracked files that have been changed but not yet staged.",
+"interview_answer": "A modified file is one that Git knows about, but its current state differs from the last saved commit. To save these changes, the file must be moved to the staging area using git add.",
+"real_world_example": "Editing a previously committed 'index.html' file to change a header tag.",
+"common_mistake": "Running 'git commit' without staging modified files, resulting in an unchanged commit history."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does the 'git remote' command do?",
+"simple_explanation": "It manages the set of tracked remote repositories.",
+"interview_answer": "Git remote is used to view, add, or delete connections to other repositories. Running 'git remote -v' displays the URLs of the remotes you are connected to, which is vital for troubleshooting push/pull issues.",
+"real_world_example": "Running 'git remote -v' to check if your local repo is pointing to GitHub or GitLab.",
+"common_mistake": "Forgetting to add a remote before attempting to run 'git push'."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is a SHA-1 hash in Git?",
+"simple_explanation": "A 40-character unique string that identifies a commit.",
+"interview_answer": "Git uses the SHA-1 cryptographic hash function to uniquely identify every commit, file, and object. It ensures data integrity. A key point is that you only need the first 7 characters to reference a commit.",
+"real_world_example": "Referencing commit 'e3f1a2b' when reverting a buggy code change.",
+"common_mistake": "Trying to memorize hashes instead of using tags or branch names to reference commits."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git branch -a' do?",
+"simple_explanation": "It lists all local and remote-tracking branches.",
+"interview_answer": "This command displays every branch Git is aware of, including those on the remote server. It is heavily used to find branches created by colleagues that you want to check out locally.",
+"real_world_example": "Running 'git branch -a' to find the exact name of a colleague's remote feature branch.",
+"common_mistake": "Using just 'git branch', which only shows local branches, and thinking a remote branch was deleted."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is a local repository?",
+"simple_explanation": "The Git repository stored physically on your computer.",
+"interview_answer": "The local repo contains your full working directory, staging area, and commit history. It operates independently of the internet. You only sync with a remote repository when you pull or push.",
+"real_world_example": "Committing code to your local repository while on an airplane without Wi-Fi.",
+"common_mistake": "Assuming local commits are automatically visible to the rest of the team."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What is a remote repository?",
+"simple_explanation": "A version of your project hosted on the internet or a network.",
+"interview_answer": "A remote repository (like GitHub or Bitbucket) acts as a centralized truth for a team. Developers push local changes here to share them. It serves as a backup and a collaboration hub.",
+"real_world_example": "The central GitLab server where the automated CI/CD pipeline fetches code to build.",
+"common_mistake": "Treating the remote as the only backup, ignoring local Git best practices."
+},
+{
+"tool": "Git",
+"difficulty": "Easy",
+"question": "What does 'git log --oneline' do?",
+"simple_explanation": "It displays a compressed, simplified view of the commit history.",
+"interview_answer": "This command compresses each commit into a single line showing only the short SHA-1 hash and the commit message. It is heavily used for quickly scanning recent project history without visual clutter.",
+"real_world_example": "Reviewing the last 20 commits rapidly to find when a specific feature was merged.",
+"common_mistake": "Using standard 'git log' for deep history searches and getting overwhelmed by author and date text."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is the difference between 'git fetch' and 'git pull'?",
+"simple_explanation": "Fetch downloads data; pull downloads and merges data.",
+"interview_answer": "Git fetch retrieves updates from a remote repo without altering your local working directory. Git pull runs a fetch and immediately executes a merge into your active branch. Fetching first is safer for reviewing changes.",
+"real_world_example": "Running git fetch to see what colleagues pushed to 'main' before deciding to merge it.",
+"common_mistake": "Running git pull randomly and triggering unexpected merge conflicts in your active work."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is the difference between 'git merge' and 'git rebase'?",
+"simple_explanation": "Merge preserves history with a new commit; rebase rewrites history linearly.",
+"interview_answer": "Merge joins two branches, creating a new merge commit and preserving parallel history. Rebase moves your branch's commits to the tip of the target branch, creating a clean, linear history. Rebase alters commit hashes.",
+"real_world_example": "Using rebase to update a feature branch with 'main' so the final PR history looks like a single straight line.",
+"common_mistake": "Rebasing a public, shared branch, which destroys the history other developers are relying on."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git stash' do?",
+"simple_explanation": "It temporarily saves uncommitted changes and cleans the working directory.",
+"interview_answer": "Git stash shelves your modified, tracked files so you can switch branches without committing incomplete work. The changes are saved on a stack and can be reapplied later using 'git stash pop'.",
+"real_world_example": "Stashing half-written code to urgently check out the 'main' branch to fix a production bug.",
+"common_mistake": "Forgetting that untracked files are not stashed by default unless you use 'git stash -u'."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is the difference between 'git stash pop' and 'git stash apply'?",
+"simple_explanation": "Pop applies and deletes the stash; apply keeps the stash in memory.",
+"interview_answer": "Git stash pop restores the most recently stashed changes and immediately removes them from the stash list. Git stash apply restores the changes but keeps the backup in the stash list for future use.",
+"real_world_example": "Using 'apply' to apply the same stashed debug configuration across three different branches.",
+"common_mistake": "Using 'pop' and encountering a merge conflict, assuming the stash was deleted (it is kept if a conflict occurs)."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git reset' do?",
+"simple_explanation": "It moves the HEAD pointer to a previous commit, altering history.",
+"interview_answer": "Git reset undoes local commits by moving the branch pointer backward. It is used to unstage files or permanently discard local commits. It is a destructive command if used with the --hard flag.",
+"real_world_example": "Running 'git reset HEAD~1' to undo the last local commit because you forgot a file.",
+"common_mistake": "Running git reset on commits that have already been pushed to a shared remote repository."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git revert' do?",
+"simple_explanation": "It creates a new commit that undoes the changes of a previous commit.",
+"interview_answer": "Git revert inverses the changes introduced by a specific commit and records it as a new commit. It is the safest way to undo changes in shared repositories because it preserves history.",
+"real_world_example": "Reverting a commit that caused a production outage without rewriting the team's Git history.",
+"common_mistake": "Confusing revert (safe, creates new commit) with reset (destructive, erases history)."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is the difference between 'git reset --soft' and '--hard'?",
+"simple_explanation": "Soft keeps changes staged; hard deletes changes permanently.",
+"interview_answer": "Reset --soft moves HEAD back but leaves your modified files in the staging area, perfect for squashing commits. Reset --hard moves HEAD back and completely wipes out all uncommitted changes in the working directory.",
+"real_world_example": "Using --hard to completely discard a failed experiment and return to the last known good state.",
+"common_mistake": "Using --hard by mistake and permanently losing hours of uncommitted work."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git clean' do?",
+"simple_explanation": "It permanently deletes untracked files from the working directory.",
+"interview_answer": "Git clean removes files that are not tracked by Git. It is used to clear out generated build artifacts or temporary files. Always use 'git clean -n' first to perform a dry run.",
+"real_world_example": "Running 'git clean -fd' to remove all untracked compiled node_modules folders before a fresh build.",
+"common_mistake": "Running git clean without a dry run and accidentally deleting newly created, un-added source files."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is a Merge Conflict?",
+"simple_explanation": "It happens when Git cannot automatically reconcile differences in code.",
+"interview_answer": "Merge conflicts occur when two branches modify the exact same line of a file, or one deletes a file the other modified. Git pauses the merge and forces the developer to manually resolve the overlapping code.",
+"real_world_example": "Two developers editing the same CSS header class on different branches, causing a conflict during PR merge.",
+"common_mistake": "Committing conflict markers (<<<<<<< HEAD) into the repository without actually resolving the code."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is a .gitignore file?",
+"simple_explanation": "A text file telling Git which files or directories to ignore.",
+"interview_answer": "The .gitignore file specifies untracked files that Git should never commit, such as compiled binaries, local environment variables, or OS-specific files. It keeps the repository clean and secure.",
+"real_world_example": "Adding '.env' to .gitignore to ensure secret API keys are never pushed to GitHub.",
+"common_mistake": "Adding a file to .gitignore after it has already been committed; Git will continue tracking it until explicitly removed."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git cherry-pick' do?",
+"simple_explanation": "It applies the changes from a single, specific commit to your current branch.",
+"interview_answer": "Cherry-pick takes a specific commit from one branch and creates a copy of it on the active branch. It is used to pull a specific bug fix into a release branch without merging the entire feature branch.",
+"real_world_example": "Cherry-picking a critical security hotfix from 'main' into an older 'v1.0-release' branch.",
+"common_mistake": "Cherry-picking dozens of commits manually instead of just rebasing or merging the branch."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git tag' do?",
+"simple_explanation": "It attaches a permanent, readable label to a specific commit.",
+"interview_answer": "Tags act as immutable bookmarks in Git history. They are primarily used to mark specific release points like v1.0 or v2.5. Unlike branches, tags do not move as new commits are added.",
+"real_world_example": "Tagging a commit 'v2.0.0' to trigger a production CI/CD deployment pipeline.",
+"common_mistake": "Creating a tag locally but forgetting to push it using 'git push --tags'."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is the difference between annotated and lightweight tags?",
+"simple_explanation": "Annotated tags store metadata; lightweight tags are just pointers.",
+"interview_answer": "Lightweight tags are just a name pointing to a commit hash. Annotated tags are full Git objects containing the tagger's name, email, date, and a message. Annotated tags are highly recommended for public releases.",
+"real_world_example": "Using 'git tag -a v1.0 -m \"Release 1.0\"' to create an official annotated release tag.",
+"common_mistake": "Using lightweight tags for official releases, making it hard to identify who created the release and why."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git config' do?",
+"simple_explanation": "It sets configuration values for your Git installation.",
+"interview_answer": "Git config controls how Git looks and functions. You use it to set your username, email, default text editor, and merge tools. Configurations can be applied locally (per repo) or globally (per user).",
+"real_world_example": "Running 'git config --global user.email \"me@company.com\"' to ensure commits are attributed correctly.",
+"common_mistake": "Committing code to a corporate repo using a personal global email address instead of configuring a local repo email."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is a Git alias?",
+"simple_explanation": "A custom shortcut for a longer Git command.",
+"interview_answer": "Aliases are created using 'git config' to shorten frequently used, complex commands. They save keystrokes and improve CLI efficiency. For example, mapping 'git co' to 'git checkout'.",
+"real_world_example": "Creating an alias 'git hist' that triggers a formatted, colorful 'git log --graph --oneline'.",
+"common_mistake": "Over-relying on aliases, causing confusion when typing on a different computer or server."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git blame' do?",
+"simple_explanation": "It shows who last modified each line of a file and when.",
+"interview_answer": "Git blame annotates a file, showing the author, commit hash, and timestamp for every single line of code. It is an invaluable troubleshooting tool for determining exactly who introduced a bug and in which commit.",
+"real_world_example": "Running 'git blame config.yml' to find out who changed the database connection string yesterday.",
+"common_mistake": "Using blame to shame colleagues rather than to identify context and ask the author for clarification."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git grep' do?",
+"simple_explanation": "It searches for text patterns within tracked files.",
+"interview_answer": "Git grep is a highly optimized search tool that looks for specific strings or regex patterns across the entire Git repository. It is significantly faster than standard system 'grep' because it only searches tracked files.",
+"real_world_example": "Running 'git grep \"TODO:\"' to find all unfinished tasks across the entire codebase.",
+"common_mistake": "Using standard grep -r on the root folder, which pointlessly searches through the massive hidden .git directory."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git archive' do?",
+"simple_explanation": "It creates a zip or tar file of the repository.",
+"interview_answer": "Git archive packages the files of a specific commit or branch into an archive file. It excludes the hidden .git directory, making it the perfect way to distribute clean source code for deployment.",
+"real_world_example": "Running 'git archive -o release.zip HEAD' to package the application for a manual server upload.",
+"common_mistake": "Zipping the directory manually using the OS, which inadvertently includes the large .git history folder."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git rebase --continue' do?",
+"simple_explanation": "It resumes a rebase after a merge conflict is resolved.",
+"interview_answer": "During a rebase, if Git encounters a conflict, it pauses the process. Once you manually fix the files and 'git add' them, 'git rebase --continue' tells Git to proceed applying the remaining commits.",
+"real_world_example": "Fixing a CSS conflict, staging the file, and running --continue to finish rebasing a feature branch.",
+"common_mistake": "Running 'git commit' after fixing a rebase conflict instead of using 'git rebase --continue'."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is a Fast-forward merge?",
+"simple_explanation": "A merge where the branch pointer simply moves forward.",
+"interview_answer": "A fast-forward merge happens when the target branch has no new commits since the feature branch diverged. Git simply moves the target branch pointer to the latest feature branch commit without creating a merge commit.",
+"real_world_example": "Merging a hotfix into main where main hasn't been touched, keeping the history perfectly linear.",
+"common_mistake": "Assuming all merges are fast-forwards; they fail if the target branch has diverged."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is a 3-way merge?",
+"simple_explanation": "A merge that reconciles two diverged branches using a common ancestor.",
+"interview_answer": "When the target branch has new commits, Git cannot fast-forward. It must perform a 3-way merge by comparing the two branch tips and their common ancestor, generating a dedicated merge commit.",
+"real_world_example": "Merging a week-old feature branch into main, which has had 10 other features added in the meantime.",
+"common_mistake": "Avoiding 3-way merges completely; they are standard and useful for tracking exactly when a feature was integrated."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git push --force' do?",
+"simple_explanation": "It overwrites the remote repository with your local history.",
+"interview_answer": "Force pushing replaces the remote branch history with your local branch history. It is necessary after rewriting history with rebase or amend. However, it is dangerous because it can delete commits pushed by colleagues.",
+"real_world_example": "Force pushing a feature branch after squashing commits to clean up the PR history.",
+"common_mistake": "Running 'git push --force' on the main branch, wiping out days of team collaboration."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git pull --rebase' do?",
+"simple_explanation": "It fetches changes and rebases local commits on top of them.",
+"interview_answer": "Instead of creating a messy merge commit when pulling new changes, '--rebase' temporarily sets aside your local commits, updates the branch, and reapplies your commits on top. It keeps branch history perfectly linear.",
+"real_world_example": "Using pull --rebase before pushing to avoid useless 'Merge branch main into main' commits.",
+"common_mistake": "Rebasing a pull when you have complex conflicts, which forces you to resolve conflicts for every single local commit."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git remote add' do?",
+"simple_explanation": "It links your local repository to a new remote server URL.",
+"interview_answer": "This command creates a new connection record to a remote repository. It is typically used right after initializing a fresh local repository to link it to an empty GitHub or GitLab repository.",
+"real_world_example": "Running 'git remote add origin [https://github.com/user/project.git](https://github.com/user/project.git)'.",
+"common_mistake": "Trying to add an 'origin' remote when one already exists (use 'git remote set-url' instead)."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is a Tracking Branch?",
+"simple_explanation": "A local branch connected to a specific remote branch.",
+"interview_answer": "A tracking branch has a direct relationship with a remote branch. When you type 'git pull' or 'git push' without arguments, Git uses this tracking relationship to know exactly where to fetch or send data.",
+"real_world_example": "Your local 'main' branch automatically tracking 'origin/main' after a git clone.",
+"common_mistake": "Creating a local branch and running 'git push' without setting an upstream, causing Git to reject the push."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git checkout -b' do?",
+"simple_explanation": "It creates a new branch and instantly switches to it.",
+"interview_answer": "This is a shortcut command combining 'git branch ' and 'git checkout '. It is the most common way developers spin up a new working area to begin coding a feature.",
+"real_world_example": "Running 'git checkout -b bugfix/login-error' to immediately start fixing an issue.",
+"common_mistake": "Adding spaces in the branch name, causing Git to throw a syntax error."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git switch' do?",
+"simple_explanation": "It switches between branches.",
+"interview_answer": "Introduced in Git 2.23, 'switch' is a dedicated command strictly for changing branches. It was created because 'git checkout' was overloaded with too many functions (like restoring files). It is safer and clearer.",
+"real_world_example": "Running 'git switch main' to return to the primary codebase.",
+"common_mistake": "Trying to use git switch to restore a deleted file, which is what 'git restore' is for."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git restore' do?",
+"simple_explanation": "It unmodifies or unstages files.",
+"interview_answer": "Introduced alongside 'git switch', 'git restore' safely discards uncommitted local changes in the working directory or removes files from the staging area. It replaces the older, confusing 'git checkout -- ' method.",
+"real_world_example": "Running 'git restore config.json' to undo experimental edits and revert to the last commit's state.",
+"common_mistake": "Running git restore on a file expecting to retrieve it from an old commit without specifying the --source flag."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git commit --amend' do?",
+"simple_explanation": "It alters the most recent commit.",
+"interview_answer": "The --amend flag combines staged changes with the previous commit, or simply allows you to edit the last commit message. It is heavily used to fix typos or forgotten files immediately after committing. It changes the commit hash.",
+"real_world_example": "Forgetting to add a file, staging it, and running 'commit --amend' to cleanly bundle it into the previous commit.",
+"common_mistake": "Amending a commit that has already been pushed, causing sync conflicts for the rest of the team."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git log --graph' do?",
+"simple_explanation": "It draws an ASCII art tree of the commit history.",
+"interview_answer": "The --graph flag visually represents branch divergence and merges directly in the terminal. Combined with --oneline, it is the best way to understand complex branching topologies without a GUI tool.",
+"real_world_example": "Running 'git log --graph --oneline' to see where a feature branch split off from main.",
+"common_mistake": "Using --graph without --oneline, resulting in massive, hard-to-read textual output."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does it mean to ignore tracked files (assume-unchanged)?",
+"simple_explanation": "Telling Git to temporarily ignore changes to a committed file.",
+"interview_answer": "Using 'git update-index --assume-unchanged', you can force Git to ignore local edits to a file that is currently tracked. This is used for modifying local config files without accidentally committing the local overrides.",
+"real_world_example": "Changing a tracked database.yml to point to localhost, but ignoring the change so it doesn't get pushed.",
+"common_mistake": "Using this instead of .gitignore for files that genuinely should never be tracked in the first place."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does 'git fetch --prune' do?",
+"simple_explanation": "It removes remote-tracking branches that no longer exist on the remote.",
+"interview_answer": "When colleagues delete merged branches on GitHub, your local Git still remembers them. Fetching with --prune automatically cleans up these stale references, keeping your local branch list accurate and clean.",
+"real_world_example": "Running 'git fetch --prune' to clear out 20 old feature branches deleted during last week's sprint.",
+"common_mistake": "Thinking --prune deletes your local branches; it only deletes the 'origin/branch' tracking references."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What is the difference between 'git branch -d' and '-D'?",
+"simple_explanation": "'-d' deletes safely; '-D' force deletes.",
+"interview_answer": "The lowercase '-d' deletes a branch only if it has been fully merged into your current branch. The uppercase '-D' forcefully deletes the branch regardless of its merge status, permanently destroying unmerged commits.",
+"real_world_example": "Using '-D' to violently discard an experimental branch you decided not to finish.",
+"common_mistake": "Using '-D' by habit, accidentally deleting weeks of unmerged work permanently."
+},
+{
+"tool": "Git",
+"difficulty": "Medium",
+"question": "What does it mean to Squash commits?",
+"simple_explanation": "Combining multiple commits into a single, cohesive commit.",
+"interview_answer": "Squashing cleans up Git history by melting several small 'work-in-progress' commits into one logical feature commit. It is usually done via interactive rebase or during a pull request merge to keep the main branch pristine.",
+"real_world_example": "Squashing 'wip', 'fix typo', and 'added tests' into a single 'Implemented Login Page' commit.",
+"common_mistake": "Squashing a shared branch, which rewrites history and disrupts anyone else working on those commits."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is 'git reflog'?",
+"simple_explanation": "A local journal recording every movement of the HEAD pointer.",
+"interview_answer": "The reflog tracks all branch switches, commits, resets, and rebases for 30 days. It is the ultimate recovery tool, allowing you to find and restore commits even after hard resets or branch deletions.",
+"real_world_example": "Running 'git reflog' to find the hash of a commit destroyed by a catastrophic 'git reset --hard'.",
+"common_mistake": "Assuming the reflog is pushed to the remote server; it is strictly local to your machine."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "How do you recover a deleted branch?",
+"simple_explanation": "Find its tip hash in the reflog and recreate the branch.",
+"interview_answer": "If you accidentally delete an unmerged branch, use 'git reflog' to identify the SHA-1 hash of the last commit made on that branch. Then, run 'git checkout -b  ' to revive it perfectly.",
+"real_world_example": "Restoring a critical 'hotfix' branch deleted by mistake using a hash found in the reflog.",
+"common_mistake": "Running git garbage collection (gc) immediately after deletion, which permanently destroys unreachable commits."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is a Detached HEAD state?",
+"simple_explanation": "When HEAD points directly to a commit hash instead of a branch name.",
+"interview_answer": "Detached HEAD occurs when you checkout a specific historical commit or remote branch. You can view and compile the code, but any new commits made here will be orphaned and lost when you switch branches.",
+"real_world_example": "Checking out 'v1.0' tag to reproduce an old bug, putting the repo in a detached HEAD state.",
+"common_mistake": "Making hours of code changes in a detached HEAD without creating a branch to save them."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "How do you resolve a Detached HEAD state where you made commits?",
+"simple_explanation": "Create a new branch from your current position.",
+"interview_answer": "To save commits made in a detached HEAD, simply run 'git checkout -b '. This attaches a branch pointer to your current commit hash, anchoring the history and preventing the commits from being garbage collected.",
+"real_world_example": "Running 'git checkout -b recovered-work' after accidentally committing to a historical tag.",
+"common_mistake": "Switching back to 'main' without branching, requiring a dive into the reflog to find the lost commits."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What does 'git bisect' do?",
+"simple_explanation": "It uses binary search to find the exact commit that introduced a bug.",
+"interview_answer": "Git bisect automates finding regressions. You mark a known 'good' commit and a known 'bad' commit. Git checks out a commit halfway between them. You test it, mark it good/bad, and Git narrows the search logarithmically.",
+"real_world_example": "Using bisect to search through 500 commits in 10 minutes to find exactly which line broke the UI.",
+"common_mistake": "Starting a bisect session and forgetting to run 'git bisect reset' to return to the original branch."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is an Interactive Rebase (git rebase -i)?",
+"simple_explanation": "A tool to edit, squash, reorder, or delete commits in your local history.",
+"interview_answer": "Interactive rebase opens a text editor listing recent commits. You can change commands from 'pick' to 'squash', 'edit', or 'drop'. It is heavily used in DevOps to clean up messy commit histories before merging PRs.",
+"real_world_example": "Squashing five 'fix typo' commits into one clean feature commit before a code review.",
+"common_mistake": "Interactively rebasing commits that have already been pushed to a shared remote branch."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What are Git Submodules?",
+"simple_explanation": "A way to keep a Git repository as a subdirectory of another Git repository.",
+"interview_answer": "Submodules allow you to nest external repositories inside a parent project while maintaining separate histories. They are locked to a specific commit hash. They are heavily used to manage shared library dependencies.",
+"real_world_example": "Including an independent UI-components repository inside the main frontend web application repository.",
+"common_mistake": "Cloning the parent repo and wondering why the submodule folder is empty (must run git submodule update --init)."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is 'git worktree'?",
+"simple_explanation": "It allows multiple working directories linked to a single Git repository.",
+"interview_answer": "Git worktree lets you checkout multiple branches simultaneously in different folders on your hard drive, sharing the same local .git data. It is invaluable for testing long-running processes on one branch while coding on another.",
+"real_world_example": "Running a heavy compilation on the 'main' branch in one folder while fixing a bug on 'dev' in another.",
+"common_mistake": "Cloning the entire repository a second time instead of using worktrees, wasting massive disk space."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What does 'git filter-repo' do?",
+"simple_explanation": "A tool used to drastically rewrite Git history, like removing large files permanently.",
+"interview_answer": "Replacing the deprecated 'filter-branch', filter-repo surgically removes sensitive files or massive binaries from every commit in the repository history. It is a highly destructive operation used for deep repository cleanup.",
+"real_world_example": "Permanently wiping an accidentally committed AWS access key from a 5-year-old repository history.",
+"common_mistake": "Failing to realize that rewriting history changes all commit hashes, breaking everyone else's local clones."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What are Git Hooks?",
+"simple_explanation": "Scripts that run automatically triggered by specific Git events.",
+"interview_answer": "Git hooks are custom shell scripts located in the .git/hooks directory. They fire on events like commit, push, or receive. DevOps engineers use them to enforce code quality, run linters, or trigger CI/CD pipelines.",
+"real_world_example": "A pre-commit hook that rejects any commit if the code fails unit tests.",
+"common_mistake": "Assuming local client-side hooks can replace server-side CI/CD checks; developers can easily bypass client hooks with --no-verify."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What does a Shallow Clone do?",
+"simple_explanation": "It downloads a repository with truncated history to save time and space.",
+"interview_answer": "Running 'git clone --depth 1' downloads only the very latest commit, ignoring historical data. This drastically speeds up CI/CD pipelines that only need the current code to build an application.",
+"real_world_example": "A Jenkins pipeline doing a shallow clone of a 5GB repo in seconds instead of minutes.",
+"common_mistake": "Trying to perform complex history-based operations or rebases inside a shallow clone."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is a Sparse Checkout?",
+"simple_explanation": "It allows you to only populate specific directories in your working tree.",
+"interview_answer": "Sparse checkout restricts the working directory to only include a subset of folders. It is essential when working with massive monorepos where downloading the entire project structure would overwhelm local IDEs.",
+"real_world_example": "Checking out only the 'frontend' directory from a massive enterprise monorepo.",
+"common_mistake": "Confusing sparse checkout (limits working directory files) with shallow clone (limits commit history)."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What does 'git fsck' do?",
+"simple_explanation": "It verifies the integrity of objects in the Git database.",
+"interview_answer": "Git File System Check verifies the connectivity and validity of all objects in the local repository. It checks for corrupt, missing, or dangling commits and trees, acting as a deep diagnostic tool for repository health.",
+"real_world_example": "Running git fsck to find dangling commits after an accidental hard reset.",
+"common_mistake": "Panicking when fsck shows dangling commits; dangling commits are normal byproducts of rebasing and amending."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What does 'git gc' do?",
+"simple_explanation": "It cleans up unnecessary files and optimizes local repository storage.",
+"interview_answer": "Git Garbage Collection compresses file revisions, removes unreachable orphaned commits, and packs references into single files. It drastically reduces repository disk usage and improves command performance.",
+"real_world_example": "Running 'git gc --prune=now' to permanently delete a 1GB file you just removed from history.",
+"common_mistake": "Running garbage collection before looking in the reflog to restore lost commits, making recovery impossible."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is Git Rerere?",
+"simple_explanation": "A feature that remembers how you resolved merge conflicts.",
+"interview_answer": "Reuse Recorded Resolution (rerere) watches you resolve a conflict and saves the fingerprint. If the exact same conflict occurs again (common in heavy rebasing), Git automatically applies your previous resolution.",
+"real_world_example": "Rebasing a long-running feature branch multiple times and letting rerere auto-fix the same recurring CSS conflicts.",
+"common_mistake": "Forgetting to explicitly enable it via 'git config --global rerere.enabled true'."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is Git LFS?",
+"simple_explanation": "Large File Storage replaces large files with text pointers inside Git.",
+"interview_answer": "Git LFS stores large binaries (like audio, video, or ML models) on a separate server, keeping only a lightweight text pointer in the Git history. It prevents the repository from bloating to unusable sizes.",
+"real_world_example": "Using Git LFS to track 3D assets in a game development repository.",
+"common_mistake": "Committing a 500MB file to Git first, and only enabling LFS afterward (the file remains in the history forever)."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "How do you sign a Git commit?",
+"simple_explanation": "Use the '-S' flag to sign a commit cryptographically with GPG/SSH keys.",
+"interview_answer": "Signed commits prove that a specific developer authored the changes, preventing identity spoofing. Platforms like GitHub display a 'Verified' badge. It is a critical security requirement in strict DevOps pipelines.",
+"real_world_example": "Running 'git commit -S -m \"Security patch\"' using a YubiKey hardware token.",
+"common_mistake": "Generating a GPG key locally but forgetting to upload the public key to your Git hosting provider."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is a Git Bundle?",
+"simple_explanation": "An archive containing a Git repository and its history, packaged into a single file.",
+"interview_answer": "Git bundle creates an offline, transportable binary file of a repository branch. It is used to sneakernet code across completely air-gapped secure networks where direct 'git push' is impossible.",
+"real_world_example": "Putting a git bundle on a USB drive to transfer source code into a high-security military network.",
+"common_mistake": "Archiving the working directory with zip instead of 'git bundle', losing all branch metadata and tracking."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is a Bare Repository?",
+"simple_explanation": "A repository without a working directory, used entirely for sharing.",
+"interview_answer": "Bare repositories only contain the hidden .git data. They cannot be coded in locally. Every central server repository (like those on GitHub) is a bare repo. They exist purely to accept 'git push' operations.",
+"real_world_example": "Initializing a server folder with 'git init --bare' to act as a private Git hosting server.",
+"common_mistake": "Pushing code to a non-bare repository, which causes severe sync conflicts and overrides the working directory."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What does 'git push -u' do?",
+"simple_explanation": "It pushes a branch and sets up a tracking relationship.",
+"interview_answer": "The -u (--set-upstream) flag links your current local branch to a newly created remote branch. Future pushes or pulls on this branch will no longer require you to specify the remote name or branch name.",
+"real_world_example": "Running 'git push -u origin feature-x' on a brand new branch.",
+"common_mistake": "Typing the full 'git push origin branchname' every single time instead of using -u once."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "Why is rewriting public history a security risk?",
+"simple_explanation": "It desynchronizes the commit graph for all other developers.",
+"interview_answer": "If you rebase or amend commits already pushed to a shared remote, you alter their cryptographic hashes. When colleagues pull, Git sees diverging timelines, leading to catastrophic merge conflicts and lost work.",
+"real_world_example": "Force-pushing a rebased 'main' branch, causing 5 other developers' local repositories to reject standard pulls.",
+"common_mistake": "Using 'git push --force' without communicating with the team to coordinate local resets."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is Git Flow?",
+"simple_explanation": "A strict branching model separating features, releases, and hotfixes.",
+"interview_answer": "Git Flow utilizes two long-lived branches ('main' and 'develop'). Features branch off 'develop'. Release branches prepare for production. Hotfixes branch off 'main'. It provides highly structured release management for versioned software.",
+"real_world_example": "A medical software company using Git Flow to strictly manage compliance across major software versions.",
+"common_mistake": "Using Git Flow for SaaS web apps where continuous deployment (Trunk-based development) is far more efficient."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is Trunk-Based Development?",
+"simple_explanation": "A branching model where developers merge code into main multiple times a day.",
+"interview_answer": "In Trunk-based development, branches are short-lived. Developers continuously integrate small chunks of code into the 'trunk' (main). It is the backbone of CI/CD, eliminating 'merge hell' and enabling rapid iterations.",
+"real_world_example": "A DevOps team deploying to production 50 times a day directly from the main branch.",
+"common_mistake": "Attempting trunk-based development without robust automated testing, leading to a broken main branch."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "How do you revert a merge commit?",
+"simple_explanation": "Use 'git revert -m' to specify which parent line to keep.",
+"interview_answer": "Reverting a merge commit is complex because Git needs to know which parent branch's history to retain. You must provide the '-m 1' flag to keep the mainline history and reverse the feature branch's changes.",
+"real_world_example": "Running 'git revert -m 1 ' to back out a feature that broke production.",
+"common_mistake": "Simply trying 'git revert ', which fails instantly because Git cannot guess the mainline parent."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is 'git push --force-with-lease'?",
+"simple_explanation": "A safer version of force pushing that prevents overwriting others' work.",
+"interview_answer": "Unlike the destructive '--force', '--force-with-lease' checks the remote branch first. If a colleague has pushed new commits that you haven't fetched yet, the push is rejected. It ensures you only overwrite your own history.",
+"real_world_example": "Force pushing a squashed PR branch safely without accidentally deleting a co-worker's sudden hotfix.",
+"common_mistake": "Using standard '--force' in collaborative environments, leading to accidental code deletion."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "How do you apply a patch file in Git?",
+"simple_explanation": "Use 'git apply' or 'git am'.",
+"interview_answer": "Patches are text files containing code diffs. 'git apply' alters the working directory but doesn't commit. 'git am' reads patch files generated by 'git format-patch' and fully reconstructs the commits, maintaining original author metadata.",
+"real_world_example": "An open-source maintainer using 'git am' to merge code emailed via a mailing list.",
+"common_mistake": "Using 'git apply' on a formatted patch and losing the original contributor's name and commit message."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is 'git daemon'?",
+"simple_explanation": "A simple, built-in server that allows unauthenticated Git clone/pull access.",
+"interview_answer": "Git daemon spins up a lightweight TCP server operating on port 9418. It is used to quickly share read-only access to a local repository over a local network without setting up SSH or HTTP servers.",
+"real_world_example": "Running git daemon to let a coworker clone a large repository directly from your laptop over the LAN.",
+"common_mistake": "Exposing git daemon to the internet, giving everyone unauthenticated access to your source code."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What are Smudge and Clean filters?",
+"simple_explanation": "Custom scripts that modify files upon checkout and commit.",
+"interview_answer": "Configured in .gitattributes, a 'clean' filter runs before a file is staged, while a 'smudge' filter runs when a file is checked out. They are used for tasks like automatically encrypting secrets in Git and decrypting them locally.",
+"real_world_example": "Using a clean filter to automatically strip out local database passwords before committing a config file.",
+"common_mistake": "Relying on filters for critical security without ensuring every developer has the filter scripts installed locally."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What are Git Namespaces?",
+"simple_explanation": "A way to isolate Git references (like branches and tags) in a single repository.",
+"interview_answer": "Using the GIT_NAMESPACE environment variable, a single bare repository can serve multiple distinct projects. Operations only see the branches within their namespace. It is an advanced server-side optimization used by hosting providers.",
+"real_world_example": "GitLab using namespaces to serve hundreds of different forks out of one physical repository disk footprint.",
+"common_mistake": "Attempting to use namespaces for local client-side development instead of simply using separate repositories."
+},
+{
+"tool": "Git",
+"difficulty": "Hard",
+"question": "What is the Octopus merge strategy?",
+"simple_explanation": "A merge strategy used to combine more than two branches simultaneously.",
+"interview_answer": "Standard merges combine two branches. The Octopus strategy can merge three or more branches into a single commit. It is used to combine multiple independent feature branches cleanly, provided there are zero merge conflicts.",
+"real_world_example": "Merging five separate documentation update branches into main with a single octopus commit.",
+"common_mistake": "Attempting an octopus merge on branches with conflicting code, causing the entire merge to abort instantly."
+}
+]

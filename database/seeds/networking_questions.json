@@ -1,0 +1,812 @@
+[
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is an IP address?",
+"simple_explanation": "An IP address is a unique identifier for a device on a network.",
+"interview_answer": "An IP address is a logical address used to route data across networks. It enables devices to locate and communicate with each other. A key interview point is distinguishing between public (internet-facing) and private (internal) IPs.",
+"real_world_example": "192.168.1.5 is a common private IP address assigned to a home laptop.",
+"common_mistake": "Thinking an IP address is permanently tied to hardware like a MAC address."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a MAC address?",
+"simple_explanation": "A MAC address is a physical identifier hardcoded into a network interface card.",
+"interview_answer": "A MAC address is a unique, physical address assigned to network hardware by the manufacturer. It is used for local routing on a single network segment. A key point is that switches use MAC addresses to forward frames.",
+"real_world_example": "00:1A:2B:3C:4D:5E identifies a specific ethernet card on a server.",
+"common_mistake": "Confusing MAC addresses (Layer 2) with IP addresses (Layer 3)."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is DNS?",
+"simple_explanation": "DNS translates human-readable domain names into IP addresses.",
+"interview_answer": "DNS is the phonebook of the internet. It resolves domains like google.com into IP addresses so browsers can load resources. A crucial point is that DNS primarily uses UDP port 53 for fast query resolution.",
+"real_world_example": "Typing 'example.com' triggers a DNS lookup to find the server's IP (e.g., 93.184.216.34).",
+"common_mistake": "Assuming DNS also hosts the website's content rather than just routing the name."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is DHCP?",
+"simple_explanation": "DHCP automatically assigns IP addresses to devices on a network.",
+"interview_answer": "Dynamic Host Configuration Protocol automatically distributes IP addresses, subnet masks, and gateways to devices. It prevents manual configuration errors and IP conflicts. A key point is the DORA process (Discover, Offer, Request, Acknowledge).",
+"real_world_example": "A smartphone connecting to Wi-Fi automatically gets an IP via DHCP.",
+"common_mistake": "Assigning static IPs within the DHCP pool, causing IP conflicts."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is TCP?",
+"simple_explanation": "TCP is a reliable, connection-oriented network protocol.",
+"interview_answer": "Transmission Control Protocol ensures accurate, ordered delivery of data packets. It uses a three-way handshake to establish a connection and retransmits lost packets. It is essential for applications where data integrity is critical, like web browsing.",
+"real_world_example": "Downloading a file uses TCP so no bytes are missing or corrupted.",
+"common_mistake": "Thinking TCP is faster than UDP; its reliability actually introduces overhead."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is UDP?",
+"simple_explanation": "UDP is a fast, connectionless network protocol without delivery guarantees.",
+"interview_answer": "User Datagram Protocol sends packets without establishing a connection or checking for lost data. It prioritizes speed over reliability. A key point is its use in real-time applications where minor packet loss is acceptable.",
+"real_world_example": "Live video streaming and VoIP calls use UDP to minimize lag.",
+"common_mistake": "Using UDP for file transfers, which can result in corrupted files."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is HTTP?",
+"simple_explanation": "HTTP is the protocol used to transfer web pages over the internet.",
+"interview_answer": "HyperText Transfer Protocol defines how messages are formatted and transmitted across the web. It operates on TCP port 80. An important point is that standard HTTP sends data in plain text, making it insecure.",
+"real_world_example": "A browser requesting an HTML file from an Apache web server.",
+"common_mistake": "Using HTTP for logins, exposing passwords to packet sniffers."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is HTTPS?",
+"simple_explanation": "HTTPS is the secure, encrypted version of HTTP.",
+"interview_answer": "HTTPS encrypts HTTP requests and responses using SSL/TLS. It protects data from eavesdropping and man-in-the-middle attacks. A key interview point is that HTTPS operates on TCP port 443 and requires a valid certificate.",
+"real_world_example": "Entering credit card details on an e-commerce site secured by HTTPS.",
+"common_mistake": "Assuming HTTPS encrypts the destination IP; only the payload is encrypted."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What does the 'ping' command do?",
+"simple_explanation": "Ping tests the reachability of a host on a network.",
+"interview_answer": "Ping uses ICMP echo requests to verify network connectivity and measure round-trip time (latency). It is the first step in network troubleshooting. A key point is that firewalls often block ping to hide servers.",
+"real_world_example": "Running 'ping 8.8.8.8' to check if a server has internet access.",
+"common_mistake": "Assuming a server is offline just because it doesn't reply to a ping."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is Traceroute?",
+"simple_explanation": "Traceroute maps the path packets take to reach a destination.",
+"interview_answer": "Traceroute identifies every router (hop) between a source and destination by incrementally increasing the Time To Live (TTL) of packets. It is used to pinpoint exactly where a network connection is failing or slowing down.",
+"real_world_example": "Running 'traceroute google.com' to see which ISP router is dropping packets.",
+"common_mistake": "Thinking asterisks (*) in the output mean the connection failed completely."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a Network Port?",
+"simple_explanation": "A port is a logical endpoint for communication within an operating system.",
+"interview_answer": "Ports differentiate multiple services running on the same IP address. They range from 0 to 65535. A key point is knowing standard ports, like 22 for SSH and 80 for HTTP, for firewall configurations.",
+"real_world_example": "A server hosting both a website on port 80 and a database on port 3306.",
+"common_mistake": "Confusing logical network ports with physical hardware ports."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a Subnet?",
+"simple_explanation": "A subnet is a smaller, logical division of a larger network.",
+"interview_answer": "Subnetting divides a large network into smaller segments to improve performance, security, and IP address management. A key point is that devices in different subnets require a router to communicate with each other.",
+"real_world_example": "Creating separate subnets for the HR department and the Engineering department.",
+"common_mistake": "Assigning devices in the same physical room to different subnets and wondering why they can't connect directly."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a Router?",
+"simple_explanation": "A router forwards data packets between different computer networks.",
+"interview_answer": "Routers operate at Layer 3 of the OSI model and use IP addresses to determine the best path for data. They are used to connect local networks to the internet. A key point is they block broadcast traffic.",
+"real_world_example": "Your home Wi-Fi router connecting your local devices to your ISP's network.",
+"common_mistake": "Confusing a router (connects networks) with a switch (connects devices within a network)."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a Switch?",
+"simple_explanation": "A switch connects devices together on a single local network.",
+"interview_answer": "Switches operate at Layer 2 of the OSI model and use MAC addresses to forward data only to the intended device. They provide dedicated bandwidth to each connection, unlike legacy network hubs.",
+"real_world_example": "A switch connecting 20 desktop computers in an office so they can share files.",
+"common_mistake": "Trying to use a switch to connect two completely different subnets without a router."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a Firewall?",
+"simple_explanation": "A firewall filters incoming and outgoing network traffic based on security rules.",
+"interview_answer": "Firewalls act as a barrier between trusted and untrusted networks. They inspect packets and block unauthorized access. A key interview point is the difference between stateless firewalls and stateful firewalls (which remember connection context).",
+"real_world_example": "AWS Security Groups acting as virtual firewalls to block port 22 access from the internet.",
+"common_mistake": "Configuring a firewall to block all traffic, accidentally locking yourself out of SSH."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is the OSI Model?",
+"simple_explanation": "A conceptual framework standardizing network communication into 7 layers.",
+"interview_answer": "The Open Systems Interconnection model divides networking into seven layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application. It is crucial for troubleshooting by isolating network problems to specific layers.",
+"real_world_example": "Diagnosing a broken cable as a 'Layer 1' physical issue.",
+"common_mistake": "Trying to fix a Layer 7 application error by replacing Layer 1 hardware cables."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is NAT?",
+"simple_explanation": "NAT translates private IP addresses to a public IP address.",
+"interview_answer": "Network Address Translation maps multiple private IPs on a local network to a single public IP for internet access. It is used to conserve IPv4 addresses and hide internal network structures from the outside world.",
+"real_world_example": "A home router translating 5 local phone IPs into 1 public IP to browse the web.",
+"common_mistake": "Forgetting to configure NAT for private cloud subnets, leaving them without internet access."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is CIDR?",
+"simple_explanation": "CIDR is a method for allocating IP addresses and routing internet protocol packets.",
+"interview_answer": "Classless Inter-Domain Routing uses a suffix (like /24) to indicate the number of bits in the network mask. It replaces rigid IP classes, allowing for flexible and efficient allocation of IP addresses in cloud environments.",
+"real_world_example": "Using 10.0.0.0/24 to allocate exactly 256 IP addresses to a VPC subnet.",
+"common_mistake": "Thinking a /32 subnet gives many IPs, when it actually specifies a single host."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a LAN?",
+"simple_explanation": "A LAN is a network confined to a small geographic area.",
+"interview_answer": "A Local Area Network connects computers within a home, school, or office building. It offers high speeds and low latency. Devices on a LAN typically communicate using Ethernet cables or Wi-Fi.",
+"real_world_example": "Connecting office computers and printers to the same LAN to share documents.",
+"common_mistake": "Confusing a LAN with a WAN (Wide Area Network) which connects multiple LANs."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a WAN?",
+"simple_explanation": "A WAN spans a large geographical area, connecting multiple LANs.",
+"interview_answer": "A Wide Area Network connects smaller networks over long distances, often using leased telecommunication lines or satellite links. The internet is the largest example of a WAN. It typically has higher latency than a LAN.",
+"real_world_example": "A corporate WAN connecting an office in New York with a branch in London.",
+"common_mistake": "Expecting WAN speeds to match LAN speeds, leading to application timeouts."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a VPN?",
+"simple_explanation": "A VPN creates a secure, encrypted connection over a less secure network.",
+"interview_answer": "A Virtual Private Network establishes an encrypted tunnel between a device and a network over the internet. It is used to secure remote access to corporate resources and hide user traffic from ISPs.",
+"real_world_example": "An employee working from a coffee shop using a VPN to securely access internal company databases.",
+"common_mistake": "Assuming a VPN provides total anonymity; the VPN provider can still see the traffic."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is the Loopback Address?",
+"simple_explanation": "A special IP address used to test network software locally.",
+"interview_answer": "The IPv4 loopback address is 127.0.0.1 (or 'localhost'). Traffic sent to this address never leaves the machine. It is used by developers to run and test network applications locally without physical network hardware.",
+"real_world_example": "Accessing a locally running web server by typing [http://127.0.0.1](https://www.google.com/search?q=http://127.0.0.1) in the browser.",
+"common_mistake": "Trying to share a 127.0.0.1 link with a coworker and expecting them to see your local app."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is SSH?",
+"simple_explanation": "SSH is a secure protocol for remote command-line login.",
+"interview_answer": "Secure Shell uses strong encryption to provide a secure channel over an unsecured network. Operating on TCP port 22, it is the standard tool for Linux server administration, replacing insecure protocols like Telnet.",
+"real_world_example": "A DevOps engineer using SSH to log into an AWS EC2 instance to restart a service.",
+"common_mistake": "Using password authentication for SSH instead of cryptographic key pairs."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is Bandwidth?",
+"simple_explanation": "The maximum rate of data transfer across a given path.",
+"interview_answer": "Bandwidth measures the capacity of a network connection, typically in bits per second (bps). It is a measure of capacity, not speed. A key point: high bandwidth doesn't guarantee low latency.",
+"real_world_example": "A 1 Gbps fiber optic connection allowing fast downloads of large docker images.",
+"common_mistake": "Confusing bandwidth (pipe width) with latency (travel time)."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is Latency?",
+"simple_explanation": "The time it takes for data to travel from source to destination.",
+"interview_answer": "Latency is the delay incurred during network communication, measured in milliseconds. High latency causes lag in applications. Minimizing latency is crucial for real-time applications and database queries.",
+"real_world_example": "A gamer experiencing lag because the server is located on another continent, causing 200ms latency.",
+"common_mistake": "Buying higher bandwidth expecting it to fix latency issues caused by physical distance."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is a Default Gateway?",
+"simple_explanation": "The router node that forwards traffic to other networks.",
+"interview_answer": "A default gateway is the IP address of the router that connects a local subnet to outside networks, like the internet. If a device doesn't know a destination's route, it sends the packet to the gateway.",
+"real_world_example": "A laptop sending a request for a website to the home router's IP address (192.168.1.1).",
+"common_mistake": "Setting the gateway IP incorrectly, resulting in local access but no internet connectivity."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is TTL (Time To Live)?",
+"simple_explanation": "A limit on how many hops a packet can take before being discarded.",
+"interview_answer": "TTL prevents network packets from looping endlessly if routing errors occur. Each router decrements the TTL by 1. If it hits 0, the packet is dropped, and an ICMP 'Time Exceeded' message is sent back.",
+"real_world_example": "Traceroute intentionally sends packets with a TTL of 1, 2, 3 to discover the routing path.",
+"common_mistake": "Confusing IP packet TTL with DNS cache TTL, which dictates how long a DNS record is stored."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is IPv4 vs IPv6?",
+"simple_explanation": "IPv4 uses 32-bit addresses, while IPv6 uses 128-bit addresses.",
+"interview_answer": "IPv4 is the original IP standard but ran out of addresses. IPv6 was created to solve this exhaustion, offering a virtually unlimited address space. IPv6 uses hexadecimal notation and includes built-in security features like IPSec.",
+"real_world_example": "An IPv4 address looks like 192.168.1.1, while an IPv6 address looks like 2001:0db8:85a3::8a2e:0370:7334.",
+"common_mistake": "Trying to apply IPv4 subnetting logic directly to IPv6 networks."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is Telnet?",
+"simple_explanation": "An unencrypted network protocol for remote terminal access.",
+"interview_answer": "Telnet allows users to communicate with a remote device. However, it sends all data, including passwords, in plain text. It is obsolete for secure administration and has been entirely replaced by SSH.",
+"real_world_example": "Using Telnet to manually test if an SMTP email server is responding on port 25.",
+"common_mistake": "Using Telnet over the public internet to manage a server, exposing credentials to hackers."
+},
+{
+"tool": "Networking",
+"difficulty": "Easy",
+"question": "What is FTP?",
+"simple_explanation": "A standard network protocol used to transfer files.",
+"interview_answer": "File Transfer Protocol is used to upload or download files between a client and server. Like Telnet, standard FTP is unencrypted. A key point is to always prefer SFTP (SSH File Transfer Protocol) in modern environments.",
+"real_world_example": "Uploading HTML files to a web hosting provider via an FTP client like FileZilla.",
+"common_mistake": "Using port 21 for FTP and wondering why a firewall blocks the random high-numbered data ports it opens."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a Load Balancer?",
+"simple_explanation": "A device that distributes incoming network traffic across multiple servers.",
+"interview_answer": "Load balancers prevent any single server from becoming a bottleneck by distributing requests based on algorithms like Round Robin or Least Connections. They ensure high availability and reliability for applications.",
+"real_world_example": "An AWS Application Load Balancer routing user traffic to 5 different backend web servers.",
+"common_mistake": "Deploying a load balancer without health checks, causing traffic to be sent to dead servers."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a Reverse Proxy?",
+"simple_explanation": "A server that sits in front of backend servers and forwards client requests to them.",
+"interview_answer": "A reverse proxy acts as an intermediary, protecting backend servers from direct internet access. It is used for load balancing, SSL termination, and caching. Nginx and HAProxy are popular reverse proxies.",
+"real_world_example": "Nginx receiving HTTPS traffic, decrypting it, and forwarding it to an internal Node.js app on port 3000.",
+"common_mistake": "Confusing a reverse proxy (protects servers) with a forward proxy (protects clients)."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is an A Record in DNS?",
+"simple_explanation": "A DNS record that points a domain name to an IPv4 address.",
+"interview_answer": "The Address (A) record is the most fundamental DNS record. It directly translates a human-readable hostname into the IPv4 address of the hosting server. For IPv6, an AAAA record is used.",
+"real_world_example": "Setting an A record for 'example.com' to point to the server IP 192.0.2.1.",
+"common_mistake": "Trying to point an A record to another domain name instead of an IP address."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a CNAME Record?",
+"simple_explanation": "A DNS record that maps one domain name to another domain name.",
+"interview_answer": "Canonical Name (CNAME) records create aliases for domains. Instead of pointing to an IP, they point to another A record. If the underlying IP changes, only the A record needs updating, not the CNAME.",
+"real_world_example": "Pointing '[www.example.com](https://www.example.com)' to the CNAME 'example.com' so both resolve to the same server.",
+"common_mistake": "Placing a CNAME record at the root domain (apex), which violates DNS RFC standards."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is the TCP 3-way Handshake?",
+"simple_explanation": "The process used by TCP to establish a reliable connection.",
+"interview_answer": "It involves three steps: SYN, SYN-ACK, and ACK. The client sends a SYN packet, the server replies with SYN-ACK, and the client confirms with an ACK. This synchronizes sequence numbers before data transfer begins.",
+"real_world_example": "A browser establishing a TCP connection with a web server before requesting a webpage.",
+"common_mistake": "Assuming data payload is sent during the SYN packet phase; data transmission starts after the handshake."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is an MX Record?",
+"simple_explanation": "A DNS record that directs email to a mail server.",
+"interview_answer": "Mail Exchange (MX) records specify the mail server responsible for accepting email messages on behalf of a domain. They include a priority value, allowing administrators to configure primary and backup email servers.",
+"real_world_example": "Configuring MX records to route all company emails to Google Workspace servers.",
+"common_mistake": "Setting multiple MX records to the same priority, confusing email routing protocols."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is BGP?",
+"simple_explanation": "BGP is the protocol that makes internet routing work.",
+"interview_answer": "Border Gateway Protocol routes traffic between autonomous systems (AS) on the internet. It finds the most efficient path based on network policies and rules. It is the core routing protocol of the internet.",
+"real_world_example": "ISPs using BGP to determine the fastest path to route traffic from a user in Europe to a server in Japan.",
+"common_mistake": "Using BGP for internal network routing instead of an interior gateway protocol like OSPF."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is VLAN?",
+"simple_explanation": "A logical grouping of devices on a network regardless of physical location.",
+"interview_answer": "Virtual Local Area Networks partition a single physical switch into multiple isolated logical networks. They improve security and reduce broadcast traffic. Devices on different VLANs require a router to communicate.",
+"real_world_example": "Putting guest Wi-Fi users on VLAN 10 and corporate employees on VLAN 20 for security.",
+"common_mistake": "Plugging a device into a switch port assigned to the wrong VLAN and losing connectivity."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is ARP?",
+"simple_explanation": "ARP maps IP addresses to physical MAC addresses.",
+"interview_answer": "Address Resolution Protocol resolves a known Layer 3 IP address to an unknown Layer 2 MAC address on a local network. A device broadcasts an ARP request, and the target replies with its MAC address.",
+"real_world_example": "A laptop broadcasting an ARP request to find the MAC address of the default gateway router.",
+"common_mistake": "Assuming ARP routes traffic across the internet; ARP only works within a local network segment."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is SNAT?",
+"simple_explanation": "Source NAT changes the source IP address of an outgoing packet.",
+"interview_answer": "SNAT translates the private source IP of a packet to a public IP as it leaves the network. This is used by home routers and NAT Gateways so internal devices can access the internet securely.",
+"real_world_example": "An AWS NAT Gateway altering a private EC2 instance's outbound packet to use an Elastic IP.",
+"common_mistake": "Using SNAT when trying to expose an internal server to the internet, which requires DNAT."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is DNAT?",
+"simple_explanation": "Destination NAT changes the destination IP address of an incoming packet.",
+"interview_answer": "DNAT translates a public destination IP to a private internal IP. It is commonly used for port forwarding, allowing external internet users to access a service hosted on a private, internal network.",
+"real_world_example": "A router forwarding traffic hitting its public IP on port 80 to an internal web server at 192.168.1.50.",
+"common_mistake": "Configuring DNAT but forgetting to open the corresponding port on the firewall."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is MTU?",
+"simple_explanation": "The Maximum Transmission Unit is the largest packet size a network can transmit.",
+"interview_answer": "MTU defines the maximum size of a frame or packet (in bytes) that can be sent over a network interface. The standard Ethernet MTU is 1500 bytes. Packets exceeding this are fragmented.",
+"real_world_example": "Setting an MTU of 1500 on a network interface card for standard internet communication.",
+"common_mistake": "Setting MTU too high without enabling Jumbo Frames, causing packet drops and network blackholes."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What are Jumbo Frames?",
+"simple_explanation": "Ethernet frames with an MTU larger than the standard 1500 bytes.",
+"interview_answer": "Jumbo frames typically carry up to 9000 bytes. They reduce CPU utilization and overhead by transmitting larger chunks of data per packet. They are heavily used in high-performance computing and storage networks (SANs).",
+"real_world_example": "Enabling 9000 MTU Jumbo Frames for fast data replication between two database servers.",
+"common_mistake": "Enabling Jumbo Frames on a server but not on the physical switch, leading to dropped packets."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is Anycast?",
+"simple_explanation": "Routing traffic to the nearest available node in a group sharing the same IP.",
+"interview_answer": "Anycast allows multiple globally distributed servers to share the same IP address. BGP routes user requests to the server geographically closest to them. It is the backbone technology of modern CDNs and DNS root servers.",
+"real_world_example": "Cloudflare using Anycast to route a user in Paris to a Paris data center, not one in New York.",
+"common_mistake": "Using Anycast for stateful applications like database writes without strong replication mechanisms."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a CDN?",
+"simple_explanation": "A network of servers that caches content close to users.",
+"interview_answer": "A Content Delivery Network reduces latency by caching static assets (images, CSS) on edge servers globally. When a user requests a file, it is served from the closest node, reducing load on the origin server.",
+"real_world_example": "Using AWS CloudFront to serve website images to users in Europe with minimal delay.",
+"common_mistake": "Failing to invalidate CDN caches after deploying new code, causing users to see old website versions."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a VPC?",
+"simple_explanation": "A Virtual Private Cloud is a secure, isolated private network hosted within a public cloud.",
+"interview_answer": "A VPC allows users to provision a logically isolated section of a cloud provider where they can launch resources. It provides granular control over subnets, IP ranges, route tables, and network gateways.",
+"real_world_example": "Creating an AWS VPC with a 10.0.0.0/16 CIDR block to securely host enterprise applications.",
+"common_mistake": "Using overlapping CIDR blocks across different VPCs, making VPC peering impossible later."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is the difference between Public and Private Subnets?",
+"simple_explanation": "Public subnets have direct internet access; private subnets do not.",
+"interview_answer": "A public subnet has a route to an Internet Gateway, allowing resources to receive inbound public traffic. A private subnet routes outbound traffic through a NAT Gateway and cannot be reached directly from the internet.",
+"real_world_example": "Placing a web server in a public subnet and the database in a private subnet for security.",
+"common_mistake": "Putting databases in public subnets, exposing them directly to internet port scanners."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is an Internet Gateway (IGW)?",
+"simple_explanation": "A cloud component that connects a VPC to the internet.",
+"interview_answer": "An IGW performs network address translation for instances with public IPs and provides a target in your VPC route tables for internet-bound traffic. Without an IGW, your VPC is completely isolated from the web.",
+"real_world_example": "Attaching an IGW to an AWS VPC so web servers can serve traffic to internet users.",
+"common_mistake": "Creating an IGW but forgetting to update the route table to point 0.0.0.0/0 to it."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a NAT Gateway?",
+"simple_explanation": "A service that allows resources in a private subnet to access the internet.",
+"interview_answer": "A NAT Gateway enables instances in a private subnet to initiate outbound internet traffic (for updates or APIs) while preventing inbound internet traffic. It translates private IPs to a single public IP.",
+"real_world_example": "A backend database instance downloading software patches through a NAT Gateway.",
+"common_mistake": "Placing the NAT Gateway in a private subnet instead of a public subnet, breaking internet routing."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is VPC Peering?",
+"simple_explanation": "A networking connection between two VPCs that enables traffic routing between them.",
+"interview_answer": "VPC Peering allows instances in two different VPCs to communicate using private IP addresses as if they were on the same network. It is highly secure and traffic never traverses the public internet.",
+"real_world_example": "Peering a 'Dev' VPC with an 'Analytics' VPC so data processing scripts can query databases privately.",
+"common_mistake": "Assuming VPC peering is transitive (if A peers B, and B peers C, A cannot talk to C)."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What are Route Tables?",
+"simple_explanation": "A set of rules determining where network traffic is directed.",
+"interview_answer": "Route tables contain a list of routes specifying destinations (CIDR blocks) and targets (Gateways, Peering connections). Every subnet must be associated with a route table to define its outbound traffic flow.",
+"real_world_example": "Adding a route for 0.0.0.0/0 targeting the Internet Gateway to make a subnet public.",
+"common_mistake": "Associating multiple subnets with a poorly configured default route table, exposing private resources."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a Security Group?",
+"simple_explanation": "A virtual stateful firewall that controls inbound and outbound traffic at the instance level.",
+"interview_answer": "Security Groups evaluate traffic attached to a specific instance (e.g., an EC2). They are stateful, meaning if you allow an inbound request, the return outbound response is automatically allowed regardless of outbound rules.",
+"real_world_example": "Allowing inbound traffic on port 443 for an HTTPS web server.",
+"common_mistake": "Opening port 22 (SSH) to 0.0.0.0/0, allowing anyone on the internet to attempt login."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is a Network ACL (NACL)?",
+"simple_explanation": "A virtual stateless firewall that controls traffic at the subnet level.",
+"interview_answer": "NACLs act as an additional layer of security surrounding an entire subnet. They are stateless, meaning inbound and outbound rules must be explicitly allowed. They process rules in numerical order.",
+"real_world_example": "Blocking a specific malicious IP address (e.g., 203.0.113.50) from entering the entire subnet.",
+"common_mistake": "Forgetting to open ephemeral ports in outbound NACL rules, causing return traffic to fail."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What are Ephemeral Ports?",
+"simple_explanation": "Temporary port numbers automatically assigned for outgoing connections.",
+"interview_answer": "When a client initiates a TCP/UDP connection, the OS assigns a random high-numbered port (e.g., 49152 to 65535) as the source port. This allows the OS to track multiple outbound connections simultaneously.",
+"real_world_example": "A browser opening port 51324 to connect to a web server on port 443.",
+"common_mistake": "Blocking ephemeral port ranges on a stateless firewall, breaking all outbound internet responses."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is iptables?",
+"simple_explanation": "A Linux command-line firewall utility that manages network traffic rules.",
+"interview_answer": "Iptables uses the Linux kernel's netfilter framework to inspect, modify, reject, or drop packets based on defined chains and rules. It is the fundamental firewall technology on Linux systems.",
+"real_world_example": "Running 'iptables -A INPUT -p tcp --dport 22 -j ACCEPT' to allow SSH traffic.",
+"common_mistake": "Appending a rule to the end of a chain instead of inserting it, where an earlier drop rule overrides it."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is the 'netstat' command?",
+"simple_explanation": "A network utility that displays active TCP/UDP connections and ports.",
+"interview_answer": "Netstat prints network connections, routing tables, and interface statistics. It is used to verify which services are listening on which ports. It has largely been superseded by the faster 'ss' command.",
+"real_world_example": "Running 'netstat -tulnp' to list all listening ports and the processes associated with them.",
+"common_mistake": "Running the command without root privileges, failing to see process names belonging to other users."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is 'tcpdump'?",
+"simple_explanation": "A CLI packet analyzer that captures network traffic.",
+"interview_answer": "Tcpdump intercepts and displays TCP/IP packets being transmitted over a network interface. It uses boolean expressions to filter massive amounts of traffic, making it indispensable for low-level network debugging.",
+"real_world_example": "Running 'tcpdump port 80' to monitor unencrypted HTTP traffic hitting a web server.",
+"common_mistake": "Running tcpdump on a busy interface without a filter, instantly flooding the terminal and crashing the session."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is Nmap?",
+"simple_explanation": "A network scanning tool used to discover hosts and services.",
+"interview_answer": "Network Mapper (Nmap) sends crafted packets to target hosts to discover open ports, running services, and operating systems. It is widely used for security auditing and network inventory management.",
+"real_world_example": "Running 'nmap -p 1-65535 192.168.1.10' to find every open port on a server.",
+"common_mistake": "Scanning networks you do not own or have permission to test, which can trigger IDS alerts or legal action."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is Wireshark?",
+"simple_explanation": "A GUI-based network protocol analyzer.",
+"interview_answer": "Wireshark captures network packets and displays them in immense detail. It decodes hundreds of protocols, allowing engineers to drill down into packet payloads, sequence numbers, and network errors visually.",
+"real_world_example": "Opening a .pcap file generated by tcpdump in Wireshark to analyze a complex TLS handshake failure.",
+"common_mistake": "Trying to run Wireshark natively on a headless Linux server instead of capturing with tcpdump and exporting."
+},
+{
+"tool": "Networking",
+"difficulty": "Medium",
+"question": "What is Forward Proxy?",
+"simple_explanation": "A server that intercepts outbound requests from a client to the internet.",
+"interview_answer": "A forward proxy sits in front of client machines. It masks the client's IP, caches outbound content, and enforces corporate web filtering policies. It is the opposite of a reverse proxy.",
+"real_world_example": "A corporate proxy server blocking employee access to social media sites.",
+"common_mistake": "Confusing forward proxies (protecting internal clients) with reverse proxies (protecting internal servers)."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is TCP Window Scaling?",
+"simple_explanation": "An option that allows TCP to increase its receive window size for faster throughput.",
+"interview_answer": "Standard TCP limits the receive window to 64KB, throttling high-bandwidth, high-latency links. Window Scaling multiplies this size, allowing massive amounts of unacknowledged data to be in flight, significantly improving performance.",
+"real_world_example": "Enabling TCP window scaling to quickly transfer a 100GB database backup across an ocean.",
+"common_mistake": "Disabling window scaling on modern networks, crippling high-bandwidth WAN connections."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is a SYN Flood attack?",
+"simple_explanation": "A DDoS attack exploiting the TCP 3-way handshake.",
+"interview_answer": "The attacker sends thousands of SYN packets with spoofed IPs. The server replies with SYN-ACKs and leaves ports half-open waiting for ACKs that never arrive, eventually exhausting server resources and dropping legitimate traffic.",
+"real_world_example": "A botnet bringing down a website by consuming all available TCP connection slots.",
+"common_mistake": "Attempting to block SYN floods purely with iptables instead of using kernel-level SYN cookies."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is BGP Route Flapping?",
+"simple_explanation": "When a router repeatedly announces and withdraws a network route.",
+"interview_answer": "Route flapping occurs due to unstable hardware or configuration errors. It forces all internet routers to constantly recalculate paths, severely degrading network performance. Route dampening is used to suppress flapping routes.",
+"real_world_example": "A faulty network cable causing a BGP session to drop and reconnect every 5 seconds.",
+"common_mistake": "Ignoring route flapping, which can result in upstream ISPs penalizing and dropping your BGP prefix entirely."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Split-brain DNS?",
+"simple_explanation": "Serving different DNS records for the same domain based on the client's network.",
+"interview_answer": "Split-horizon DNS responds with an internal private IP if queried from within the corporate network, but replies with a public IP if queried from the internet. It optimizes traffic flow and security.",
+"real_world_example": "Internal employees resolving 'db.company.com' to 10.0.0.5, while external contractors resolve it to a public VPN gateway.",
+"common_mistake": "Misconfiguring DNS views, causing external users to receive unreachable private IP addresses."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Asymmetric Routing?",
+"simple_explanation": "When network traffic takes one path to a destination and a different path back.",
+"interview_answer": "Asymmetric routing occurs when multiple gateways exist. While technically valid in IP routing, stateful firewalls will drop the return traffic because they never saw the initial connection establishment packets.",
+"real_world_example": "A packet leaving via ISP A but returning via ISP B, getting dropped by ISP A's firewall.",
+"common_mistake": "Using active-active dual WAN links on a stateful firewall without proper connection tracking rules."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What causes TCP Retransmission?",
+"simple_explanation": "When a sender resends a packet because it didn't receive an acknowledgment.",
+"interview_answer": "TCP relies on ACKs to ensure delivery. If a packet is lost due to network congestion, faulty hardware, or bad Wi-Fi, the sender's timer expires, and it retransmits the packet. High retransmissions indicate poor network health.",
+"real_world_example": "A massive spike in TCP retransmissions seen in Wireshark during a saturated network link event.",
+"common_mistake": "Blaming application code for slowness when packet loss is triggering massive TCP retransmission delays."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is an MTU Blackhole?",
+"simple_explanation": "When packets are dropped silently because they exceed MTU and ICMP is blocked.",
+"interview_answer": "If a packet is too large for a router, the router drops it and sends an ICMP 'Fragmentation Needed' message. If firewalls block ICMP, the sender never knows to send smaller packets, causing connections to stall silently.",
+"real_world_example": "An SSH session hanging indefinitely immediately after successful authentication due to large key payloads.",
+"common_mistake": "Blocking all ICMP traffic blindly for 'security', thereby breaking Path MTU Discovery."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What are Linux Network Namespaces?",
+"simple_explanation": "Isolated logical network stacks within a single Linux kernel.",
+"interview_answer": "Network namespaces provide a process with its own dedicated set of interfaces, routing tables, and iptables rules. They are the fundamental networking construct used by Docker and Kubernetes to isolate container traffic.",
+"real_world_example": "Running two Docker containers that both successfully bind to port 80 without conflicting on the host.",
+"common_mistake": "Running 'ip route' on the host and expecting to see the routing tables of the containers."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is VXLAN?",
+"simple_explanation": "A network virtualization technology that encapsulates Layer 2 frames in UDP packets.",
+"interview_answer": "Virtual Extensible LAN creates massive overlay networks spanning different physical subnets. It solves the 4,096 VLAN limitation by using a 24-bit identifier, enabling massive multi-tenant architectures in cloud environments and Kubernetes.",
+"real_world_example": "Kubernetes using VXLAN via Flannel to allow Pods on different physical worker nodes to communicate securely.",
+"common_mistake": "Attempting to troubleshoot VXLAN overlay traffic with standard ping instead of packet capturing the encapsulated UDP payloads."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is HTTP/2 Multiplexing?",
+"simple_explanation": "Sending multiple HTTP requests simultaneously over a single TCP connection.",
+"interview_answer": "HTTP/1.1 requires opening multiple TCP connections or waiting for responses (head-of-line blocking). HTTP/2 multiplexing allows interleaved requests and responses on one connection, drastically reducing latency and SSL handshake overhead for complex websites.",
+"real_world_example": "Loading a website with 50 images rapidly over a single TCP connection instead of queueing them.",
+"common_mistake": "Continuing to use domain sharding (cdn1.domain.com, cdn2.domain.com) with HTTP/2, which actually decreases performance."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is HTTP/3 (QUIC)?",
+"simple_explanation": "The newest HTTP protocol built on UDP instead of TCP.",
+"interview_answer": "QUIC solves TCP's head-of-line blocking by using UDP and handling reliability and encryption at the application layer. It establishes connections much faster and maintains them even when switching networks, like moving from Wi-Fi to cellular.",
+"real_world_example": "A mobile app maintaining a seamless video stream while transitioning from home Wi-Fi to a 5G network.",
+"common_mistake": "Deploying HTTP/3 but forgetting to open UDP port 443 on the corporate firewall."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is TCP BBR?",
+"simple_explanation": "A modern congestion control algorithm developed by Google.",
+"interview_answer": "Bottleneck Bandwidth and Round-trip propagation time (BBR) maximizes network throughput by modeling the network link and reacting to actual bandwidth availability, rather than reacting strictly to packet loss like older algorithms (CUBIC).",
+"real_world_example": "Enabling TCP BBR on a video streaming server to ensure smooth playback on high-packet-loss mobile networks.",
+"common_mistake": "Assuming BBR fixes underlying physical network hardware faults; it only optimizes data flow."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Zero Trust Networking?",
+"simple_explanation": "A security model requiring strict identity verification for every person and device.",
+"interview_answer": "Zero Trust discards the idea of a 'trusted internal network'. Every request, whether internal or external, is authenticated, authorized, and encrypted. It heavily utilizes micro-segmentation and Identity and Access Management (IAM).",
+"real_world_example": "Requiring a developer to use MFA and device certificates to SSH into an internal dev server.",
+"common_mistake": "Assuming placing resources behind a corporate VPN constitutes a Zero Trust architecture."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is a VPC Endpoint (AWS PrivateLink)?",
+"simple_explanation": "A service that allows private connections to AWS services without internet access.",
+"interview_answer": "VPC Endpoints allow instances in private subnets to communicate securely with services like S3 or DynamoDB using the Amazon internal network, completely bypassing NAT gateways, IGWs, and the public internet.",
+"real_world_example": "An EC2 instance securely uploading logs to an S3 bucket without ever obtaining a public IP.",
+"common_mistake": "Paying high bandwidth costs by routing heavy S3 traffic through a NAT Gateway instead of a Gateway Endpoint."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is an AWS Transit Gateway?",
+"simple_explanation": "A central hub that simplifies network routing between thousands of VPCs and on-premise networks.",
+"interview_answer": "Transit Gateway solves the complexity of VPC peering by acting as a highly scalable cloud router. Instead of creating complex point-to-point peering meshes, all VPCs and VPNs connect to one central hub.",
+"real_world_example": "Routing traffic between 50 different AWS VPCs and a physical corporate datacenter using a single Transit Gateway.",
+"common_mistake": "Setting up dozens of manual VPC peering connections instead of adopting a Transit Gateway architecture early."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is ARP Spoofing?",
+"simple_explanation": "A malicious technique where an attacker sends fake ARP messages onto a LAN.",
+"interview_answer": "The attacker links their MAC address with the IP address of a legitimate gateway. Network traffic is diverted to the attacker, enabling Man-in-the-Middle (MitM) attacks, packet sniffing, or session hijacking.",
+"real_world_example": "A hacker on a public Wi-Fi network intercepting unencrypted passwords by pretending to be the router.",
+"common_mistake": "Thinking IPsec or HTTPS protects against ARP spoofing; they only encrypt the payload, not the routing disruption."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is a Kubernetes CNI?",
+"simple_explanation": "The Container Network Interface provides networking connectivity between Pods.",
+"interview_answer": "CNI is a standard that allows Kubernetes to use various third-party networking solutions (like Calico or Cilium) to assign IP addresses to Pods and handle multi-node overlay routing and Network Policies.",
+"real_world_example": "Installing Calico to allocate IPs and enforce security policies preventing frontend pods from accessing the database directly.",
+"common_mistake": "Trying to start a Kubernetes cluster and wondering why CoreDNS is stuck pending (it requires a CNI to be installed)."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is an Ingress Controller?",
+"simple_explanation": "A specialized load balancer that routes external HTTP traffic to Kubernetes services.",
+"interview_answer": "An Ingress Controller (like Nginx-Ingress) reads Ingress resource rules in Kubernetes and configures an underlying proxy. It provides name-based virtual hosting, path-based routing, and SSL termination at the edge of the cluster.",
+"real_world_example": "Routing traffic for 'api.app.com' to the API pods and 'app.com' to the frontend pods using one public IP.",
+"common_mistake": "Creating an Ingress resource YAML but forgetting to install the actual Ingress Controller software."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is a Service Mesh?",
+"simple_explanation": "A dedicated infrastructure layer for managing service-to-service communication.",
+"interview_answer": "Service Meshes (like Istio or Linkerd) inject sidecar proxies into every application pod. They handle complex traffic routing, retry logic, observability, and automatic mutual TLS (mTLS) encryption without requiring code changes.",
+"real_world_example": "Using Istio to implement a canary deployment, routing exactly 5% of traffic to a new microservice version.",
+"common_mistake": "Implementing a complex service mesh for a simple monolithic application, adding unnecessary overhead."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Mutual TLS (mTLS)?",
+"simple_explanation": "A protocol where both the client and server cryptographically verify each other.",
+"interview_answer": "In standard TLS, only the client verifies the server. In mTLS, both parties present certificates. It ensures traffic is encrypted and strictly authenticates the identities of microservices communicating within a Zero Trust architecture.",
+"real_world_example": "A billing microservice refusing a connection from a frontend service because the frontend lacks a valid client certificate.",
+"common_mistake": "Implementing mTLS but failing to establish an automated certificate rotation process, causing massive outages upon expiration."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Connection Draining?",
+"simple_explanation": "A load balancer feature that allows existing requests to complete before deregistering a server.",
+"interview_answer": "When a backend server is marked unhealthy or targeted for shutdown, connection draining stops sending new requests to it but waits a configured timeout for active connections to finish smoothly. It ensures zero-downtime deployments.",
+"real_world_example": "A load balancer waiting 30 seconds for a user's large file upload to finish before terminating the EC2 instance.",
+"common_mistake": "Setting a draining timeout too low, causing long-running database queries or file uploads to fail mid-flight."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What are Sticky Sessions (Session Affinity)?",
+"simple_explanation": "Routing a user's requests to the exact same backend server for the duration of their session.",
+"interview_answer": "Sticky sessions use cookies or IP hashing to ensure a client remains bound to a specific server. This is heavily used for stateful applications that store session data locally in RAM rather than a centralized cache.",
+"real_world_example": "An e-commerce site ensuring a user's shopping cart isn't lost by routing them to the same server handling their session.",
+"common_mistake": "Relying on sticky sessions instead of refactoring the app to be stateless and using Redis for session storage."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Split Tunneling?",
+"simple_explanation": "A VPN feature routing only specific traffic through the encrypted tunnel.",
+"interview_answer": "Split tunneling allows a remote user to access corporate resources via the VPN while routing general internet traffic (like streaming or browsing) directly through their local ISP. It saves massive amounts of corporate bandwidth.",
+"real_world_example": "An employee accessing internal Jira via the VPN but watching a YouTube tutorial on their home network.",
+"common_mistake": "Disabling split tunneling globally, causing the corporate VPN concentrator to crash under the load of employee internet browsing."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is BGP Split Horizon?",
+"simple_explanation": "A routing loop prevention mechanism in BGP.",
+"interview_answer": "The rule states that a route learned from an Internal BGP (iBGP) peer must not be advertised to another iBGP peer. This prevents infinite routing loops within an Autonomous System but requires a full-mesh topology or Route Reflectors.",
+"real_world_example": "A network architect configuring a BGP Route Reflector because fully meshing 50 internal routers is unscalable.",
+"common_mistake": "Forgetting the split horizon rule and wondering why iBGP routes aren't propagating across a linear network."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is eBPF?",
+"simple_explanation": "A technology allowing secure, sandbox execution of code inside the Linux kernel.",
+"interview_answer": "eBPF allows dynamic programming of the kernel without rewriting it or loading modules. In DevOps, it is revolutionizing high-performance networking, security filtering, and observability (e.g., Cilium CNI) by bypassing the standard network stack.",
+"real_world_example": "Cilium using eBPF to route Kubernetes traffic instantly at the kernel level rather than parsing complex iptables rules.",
+"common_mistake": "Assuming eBPF is just a packet sniffer like tcpdump, ignoring its powerful traffic manipulation capabilities."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is SNI (Server Name Indication)?",
+"simple_explanation": "A TLS extension allowing multiple HTTPS websites to be served from a single IP.",
+"interview_answer": "Before SNI, an IP address could only host one SSL certificate because the handshake occurred before the HTTP headers. SNI includes the requested hostname in the initial TLS handshake, allowing the server to present the correct certificate.",
+"real_world_example": "A single load balancer serving SSL certificates for both siteA.com and siteB.com on IP 10.0.0.5.",
+"common_mistake": "Supporting legacy clients that do not support SNI, resulting in SSL mismatched domain errors."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is an Overlay Network?",
+"simple_explanation": "A virtual network built on top of an existing physical network infrastructure.",
+"interview_answer": "Overlay networks decouple network topology from physical hardware. They use encapsulation protocols like VXLAN or GRE. This allows tools like Docker and Kubernetes to seamlessly create complex, isolated subnets across diverse cloud environments.",
+"real_world_example": "A Docker Swarm overlay network allowing containers on an AWS host and a GCP host to communicate on a 10.0.0.0/24 subnet.",
+"common_mistake": "Troubleshooting overlay connectivity issues without checking if the underlying physical network allows UDP encapsulation traffic."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Source Routing?",
+"simple_explanation": "A technique where the sender dictates the exact path a packet must take.",
+"interview_answer": "Unlike traditional routing where routers decide the path dynamically, strict source routing allows the packet creator to specify every hop. It is mostly disabled globally today because it allows attackers to bypass security boundaries and spoof IPs.",
+"real_world_example": "An engineer using loose source routing for advanced network diagnostic tracing.",
+"common_mistake": "Leaving source routing enabled on perimeter firewalls, exposing the internal network to path manipulation."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is Rate Limiting?",
+"simple_explanation": "Controlling the amount of incoming or outgoing traffic in a network.",
+"interview_answer": "Rate limiting restricts how many requests a user or IP can make in a given timeframe (e.g., Leaky Bucket or Token Bucket algorithms). It prevents brute-force attacks, scraping, and application exhaustion.",
+"real_world_example": "Configuring Nginx to limit users to 10 API requests per second to prevent database overload.",
+"common_mistake": "Applying global rate limits without whitelisting internal services or health checks, bringing down the whole system."
+},
+{
+"tool": "Networking",
+"difficulty": "Hard",
+"question": "What is DPDK (Data Plane Development Kit)?",
+"simple_explanation": "A set of libraries that accelerate packet processing workloads.",
+"interview_answer": "DPDK bypasses the heavy Linux kernel network stack, allowing applications to read packets directly from the network interface card via polling. It is used in NFV (Network Function Virtualization) and ultra-low latency trading environments.",
+"real_world_example": "A telecom provider using DPDK on generic x86 servers to route 5G traffic at hardware speeds.",
+"common_mistake": "Attempting to use DPDK for standard web hosting, where the kernel-bypass overhead outweighs the benefits."
+}
+]

@@ -1,0 +1,902 @@
+[
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is GitHub?",
+"simple_explanation": "GitHub is a cloud-based hosting service for Git repositories.",
+"interview_answer": "GitHub is a platform that hosts Git repositories in the cloud. It is used to facilitate collaboration, version control, and CI/CD. A key point is it adds a web interface and collaboration tools on top of standard Git.",
+"real_world_example": "A team using GitHub to store code, track bugs, and review pull requests.",
+"common_mistake": "Confusing GitHub (the cloud service) with Git (the underlying version control tool)."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a GitHub Repository?",
+"simple_explanation": "A storage space for a project's files and revision history.",
+"interview_answer": "A repository contains all project files and their revision history. It is used to organize and track code changes. An important point is that repositories can be public, private, or internal.",
+"real_world_example": "Creating a new repository to store the source code of a React web application.",
+"common_mistake": "Deleting a repository thinking it only deletes local files, which actually deletes cloud history."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a Fork?",
+"simple_explanation": "A personal copy of someone else's GitHub repository.",
+"interview_answer": "A fork is a copy of a repository linked to your own account. It is used to freely experiment with changes without affecting the original project. A key point is that forks are the foundation of open-source contributions.",
+"real_world_example": "Forking the Linux kernel repository to propose a bug fix via a pull request.",
+"common_mistake": "Thinking a fork stays automatically synced with the original repository without manual fetching."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a Pull Request (PR)?",
+"simple_explanation": "A proposal to merge code changes into a branch.",
+"interview_answer": "A Pull Request lets you notify team members about completed feature work. It is used to initiate code reviews and discussions before merging. A critical point is that PRs display the exact code diffs being proposed.",
+"real_world_example": "Opening a PR to merge a 'login-fix' branch into the 'main' production branch.",
+"common_mistake": "Opening a PR to the wrong target branch, causing unrelated code to be merged."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What are GitHub Issues?",
+"simple_explanation": "A tracking tool for bugs, enhancements, and tasks.",
+"interview_answer": "Issues are integrated tracking items within a repository. They are used to plan work, report bugs, and discuss features. An important point is they can be linked directly to Pull Requests for automated closing.",
+"real_world_example": "Creating an issue titled 'Button misalignment on mobile' to track a UI bug.",
+"common_mistake": "Using issues for general chat rather than actionable development tasks."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is the difference between Cloning and Forking?",
+"simple_explanation": "Cloning downloads a repo locally; forking copies it on GitHub.",
+"interview_answer": "Cloning copies a repository to your local machine, while forking creates a cloud-side copy under your GitHub account. Forking is used when you lack write access to the original repo to make your own changes.",
+"real_world_example": "Forking an open-source project, then cloning your fork to your laptop to write code.",
+"common_mistake": "Trying to clone a read-only repository and pushing changes directly back to it."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a GitHub Profile README?",
+"simple_explanation": "A special repository that displays content on your personal profile page.",
+"interview_answer": "It is a markdown file placed in a repository named after your username. It is used to showcase your skills, portfolio, and bio to employers. A key point is it must be public and initialized with a README.md.",
+"real_world_example": "Adding a list of programming languages and recent blog posts to your GitHub profile.",
+"common_mistake": "Naming the repository incorrectly so the README does not render on the profile page."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a GitHub Gist?",
+"simple_explanation": "A simple way to share code snippets and pastes.",
+"interview_answer": "Gists are mini-repositories used to share single files, parts of files, or full applications easily. They are used to quickly exchange code without creating a full repository. They can be secret or public.",
+"real_world_example": "Pasting a useful Bash script into a Gist and sharing the URL with a coworker.",
+"common_mistake": "Using Gists for full-scale application version control instead of standard repositories."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What does Starring a repository do?",
+"simple_explanation": "It bookmarks a repository and shows appreciation to the maintainer.",
+"interview_answer": "Starring saves a repository to your personal list for easy retrieval later. It is used to keep track of interesting projects. A key point is that it acts as a popularity metric for open-source tools.",
+"real_world_example": "Starring the 'kubernetes' repository to easily find it later from your profile.",
+"common_mistake": "Confusing starring (bookmarking) with watching (receiving notifications for activity)."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What does Watching a repository do?",
+"simple_explanation": "It subscribes you to notifications for repository activity.",
+"interview_answer": "Watching a repository sends you alerts for new issues, PRs, and discussions. It is used to stay updated on projects you actively contribute to. An important point is you can customize notification levels.",
+"real_world_example": "Watching a crucial microservice repository so you are emailed whenever a new PR is opened.",
+"common_mistake": "Watching too many active repositories and flooding your email inbox with useless notifications."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a GitHub Wiki?",
+"simple_explanation": "A dedicated space within a repository for extensive documentation.",
+"interview_answer": "A Wiki is a markdown-based documentation site hosted alongside your code. It is used to provide detailed user guides, architectural notes, and FAQs. A key point is every Wiki is technically its own Git repository.",
+"real_world_example": "Using a repository's Wiki to document the API endpoints and onboarding steps for new developers.",
+"common_mistake": "Putting all documentation in the root README instead of separating detailed guides into a Wiki."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is the Blame view?",
+"simple_explanation": "A UI feature showing who last modified each line of a file.",
+"interview_answer": "The blame view displays the author, commit hash, and timestamp for every line of a file. It is used to identify who introduced specific code changes. It is an essential tool for debugging regressions.",
+"real_world_example": "Using the blame button to find out who changed a database connection string yesterday.",
+"common_mistake": "Using the blame view to aggressively shame coworkers instead of just seeking context."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is the Raw view?",
+"simple_explanation": "It displays the unformatted plain text of a file.",
+"interview_answer": "The Raw button bypasses GitHub's UI formatting and renders the exact plain text of a file. It is used to directly download scripts, CSVs, or config files without copying HTML artifacts.",
+"real_world_example": "Clicking 'Raw' on a bash script file and using wget to download it directly to a server.",
+"common_mistake": "Copying code from the formatted UI view and accidentally pasting hidden HTML characters into an IDE."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is GitHub Desktop?",
+"simple_explanation": "A graphical user interface application for interacting with GitHub.",
+"interview_answer": "GitHub Desktop is a GUI client that simplifies Git operations without using the command line. It is used to make version control more accessible. A key point is it visually highlights code diffs before committing.",
+"real_world_example": "A designer using GitHub Desktop to commit and push updated image assets without learning CLI commands.",
+"common_mistake": "Relying entirely on the GUI and failing to understand underlying Git concepts during complex merge conflicts."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is the default branch?",
+"simple_explanation": "The base branch that GitHub uses for pull requests and code browsing.",
+"interview_answer": "The default branch is the primary timeline of your project, historically named 'master' and now commonly 'main'. It is used as the base for new feature branches. It should always contain production-ready code.",
+"real_world_example": "Configuring 'main' as the default branch so all new PRs automatically target it for merging.",
+"common_mistake": "Deleting the default branch without realizing it disrupts the repository's primary workflow."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a README.md file?",
+"simple_explanation": "The primary introductory document for a repository.",
+"interview_answer": "A README provides the first impression of a project, containing instructions on installation, usage, and contribution. It is used to help new users understand the codebase. It automatically renders on the repository homepage.",
+"real_world_example": "Writing a README that explains how to run 'npm install' and 'npm start' to run the project.",
+"common_mistake": "Leaving the README empty, leaving visitors guessing what the repository actually does."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is the difference between Git and GitHub?",
+"simple_explanation": "Git is the version control software; GitHub is the hosting platform.",
+"interview_answer": "Git tracks local code history, while GitHub provides a remote, cloud-based hosting environment for Git repositories. GitHub is used to add collaboration tools like PRs and Actions on top of Git.",
+"real_world_example": "Using Git locally to commit code, then pushing it to GitHub to share with a team.",
+"common_mistake": "Assuming you cannot use Git without an active internet connection to GitHub."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is the Commit History view?",
+"simple_explanation": "A chronological list of all commits made to a repository.",
+"interview_answer": "The commit history view shows the timeline of changes, displaying commit messages, authors, and SHAs. It is used to trace the evolution of the project. Clicking a commit shows exactly what lines were altered.",
+"real_world_example": "Scrolling through the commit history to see when a specific security patch was merged.",
+"common_mistake": "Writing poor commit messages, rendering the commit history view useless for future audits."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "How do you mention users in GitHub?",
+"simple_explanation": "By typing the '@' symbol followed by their username.",
+"interview_answer": "Mentioning a user (@username) triggers a notification to them. It is used in issues, PRs, and comments to request reviews or draw someone's attention. A key point is it bridges communication gaps instantly.",
+"real_world_example": "Typing '@johndoe can you review this database schema change?' in a PR comment.",
+"common_mistake": "Tagging entire large teams unnecessarily, causing notification fatigue for dozens of developers."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "How do you close an issue with a commit?",
+"simple_explanation": "By using keywords like 'Fixes #123' in the commit message.",
+"interview_answer": "GitHub parses commit messages for specific keywords (like Closes, Fixes, Resolves) followed by an issue number. When the commit merges into the default branch, the linked issue closes automatically.",
+"real_world_example": "Writing 'Fixes #42' in a commit to automatically close the bug report once the PR merges.",
+"common_mistake": "Using the wrong keyword or omitting the hash (#), requiring the issue to be closed manually."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What are GitHub Labels?",
+"simple_explanation": "Color-coded tags used to categorize issues and pull requests.",
+"interview_answer": "Labels help organize and filter project work by type, priority, or status. They are used to quickly identify what an issue relates to. Standard labels include 'bug', 'enhancement', and 'help wanted'.",
+"real_world_example": "Filtering the issue tracker to only show items with the 'high-priority' and 'bug' labels.",
+"common_mistake": "Creating too many overlapping labels, causing confusion on which ones to apply."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is an Assignee?",
+"simple_explanation": "A user specifically designated to work on an issue or PR.",
+"interview_answer": "Assigning a user indicates who is responsible for completing a task or review. It is used to delegate work and prevent duplicated efforts. Users can filter dashboards to see only their assigned tasks.",
+"real_world_example": "Assigning a frontend developer to an issue titled 'Update login page styling'.",
+"common_mistake": "Assigning too many people to a single small issue, leading to a bystander effect where no one does it."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is GitHub Search?",
+"simple_explanation": "A tool to find code, repositories, users, and issues globally.",
+"interview_answer": "GitHub Search allows indexing and searching across all public repositories or within your organizations. It is used to find specific code snippets, track down errors, or discover open-source libraries.",
+"real_world_example": "Searching for 'filename:docker-compose.yml postgres' to find examples of database configurations.",
+"common_mistake": "Searching without utilizing filters, resulting in millions of irrelevant results."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is Markdown in GitHub?",
+"simple_explanation": "A lightweight markup language used for formatting text.",
+"interview_answer": "Markdown is used to format READMEs, issues, and PR comments with headers, lists, code blocks, and links. It makes documentation readable and visually appealing. A key point is GitHub Flavored Markdown supports task lists.",
+"real_world_example": "Using triple backticks (```) to display a syntax-highlighted block of Python code in an issue.",
+"common_mistake": "Forgetting blank lines between paragraphs, causing text to render as one massive block."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is a Collaborator?",
+"simple_explanation": "A user granted read and write access to a repository.",
+"interview_answer": "A collaborator is explicitly invited to a repository to push code and merge pull requests. It is used to build trusted core teams for a project. They bypass the need for forking.",
+"real_world_example": "Inviting a freelance developer as a collaborator so they can push code directly to the company repo.",
+"common_mistake": "Adding everyone as a collaborator instead of using organizational teams with granular access control."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "Contributors vs Collaborators?",
+"simple_explanation": "Contributors submit code via forks; collaborators have direct write access.",
+"interview_answer": "A contributor is anyone who has had a PR merged into the project. A collaborator is someone with direct push access to the repository. It is a distinction of access permissions versus historical activity.",
+"real_world_example": "An open-source user making a one-time fix is a contributor, while the project maintainer is a collaborator.",
+"common_mistake": "Giving collaborator access to someone just to merge a single contribution."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What does Archiving a repository do?",
+"simple_explanation": "It makes the repository read-only to all users.",
+"interview_answer": "Archiving freezes a repository, disabling new commits, issues, and PRs while preserving existing data. It is used to gracefully retire old projects without destroying their history or breaking dependent links.",
+"real_world_example": "Archiving a deprecated API v1 repository so no one accidentally commits new code to it.",
+"common_mistake": "Deleting an old repository instead of archiving it, breaking links and destroying valuable history."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What happens when you delete a repository?",
+"simple_explanation": "It permanently removes the code, history, issues, and wiki from GitHub.",
+"interview_answer": "Deleting a repository completely wipes its data from GitHub servers. It is used to clean up mistakes or remove sensitive code. A critical point is that GitHub requires a typed confirmation to execute this destructive action.",
+"real_world_example": "Deleting a poorly named test repository created by mistake during onboarding.",
+"common_mistake": "Deleting a repository without backing it up locally, resulting in total data loss."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "What is the GitHub CLI (gh)?",
+"simple_explanation": "A command-line tool to manage GitHub features directly from the terminal.",
+"interview_answer": "The GitHub CLI allows developers to create PRs, manage issues, and trigger Actions without leaving the terminal. It is used to speed up workflows. It integrates GitHub functionality natively into Git commands.",
+"real_world_example": "Running 'gh pr create' to open a pull request directly from your command-line interface.",
+"common_mistake": "Confusing standard 'git' commands with 'gh' commands."
+},
+{
+"tool": "GitHub",
+"difficulty": "Easy",
+"question": "Private vs Public repositories?",
+"simple_explanation": "Public is visible to everyone; private is restricted to authorized users.",
+"interview_answer": "Public repositories can be cloned by anyone on the internet, fostering open-source development. Private repositories hide code from the public, making them essential for proprietary company software and sensitive intellectual property.",
+"real_world_example": "Keeping a startup's backend source code in a private repository to prevent theft.",
+"common_mistake": "Accidentally creating a public repository for a school assignment, violating academic integrity rules."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are GitHub Actions?",
+"simple_explanation": "GitHub's native CI/CD and automation platform.",
+"interview_answer": "GitHub Actions automate software workflows, such as building, testing, and deploying code. They are triggered by GitHub events like pushes or PRs. A key point is they use YAML files stored in the .github/workflows directory.",
+"real_world_example": "Running a test suite automatically every time a developer opens a new Pull Request.",
+"common_mistake": "Putting workflow files outside the .github/workflows directory, causing GitHub to ignore them."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Branch Protection Rules?",
+"simple_explanation": "Rules that prevent destructive actions on critical branches.",
+"interview_answer": "Branch protection rules enforce policies like requiring PR approvals, mandating passing status checks, or blocking force pushes. They are used to protect the integrity of the 'main' production branch from bad code.",
+"real_world_example": "Configuring main so nobody can merge code unless at least two senior developers approve the PR.",
+"common_mistake": "Applying rules but allowing administrators to bypass them, defeating the purpose of strict compliance."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is a CODEOWNERS file?",
+"simple_explanation": "A file that defines individuals or teams responsible for specific code paths.",
+"interview_answer": "CODEOWNERS automatically requests reviews from specified users when a pull request modifies files they own. It is used to ensure subject matter experts always review critical system changes.",
+"real_world_example": "Routing any changes in the '/security' folder automatically to the InfoSec team for review.",
+"common_mistake": "Creating a CODEOWNERS file with syntax errors, which causes GitHub to ignore the ownership rules silently."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is a Draft Pull Request?",
+"simple_explanation": "A PR that is visibly marked as a work-in-progress.",
+"interview_answer": "Draft PRs cannot be merged until they are marked as ready. They are used to request early feedback on code architecture without triggering strict required reviews or deployment pipelines prematurely.",
+"real_world_example": "Opening a Draft PR to show a team a proposed UI layout before writing the underlying backend logic.",
+"common_mistake": "Reviewing a Draft PR rigorously for minor syntax errors when the author is only asking for high-level feedback."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is GitHub Pages?",
+"simple_explanation": "A static site hosting service directly from a GitHub repository.",
+"interview_answer": "GitHub Pages hosts HTML, CSS, and JavaScript files directly from a repository. It is used to deploy portfolios, documentation, or basic websites for free. A key point is it natively supports Jekyll static site generation.",
+"real_world_example": "Hosting a personal resume website directly from the 'username.github.io' repository.",
+"common_mistake": "Trying to run backend server code (like Node.js or PHP) on GitHub Pages, which only supports static files."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are GitHub Projects?",
+"simple_explanation": "A built-in project management tool resembling Kanban boards.",
+"interview_answer": "GitHub Projects organize issues and PRs into customizable boards or tables. They are used to track agile workflows, sprint progress, and task assignments in real-time. They integrate natively with repository metadata.",
+"real_world_example": "Moving an issue card from 'In Progress' to 'Done' automatically when the linked PR is merged.",
+"common_mistake": "Using external project management tools for simple repos instead of leveraging native, automated GitHub Projects."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Milestones?",
+"simple_explanation": "Groups of issues and PRs tied to a specific goal or date.",
+"interview_answer": "Milestones track progress toward a specific release or sprint target. They show a completion percentage based on closed versus open issues. They are used to keep teams aligned on release schedules.",
+"real_world_example": "Grouping 20 bug-fix issues into a 'v2.0 Release' milestone to ensure nothing is forgotten before launch.",
+"common_mistake": "Creating milestones but forgetting to associate individual issues with them."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is a GitHub Webhook?",
+"simple_explanation": "An automated HTTP callback triggered by events in a repository.",
+"interview_answer": "Webhooks send POST requests to external URLs when repository events occur (like a push or issue creation). They are used to integrate GitHub with external CI/CD servers, Slack, or ticketing systems.",
+"real_world_example": "Configuring a webhook to ping a Jenkins server to start a build whenever code is pushed.",
+"common_mistake": "Failing to secure the webhook endpoint with a secret, allowing malicious actors to trigger false events."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is a Personal Access Token (PAT)?",
+"simple_explanation": "A secure alternative to using passwords for authentication.",
+"interview_answer": "PATs authorize Git over HTTPS or GitHub API requests. They are used because GitHub deprecated basic password authentication for security reasons. A key point is you can scope their permissions strictly.",
+"real_world_example": "Generating a PAT with 'repo' scope to allow an automated script to clone a private repository.",
+"common_mistake": "Selecting no expiration date for a PAT and leaving it active forever, creating a security risk."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "How do SSH Keys work in GitHub?",
+"simple_explanation": "Cryptographic keys used to authenticate securely without typing passwords.",
+"interview_answer": "You generate a public/private key pair, adding the public key to your GitHub account. It is used to establish secure, passwordless Git operations over the SSH protocol. It is highly recommended for daily developers.",
+"real_world_example": "Cloning a repo via 'git@github.com:user/repo.git' and relying on your local SSH agent to authenticate.",
+"common_mistake": "Uploading your private SSH key to GitHub instead of the public one."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is Dependabot?",
+"simple_explanation": "A tool that automatically checks for outdated or vulnerable dependencies.",
+"interview_answer": "Dependabot scans your repository's package files (like package.json). It automatically generates pull requests to update vulnerable or outdated libraries. It is used to proactively secure software supply chains.",
+"real_world_example": "Dependabot opening a PR to upgrade the 'lodash' library after a critical vulnerability was disclosed.",
+"common_mistake": "Ignoring Dependabot PRs for months, allowing security vulnerabilities to accumulate in production."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is a GitHub Release?",
+"simple_explanation": "A packaged version of software offered for download.",
+"interview_answer": "Releases are tied to Git tags and provide compiled binaries, release notes, and source code archives. They are used to distribute finished software to end-users cleanly. They are easily created via the UI.",
+"real_world_example": "Publishing 'v1.0.0' with attached Windows and Mac installer binaries and a changelog.",
+"common_mistake": "Creating a tag without drafting an actual GitHub Release, leaving users without compiled binaries."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are GitHub Tags?",
+"simple_explanation": "Markers that point to specific commits, usually for versioning.",
+"interview_answer": "The GitHub UI displays tags to help users navigate project history. Tags are used to definitively mark points like 'v2.1'. A key point is that GitHub Releases are built directly on top of tags.",
+"real_world_example": "Pushing a tag to GitHub to trigger an Action that publishes an NPM package.",
+"common_mistake": "Confusing a branch (which moves with new commits) with a tag (which stays permanently on one commit)."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Review Requests?",
+"simple_explanation": "Explicitly asking a team member to review a Pull Request.",
+"interview_answer": "Requesting a review notifies specific collaborators that their input is required on a PR. It is used to ensure code quality before merging. Branch protection rules often mandate a minimum number of approved reviews.",
+"real_world_example": "Requesting a review from the lead database engineer on a PR that alters SQL schema.",
+"common_mistake": "Merging a PR immediately after a review without resolving the requested changes."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "How do you handle Merge Conflicts in the GitHub UI?",
+"simple_explanation": "Using the built-in web editor to resolve overlapping code changes.",
+"interview_answer": "GitHub provides a web interface to resolve simple merge conflicts manually without using the CLI. It is used for quick fixes by letting you select which code to keep, then creates a resolution commit.",
+"real_world_example": "Using the UI editor to delete conflict markers (<<<<<<<) and keep both sets of CSS changes.",
+"common_mistake": "Attempting to resolve complex, multi-file architectural conflicts in the UI instead of pulling them locally."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are GitHub Discussions?",
+"simple_explanation": "A collaborative forum space separate from Issues.",
+"interview_answer": "Discussions provide a space for Q&A, feature ideas, and announcements without cluttering the actionable Issue tracker. It is used to build community engagement. You can mark specific replies as the 'Answer'.",
+"real_world_example": "Asking 'How do I configure this plugin?' in Discussions, reserving Issues strictly for code bugs.",
+"common_mistake": "Filing bug reports in Discussions where they cannot be easily tracked or closed by commits."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Issue/PR Templates?",
+"simple_explanation": "Pre-filled markdown structures for new issues or PRs.",
+"interview_answer": "Templates guide users to provide specific information (like reproduction steps or environment details) when opening an issue or PR. They are used to standardize bug reports and ensure maintainers get actionable data.",
+"real_world_example": "Creating a 'Bug Report' template that requires users to paste their OS and browser versions.",
+"common_mistake": "Making templates too long and complex, causing users to ignore them and delete the pre-filled text."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Status Checks?",
+"simple_explanation": "Automated tests that must pass before a PR can be merged.",
+"interview_answer": "Status checks run alongside PRs, executing CI pipelines or linters. If branch protection requires them, failing checks will block the merge button. They are used to ensure main branch stability.",
+"real_world_example": "A GitHub Action running Python unit tests and reporting a green checkmark on the PR.",
+"common_mistake": "Making a flaky test a required status check, blocking developers from merging perfectly good code."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "How do you sync a Fork in the GitHub UI?",
+"simple_explanation": "Clicking the 'Sync fork' button to fetch upstream changes.",
+"interview_answer": "GitHub provides a one-click button to update your fork's main branch with commits from the original (upstream) repository. It is used to prevent merge conflicts before starting new work. It avoids complex CLI rebasing.",
+"real_world_example": "Clicking 'Sync fork' to pull in the latest security patches from the original project before writing a new feature.",
+"common_mistake": "Starting a new branch on an out-of-date fork, causing massive conflicts when opening a PR to upstream."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is Commit Signature Verification?",
+"simple_explanation": "Validating that a commit was actually authored by the claimed user.",
+"interview_answer": "GitHub displays a 'Verified' badge for commits signed with cryptographic keys (GPG, SSH, or S/MIME). It prevents identity spoofing in Git. A key point is it builds trust in enterprise and open-source supply chains.",
+"real_world_example": "Signing a commit using a YubiKey so GitHub displays a green 'Verified' badge on the commit history.",
+"common_mistake": "Generating a GPG key locally but forgetting to upload the public key to your GitHub profile settings."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "How does the Revert PR feature work?",
+"simple_explanation": "It creates a new PR that undoes the changes of a merged PR.",
+"interview_answer": "Clicking the 'Revert' button on a merged PR automatically creates a new branch and PR that inverses the original code. It is the fastest way to roll back a deployment that broke production.",
+"real_world_example": "Reverting a PR that inadvertently dropped a database column, restoring the code instantly.",
+"common_mistake": "Reverting a PR and then trying to re-merge the original branch later, which Git rejects due to history rules."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are GitHub Codespaces?",
+"simple_explanation": "Cloud-hosted development environments accessible via the browser.",
+"interview_answer": "Codespaces provide a complete VS Code environment hosted on GitHub servers, pre-configured with project dependencies. They are used to onboard developers instantly without local laptop setup. They are billed by compute time.",
+"real_world_example": "Opening a Codespace on an iPad to quickly fix a typo and commit code without installing Git.",
+"common_mistake": "Leaving high-compute Codespaces running idle, accidentally consuming monthly usage quotas."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Environments in GitHub Actions?",
+"simple_explanation": "Deployment targets that support protection rules and specific secrets.",
+"interview_answer": "Environments represent deployment stages (like Staging or Production). They are used to enforce manual approval gates or specific timers before a GitHub Action can deploy code. They also hold environment-specific secrets.",
+"real_world_example": "Configuring a 'Production' environment to pause an Action until the QA manager clicks 'Approve'.",
+"common_mistake": "Storing production API keys as repository secrets instead of scoped environment secrets."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "How do Secrets work in GitHub Actions?",
+"simple_explanation": "Encrypted variables used to store sensitive data.",
+"interview_answer": "Secrets securely store passwords, tokens, and certificates. They are passed as environment variables to Actions runners. A key point is that once a secret is saved, its value can never be viewed again, only updated.",
+"real_world_example": "Storing an AWS_ACCESS_KEY so a GitHub Action can deploy infrastructure without hardcoding credentials.",
+"common_mistake": "Echoing a secret in an Action script; while GitHub masks it, poor scripting might still leak it to logs."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is GitHub Packages?",
+"simple_explanation": "A package hosting service deeply integrated with GitHub.",
+"interview_answer": "GitHub Packages hosts software packages (npm, Docker, Maven, NuGet) alongside source code. It uses GitHub credentials for access control, streamlining CI/CD pipelines by keeping code and compiled artifacts in one ecosystem.",
+"real_world_example": "A GitHub Action building a Docker image and pushing it directly to the GitHub Container Registry (ghcr.io).",
+"common_mistake": "Publishing public packages containing sensitive code, ignoring that packages have their own visibility settings."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "How do you track issues across multiple repositories?",
+"simple_explanation": "By using organization-wide GitHub Projects.",
+"interview_answer": "Organization-level GitHub Projects can pull in issues and PRs from multiple repositories into a single unified Kanban board. It is used by management to track complex epics that span various microservices.",
+"real_world_example": "Tracking frontend and backend repository tasks together on a single 'Sprint 4' board.",
+"common_mistake": "Creating repository-level projects for architecture epics, fracturing visibility across the team."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is Squash and Merge in the GitHub UI?",
+"simple_explanation": "It combines all PR commits into a single commit before merging.",
+"interview_answer": "Squash and merge condenses a messy PR history into one clean commit on the default branch. It is used to keep the main timeline readable. A key point is it alters commit hashes.",
+"real_world_example": "Squashing 15 'WIP' commits into a single 'Added Shopping Cart' commit when completing the PR.",
+"common_mistake": "Squashing shared, long-running collaboration branches, which makes syncing difficult for other contributors."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is Rebase and Merge in the GitHub UI?",
+"simple_explanation": "It adds PR commits to the main branch without a merge commit.",
+"interview_answer": "Rebase and merge takes all commits from the feature branch and applies them individually on top of the target branch. It maintains a perfectly linear history without the clutter of 'Merge' commits.",
+"real_world_example": "Using rebase and merge to integrate a 3-commit bugfix, keeping the main branch history a straight line.",
+"common_mistake": "Using this on massive PRs, flooding the main branch history with hundreds of granular, broken commits."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is the Network Graph?",
+"simple_explanation": "A visual representation of branch histories and forks.",
+"interview_answer": "The Network Graph under the 'Insights' tab visualizes the commit history across the repository and its forks. It is used to see how different branches diverge and when they were merged, helping understand collaboration.",
+"real_world_example": "Looking at the Network Graph to see how far behind your fork is from the original project.",
+"common_mistake": "Trying to use the Network Graph on massive monorepos, which can be incredibly slow and hard to read."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is the Traffic / Insights tab?",
+"simple_explanation": "A dashboard showing repository visitor analytics.",
+"interview_answer": "The Traffic tab displays page views, unique visitors, and referring sites over the last 14 days. It also shows which files are most popular. It is used by open-source maintainers to gauge project popularity.",
+"real_world_example": "Checking Traffic insights to see if a recent blog post drove more developers to clone your repository.",
+"common_mistake": "Assuming traffic data is kept forever; GitHub only stores 14 days of detailed traffic history."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Repository Topics?",
+"simple_explanation": "Tags that help classify and discover repositories.",
+"interview_answer": "Topics are keywords added to a repository's 'About' section. They improve searchability and group similar projects together. They are used to help developers find libraries related to specific technologies, like 'react' or 'machine-learning'.",
+"real_world_example": "Adding the 'python' and 'web-scraping' topics to make your tool discoverable by others.",
+"common_mistake": "Leaving topics blank, significantly reducing the open-source visibility of a project."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "Why enforce Two-Factor Authentication (2FA)?",
+"simple_explanation": "It adds an extra layer of security beyond just a password.",
+"interview_answer": "2FA requires users to provide a time-based code or security key when logging in. Organizations enforce it to prevent compromised passwords from exposing proprietary source code. GitHub mandates 2FA for active contributors.",
+"real_world_example": "Using an authenticator app on your phone to generate a code to log into GitHub securely.",
+"common_mistake": "Losing recovery codes, which can permanently lock you out of your account if your phone is lost."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are GitHub Sponsors?",
+"simple_explanation": "A feature allowing financial support for open-source developers.",
+"interview_answer": "GitHub Sponsors lets users and organizations fund the developers who build the open-source tools they rely on. It operates directly within the platform. A key point is it helps sustain open-source ecosystems.",
+"real_world_example": "A corporation sponsoring the maintainer of a critical JavaScript library for $500 a month.",
+"common_mistake": "Expecting sponsorship automatically; maintainers must actively apply and set up funding tiers."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What happens when you transfer repository ownership?",
+"simple_explanation": "The repository moves to a new user or organization, keeping its history.",
+"interview_answer": "Transferring ownership moves the code, issues, PRs, and wiki to a new account. GitHub automatically redirects web links and Git clone URLs. It is used when handing over a project to a community or company.",
+"real_world_example": "Moving a popular personal side-project into an official corporate organization account.",
+"common_mistake": "Transferring a repo and losing access because you aren't an admin in the destination organization."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "Dependabot Security Updates vs Version Updates?",
+"simple_explanation": "Security updates fix vulnerabilities; version updates keep packages current.",
+"interview_answer": "Security updates are triggered by known CVEs to patch dangerous vulnerabilities automatically. Version updates run on a schedule to keep libraries at their latest versions, preventing technical debt, even if no vulnerability exists.",
+"real_world_example": "A scheduled version update opening a PR to move React from v17 to v18.",
+"common_mistake": "Enabling version updates without automated test coverage, blindly merging PRs that break functionality."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are GitHub API Rate Limits?",
+"simple_explanation": "Restrictions on how many API requests you can make in an hour.",
+"interview_answer": "GitHub restricts unauthenticated requests to 60 per hour, and authenticated requests (via PAT) to 5,000 per hour. This protects the platform from abuse. Scripts must handle 403 or 429 status codes gracefully.",
+"real_world_example": "A CI script failing because it polled the GitHub API 100 times without an authentication token.",
+"common_mistake": "Running automated scraping scripts without a PAT, hitting the rate limit almost instantly."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What is a Deploy Key?",
+"simple_explanation": "An SSH key that grants access to a single repository.",
+"interview_answer": "A Deploy Key is a repository-specific SSH key. It is used by external servers (like Jenkins) to clone code without tying access to a personal user account. A key point is it can be read-only.",
+"real_world_example": "Adding a Deploy Key to a production server so it can securely 'git pull' code deployments.",
+"common_mistake": "Using a personal SSH key on a shared server, giving everyone access to all your personal repositories."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "Organization vs User Account?",
+"simple_explanation": "Users represent people; Organizations represent groups managing shared projects.",
+"interview_answer": "User accounts are personal and hold individual forks. Organization accounts cannot sign in; they group multiple users into teams with granular role-based access control (RBAC). Organizations are essential for enterprise security and billing.",
+"real_world_example": "Creating an organization for 'MyStartup' to group the backend, frontend, and infrastructure repositories.",
+"common_mistake": "Creating a fake 'shared user' account for a team instead of using a proper Organization structure."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "GitHub Apps vs OAuth Apps?",
+"simple_explanation": "GitHub Apps act independently; OAuth Apps act on behalf of a user.",
+"interview_answer": "GitHub Apps have fine-grained repository permissions, act as their own bot identities, and generate short-lived tokens. OAuth apps request broad permissions and act exactly as the authorizing user. GitHub Apps are the modern, secure standard.",
+"real_world_example": "Installing a CI/CD GitHub App that only requests read access to code and write access to commit statuses.",
+"common_mistake": "Using OAuth apps for automation, which consumes a user seat and breaks if the user leaves the company."
+},
+{
+"tool": "GitHub",
+"difficulty": "Medium",
+"question": "What are Actions Workflow Triggers?",
+"simple_explanation": "Events that cause a GitHub Action to run.",
+"interview_answer": "Triggers define when a workflow executes. They can be Git events (push, pull_request), schedule-based (cron), or manual (workflow_dispatch). A key point is workflows can be triggered by external systems via 'repository_dispatch'.",
+"real_world_example": "Using the 'workflow_dispatch' trigger to add a button allowing QA to manually deploy a staging environment.",
+"common_mistake": "Triggering heavy workflows on every single push instead of scoping them to specific branches or paths."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is GitHub Advanced Security (GHAS)?",
+"simple_explanation": "A suite of premium security features for enterprise organizations.",
+"interview_answer": "GHAS includes Secret Scanning, CodeQL code scanning, and Dependency review. It integrates security directly into the developer workflow. A key interview point is that it requires an additional enterprise license for private repositories.",
+"real_world_example": "An enterprise using GHAS to block pull requests that introduce SQL injection vulnerabilities.",
+"common_mistake": "Assuming GHAS features are free for private enterprise repos (they are only free for public open-source repos)."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How does Secret Scanning work?",
+"simple_explanation": "It automatically detects exposed credentials in code and alerts administrators.",
+"interview_answer": "Secret scanning parses all commits for patterns matching API keys, tokens, and passwords from known service providers. If a match is found, it alerts the repo admins and can even notify the provider to revoke the token automatically.",
+"real_world_example": "GitHub alerting an admin immediately after a developer accidentally commits an AWS Access Key.",
+"common_mistake": "Relying on secret scanning as a primary defense instead of utilizing pre-commit hooks to block secrets beforehand."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is CodeQL?",
+"simple_explanation": "GitHub's semantic code analysis engine for finding vulnerabilities.",
+"interview_answer": "CodeQL treats code like data, allowing security teams to write queries that find security flaws like cross-site scripting or buffer overflows. It is the engine powering GitHub's automated code scanning feature.",
+"real_world_example": "Running a CodeQL Action on a Java codebase to detect unsecured endpoints before they merge.",
+"common_mistake": "Assuming CodeQL replaces traditional unit tests; it only performs static security and quality analysis."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is a Self-hosted Runner?",
+"simple_explanation": "A machine you manage that executes GitHub Actions jobs.",
+"interview_answer": "Instead of using GitHub's shared cloud runners, you can install the runner agent on your own infrastructure (EC2, on-prem). They are used to bypass firewall restrictions, access internal databases, or utilize specific hardware like GPUs.",
+"real_world_example": "Using a self-hosted runner inside a corporate VPC to deploy code directly to an internal Kubernetes cluster.",
+"common_mistake": "Using self-hosted runners on public repositories, allowing malicious PRs to execute code directly on your private infrastructure."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How does OIDC work with GitHub Actions?",
+"simple_explanation": "It allows Actions to authenticate with cloud providers without storing long-lived secrets.",
+"interview_answer": "OpenID Connect lets a workflow request a short-lived, dynamically generated access token directly from a cloud provider like AWS or Azure. This entirely eliminates the risk of storing static, permanent IAM keys as GitHub Secrets.",
+"real_world_example": "An Action assuming an AWS IAM role via OIDC to safely push files to S3 without secret keys.",
+"common_mistake": "Setting up OIDC but failing to restrict the cloud trust policy to specific repositories, exposing the cloud account."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is a Matrix Strategy in Actions?",
+"simple_explanation": "A configuration to run the same job multiple times across different variable combinations.",
+"interview_answer": "A matrix allows you to test your code concurrently across multiple OS versions and language runtimes. It dynamically spawns parallel jobs. A key point is it drastically reduces YAML code duplication.",
+"real_world_example": "Testing a Node.js package against Node versions 14, 16, and 18 on both Ubuntu and Windows simultaneously.",
+"common_mistake": "Adding too many dimensions to a matrix, spawning hundreds of jobs and exhausting runner concurrency limits instantly."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are Merge Queues?",
+"simple_explanation": "A feature that serializes and tests PRs before merging them to main.",
+"interview_answer": "Merge queues resolve the 'semantic merge conflict' problem on highly active branches. They queue approved PRs, test them against the absolute latest code sequentially, and merge them only if tests pass, keeping main permanently green.",
+"real_world_example": "A 100-developer team using a merge queue to prevent overlapping PRs from breaking the production build.",
+"common_mistake": "Enabling merge queues without heavily optimizing CI speed, creating massive bottlenecks for deployments."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are Enterprise Managed Users (EMU)?",
+"simple_explanation": "Accounts entirely controlled by an organization's identity provider.",
+"interview_answer": "EMUs allow enterprises to provision and suspend GitHub accounts via an Identity Provider (IdP) like Azure AD. These accounts cannot collaborate outside the enterprise. It solves data exfiltration and compliance concerns for large corporations.",
+"real_world_example": "An employee leaving the company, and their GitHub access being revoked instantly via an Active Directory deprovisioning script.",
+"common_mistake": "Trying to convert existing personal GitHub accounts into EMUs (EMUs are strictly new, isolated accounts)."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How does SAML SSO work in GitHub?",
+"simple_explanation": "It forces users to authenticate via a corporate identity provider to access organization data.",
+"interview_answer": "SAML Single Sign-On links an employee's personal GitHub account to their corporate identity. When accessing organization resources, they must authenticate through Okta or Okta/Azure. If SSO is revoked, they lose org access but keep their personal account.",
+"real_world_example": "Logging into Okta to access a private enterprise repository using your personal GitHub username.",
+"common_mistake": "Failing to set up recovery codes before enabling mandatory SAML, risking locking administrators out."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is the GitHub GraphQL API?",
+"simple_explanation": "A flexible API that allows fetching exact data shapes in a single request.",
+"interview_answer": "Unlike the v3 REST API, the v4 GraphQL API allows clients to request specifically what they need, minimizing over-fetching and under-fetching. It is used to build highly efficient integrations and custom dashboards.",
+"real_world_example": "Querying exactly the names and status checks of the last 5 PRs without fetching massive commit payload bodies.",
+"common_mistake": "Continuing to use multiple chained REST API calls for complex data instead of one efficient GraphQL query."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How do you secure Webhook Payloads?",
+"simple_explanation": "By validating the HMAC signature sent in the request headers.",
+"interview_answer": "GitHub generates a hash signature using a configured secret token and sends it via the `X-Hub-Signature-256` header. The receiving server must compute the payload hash using the same secret to verify the payload is genuinely from GitHub.",
+"real_world_example": "A Jenkins server rejecting a malicious POST request because the cryptographic signature does not match.",
+"common_mistake": "Accepting webhook payloads blindly without verifying the signature, allowing arbitrary code execution triggers."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are Reusable Workflows?",
+"simple_explanation": "Workflows that can be called from other workflows.",
+"interview_answer": "Reusable workflows prevent YAML duplication across repositories. By using the 'workflow_call' trigger, a centralized pipeline (like a standard deployment template) can be maintained in one repo and referenced by dozens of other repositories.",
+"real_world_example": "Maintaining a single 'terraform-deploy.yml' workflow that all infrastructure microservices call to deploy safely.",
+"common_mistake": "Passing sensitive secrets directly as standard inputs instead of using the dedicated `secrets: inherit` directive."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "Reusable Workflows vs Composite Actions?",
+"simple_explanation": "Workflows define full jobs and environments; Composite actions group steps.",
+"interview_answer": "A Composite Action groups multiple steps into a single reusable step within a job. A Reusable Workflow defines entire jobs, including environments, runners, and matrices. Use composite actions for small tasks, workflows for full pipelines.",
+"real_world_example": "Using a Composite Action to group 'install dependencies, setup cache, and authenticate CLI' into one step.",
+"common_mistake": "Trying to use different runner types (Ubuntu vs Windows) inside a Composite Action, which is impossible."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is GitHub Copilot?",
+"simple_explanation": "An AI-powered pair programmer built into your code editor.",
+"interview_answer": "Trained on public code, Copilot suggests whole lines or functions as you type. In enterprise settings, GitHub Copilot for Business ensures organizational code is not used for telemetry or future AI training, satisfying legal compliance.",
+"real_world_example": "Writing a comment '//# Parse JSON to CSV' and hitting Tab to let Copilot write the boilerplate Python code.",
+"common_mistake": "Accepting Copilot code blindly without reviewing for security flaws or logical errors."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What happens when administrators bypass Required Status Checks?",
+"simple_explanation": "They force-merge code that failed CI, which can break production.",
+"interview_answer": "By default, repository admins can bypass branch protection rules. While useful during emergencies to merge hotfixes when CI is down, it introduces extreme risk. Best practice is to enforce 'Do not allow bypassing the above settings' for everyone.",
+"real_world_example": "An admin overriding a failed test suite to push an urgent security patch directly to main.",
+"common_mistake": "Allowing admins to constantly bypass rules out of convenience, destroying trust in the CI/CD pipeline."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are Fine-grained Personal Access Tokens?",
+"simple_explanation": "Newer tokens with strict repository scoping and specific permissions.",
+"interview_answer": "Unlike classic PATs which grant broad access across all repositories a user can see, fine-grained PATs target specific repositories and individual API actions (e.g., read-only for Issues). They minimize blast radius if compromised.",
+"real_world_example": "Generating a token that can only read issues on the 'website' repo and expires in exactly 7 days.",
+"common_mistake": "Using classic PATs with the 'repo' scope for simple automation scripts, exposing entire organizational codebases."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are IP Allow Lists?",
+"simple_explanation": "A security feature restricting access to enterprise assets from approved IP addresses.",
+"interview_answer": "IP Allow Lists prevent users from accessing organizational repositories, issues, or APIs unless their traffic originates from a whitelisted corporate VPN or office IP. It is a strict mitigation against credential theft.",
+"real_world_example": "Blocking an employee from pulling source code on their personal home Wi-Fi network.",
+"common_mistake": "Enabling IP Allow Lists without whitelisting third-party CI/CD IPs, breaking automated integrations instantly."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How do Organization Secrets work?",
+"simple_explanation": "Secrets defined at the org level that can be shared across multiple repositories.",
+"interview_answer": "Organization Secrets prevent duplicating keys across hundreds of repositories. Administrators can scope them to all repos, private repos, or explicitly selected repos. A key point is they drastically simplify credentials rotation.",
+"real_world_example": "Saving a SonarQube API token once at the Org level and using it in 50 different microservice workflows.",
+"common_mistake": "Sharing highly privileged AWS root credentials across 'All repositories' including low-trust experimental projects."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How does the Actions Cache work?",
+"simple_explanation": "It stores dependencies between workflow runs to speed up build times.",
+"interview_answer": "Using the 'actions/cache' step, runners save downloaded packages (like node_modules or .m2) to an external cache based on a hash of the lockfile. Subsequent runs restore this cache, bypassing heavy network downloads.",
+"real_world_example": "Reducing a Java build pipeline from 10 minutes to 2 minutes by caching Maven dependencies.",
+"common_mistake": "Caching the output artifacts instead of dependencies, which can result in deploying stale, outdated binaries."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How do you manage Concurrency in GitHub Actions?",
+"simple_explanation": "Using the 'concurrency' key to cancel or queue overlapping workflow runs.",
+"interview_answer": "Concurrency groups ensure that only one workflow or job runs at a time for a specific context (like a PR branch). It prevents race conditions during deployment and saves compute minutes by canceling redundant, outdated runs.",
+"real_world_example": "Canceling a running build because a developer pushed a new commit to the exact same pull request.",
+"common_mistake": "Applying a global concurrency group without scoping it to branches, limiting the entire repository to one build at a time."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How do custom domains and SSL work on GitHub Pages?",
+"simple_explanation": "You point a DNS record to GitHub, and they automatically provision a Let's Encrypt certificate.",
+"interview_answer": "By adding a CNAME file to your repository and updating your DNS provider with A/CNAME records, GitHub Pages routes your custom domain. A key point is GitHub handles SSL certificate creation and renewal natively.",
+"real_world_example": "Serving 'docs.mycompany.com' securely over HTTPS directly from a GitHub repository.",
+"common_mistake": "Forgetting to configure a CNAME record at your DNS provider, causing the site to remain on the default github.io domain."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are Repository Rulesets?",
+"simple_explanation": "An evolution of branch protection applied dynamically across multiple repositories.",
+"interview_answer": "Rulesets allow administrators to define bypassable or strict rules (like require signatures or PRs) based on naming patterns (e.g., all branches starting with 'release-*'). They can be enforced across an entire organization without configuring per-repo rules.",
+"real_world_example": "Enforcing that every repository in the organization must require 1 approving review on the 'main' branch.",
+"common_mistake": "Using overlapping Rulesets and Branch Protection rules, causing confusing evaluation logic for developers."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is an Internal Repository?",
+"simple_explanation": "A repository visible to all enterprise members but hidden from the public.",
+"interview_answer": "Internal repositories are an enterprise-only feature. They foster 'inner-source' collaboration, allowing anyone within the corporate organization to view and fork the code, without exposing it to the internet or external collaborators.",
+"real_world_example": "Hosting shared CSS UI components internally so any team can read the code without requesting explicit access.",
+"common_mistake": "Using private repositories for generic company tools, creating a heavy administrative burden for access requests."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is the GitHub Audit Log?",
+"simple_explanation": "A centralized log of all security and access events in an enterprise.",
+"interview_answer": "The Audit Log tracks repository creation, team modifications, and authentication events. It is essential for compliance and forensics. Enterprises can stream this log directly to an external SIEM like Datadog or Splunk via an API.",
+"real_world_example": "Using the audit log to determine who changed an internal repository to public visibility.",
+"common_mistake": "Relying on the UI for historical audits, since GitHub retains UI logs for limited periods; exporting to AWS S3 is safer."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How do you pass data between jobs in GitHub Actions?",
+"simple_explanation": "Use Job Outputs or upload/download Artifacts.",
+"interview_answer": "For simple strings, define outputs in Job A and reference them via the 'needs' context in Job B. For files or binaries, use 'actions/upload-artifact' in Job A and 'actions/download-artifact' in Job B.",
+"real_world_example": "Passing a compiled Go binary from a 'build' job to a 'deploy' job running on a different runner machine.",
+"common_mistake": "Trying to use local environment variables across different jobs, failing because each job spins up a completely fresh runner."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are Contexts in GitHub Actions?",
+"simple_explanation": "Collections of variables containing information about the workflow run and environment.",
+"interview_answer": "Contexts (like github, env, secrets, inputs) provide dynamic data to workflows. They use the `${{ <context> }}` syntax. A crucial point is understanding the difference between environment variables and contexts during the YAML evaluation phase.",
+"real_world_example": "Using `${{ github.actor }}` to send a Slack message tagging the specific person who triggered the deployment.",
+"common_mistake": "Using untrusted context variables like `${{ github.head_ref }}` directly in inline shell scripts, enabling shell injection attacks."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is GitHub Connect?",
+"simple_explanation": "A feature bridging GitHub Enterprise Server (on-prem) with GitHub Enterprise Cloud.",
+"interview_answer": "GitHub Connect allows on-premise users to search cloud repositories, sync Dependabot vulnerabilities, and utilize GitHub Actions cloud runners from within their strictly firewalled internal Enterprise Server environments.",
+"real_world_example": "A bank using GitHub Connect so on-premise developers can search open-source libraries hosted on github.com natively.",
+"common_mistake": "Assuming GitHub Connect synchronizes repository source code between cloud and on-prem instances."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What are Runner Groups?",
+"simple_explanation": "A way to restrict access to specific self-hosted runners.",
+"interview_answer": "Runner groups organize self-hosted runners at the enterprise or organization level. Administrators use them to grant runner access only to specific repositories, ensuring low-trust projects cannot execute code on high-trust internal deployment machines.",
+"real_world_example": "Creating a 'Production-Deployers' group and only allowing the 'core-api' repository to route jobs to it.",
+"common_mistake": "Putting a highly privileged self-hosted runner in the default group, letting any repository access internal databases."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "How does CodeQL Autobuild work?",
+"simple_explanation": "It automatically attempts to compile compiled languages for security scanning.",
+"interview_answer": "For languages like Java or C++, CodeQL must trace the compilation process to build a semantic database. The 'autobuild' action guesses the build commands (like 'mvn clean install'). If it fails, developers must replace it with explicit build steps.",
+"real_world_example": "Replacing 'autobuild' with a custom Gradle command because the repository uses an unconventional directory structure.",
+"common_mistake": "Using autobuild for interpreted languages like Python or JavaScript, which do not require compilation for CodeQL."
+},
+{
+"tool": "GitHub",
+"difficulty": "Hard",
+"question": "What is the Dependency Review API?",
+"simple_explanation": "An API/Action that blocks PRs introducing vulnerable dependencies.",
+"interview_answer": "Dependency Review acts as an enforcement layer for Dependabot. When configured in Actions, it compares the base and head commits. If the PR introduces a package with a known vulnerability, it fails the status check, blocking the merge.",
+"real_world_example": "Failing a PR immediately because a developer added an outdated, vulnerable version of 'log4j' to the package.xml.",
+"common_mistake": "Enabling Dependency Review without configuring branch protection rules, allowing developers to ignore the failure and merge anyway."
+}
+]

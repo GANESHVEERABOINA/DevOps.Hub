@@ -4,107 +4,98 @@
 "difficulty": "Easy",
 "question": "What is Docker?",
 "simple_explanation": "Docker is a platform for developing, shipping, and running applications in containers.",
-"interview_answer": "Docker is an open-source platform that automates the deployment of applications inside lightweight, portable containers. It packages code and its dependencies together to ensure consistency across different environments.",
-"real_world_example": "Using Docker to ensure an app runs the exact same way on a developer's Mac as it does on an AWS production server.",
-"common_mistake": "Thinking Docker is a programming language or framework."
-},
-{
-"tool": "Docker",
-"difficulty": "Easy",
-"question": "What is the difference between a Container and a Virtual Machine?",
-"simple_explanation": "Containers share the host OS kernel, while VMs require a full guest OS.",
-"interview_answer": "Virtual Machines virtualize the hardware and run a complete guest operating system, making them resource-heavy. Containers virtualize the operating system, sharing the host kernel, making them lightweight, fast to start, and efficient.",
-"real_world_example": "Running 10 Node.js containers on a laptop comfortably, whereas 10 VMs would freeze the machine.",
-"common_mistake": "Assuming containers provide the exact same strong hardware-level isolation as VMs."
-},
-{
-"tool": "Docker",
-"difficulty": "Easy",
-"question": "What is a Docker Image?",
-"simple_explanation": "A read-only template used to create Docker containers.",
-"interview_answer": "A Docker image is an immutable file that contains the source code, libraries, dependencies, tools, and other files needed for an application to run. It acts as a blueprint for containers.",
-"real_world_example": "An Ubuntu image pre-installed with Nginx and your website's HTML files.",
-"common_mistake": "Confusing an image (the blueprint) with a container (the running instance)."
+"interview_answer": "Docker is an open-source platform that packages applications into isolated environments called containers. It is used to ensure consistent software execution across any infrastructure. A key point is that it eliminates the 'it works on my machine' problem.",
+"real_world_example": "Using Docker to run the exact same Node.js application on a developer's Mac and an AWS production server.",
+"common_mistake": "Thinking Docker is a full virtual machine rather than an application-layer container engine."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is a Docker Container?",
-"simple_explanation": "A running instance of a Docker image.",
-"interview_answer": "A container is a standard unit of software that packages code and dependencies. It is an isolated, runtime instance of a Docker image executing on the Docker engine.",
-"real_world_example": "A running instance of a PostgreSQL database that your web app is currently writing data into.",
-"common_mistake": "Trying to edit files permanently inside a container without volumes; changes are lost on restart."
+"simple_explanation": "A container is a running instance of a Docker image.",
+"interview_answer": "A container is a lightweight, standalone, and executable software package containing code and dependencies. It is used to run applications in an isolated environment. Importantly, containers share the host machine's OS kernel.",
+"real_world_example": "Running a temporary PostgreSQL database container for local testing without installing it on your OS.",
+"common_mistake": "Assuming data saved inside a container persists permanently without using Docker volumes."
+},
+{
+"tool": "Docker",
+"difficulty": "Easy",
+"question": "What is a Docker Image?",
+"simple_explanation": "An image is a read-only template used to build containers.",
+"interview_answer": "A Docker image is an immutable file comprised of multiple layers, containing the application code, libraries, and tools. It is used as a blueprint to instantiate containers. Images are typically stored in a registry like Docker Hub.",
+"real_world_example": "Downloading the official 'nginx:latest' image to serve as the base for a web application.",
+"common_mistake": "Confusing an image (the blueprint) with a container (the running instance)."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is a Dockerfile?",
 "simple_explanation": "A text document containing commands to assemble a Docker image.",
-"interview_answer": "A Dockerfile is a script composed of various instructions (like FROM, RUN, CMD) that tells Docker how to build an image automatically step-by-step.",
-"real_world_example": "Writing a Dockerfile to copy a Python script, install requirements.txt, and start the app.",
+"interview_answer": "A Dockerfile is a script composed of sequential instructions that automate the image creation process. It is used to define the exact environment your application requires. Every instruction in a Dockerfile creates a new image layer.",
+"real_world_example": "Writing a Dockerfile that copies a Python script, installs dependencies, and defines the startup command.",
 "common_mistake": "Naming the file 'dockerfile.txt' instead of exactly 'Dockerfile' with no extension."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is Docker Hub?",
-"simple_explanation": "A cloud-based registry service for finding and sharing Docker images.",
-"interview_answer": "Docker Hub is the default public registry where developers can push their custom images and pull official images provided by software vendors like Node, Python, and Ubuntu.",
-"real_world_example": "Pulling the official 'redis' image from Docker Hub to quickly start a cache server.",
-"common_mistake": "Pushing proprietary company code to public Docker Hub repositories by accident."
+"simple_explanation": "Docker Hub is a cloud-based registry service for sharing Docker images.",
+"interview_answer": "Docker Hub is the default public registry where developers push and pull container images. It is used to distribute software globally and find official base images. Private repositories are also available for enterprise code.",
+"real_world_example": "Pulling the official 'ubuntu' base image from Docker Hub to start building a custom application environment.",
+"common_mistake": "Accidentally pushing a proprietary image containing hardcoded company secrets to a public Docker Hub repository."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What does the 'docker run' command do?",
-"simple_explanation": "It creates and starts a container from a specified image.",
-"interview_answer": "The docker run command is a combination of 'docker create' and 'docker start'. It allocates a read-write layer over the specified image and initiates the container's main process.",
-"real_world_example": "Executing 'docker run -p 80:80 nginx' to spin up a web server.",
-"common_mistake": "Running a container without the -d flag and closing the terminal, which kills the container."
+"simple_explanation": "It creates and starts a new container from an image.",
+"interview_answer": "The docker run command combines 'docker create' and 'docker start'. It is used to instantiate an image into an active container. You can pass various flags to attach volumes, map ports, or set environment variables.",
+"real_world_example": "Running 'docker run -p 80:80 nginx' to start a web server and map it to your local port 80.",
+"common_mistake": "Running a container without the detached flag (-d) and accidentally closing the terminal, killing the application."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What does the 'docker pull' command do?",
-"simple_explanation": "It downloads an image from a registry to your local machine.",
-"interview_answer": "Docker pull fetches an image and its corresponding layers from a specified registry (like Docker Hub) so it can be used locally to run containers.",
-"real_world_example": "Running 'docker pull ubuntu:20.04' before getting onto an airplane to work offline.",
-"common_mistake": "Forgetting to specify an image tag, which defaults to 'latest' and might break your app."
+"simple_explanation": "It downloads an image from a Docker registry to your local machine.",
+"interview_answer": "Docker pull fetches an image and its layered filesystem from a registry like Docker Hub. It is used to update local images or prepare for offline container execution. If no tag is specified, it pulls the 'latest' version.",
+"real_world_example": "Running 'docker pull redis:6.0' to download a specific version of a caching server before deployment.",
+"common_mistake": "Forgetting to specify an image tag, unintentionally pulling a major new version that breaks compatibility."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "How do you list running containers?",
 "simple_explanation": "Use the 'docker ps' command.",
-"interview_answer": "The 'docker ps' command lists all currently running containers. To see all containers, including stopped ones, use 'docker ps -a'.",
-"real_world_example": "Running 'docker ps' to find the Container ID of a hung application to kill it.",
-"common_mistake": "Assuming 'docker ps' shows images; it only shows containers."
+"interview_answer": "The docker ps command displays all currently active containers along with their IDs, names, and port mappings. It is used to monitor system state. Adding the '-a' flag shows stopped containers as well.",
+"real_world_example": "Running 'docker ps' to find the randomly generated name of a container you need to stop.",
+"common_mistake": "Expecting 'docker ps' to show Docker images; it only shows containers."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What does the 'docker build' command do?",
 "simple_explanation": "It builds an image from a Dockerfile.",
-"interview_answer": "The docker build command reads the instructions in a Dockerfile and creates a Docker image. You usually provide a tag name and the build context path (often just '.').",
-"real_world_example": "Running 'docker build -t my-app:v1 .' in your project root.",
-"common_mistake": "Forgetting the dot '.' at the end of the command, which specifies the build context."
+"interview_answer": "The docker build command reads instructions from a Dockerfile and context directory to generate a new Docker image. It is used during the CI/CD process to package new code. The '-t' flag is used to tag the resulting image.",
+"real_world_example": "Running 'docker build -t myapp:v1 .' to create an image tagged as v1 from the current directory.",
+"common_mistake": "Forgetting the dot '.' at the end of the command, which specifies the build context directory."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
-"question": "How do you list local Docker images?",
-"simple_explanation": "Use the 'docker images' command.",
-"interview_answer": "The 'docker images' (or 'docker image ls') command displays a list of all Docker images downloaded or built on your local host, showing their tags, IDs, and sizes.",
-"real_world_example": "Running 'docker images' to check if a newly built image was tagged correctly.",
-"common_mistake": "Looking for running containers in the 'docker images' output."
+"question": "How do you stop a running container?",
+"simple_explanation": "Use the 'docker stop' command.",
+"interview_answer": "Docker stop sends a SIGTERM signal to the container's main process, allowing it to shut down gracefully. It is used for safe application termination. If the process doesn't exit within a grace period, a SIGKILL is sent.",
+"real_world_example": "Running 'docker stop database_container' to safely close database connections before restarting.",
+"common_mistake": "Using 'docker kill' by default, which abruptly terminates the process and can cause data corruption."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "How do you delete a container?",
-"simple_explanation": "Use the 'docker rm' command followed by the container ID or name.",
-"interview_answer": "The 'docker rm' command removes stopped containers from the host machine to free up space. You must stop the container first or use the '-f' flag to force removal.",
-"real_world_example": "Running 'docker rm web-server' to clean up an old test environment.",
+"simple_explanation": "Use the 'docker rm' command.",
+"interview_answer": "The docker rm command removes stopped containers from the host machine to free up resources. It is used to clean up old instances. You cannot remove a running container unless you use the force (-f) flag.",
+"real_world_example": "Running 'docker rm old_test_container' to declutter your local development environment.",
 "common_mistake": "Trying to remove an image with 'docker rm' instead of 'docker rmi'."
 },
 {
@@ -112,746 +103,764 @@
 "difficulty": "Easy",
 "question": "How do you delete a Docker image?",
 "simple_explanation": "Use the 'docker rmi' command.",
-"interview_answer": "The 'docker rmi' command removes a Docker image from the local storage. You cannot remove an image if a container (even a stopped one) is currently based on it.",
-"real_world_example": "Running 'docker rmi ubuntu:18.04' to free up disk space.",
+"interview_answer": "Docker rmi removes an image from your local system. It is used to free up disk space when an image is no longer needed. An image cannot be deleted if a container is currently based on it.",
+"real_world_example": "Running 'docker rmi ubuntu:18.04' to reclaim disk space after upgrading your apps to a newer base image.",
 "common_mistake": "Confusing 'docker rm' (remove container) with 'docker rmi' (remove image)."
-},
-{
-"tool": "Docker",
-"difficulty": "Easy",
-"question": "How do you stop a running container?",
-"simple_explanation": "Use the 'docker stop' command.",
-"interview_answer": "The 'docker stop' command sends a SIGTERM signal to the main process inside the container, allowing it to shut down gracefully before finally sending a SIGKILL.",
-"real_world_example": "Running 'docker stop db-container' before taking a backup of the host volume.",
-"common_mistake": "Using 'docker kill' by default, which corrupts data by not allowing processes to close properly."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "How do you execute a command inside a running container?",
 "simple_explanation": "Use the 'docker exec' command.",
-"interview_answer": "The 'docker exec' command runs a new command in a running container. It is commonly used to open an interactive shell inside a container for debugging.",
-"real_world_example": "Running 'docker exec -it webapp bash' to poke around the file system of a running Node app.",
+"interview_answer": "Docker exec runs a new command inside an already running container. It is widely used for debugging and administration. Appending '-it' allows you to open an interactive terminal session inside the container.",
+"real_world_example": "Running 'docker exec -it webapp bash' to open a shell and inspect configuration files live.",
 "common_mistake": "Trying to use 'docker exec' on a container that has already stopped."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is the FROM instruction in a Dockerfile?",
-"simple_explanation": "It specifies the base image to build upon.",
-"interview_answer": "The FROM instruction initializes a new build stage and sets the Base Image for subsequent instructions. Every valid Dockerfile must start with a FROM instruction.",
-"real_world_example": "Using 'FROM node:18-alpine' to start with a lightweight Linux image that has Node.js pre-installed.",
-"common_mistake": "Putting commands like ENV or RUN before the FROM instruction."
+"simple_explanation": "It specifies the base image for the build.",
+"interview_answer": "The FROM instruction initializes a new build stage and sets the foundational image for subsequent instructions. It is required and must be the first valid command in a Dockerfile. It determines your OS environment.",
+"real_world_example": "Using 'FROM python:3.9-slim' to start with a lightweight Python environment.",
+"common_mistake": "Putting commands like RUN or ENV before the FROM instruction in the Dockerfile."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is the RUN instruction in a Dockerfile?",
-"simple_explanation": "It executes commands during the image build process.",
-"interview_answer": "The RUN instruction executes any commands in a new layer on top of the current image and commits the results. It is typically used for installing software packages.",
-"real_world_example": "Using 'RUN apt-get update && apt-get install -y curl' to add a tool to the image.",
-"common_mistake": "Using RUN to start a web server; RUN is for building, CMD is for running."
+"simple_explanation": "It executes commands in a new layer during the build process.",
+"interview_answer": "The RUN instruction executes arbitrary shell commands on top of the current image and commits the results. It is primarily used to install software packages and dependencies required by your application.",
+"real_world_example": "Using 'RUN apt-get update && apt-get install -y curl' to add a networking tool to your image.",
+"common_mistake": "Using RUN to start the application server, which should be done using CMD or ENTRYPOINT."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is the CMD instruction?",
-"simple_explanation": "It provides the default command to run when starting a container.",
-"interview_answer": "The CMD instruction specifies the default executable or parameters for a container when it starts. If a user provides arguments to 'docker run', they will override the CMD instruction.",
-"real_world_example": "Using 'CMD [\"node\", \"server.js\"]' to launch an app automatically when the container starts.",
+"simple_explanation": "It provides default arguments or the default command for an executing container.",
+"interview_answer": "CMD specifies the primary command that runs when a container starts. It is used to launch the main application process. If a user provides arguments to 'docker run', they completely override the CMD instruction.",
+"real_world_example": "Using 'CMD [\"node\", \"server.js\"]' to automatically start a Node.js API when the container boots.",
 "common_mistake": "Putting multiple CMD instructions in a Dockerfile; only the last one will take effect."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is the ENTRYPOINT instruction?",
-"simple_explanation": "It configures a container to run as an executable that cannot easily be overridden.",
-"interview_answer": "ENTRYPOINT specifies a command that will always run when the container starts. Unlike CMD, arguments passed to 'docker run' are appended to the ENTRYPOINT command rather than replacing it.",
-"real_world_example": "Setting 'ENTRYPOINT [\"python\", \"script.py\"]' so users can just type 'docker run myapp --help' to pass arguments.",
-"common_mistake": "Not understanding that ENTRYPOINT and CMD can be combined (ENTRYPOINT for the executable, CMD for default arguments)."
+"simple_explanation": "It configures a container to run as a specific executable.",
+"interview_answer": "ENTRYPOINT specifies a command that will always run when the container starts. It is used when you want the container to behave like a dedicated CLI tool. Arguments passed to 'docker run' are appended to the ENTRYPOINT.",
+"real_world_example": "Setting 'ENTRYPOINT [\"python\", \"script.py\"]' so users can just type 'docker run myapp --help'.",
+"common_mistake": "Using ENTRYPOINT when you actually want users to easily override the startup command."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
-"question": "What does the EXPOSE instruction do?",
-"simple_explanation": "It documents the ports the container listens on at runtime.",
-"interview_answer": "The EXPOSE instruction functions as a type of documentation between the person who builds the image and the person who runs it. It does not actually publish the port to the host machine.",
-"real_world_example": "Writing 'EXPOSE 8080' so other developers know which port the web application uses inside the container.",
-"common_mistake": "Thinking EXPOSE automatically makes the port accessible from the host's web browser (you still need the -p flag)."
+"question": "What is the EXPOSE instruction?",
+"simple_explanation": "It documents the ports a container listens on.",
+"interview_answer": "EXPOSE functions as a type of documentation between the image builder and the person running the container. It indicates which ports the application uses, but it does not actually publish the port to the host machine.",
+"real_world_example": "Adding 'EXPOSE 8080' to a Dockerfile so other developers know to map that port when running it.",
+"common_mistake": "Thinking EXPOSE automatically makes the port accessible from the internet without using the '-p' flag."
+},
+{
+"tool": "Docker",
+"difficulty": "Easy",
+"question": "What is the WORKDIR instruction?",
+"simple_explanation": "It sets the working directory for subsequent Dockerfile instructions.",
+"interview_answer": "WORKDIR establishes the path where RUN, CMD, ENTRYPOINT, COPY, and ADD commands execute. It is used to organize files cleanly inside the container. If the directory does not exist, Docker creates it automatically.",
+"real_world_example": "Setting 'WORKDIR /app' so all source code is neatly contained in a specific application folder.",
+"common_mistake": "Using 'RUN cd /app' instead of WORKDIR, which does not persist across different image layers."
+},
+{
+"tool": "Docker",
+"difficulty": "Easy",
+"question": "What is the ENV instruction?",
+"simple_explanation": "It sets environment variables inside the image.",
+"interview_answer": "The ENV instruction defines persistent environment variables that are available during the build process and when the container runs. It is used to configure application paths, modes, or default settings.",
+"real_world_example": "Using 'ENV NODE_ENV=production' to ensure a JavaScript app runs in its optimized mode.",
+"common_mistake": "Hardcoding sensitive secrets like API keys using ENV, making them visible to anyone who inspects the image."
+},
+{
+"tool": "Docker",
+"difficulty": "Easy",
+"question": "What is Docker Desktop?",
+"simple_explanation": "A GUI application that installs and manages Docker environments.",
+"interview_answer": "Docker Desktop bundles the Docker Engine, CLI, and Compose into an easy-to-install application for Windows and Mac. It is used by developers for local container testing. It relies on a lightweight underlying virtual machine.",
+"real_world_example": "Installing Docker Desktop on a MacBook to immediately start building containers without configuring Linux VMs manually.",
+"common_mistake": "Trying to install Docker Desktop on an Ubuntu server instead of just installing the native Docker Engine."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is the Docker Daemon?",
 "simple_explanation": "The background service managing Docker objects.",
-"interview_answer": "The Docker daemon (dockerd) listens for Docker API requests and manages Docker objects such as images, containers, networks, and volumes.",
-"real_world_example": "When a build fails with 'Cannot connect to the Docker daemon', it means dockerd isn't running on the system.",
-"common_mistake": "Confusing the Docker CLI (client) with the Docker Daemon (server)."
-},
-{
-"tool": "Docker",
-"difficulty": "Easy",
-"question": "What is the Docker CLI?",
-"simple_explanation": "The command-line interface used to interact with Docker.",
-"interview_answer": "The Docker client (docker command) is the primary way that many Docker users interact with Docker. It uses the Docker API to send commands to the Docker daemon.",
-"real_world_example": "Typing 'docker run' in the terminal uses the CLI to tell the daemon to start a container.",
-"common_mistake": "Assuming the CLI actually builds the image, when it just sends the build context to the daemon."
+"interview_answer": "The Docker daemon (dockerd) listens for Docker API requests and manages core objects such as images, containers, networks, and volumes. It is the actual engine doing the heavy lifting on the host operating system.",
+"real_world_example": "When a build fails with 'Cannot connect to the Docker daemon', it means dockerd crashed or wasn't started.",
+"common_mistake": "Confusing the Docker CLI (the client you type commands into) with the Docker Daemon (the server)."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is a Docker image tag?",
 "simple_explanation": "A label used to identify a specific version of an image.",
-"interview_answer": "Tags are aliases for image IDs, primarily used to denote versions or variants of an image. They format as 'image_name:tag'.",
-"real_world_example": "Using 'postgres:13' to specifically use PostgreSQL version 13 instead of the newest version.",
-"common_mistake": "Assuming tags are immutable; an author can push a different image over an existing tag."
+"interview_answer": "Tags are aliases for specific image IDs, used to denote versions, architectures, or environments. They format as 'image_name:tag'. They are essential for ensuring stable, repeatable deployments by locking to a specific version.",
+"real_world_example": "Using 'postgres:13-alpine' to specifically use PostgreSQL version 13 on a lightweight Alpine OS.",
+"common_mistake": "Assuming tags are immutable; maintainers can push a totally different image over an existing tag."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What does the 'latest' tag mean?",
 "simple_explanation": "It is the default tag applied if no tag is specified.",
-"interview_answer": "The 'latest' tag has no special programmatic meaning; it is simply the default string applied to images. It usually points to the most recent stable release, but relies entirely on the maintainer to update it.",
-"real_world_example": "Pulling 'nginx' defaults to pulling 'nginx:latest'.",
-"common_mistake": "Using 'latest' in production, which causes unexpected breaks when the underlying image updates."
+"interview_answer": "The 'latest' tag has no special programmatic meaning; it is simply the default string Docker applies. It relies entirely on the image maintainer to update it. It is strongly discouraged for production use.",
+"real_world_example": "Pulling 'nginx' automatically defaults to pulling 'nginx:latest'.",
+"common_mistake": "Using the 'latest' tag in production deployments, causing unexpected application breaks when the underlying image updates."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
-"question": "How do you view the logs of a container?",
+"question": "How do you view container logs?",
 "simple_explanation": "Use the 'docker logs' command.",
-"interview_answer": "The 'docker logs' command fetches the logs present at the time of execution. You can use the '-f' (follow) flag to stream live logs from standard output.",
-"real_world_example": "Running 'docker logs -f my-app' to watch server requests stream in real-time.",
-"common_mistake": "Looking for log files manually inside the container's /var/log instead of relying on Docker's stdout logging."
+"interview_answer": "The docker logs command fetches the standard output and standard error from a container. It is the primary troubleshooting tool. You can use the '-f' flag to follow the live stream of logs.",
+"real_world_example": "Running 'docker logs -f myapp' to watch live HTTP requests hitting your web container.",
+"common_mistake": "Looking for log files manually inside the container's /var/log directory instead of relying on Docker's stdout capture."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is a Base Image?",
-"simple_explanation": "An image that has no parent image.",
-"interview_answer": "A base image is the starting point for building a custom Docker image. It is usually a minimal operating system layer, like Ubuntu, Alpine, or Debian.",
-"real_world_example": "Starting a Dockerfile with 'FROM alpine' to use the Alpine Linux base image.",
-"common_mistake": "Creating a massive image because you chose 'ubuntu' as a base instead of a slim or alpine variant."
+"simple_explanation": "An image that serves as the foundation for your custom image.",
+"interview_answer": "A base image is the starting point referenced in the FROM instruction. It usually contains a minimal operating system layer, like Ubuntu or Alpine, or a pre-configured language runtime like Node or Python.",
+"real_world_example": "Starting a Dockerfile with 'FROM alpine' to use the ultra-small Alpine Linux base image.",
+"common_mistake": "Choosing a massive base image like full Ubuntu for a simple Go binary, inflating the image size by 500MB."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
 "question": "What is the 'scratch' image?",
 "simple_explanation": "An explicitly empty image used for building minimal containers.",
-"interview_answer": "The 'scratch' image is an empty Docker image with zero layers. It is mostly used for building extremely minimal images containing statically compiled binaries like Go applications.",
-"real_world_example": "Using 'FROM scratch' and adding a single Go executable to make a 5MB Docker image.",
-"common_mistake": "Trying to run bash or ls in a scratch container (it has no shell or OS utilities)."
+"interview_answer": "The 'scratch' image has zero layers and contains absolutely nothing. It is used to build extremely small, secure containers containing only statically compiled binaries, eliminating OS-level vulnerabilities entirely.",
+"real_world_example": "Using 'FROM scratch' and adding a single compiled Go executable to create a 5MB production image.",
+"common_mistake": "Trying to run basic shell commands like 'ls' or 'bash' in a scratch container, which lacks all OS utilities."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
-"question": "What is Docker Compose?",
-"simple_explanation": "A tool for defining and running multi-container Docker applications.",
-"interview_answer": "Docker Compose uses a YAML file to configure application services, networks, and volumes. Then, with a single command, you create and start all the services from your configuration.",
-"real_world_example": "Using a docker-compose.yml file to spin up a web frontend, Node backend, and Redis cache simultaneously.",
-"common_mistake": "Trying to use Docker Compose natively to scale applications across multiple physical servers (it's primarily for single-host)."
+"question": "What does Detached mode (-d) do?",
+"simple_explanation": "It runs the container in the background.",
+"interview_answer": "Running a container with the '-d' flag starts it in the background and prints the container ID to the terminal. It is used to free up your command prompt while a long-running service executes.",
+"real_world_example": "Starting a Redis caching database with 'docker run -d redis' so you can keep typing commands in the same window.",
+"common_mistake": "Running an interactive base image like ubuntu in detached mode; it will exit immediately without a long-running process."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
-"question": "What is Docker Desktop?",
-"simple_explanation": "A GUI application that installs and manages Docker environments on Windows and Mac.",
-"interview_answer": "Docker Desktop bundles the Docker Engine, Docker CLI client, Docker Compose, and a lightweight Linux VM to run containers natively on Windows and macOS workstations.",
-"real_world_example": "Installing Docker Desktop on a MacBook to get the 'docker' command working instantly.",
-"common_mistake": "Trying to install Docker Desktop on an Ubuntu server instead of the standard Docker Engine."
+"question": "How does Port Mapping work in Docker?",
+"simple_explanation": "It forwards traffic from a host machine port to a container port.",
+"interview_answer": "Using the '-p host_port:container_port' flag, Docker binds a port on your physical host to a port inside the container's isolated network. It is required to make containerized web applications accessible to the outside world.",
+"real_world_example": "Running '-p 8080:80' allows you to access an Nginx container (port 80) by visiting localhost:8080 on your browser.",
+"common_mistake": "Reversing the port order and typing container_port:host_port, causing connection refused errors."
 },
 {
 "tool": "Docker",
 "difficulty": "Easy",
-"question": "What is an image layer?",
-"simple_explanation": "A read-only modification to an image resulting from a Dockerfile instruction.",
-"interview_answer": "Each instruction in a Dockerfile (like RUN, COPY) creates a read-only layer. Layers are stacked and cached, meaning if a layer hasn't changed, Docker reuses it to speed up builds.",
-"real_world_example": "Changing the source code at the end of a Dockerfile so the heavy 'npm install' layer above it is cached and reused.",
-"common_mistake": "Running 'apt-get update' and 'apt-get install' in separate RUN commands, creating unnecessary cache layers."
+"question": "What is a .dockerignore file?",
+"simple_explanation": "A file that excludes patterns from being copied into the image.",
+"interview_answer": "Similar to .gitignore, .dockerignore prevents specified files and directories from being sent to the Docker daemon during a build. It is vital for speeding up build times and keeping final images small.",
+"real_world_example": "Adding 'node_modules' to .dockerignore so local dependencies aren't accidentally copied into a Node.js image.",
+"common_mistake": "Not using a .dockerignore file at all, causing huge local file transfers and slow 'docker build' execution."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What are Docker Volumes?",
-"simple_explanation": "Managed storage locations to persist data outside the container's lifecycle.",
-"interview_answer": "Volumes are the preferred mechanism for persisting data generated by and used by Docker containers. They are completely managed by Docker and are stored on the host file system isolated from other host processes.",
-"real_world_example": "Mounting a volume to /var/lib/postgresql/data so database records survive a container restart.",
-"common_mistake": "Relying on the container's writable layer for data storage, leading to complete data loss upon deletion."
+"simple_explanation": "Managed storage locations used to persist data generated by containers.",
+"interview_answer": "Volumes are the preferred mechanism for persisting stateful data outside the container's ephemeral lifecycle. They are fully managed by Docker, isolated from core host processes, and can be safely shared among multiple containers.",
+"real_world_example": "Mounting a volume to /var/lib/postgresql/data so database records survive a container restart or deletion.",
+"common_mistake": "Relying on the container's default writable layer for data storage, leading to complete data loss upon removal."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What is a Bind Mount?",
 "simple_explanation": "Mounting a specific file or directory from the host machine into a container.",
-"interview_answer": "Bind mounts map an absolute path on the host system to a path inside the container. They rely on the host machine's directory structure and are often used for local development to sync code changes instantly.",
-"real_world_example": "Mounting the local './src' folder to '/app/src' in the container so live-reloading works during development.",
+"interview_answer": "Bind mounts map an absolute path on the host system directly to a path inside the container. They rely heavily on the host machine's directory structure and are primarily used for local development for live-reloading code.",
+"real_world_example": "Mounting a local './src' folder to '/app/src' in a container so code changes are reflected instantly.",
 "common_mistake": "Using bind mounts in production, which tightly couples the container to the host's exact filesystem layout."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
-"question": "What is the Bridge Network driver?",
+"question": "What is the Docker Bridge Network?",
 "simple_explanation": "The default network driver for standalone containers.",
-"interview_answer": "A bridge network is a software-defined network created by Docker that allows containers connected to the same bridge network to communicate, while providing isolation from containers not connected to it.",
-"real_world_example": "Two containers on a custom bridge network pinging each other using their container names.",
-"common_mistake": "Expecting containers on the default 'bridge' network to resolve each other's names via DNS (only custom bridge networks support DNS resolution)."
+"interview_answer": "A bridge network is a software-defined network that allows containers connected to it to communicate with each other while providing isolation from containers not on that network. User-defined bridges provide automatic DNS resolution.",
+"real_world_example": "Two microservice containers on a custom bridge network securely pinging each other using their container names.",
+"common_mistake": "Expecting containers on the default 'bridge' network to resolve each other's names via DNS (only custom bridges do this)."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What is the Host Network driver?",
 "simple_explanation": "A network mode that removes network isolation between the container and host.",
-"interview_answer": "Using the host network, a container shares the host's networking namespace, bypassing Docker's network isolation. If the container binds to port 80, it binds directly to port 80 on the host machine.",
-"real_world_example": "Using host networking for a high-performance proxy container to avoid NAT overhead.",
-"common_mistake": "Trying to run two containers on the host network listening on the exact same port, causing a conflict."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What is the None Network driver?",
-"simple_explanation": "A network mode that completely disables networking for the container.",
-"interview_answer": "The 'none' network driver puts the container in its own networking namespace but does not configure any interfaces (except loopback). The container has no access to external networks.",
-"real_world_example": "Running a batch processing container that only reads/writes to a volume and requires strict security isolation.",
-"common_mistake": "Using the none network and then wondering why 'apt-get' or 'curl' fails inside the container."
+"interview_answer": "Using the host network, a container shares the host's networking namespace completely. If the container binds to port 80, it binds directly to port 80 on the host machine without needing port mapping.",
+"real_world_example": "Using host networking for a high-performance proxy container to avoid the latency overhead of NAT routing.",
+"common_mistake": "Trying to run two containers on the host network listening on the exact same port, causing a strict port conflict."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What is the Macvlan Network driver?",
-"simple_explanation": "It assigns a MAC address to a container, making it appear as a physical device.",
-"interview_answer": "Macvlan allows you to assign physical network IPs directly to containers by giving them unique MAC addresses. The Docker daemon routes traffic to containers based on their MAC addresses.",
+"simple_explanation": "It assigns a physical MAC address to a container.",
+"interview_answer": "Macvlan allows you to assign physical network IPs directly to containers by giving them unique MAC addresses. The Docker daemon routes traffic to containers based on their MAC addresses, making them appear as physical devices.",
 "real_world_example": "Connecting a legacy application container directly to an existing physical VLAN without NAT routing.",
-"common_mistake": "Causing network broadcast storms by incorrectly configuring macvlan interfaces."
+"common_mistake": "Causing network broadcast storms by incorrectly configuring overlapping macvlan interfaces."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What is Docker Compose?",
+"simple_explanation": "A tool for defining and running multi-container Docker applications.",
+"interview_answer": "Docker Compose uses a YAML file to configure application services, networks, and volumes. It allows developers to create and start entire environments with a single command, ensuring consistency across complex multi-tier applications.",
+"real_world_example": "Using a docker-compose.yml file to spin up a web frontend, Node backend, and Redis cache simultaneously.",
+"common_mistake": "Trying to use Docker Compose natively to scale applications across multiple physical servers (it's designed for single-host)."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What does 'docker-compose up' do?",
-"simple_explanation": "Builds, (re)creates, starts, and attaches to containers for a service.",
-"interview_answer": "The 'docker-compose up' command parses the docker-compose.yml file, sets up the defined networks and volumes, and starts all the service containers. Using the '-d' flag runs it in the background.",
-"real_world_example": "Running 'docker-compose up -d' to start an entire local development environment.",
-"common_mistake": "Forgetting that 'docker-compose up' does not rebuild images by default if they already exist."
+"simple_explanation": "Builds, creates, starts, and attaches to containers for a service.",
+"interview_answer": "The command parses the docker-compose.yml file, sets up the defined networks and volumes, and starts all the service containers. Using the '-d' flag runs it all cleanly in the background.",
+"real_world_example": "Running 'docker-compose up -d' to start an entire local development environment in seconds.",
+"common_mistake": "Forgetting that 'docker-compose up' does not rebuild images by default if older versions already exist."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What does 'docker-compose down' do?",
-"simple_explanation": "Stops and removes containers, networks, and default volumes created by 'up'.",
-"interview_answer": "The command stops containers and removes the containers, networks, and anonymous volumes defined in the compose file. Named volumes are kept by default to prevent data loss.",
-"real_world_example": "Running 'docker-compose down -v' to completely wipe an environment clean, including data volumes.",
-"common_mistake": "Confusing 'docker-compose stop' (just pauses) with 'docker-compose down' (destroys the containers)."
+"simple_explanation": "Stops and removes containers, networks, and volumes created by 'up'.",
+"interview_answer": "This command cleanly tears down the environment defined in the compose file. It removes containers and default networks, but keeps named volumes by default to prevent accidental data loss unless the '-v' flag is used.",
+"real_world_example": "Running 'docker-compose down -v' to completely wipe a test environment clean, including stale database volumes.",
+"common_mistake": "Confusing 'docker-compose stop' (which just pauses execution) with 'docker-compose down' (which destroys the containers)."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What are Restart Policies?",
-"simple_explanation": "Rules that dictate if Docker should automatically restart a container when it exits.",
-"interview_answer": "Restart policies (like 'always', 'unless-stopped', 'on-failure') tell the Docker daemon what to do when a container dies. This ensures high availability and resilience for background services.",
-"real_world_example": "Adding '--restart unless-stopped' to a web server so it comes back online after a server reboot.",
-"common_mistake": "Using 'always' on a one-off batch script, causing it to run repeatedly forever."
+"simple_explanation": "Rules that dictate if Docker should automatically restart an exited container.",
+"interview_answer": "Restart policies (like 'always', 'unless-stopped', 'on-failure') tell the Docker daemon how to handle a container crash or a host reboot. They are critical for ensuring high availability of background services.",
+"real_world_example": "Adding '--restart unless-stopped' to a web server so it comes back online automatically after a server reboot.",
+"common_mistake": "Using the 'always' policy on a one-off batch processing script, causing it to run repeatedly forever."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
-"question": "What is a .dockerignore file?",
-"simple_explanation": "A file that specifies which files/directories to exclude from the image build.",
-"interview_answer": "Similar to .gitignore, .dockerignore excludes files from being sent to the Docker daemon as part of the build context. This makes builds faster and reduces final image size.",
-"real_world_example": "Adding 'node_modules' to .dockerignore so local dependencies aren't accidentally copied into the image.",
-"common_mistake": "Not using a .dockerignore file, causing huge file transfers and slow 'docker build' times."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How do you pass environment variables to a container?",
-"simple_explanation": "Use the '-e' flag with 'docker run' or the 'environment' key in Compose.",
-"interview_answer": "Environment variables can be injected at runtime using the '-e' flag, by passing a file with '--env-file', or defined inside the Dockerfile using the ENV instruction.",
-"real_world_example": "Running 'docker run -e DB_PASS=secret my-app' to securely configure database access.",
-"common_mistake": "Hardcoding API keys in the Dockerfile using ENV, which makes them visible in image history."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What is the difference between ARG and ENV?",
-"simple_explanation": "ARG is available only during the build, ENV is available during build and runtime.",
-"interview_answer": "ARG defines variables that users can pass at build-time to the builder using '--build-arg'. ENV sets environment variables that persist in the final image and are available to the running container.",
-"real_world_example": "Using ARG to specify an NPM access token to download private packages, so the token isn't stored in the final image.",
-"common_mistake": "Trying to use an ARG variable in the CMD instruction of the running application."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How does Port Mapping work?",
-"simple_explanation": "It forwards traffic from a host machine port to a container port.",
-"interview_answer": "Using the '-p host_port:container_port' flag, Docker binds a port on the host network interface to a port inside the container's network namespace, allowing external access.",
-"real_world_example": "Running '-p 8080:80' maps your laptop's port 8080 to the Nginx container's port 80.",
-"common_mistake": "Reversing the order and typing container_port:host_port."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What does Detached mode (-d) do?",
-"simple_explanation": "It runs the container in the background and prints the container ID.",
-"interview_answer": "Running a container with '-d' starts it in the background, freeing up your current terminal prompt. The container will continue running as long as its main process is active.",
-"real_world_example": "Starting a Redis database with 'docker run -d redis' so you can keep working in the same terminal.",
-"common_mistake": "Running an interactive image (like base ubuntu) in detached mode without a long-running process; it exits immediately."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What does 'docker inspect' do?",
-"simple_explanation": "Returns detailed low-level information about Docker objects.",
-"interview_answer": "The command provides a JSON payload detailing the configuration, networking, IP addresses, volume mounts, and state of containers, images, or networks.",
-"real_world_example": "Running 'docker inspect db-container' to find its exact internal IP address on the bridge network.",
-"common_mistake": "Trying to manually parse the giant JSON output instead of using the '--format' flag to filter data."
+"question": "What are Multi-stage builds?",
+"simple_explanation": "Using multiple FROM statements to create a lean final image.",
+"interview_answer": "Multi-stage builds allow you to use one image to compile your application (with all heavy SDKs) and selectively copy the compiled artifacts into a smaller, runtime-only base image. This drastically reduces image size and attack surface.",
+"real_world_example": "Building a Go binary in a heavy 'golang' image, then copying just the binary into an empty 'scratch' image.",
+"common_mistake": "Leaving source code and compilers in the final production stage, creating bloated and insecure images."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What does 'docker stats' do?",
 "simple_explanation": "Displays a live stream of container resource usage statistics.",
-"interview_answer": "The command shows real-time metrics including CPU percentage, Memory usage/limits, network I/O, and block I/O for all running containers on the host.",
-"real_world_example": "Using 'docker stats' to identify which container is causing the host server to run out of memory.",
-"common_mistake": "Assuming 'docker stats' tracks historical data; it only shows real-time metrics."
+"interview_answer": "The command shows real-time metrics including CPU percentage, Memory usage/limits, network I/O, and block I/O for all running containers on the host. It is vital for performance monitoring.",
+"real_world_example": "Using 'docker stats' to identify which specific container is causing the host server to run out of memory.",
+"common_mistake": "Assuming 'docker stats' tracks historical data over time; it only shows real-time instantaneous metrics."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What does 'docker inspect' do?",
+"simple_explanation": "Returns detailed low-level configuration information about Docker objects.",
+"interview_answer": "This command outputs a large JSON payload detailing the configuration, networking, IP addresses, volume mounts, and state of containers or images. It is heavily used in scripting and deep troubleshooting.",
+"real_world_example": "Running 'docker inspect db-container' to find its exact internal IP address on the bridge network.",
+"common_mistake": "Trying to manually read the giant raw JSON output instead of using the '--format' flag to filter specific data."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "How do you clean up unused Docker resources?",
 "simple_explanation": "Use the 'docker system prune' command.",
-"interview_answer": "The 'docker system prune' command removes all stopped containers, dangling images, and unused networks. Adding the '-a' flag also removes unused images, and '--volumes' removes unused volumes.",
-"real_world_example": "Running 'docker system prune -a --volumes' to reclaim 20GB of disk space on a build server.",
-"common_mistake": "Running prune with --volumes on a production system and accidentally deleting a disconnected database volume."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How do multi-container applications communicate?",
-"simple_explanation": "By connecting to the same Docker network and using container names as DNS hostnames.",
-"interview_answer": "When containers are placed on the same custom bridge network, Docker's embedded DNS server resolves container names to their internal IP addresses, allowing seamless communication.",
-"real_world_example": "A backend API connecting to a database simply by using 'mongodb://db-container:27017'.",
-"common_mistake": "Using deprecated '--link' flags or hardcoding container IP addresses, which change on restart."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How do you backup a Docker volume?",
-"simple_explanation": "Mount the volume in a temporary container and tar the contents to the host.",
-"interview_answer": "You run a throwaway container that mounts the target volume and a local host directory, then execute the 'tar' command to compress the volume data into an archive on the host.",
-"real_world_example": "Running 'docker run --rm -v my_vol:/vol -v $(pwd):/backup ubuntu tar cvf /backup/backup.tar /vol'.",
-"common_mistake": "Trying to copy files directly out of /var/lib/docker/volumes on the host, which can cause permissions issues."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How do you override the CMD instruction at runtime?",
-"simple_explanation": "Add the desired command at the very end of the 'docker run' command.",
-"interview_answer": "Any strings appended after the image name in a 'docker run' command will override the default CMD defined in the Dockerfile.",
-"real_world_example": "Running 'docker run ubuntu echo \"Hello\"' overrides the default bash CMD to just print 'Hello'.",
-"common_mistake": "Trying to override an ENTRYPOINT by appending a command normally (requires the --entrypoint flag)."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What is the USER instruction in a Dockerfile?",
-"simple_explanation": "It sets the user or UID to use when running the image.",
-"interview_answer": "The USER instruction changes the active user context for any subsequent RUN, CMD, or ENTRYPOINT commands. This is critical for security to prevent containers from running as root.",
-"real_world_example": "Using 'USER node' in a Node.js image to drop root privileges before starting the application.",
-"common_mistake": "Running public facing web apps as the root user inside the container."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What is the HEALTHCHECK instruction?",
-"simple_explanation": "It tells Docker how to test if a container is still working.",
-"interview_answer": "HEALTHCHECK runs a specified command at intervals to check the container's health. If the command returns exit status 0, the container is 'healthy'; if 1, it becomes 'unhealthy'.",
-"real_world_example": "Adding 'HEALTHCHECK CMD curl -f http://localhost/ || exit 1' to ensure a web server is actually responding.",
-"common_mistake": "Relying purely on process status; a Java process might be running, but the application could be deadlocked."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What are Logging Drivers in Docker?",
-"simple_explanation": "Mechanisms that determine where and how Docker formats container logs.",
-"interview_answer": "By default, Docker uses the 'json-file' logging driver, but you can configure it to forward logs directly to centralized systems like Syslog, Splunk, AWS CloudWatch, or Fluentd.",
-"real_world_example": "Configuring the 'awslogs' driver to automatically send all container output to CloudWatch in AWS.",
-"common_mistake": "Leaving the json-file driver on without setting max-size, eventually consuming all host disk space."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How do you limit a container's memory usage?",
-"simple_explanation": "Use the '-m' or '--memory' flag during 'docker run'.",
-"interview_answer": "The memory flag sets a hard limit on the amount of RAM a container can consume. If the container tries to exceed this limit, it may receive an Out Of Memory (OOM) exception and be killed.",
-"real_world_example": "Running 'docker run -m 512m redis' to ensure the cache doesn't starve the host system.",
-"common_mistake": "Not setting memory limits in production, allowing a memory leak in one container to crash the entire host."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How do you limit a container's CPU usage?",
-"simple_explanation": "Use the '--cpus' flag during 'docker run'.",
-"interview_answer": "The '--cpus' flag specifies how much of the available CPU resources a container can use. For example, setting it to '1.5' guarantees the container at most one and a half CPU cores.",
-"real_world_example": "Running a heavy video rendering container with '--cpus=\"2.0\"' on an 8-core machine to prevent system lag.",
-"common_mistake": "Confusing '--cpus' with '--cpuset-cpus' (which pins the container to specific numbered cores)."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How do you copy files between a container and the host?",
-"simple_explanation": "Use the 'docker cp' command.",
-"interview_answer": "The 'docker cp' utility copies files or folders between a container and the local filesystem. It works even if the container is stopped.",
-"real_world_example": "Running 'docker cp container_id:/app/logs.txt ./logs.txt' to extract a crash report.",
-"common_mistake": "Trying to use docker cp as a continuous file synchronization tool instead of bind mounts."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What is the daemon.json file?",
-"simple_explanation": "The main configuration file for the Docker daemon.",
-"interview_answer": "Located usually at /etc/docker/daemon.json, this file allows administrators to customize engine settings like default logging drivers, default network bridges, insecure registries, and storage drivers.",
-"real_world_example": "Adding registry mirror URLs to daemon.json to speed up image pulls in a corporate network.",
-"common_mistake": "Creating invalid JSON syntax in the file, which prevents the Docker engine from starting entirely."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "How does Docker's image cache mechanism work?",
-"simple_explanation": "Docker reuses intermediate layers from previous builds if the instructions and files haven't changed.",
-"interview_answer": "Docker processes Dockerfiles top-to-bottom. If an instruction and the files it references are identical to a previous build, Docker uses the cached layer. If a cache is invalidated, all subsequent layers must be rebuilt.",
-"real_world_example": "Putting 'COPY package.json' and 'npm install' before copying the rest of the source code to maximize cache hits.",
-"common_mistake": "Putting 'COPY . .' at the top of the Dockerfile, invalidating the cache every time a single line of code changes."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What is the difference between COPY and ADD?",
-"simple_explanation": "COPY just copies files; ADD can also extract tarballs and download URLs.",
-"interview_answer": "COPY is the standard instruction for moving local files into the container. ADD has extra features: it automatically extracts local tar archives into the directory and can fetch remote URLs.",
-"real_world_example": "Using COPY for source code, but using ADD to automatically unpack a downloaded .tar.gz application bundle.",
-"common_mistake": "Using ADD when COPY is sufficient, which goes against Docker best practices due to unpredictability."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What is the WORKDIR instruction?",
-"simple_explanation": "It sets the current working directory for subsequent instructions.",
-"interview_answer": "WORKDIR establishes the execution path for RUN, CMD, ENTRYPOINT, COPY, and ADD commands. If the directory does not exist, Docker will create it automatically.",
-"real_world_example": "Setting 'WORKDIR /app' so all subsequent commands happen inside the /app folder instead of the root directory.",
-"common_mistake": "Using 'RUN cd /app' instead of WORKDIR, which doesn't persist across different image layers."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What does the '--rm' flag do?",
-"simple_explanation": "Automatically removes the container when it exits.",
-"interview_answer": "By default, stopped containers remain on the host file system. The '--rm' flag tells the Docker daemon to clean up the container and remove its file system immediately upon exit.",
-"real_world_example": "Running a quick Python script with 'docker run --rm python script.py' to avoid leaving stopped containers behind.",
-"common_mistake": "Combining --rm with -d (detached mode); if the container crashes in the background, logs and state are instantly gone."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "Why use the '--name' flag?",
-"simple_explanation": "To assign a recognizable name to a container instead of a random one.",
-"interview_answer": "If you don't assign a name, Docker generates a random string (like 'nostalgic_hopper'). Naming a container allows you to easily reference it in scripts, networks, and logs.",
-"real_world_example": "Running 'docker run --name production-db redis' to easily identify the database.",
-"common_mistake": "Trying to start a new container with a name that is already taken by a stopped container."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What are Docker Events?",
-"simple_explanation": "A stream of real-time events from the server.",
-"interview_answer": "The 'docker events' command streams real-time activities occurring on the Docker daemon, such as containers starting, stopping, dying, or images being pulled.",
-"real_world_example": "Using a script to listen to Docker events and send a Slack alert whenever a container dies.",
-"common_mistake": "Using events to view logs (events are state changes, not standard output)."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What does 'docker pause' do?",
-"simple_explanation": "It suspends all processes within a container.",
-"interview_answer": "The 'docker pause' command uses the cgroups freezer to suspend execution of all processes in the container. The container state is maintained in RAM, and it can be resumed with 'docker unpause'.",
-"real_world_example": "Pausing a batch processing container temporarily to free up CPU cycles for a critical production incident.",
-"common_mistake": "Assuming a paused container frees up memory (it only frees up CPU)."
-},
-{
-"tool": "Docker",
-"difficulty": "Medium",
-"question": "What does 'docker top' do?",
-"simple_explanation": "It displays the running processes inside a container.",
-"interview_answer": "Similar to the Linux 'top' or 'ps' command, 'docker top' lists the active processes occurring inside the container from the perspective of the host operating system.",
-"real_world_example": "Running 'docker top web-server' to see if multiple worker processes have spawned successfully.",
-"common_mistake": "Expecting an interactive UI like htop; it only outputs a static snapshot."
+"interview_answer": "System prune removes all stopped containers, dangling images, and unused networks. Adding the '-a' flag also removes unused images, and '--volumes' removes unused volumes. It is essential for managing disk space on servers.",
+"real_world_example": "Running 'docker system prune -a --volumes' to quickly reclaim 20GB of disk space on a cluttered CI/CD build server.",
+"common_mistake": "Running prune with --volumes on a production system and accidentally deleting an unattached, but critical, database volume."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What is an Anonymous Volume?",
 "simple_explanation": "A volume without a specific name, managed entirely by Docker.",
-"interview_answer": "Anonymous volumes are created when a Dockerfile uses the VOLUME instruction, or when a volume is mounted without a name. They are given random hash names and are harder to track and reuse.",
-"real_world_example": "Running a MySQL container without a volume flag creates an anonymous volume to satisfy the image's internal VOLUME instruction.",
-"common_mistake": "Losing data because an anonymous volume was orphaned and deleted during a system prune."
+"interview_answer": "Anonymous volumes are created when a Dockerfile uses the VOLUME instruction, or when a volume is mounted without a name. They are given random hash names and are easily orphaned and harder to reuse.",
+"real_world_example": "Running a MySQL container without specifying a volume flag creates an anonymous volume to satisfy the image's internal requirements.",
+"common_mistake": "Losing important data because an anonymous volume was orphaned and automatically deleted during a system prune."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
-"question": "Default Bridge vs Custom Bridge Networks?",
-"simple_explanation": "Custom bridges provide automatic DNS resolution, default bridge does not.",
-"interview_answer": "On the default bridge, containers can only access each other by IP address unless legacy links are used. User-defined custom bridge networks provide automatic DNS resolution between containers.",
-"real_world_example": "Creating a network called 'app-net' so the frontend container can reach the backend by simply requesting 'http://backend'.",
-"common_mistake": "Leaving containers on the default bridge and wondering why pinging by container name fails."
+"question": "What is a Named Volume?",
+"simple_explanation": "A explicitly named storage volume managed by Docker.",
+"interview_answer": "Named volumes function like anonymous volumes but are given a specific, memorable name by the user. They are easier to track, back up, and attach to multiple containers, making them best practice for persistent data.",
+"real_world_example": "Using '-v db_data:/var/lib/postgresql/data' to ensure the database data is stored in an easily identifiable volume.",
+"common_mistake": "Trying to access the physical files of a named volume directly on the host using complex file paths instead of Docker tools."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
-"question": "How do you format Docker CLI output?",
-"simple_explanation": "Use the '--format' flag with a Go template.",
-"interview_answer": "The '--format' flag allows you to manipulate the output of Docker commands using Go templates, making it easy to extract specific fields like IP addresses or Container IDs for scripts.",
-"real_world_example": "Running 'docker ps --format \"{{.Names}}: {{.Status}}\"' to print a clean list of container statuses.",
-"common_mistake": "Using awk/grep extensively when native Go formatting is faster and more reliable."
+"question": "What is the HEALTHCHECK instruction?",
+"simple_explanation": "It tells Docker how to test if a container is still working.",
+"interview_answer": "HEALTHCHECK runs a specified command at intervals to check the container's health. If the command returns exit status 0, the container is 'healthy'; if 1, it becomes 'unhealthy'. It enables self-healing infrastructure.",
+"real_world_example": "Adding 'HEALTHCHECK CMD curl -f http://localhost/ || exit 1' to ensure a web server is actually responding to requests.",
+"common_mistake": "Relying purely on process status; a Java process might be running perfectly fine while the application is totally deadlocked."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
-"question": "What does 'docker history' do?",
-"simple_explanation": "Shows the layers and commands that make up an image.",
-"interview_answer": "The command lists the intermediate image layers, displaying the Dockerfile instruction that created each layer, its size, and when it was created. It is excellent for debugging large images.",
-"real_world_example": "Running 'docker history my-app' to figure out which RUN command bloated the image by 500MB.",
-"common_mistake": "Worrying about layers that show ''; this is normal for layers pulled from remote registries."
+"question": "How do multi-container applications communicate?",
+"simple_explanation": "By connecting to the same custom Docker network.",
+"interview_answer": "When containers are placed on the same user-defined bridge network, Docker's embedded DNS server resolves container names to their internal IP addresses, allowing seamless and secure communication without relying on host ports.",
+"real_world_example": "A backend API connecting to a database simply by requesting 'mongodb://db-container:27017'.",
+"common_mistake": "Using deprecated '--link' flags or hardcoding container IP addresses, which change dynamically on every restart."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What are Docker Events?",
+"simple_explanation": "A stream of real-time activities occurring on the Docker daemon.",
+"interview_answer": "The 'docker events' command streams state changes from the server, such as containers starting, stopping, dying, or images being pulled. It is used for automation and monitoring system health.",
+"real_world_example": "Using a background script to listen to Docker events and send a Slack alert whenever a critical container dies.",
+"common_mistake": "Using events to attempt to view standard application logs (events are daemon state changes, not stdout logs)."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you limit a container's CPU usage?",
+"simple_explanation": "Use the '--cpus' flag during 'docker run'.",
+"interview_answer": "The '--cpus' flag specifies how much of the available CPU resources a container can use. For example, setting it to '1.5' guarantees the container at most one and a half CPU cores, preventing host starvation.",
+"real_world_example": "Running a heavy video rendering container with '--cpus=\"2.0\"' on an 8-core machine so the host UI doesn't lag.",
+"common_mistake": "Confusing '--cpus' (fractional limit) with '--cpuset-cpus' (pinning the container to specific numbered hardware cores)."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you limit a container's memory usage?",
+"simple_explanation": "Use the '-m' or '--memory' flag during 'docker run'.",
+"interview_answer": "The memory flag sets a hard limit on the amount of RAM a container can consume. If the container process tries to exceed this limit, it will receive an Out Of Memory (OOM) exception and be killed.",
+"real_world_example": "Running 'docker run -m 512m redis' to ensure the cache server doesn't accidentally consume all host RAM.",
+"common_mistake": "Not setting memory limits in production environments, allowing a memory leak in one container to crash the entire host machine."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What does 'docker pause' do?",
+"simple_explanation": "It suspends all processes within a container.",
+"interview_answer": "The command uses the Linux cgroups freezer to suspend execution of all processes in the container. The container state is maintained in RAM, and it can be resumed instantly with 'docker unpause'.",
+"real_world_example": "Pausing a heavy batch processing container temporarily to free up CPU cycles for a critical production incident response.",
+"common_mistake": "Assuming a paused container frees up host memory (it only stops consuming CPU cycles)."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What does 'docker top' do?",
+"simple_explanation": "It displays the running processes inside a container.",
+"interview_answer": "Similar to the Linux 'ps' command, 'docker top' lists the active processes occurring inside the container from the perspective of the host operating system. It helps debug multi-process containers.",
+"real_world_example": "Running 'docker top web-server' to see if multiple Nginx worker processes have spawned successfully.",
+"common_mistake": "Expecting an interactive, updating UI like 'htop'; it only outputs a static snapshot of the processes."
 },
 {
 "tool": "Docker",
 "difficulty": "Medium",
 "question": "What does 'docker commit' do?",
 "simple_explanation": "Creates a new image from a container's changes.",
-"interview_answer": "The command saves the current state (read-write layer) of a running or stopped container into a brand new Docker image. However, it is generally discouraged in favor of writing Dockerfiles.",
-"real_world_example": "Manually installing a debugging tool in a container and committing it to create a quick triage image.",
-"common_mistake": "Using commit to build production images, making the build process unrepeatable and undocumented."
+"interview_answer": "The command saves the current state (the read-write layer) of a running or stopped container into a brand new Docker image. However, it is generally discouraged in favor of writing declarative Dockerfiles.",
+"real_world_example": "Manually installing a debugging tool in a broken container and committing it to create a quick triage image.",
+"common_mistake": "Using commit to build production images, making the build process completely unrepeatable and undocumented."
 },
 {
 "tool": "Docker",
-"difficulty": "Hard",
-"question": "What are Multi-stage builds?",
-"simple_explanation": "Using multiple FROM statements to create a lean final image.",
-"interview_answer": "Multi-stage builds allow you to use one image to compile/build your application (with all heavy SDKs) and selectively copy the compiled artifacts into a smaller, runtime-only base image.",
-"real_world_example": "Building a Go binary in a 'golang' image, then copying just the binary into a 'scratch' image.",
-"common_mistake": "Leaving source code and compilers in the final stage, creating bloated and insecure production images."
+"difficulty": "Medium",
+"question": "What does 'docker history' do?",
+"simple_explanation": "Shows the layers and commands that make up an image.",
+"interview_answer": "The command lists all intermediate image layers, displaying the Dockerfile instruction that created each layer, its size, and when it was created. It is an excellent tool for debugging massive, bloated images.",
+"real_world_example": "Running 'docker history myapp' to figure out which RUN command bloated the image size by 500MB.",
+"common_mistake": "Worrying about layers that show ''; this is completely normal for layers pulled from remote registries."
 },
 {
 "tool": "Docker",
-"difficulty": "Hard",
-"question": "What are Distroless Images?",
-"simple_explanation": "Images containing only your application and its runtime dependencies, nothing else.",
-"interview_answer": "Maintained by Google, distroless images lack package managers, shells (no bash), and standard Linux utilities. This radically reduces the attack surface and image size for production workloads.",
-"real_world_example": "Using 'gcr.io/distroless/nodejs' to serve a production web app securely.",
-"common_mistake": "Trying to 'docker exec -it' into a distroless container for debugging (it fails because there is no shell)."
+"difficulty": "Medium",
+"question": "How do you override the CMD instruction at runtime?",
+"simple_explanation": "Add the desired command at the very end of the 'docker run' command.",
+"interview_answer": "Any string arguments appended after the image name in a 'docker run' command will automatically override the default CMD instruction defined in the Dockerfile, allowing you to run ad-hoc tasks.",
+"real_world_example": "Running 'docker run ubuntu echo \"Hello\"' overrides the default bash CMD to just print text and exit.",
+"common_mistake": "Trying to override an ENTRYPOINT by appending a command normally (this requires the specific --entrypoint flag)."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you override an ENTRYPOINT?",
+"simple_explanation": "Use the '--entrypoint' flag in the 'docker run' command.",
+"interview_answer": "Because ENTRYPOINT is designed to be hard to override, you must explicitly use the '--entrypoint' flag followed by the new executable. This is useful for opening a shell inside a container strictly locked down by an entrypoint.",
+"real_world_example": "Running 'docker run -it --entrypoint bash myapp' to bypass the locked application execution and debug the filesystem.",
+"common_mistake": "Appending the command to the end of the run command, which just passes it as a string argument to the existing entrypoint."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you backup a Docker volume?",
+"simple_explanation": "Mount the volume in a temporary container and tar the contents to the host.",
+"interview_answer": "You run a throwaway container that mounts the target data volume alongside a local host directory. You then execute a 'tar' command to compress the volume data directly into an archive on the host machine.",
+"real_world_example": "Running a quick ubuntu container to tar the '/var/lib/postgresql' volume into a backup.tar.gz file on your desktop.",
+"common_mistake": "Trying to copy files directly out of the hidden /var/lib/docker/volumes folder on the host, causing permission errors."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you pass environment variables to a container?",
+"simple_explanation": "Use the '-e' flag with 'docker run' or an env_file.",
+"interview_answer": "Environment variables can be injected dynamically at runtime using the '-e' flag. For multiple variables, passing a file with '--env-file' is preferred. This keeps configuration separate from code.",
+"real_world_example": "Running 'docker run -e DB_PASS=secret myapp' to securely configure database access at runtime.",
+"common_mistake": "Hardcoding API keys directly into the Dockerfile using ENV, which permanently exposes them in the image history."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What is the USER instruction in a Dockerfile?",
+"simple_explanation": "It sets the user or UID to use when running the image.",
+"interview_answer": "The USER instruction changes the active user context for any subsequent RUN, CMD, or ENTRYPOINT commands. This is a critical security practice to prevent containers from running processes as the powerful root user.",
+"real_world_example": "Using 'USER node' in a Node.js image to drop root privileges before starting the web server.",
+"common_mistake": "Leaving out the USER instruction entirely, causing public-facing web apps to run as root inside the container."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What is the difference between ARG and ENV?",
+"simple_explanation": "ARG is available only during the build, ENV is available during build and runtime.",
+"interview_answer": "ARG defines variables that users can pass at build-time using '--build-arg'. ENV sets environment variables that persist in the final image and are available to the running container application.",
+"real_world_example": "Using ARG to pass an NPM access token to download packages, so the secret token isn't stored in the final image.",
+"common_mistake": "Trying to use an ARG variable in the CMD instruction of the running application; it will be blank."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What is the daemon.json file?",
+"simple_explanation": "The main configuration file for the Docker daemon.",
+"interview_answer": "Located usually at /etc/docker/daemon.json, this file allows administrators to customize Docker engine settings. It configures default logging drivers, network bridges, insecure registries, and storage drivers.",
+"real_world_example": "Adding private registry mirror URLs to daemon.json to speed up image pulls in a corporate network.",
+"common_mistake": "Creating invalid JSON syntax in the file, which totally prevents the Docker engine service from starting."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What are Logging Drivers in Docker?",
+"simple_explanation": "Mechanisms that determine where and how Docker formats container logs.",
+"interview_answer": "By default, Docker uses the 'json-file' logging driver, writing stdout to local files. You can configure it to forward logs directly to centralized observability systems like Syslog, Splunk, AWS CloudWatch, or Fluentd.",
+"real_world_example": "Configuring the 'awslogs' driver to automatically stream all container output securely to CloudWatch logs.",
+"common_mistake": "Leaving the default json-file driver on without configuring max-size, eventually consuming 100% of the host disk space."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you copy files between a container and the host?",
+"simple_explanation": "Use the 'docker cp' command.",
+"interview_answer": "The docker cp utility copies files or folders between a container's filesystem and the local host filesystem. It works regardless of whether the container is currently running or stopped.",
+"real_world_example": "Running 'docker cp container_id:/app/crash.log ./crash.log' to extract a forensic crash report.",
+"common_mistake": "Trying to use docker cp as a continuous file synchronization tool instead of setting up proper bind mounts."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you format Docker CLI output?",
+"simple_explanation": "Use the '--format' flag with a Go template.",
+"interview_answer": "The '--format' flag allows you to manipulate the text output of Docker commands using Go templates. It makes it extremely easy to extract specific fields like IP addresses or Container IDs for bash scripting.",
+"real_world_example": "Running 'docker ps --format \"{{.Names}}: {{.Status}}\"' to print a clean, minimalist list of container statuses.",
+"common_mistake": "Using complex bash awk/grep chains to parse docker output when native Go formatting is much faster and more reliable."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What does the '--rm' flag do?",
+"simple_explanation": "Automatically removes the container when it exits.",
+"interview_answer": "By default, stopped containers remain on the host file system. The '--rm' flag tells the Docker daemon to instantly clean up the container and remove its file system upon exit to save space.",
+"real_world_example": "Running a quick Python script with 'docker run --rm python script.py' to avoid leaving stopped containers behind.",
+"common_mistake": "Combining --rm with detached mode (-d); if the background container crashes, the logs and state are instantly destroyed."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "Why use the '--name' flag?",
+"simple_explanation": "To assign a recognizable name to a container.",
+"interview_answer": "If you don't assign a name, Docker generates a random string. Naming a container allows you to easily reference it in scripts, commands, and custom network DNS lookups.",
+"real_world_example": "Running 'docker run --name production-db redis' to easily identify and manage the database later.",
+"common_mistake": "Trying to start a new container with a name that is already taken by a stopped container, throwing an error."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "What is the difference between COPY and ADD?",
+"simple_explanation": "COPY just copies files; ADD can also extract tarballs and download URLs.",
+"interview_answer": "COPY is the standard, predictable instruction for moving local files into the container. ADD has extra features: it automatically extracts local tar archives and can fetch remote URLs. COPY is best practice.",
+"real_world_example": "Using COPY for source code, but using ADD to automatically unpack a downloaded .tar.gz bundle into the image.",
+"common_mistake": "Using ADD when COPY is sufficient, which goes against Docker best practices due to unpredictability."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "Interactive mode vs Detached mode?",
+"simple_explanation": "Interactive connects your terminal to the container; Detached runs it in the background.",
+"interview_answer": "Interactive mode (-it) connects your standard input and terminal to the container, allowing you to interact with shells. Detached mode (-d) runs the container in the background, freeing your host terminal.",
+"real_world_example": "Using -it to run a bash shell for debugging, and -d to run an Nginx web server continuously.",
+"common_mistake": "Forgetting the -d flag on a web server, closing the terminal, and accidentally killing the website."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you change the default Docker registry?",
+"simple_explanation": "Configure registry-mirrors in daemon.json.",
+"interview_answer": "By default, Docker pulls from Docker Hub. You can change this by adding a 'registry-mirrors' array in the /etc/docker/daemon.json file, directing the daemon to check an internal corporate registry first.",
+"real_world_example": "Pointing Docker to a local Nexus repository to cache images and bypass Docker Hub rate limits.",
+"common_mistake": "Configuring the mirror on the client CLI instead of correctly configuring the Docker daemon server file."
+},
+{
+"tool": "Docker",
+"difficulty": "Medium",
+"question": "How do you troubleshoot a container that exits immediately?",
+"simple_explanation": "Use 'docker logs' and ensure a foreground process is running.",
+"interview_answer": "Containers exit when their primary PID 1 process finishes. Check 'docker logs' for application crashes. If running a base OS image, ensure you provide a long-running foreground command, or it will naturally exit.",
+"real_world_example": "Fixing an exiting Ubuntu container by changing the CMD from 'bash' to 'tail -f /dev/null' to keep it alive.",
+"common_mistake": "Endlessly restarting the container without realizing the application inside is actually throwing a fatal error."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
 "question": "What is Docker Swarm?",
 "simple_explanation": "Docker's native clustering and orchestration tool.",
-"interview_answer": "Docker Swarm turns a pool of Docker hosts into a single, virtual Docker host. It handles service discovery, load balancing, scaling, and rolling updates for containers across multiple nodes.",
-"real_world_example": "Deploying 10 replicas of an Nginx web server across 3 physical machines automatically.",
-"common_mistake": "Confusing standard Docker Compose deployments with Swarm mode deployments ('docker stack deploy')."
+"interview_answer": "Docker Swarm turns a pool of Docker hosts into a single, virtual Docker host. It handles service discovery, load balancing, scaling, and rolling updates for containers natively without installing external orchestrators.",
+"real_world_example": "Deploying 10 replicas of an Nginx web server across 3 physical machines automatically using a Swarm service.",
+"common_mistake": "Confusing standard Docker Compose deployments with Swarm mode scale deployments ('docker stack deploy')."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
 "question": "What is an Overlay Network?",
-"simple_explanation": "A distributed network among multiple Docker daemon hosts.",
-"interview_answer": "Overlay networks use VXLAN encapsulation to allow containers running on different physical Docker Swarm nodes to communicate securely as if they were on the same local bridge.",
-"real_world_example": "A web container on Node A connecting to a database container on Node B using an overlay network.",
+"simple_explanation": "A distributed network spanning multiple Docker daemon hosts.",
+"interview_answer": "Overlay networks use VXLAN encapsulation to allow containers running on completely different physical Docker Swarm nodes to communicate securely, acting exactly as if they were on the same local bridge.",
+"real_world_example": "A web container on Server A connecting seamlessly to a database container on Server B via the overlay network.",
 "common_mistake": "Trying to create an overlay network without first initializing a Swarm or configuring a key-value store."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "How do Docker Capabilities work?",
-"simple_explanation": "Granular permissions that grant specific root-level privileges to a container.",
-"interview_answer": "By default, Docker drops many Linux root capabilities to secure containers. You can use '--cap-add' and '--cap-drop' to finely tune what the container is allowed to do without granting full privileged mode.",
-"real_world_example": "Using '--cap-add=NET_ADMIN' to allow a VPN container to modify network interfaces without full root access.",
-"common_mistake": "Using '--privileged' as a lazy fix instead of identifying and adding the specific capability needed."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "What is a Seccomp profile in Docker?",
-"simple_explanation": "A security facility that restricts the system calls a container can make.",
-"interview_answer": "Secure Computing Mode (seccomp) filters the system calls passed from the container to the host kernel. Docker applies a default profile that blocks over 40 dangerous system calls.",
-"real_world_example": "Applying a custom seccomp JSON profile to explicitly block the 'chmod' system call in a locked-down container.",
-"common_mistake": "Disabling seccomp entirely to fix a permission error, severely degrading container security."
+"question": "What is Docker Content Trust (DCT)?",
+"simple_explanation": "A feature enabling digital signatures for remote images.",
+"interview_answer": "When DCT is enabled, Docker uses cryptographic signatures to ensure image integrity and publisher authenticity. You can only pull, run, or build with images that have been signed by verified publishers.",
+"real_world_example": "Enabling DCT in a banking environment to guarantee no one injected malicious code into an image during network transit.",
+"common_mistake": "Enabling DCT globally and breaking automated CI/CD pipelines because the build runner lacks the private signing keys."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
 "question": "What is Rootless Docker?",
 "simple_explanation": "Running the Docker daemon and containers as a non-root user.",
-"interview_answer": "Rootless mode mitigates potential container breakout vulnerabilities by running both the Docker daemon and containers inside a user namespace, mapping the internal root to an unprivileged user on the host.",
-"real_world_example": "Enabling rootless Docker on a shared university server so students can build images without needing sudo.",
-"common_mistake": "Expecting containers in rootless mode to bind to low ports (like port 80); unprivileged users can only bind to ports above 1024."
+"interview_answer": "Rootless mode mitigates severe vulnerabilities by running both the Docker daemon and containers inside a user namespace. It maps the internal container root to an unprivileged user on the host OS.",
+"real_world_example": "Enabling rootless Docker on a shared university server so students can build images without needing sudo access.",
+"common_mistake": "Expecting containers in rootless mode to bind to low ports (like port 80); unprivileged users can only bind above 1024."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "What is Docker in Docker (DinD)?",
-"simple_explanation": "Running a Docker daemon inside a Docker container.",
-"interview_answer": "DinD involves running the Docker engine itself within a container, requiring privileged mode. It is commonly used in CI/CD pipelines to build and push images dynamically.",
-"real_world_example": "A Jenkins container spinning up ephemeral DinD containers to build source code into images.",
-"common_mistake": "Using DinD when mounting the host's Docker socket (Docker-out-of-Docker) would be safer and more efficient."
+"question": "What does the '--privileged' flag do?",
+"simple_explanation": "Grants the container root capabilities and access to all host devices.",
+"interview_answer": "The privileged flag completely disables seccomp, AppArmor, and capability restrictions. It gives the container almost identical access to the host machine as a process running natively as root outside the container.",
+"real_world_example": "Using '--privileged' to run a VPN client container that needs to directly create raw network interfaces on the host.",
+"common_mistake": "Running a public-facing web app in privileged mode; if compromised, the attacker essentially gains root over the host server."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "How do you solve a 'No space left on device' error in Docker?",
-"simple_explanation": "Clean up unused resources or expand the Docker root directory.",
-"interview_answer": "First, run 'docker system prune -a --volumes'. If space is still exhausted, you may need to move the Docker data directory (usually /var/lib/docker) to a larger partition by editing daemon.json and restarting the service.",
-"real_world_example": "Mounting a massive 1TB block storage volume to /var/lib/docker for a heavy CI/CD build server.",
-"common_mistake": "Deleting files directly inside /var/lib/docker using 'rm -rf', which corrupts the storage driver."
+"question": "How do Docker Capabilities work?",
+"simple_explanation": "Granular permissions granting specific root-level privileges to a container.",
+"interview_answer": "By default, Docker drops many Linux root capabilities to secure containers. You can use '--cap-add' and '--cap-drop' to finely tune what the container is allowed to do without granting full privileged mode.",
+"real_world_example": "Using '--cap-add=NET_ADMIN' to allow a container to modify network routing without giving it full root access.",
+"common_mistake": "Using '--privileged' as a lazy fix instead of identifying and adding the specific Linux capability needed."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "What is the PID 1 Zombie Reaping problem?",
-"simple_explanation": "Containers failing to clean up dead child processes because the app isn't a proper init system.",
-"interview_answer": "The process started by CMD becomes PID 1. Standard apps (like Node or Java) don't know how to reap orphaned child processes, leading to zombie processes that consume resources.",
-"real_world_example": "A web app spawning child threads that die and become zombies, eventually crashing the container.",
-"common_mistake": "Assuming Docker automatically handles OS-level init responsibilities for your app."
+"question": "What is a Seccomp profile in Docker?",
+"simple_explanation": "A security facility restricting the system calls a container can make.",
+"interview_answer": "Secure Computing Mode (seccomp) filters the system calls passed from the container to the host kernel. Docker applies a default profile that blocks over 40 dangerous system calls, dramatically reducing the attack surface.",
+"real_world_example": "Applying a custom strict seccomp JSON profile to explicitly block the 'chmod' system call in a locked-down container.",
+"common_mistake": "Disabling seccomp entirely to fix a permission error, severely degrading container security."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "How do you use the '--init' flag?",
-"simple_explanation": "It wraps your process with a tiny init system (tini) to handle zombies and signals.",
-"interview_answer": "Passing '--init' to 'docker run' injects a lightweight init process (like tini) as PID 1. This init system handles signal forwarding (like SIGTERM) and reaps zombie processes properly.",
-"real_world_example": "Running 'docker run --init node-app' so Ctrl+C gracefully shuts down the Node process.",
-"common_mistake": "Adding heavy init systems like systemd inside the container instead of using the lightweight '--init' flag."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "How do you optimize a Docker image size?",
-"simple_explanation": "Use Alpine/minimal bases, multi-stage builds, and consolidate RUN commands.",
-"interview_answer": "To optimize size: select a slim base image, utilize .dockerignore, clean up package manager caches in the same RUN layer they were used, and employ multi-stage builds to exclude build tools.",
-"real_world_example": "Chaining 'apt-get install -y foo && rm -rf /var/lib/apt/lists/*' in a single RUN step to save 50MB.",
-"common_mistake": "Installing tools, deleting them in the *next* RUN command, and wondering why the image didn't shrink (layers are additive)."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "What is Docker Buildx?",
-"simple_explanation": "A CLI plugin that extends the docker build command with full BuildKit support.",
-"interview_answer": "Buildx allows you to build multi-platform images simultaneously (e.g., ARM and x86), utilize advanced caching (like exporting cache to an external registry), and run distributed builds.",
-"real_world_example": "Using 'docker buildx build --platform linux/amd64,linux/arm64' to create an image that works on both AWS Intel servers and Mac M1 laptops.",
-"common_mistake": "Trying to build for an incompatible architecture without an emulator (like QEMU) installed."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "How do you manage secrets in Docker?",
-"simple_explanation": "Use Docker Swarm Secrets or mount them temporarily via BuildKit.",
-"interview_answer": "In Swarm, 'docker secret' securely distributes sensitive data to services, mounting them in an in-memory tmpfs filesystem at /run/secrets. During builds, BuildKit's '--secret' flag securely passes secrets without leaving traces in the image.",
-"real_world_example": "Passing an AWS credential file to a container securely via /run/secrets/aws_key.",
-"common_mistake": "Passing secrets using the '-e' environment variable flag, which makes them visible to anyone who runs 'docker inspect'."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "How do you perform Image Vulnerability Scanning?",
-"simple_explanation": "Use tools like 'docker scout' or Trivy to analyze image layers for CVEs.",
-"interview_answer": "Image scanning parses the software packages installed in your Docker image against vulnerability databases (CVEs). You can run this locally or integrate it into a CI/CD pipeline to block insecure deployments.",
-"real_world_example": "Running 'docker scout cves my-image:latest' to find out the base Alpine image has a critical OpenSSL bug.",
-"common_mistake": "Scanning the image once during creation but never scanning it again as new vulnerabilities are discovered."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "Dangling vs Unused images?",
-"simple_explanation": "Dangling images have no tag and no parent; unused images have tags but aren't running.",
-"interview_answer": "A dangling image occurs when you build a new image over an existing tag. The old image loses its tag and becomes ':'. Unused images are simply images sitting locally that no active container is currently based on.",
-"real_world_example": "Dangling images commonly build up during local development after running 'docker build' repeatedly with the same name.",
-"common_mistake": "Assuming 'docker rmi' automatically cleans up dangling images; you must use 'docker image prune'."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "What is Live Restore in Docker?",
-"simple_explanation": "A daemon setting that keeps containers running if the Docker engine crashes or updates.",
-"interview_answer": "When 'live-restore' is enabled in daemon.json, the Docker daemon separates container execution from the daemon process. This allows you to restart the Docker service without causing downtime for running containers.",
-"real_world_example": "Upgrading the Docker Engine on a production server without dropping any active web socket connections.",
-"common_mistake": "Restarting the Docker daemon on a production server without Live Restore, instantly killing all microservices."
+"question": "What is AppArmor in Docker?",
+"simple_explanation": "A Linux kernel security module that restricts container capabilities via profiles.",
+"interview_answer": "Docker automatically generates and loads a default AppArmor profile for containers on supported systems (like Ubuntu). It controls what files a process can read, write, or execute, providing a Mandatory Access Control layer.",
+"real_world_example": "Restricting a container from writing to any system configuration files using a custom AppArmor profile.",
+"common_mistake": "Attempting to use AppArmor profiles on a system that relies exclusively on SELinux instead (like RHEL/CentOS)."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
 "question": "What is User Namespace Remapping?",
 "simple_explanation": "Mapping the root user inside a container to a non-privileged user on the host.",
-"interview_answer": "To mitigate privilege escalation, user namespaces map container IDs to host IDs. The container believes it is running as 'root' (UID 0), but the host sees it running as an unprivileged user (e.g., UID 100000).",
-"real_world_example": "Ensuring that if a hacker breaks out of the container, they only have the rights of a restricted dummy user on the host OS.",
-"common_mistake": "Enabling user namespaces and failing to adjust volume mount ownership, causing 'Permission Denied' errors."
+"interview_answer": "To mitigate privilege escalation, user namespaces map container IDs to host IDs. The container believes it is running as 'root' (UID 0), but the host sees it executing as an unprivileged user (e.g., UID 100000).",
+"real_world_example": "Ensuring that if a hacker breaks out of a container, they only have the rights of a restricted dummy user.",
+"common_mistake": "Enabling user namespaces and failing to adjust volume mount ownership, causing immediate 'Permission Denied' errors."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "How does Docker use Cgroups?",
-"simple_explanation": "To limit and isolate the resource usage (CPU, memory, disk I/O) of containers.",
-"interview_answer": "Control Groups (cgroups) are a Linux kernel feature that Docker utilizes to enforce quotas and limits. They ensure that one rogue container cannot consume all host system resources and starve others.",
-"real_world_example": "Using cgroups behind the scenes when you apply the '--memory=1g' flag to a container.",
-"common_mistake": "Confusing cgroups (which manage resources) with namespaces (which manage visibility and isolation)."
+"question": "What are Distroless Images?",
+"simple_explanation": "Images containing only your application and runtime dependencies, nothing else.",
+"interview_answer": "Maintained by Google, distroless images completely lack package managers, shells (no bash), and standard Linux utilities. This radically reduces the attack surface, security scanning noise, and overall image size.",
+"real_world_example": "Using 'gcr.io/distroless/nodejs' to serve a production web app securely without any embedded OS utilities.",
+"common_mistake": "Trying to 'docker exec -it' into a distroless container for debugging; it fails because there is no shell."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "How do you enforce Cache Invalidation in a Docker build?",
-"simple_explanation": "Use build arguments (ARG) to inject changing data, or use the '--no-cache' flag.",
-"interview_answer": "To force a rebuild from a specific layer downward, you can inject a dynamic ARG (like a timestamp or commit hash) right before the RUN command, or simply pass the '--no-cache' flag to build everything from scratch.",
-"real_world_example": "Passing the Git commit hash as an ARG right before 'RUN git clone' so Docker always pulls the latest code.",
-"common_mistake": "Adding '--no-cache' constantly, resulting in incredibly slow 20-minute builds instead of 10-second builds."
+"question": "What is the PID 1 Zombie Reaping problem?",
+"simple_explanation": "Containers failing to clean up dead child processes.",
+"interview_answer": "The process started by CMD becomes PID 1. Standard apps (like Node.js or Java) don't know how to reap orphaned child processes. These become zombies, eventually exhausting resources and crashing the container.",
+"real_world_example": "A web app spawning child threads that die and become zombies, eventually locking up the Docker container.",
+"common_mistake": "Assuming Docker automatically handles OS-level init responsibilities (like signal forwarding and reaping) for your application."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "How do you use the '--init' flag?",
+"simple_explanation": "It wraps your process with a tiny init system to handle zombies and signals.",
+"interview_answer": "Passing '--init' injects a lightweight init process (like tini) as PID 1 inside the container. This init system properly handles signal forwarding (like SIGTERM) and reaps zombie processes gracefully.",
+"real_world_example": "Running 'docker run --init node-app' so pressing Ctrl+C gracefully and instantly shuts down the Node process.",
+"common_mistake": "Adding heavy init systems like systemd inside the container instead of using the lightweight native '--init' flag."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "What happens during an OOM (Out of Memory) event?",
+"simple_explanation": "The host kernel kills the container process to save the system.",
+"interview_answer": "If a container exhausts its allocated memory limit, or the host runs out of RAM, the Linux kernel invokes the OOM killer. It forcefully terminates the container process to prevent a full system crash.",
+"real_world_example": "A memory-leaking Java application container suddenly stopping with 'OOMKilled' status in 'docker inspect'.",
+"common_mistake": "Blaming Docker for crashing when the underlying application actually has a severe memory leak."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "How do you perform Image Vulnerability Scanning?",
+"simple_explanation": "Use tools to analyze image layers for known CVEs.",
+"interview_answer": "Image scanning parses the software packages installed in your Docker image against vulnerability databases (CVEs). Tools like 'docker scout' or Trivy are integrated into CI/CD pipelines to block insecure deployments.",
+"real_world_example": "Running 'docker scout cves my-image' to discover the base Alpine image has a critical OpenSSL bug.",
+"common_mistake": "Scanning the image once during creation but never scanning it again as new vulnerabilities are discovered over time."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "Dangling vs Unused images?",
+"simple_explanation": "Dangling images have no tag; unused images have tags but aren't running.",
+"interview_answer": "A dangling image occurs when you build a new image over an existing tag, causing the old image to become ':'. Unused images simply have no active containers currently referencing them.",
+"real_world_example": "Dangling images commonly build up during local development after running 'docker build' repeatedly with the exact same name.",
+"common_mistake": "Assuming 'docker rmi' automatically cleans up dangling images; you must explicitly use 'docker image prune'."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "What is Docker-in-Docker (DinD)?",
+"simple_explanation": "Running a Docker daemon completely inside a Docker container.",
+"interview_answer": "DinD involves running the Docker engine itself within a container, which strictly requires privileged mode. It is commonly used in CI/CD pipelines to build and push images dynamically in isolated environments.",
+"real_world_example": "A Jenkins container spinning up ephemeral DinD containers to build source code into final production images.",
+"common_mistake": "Using DinD when simply mounting the host's Docker socket (DooD) would be much safer and highly efficient."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "What is Docker-out-of-Docker (DooD)?",
+"simple_explanation": "Mounting the host's Docker socket into a container.",
+"interview_answer": "Instead of running a nested daemon, DooD mounts '/var/run/docker.sock' into the container. When the container runs a Docker command, it executes on the host's Docker daemon, sharing the host's image cache.",
+"real_world_example": "Mounting the socket in a Jenkins container so Jenkins can trigger builds on the underlying host machine.",
+"common_mistake": "Mounting the socket in an untrusted container; it provides root-level access to the entire host system."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "How do you solve a 'No space left on device' error in Docker?",
+"simple_explanation": "Clean up unused resources or expand the Docker root directory.",
+"interview_answer": "First, run 'docker system prune -a --volumes'. If space is still exhausted, you must move the Docker data directory (usually /var/lib/docker) to a larger partition by editing daemon.json and restarting.",
+"real_world_example": "Mounting a massive 1TB AWS block storage volume to /var/lib/docker for a heavy CI/CD build server.",
+"common_mistake": "Deleting folders directly inside /var/lib/docker using 'rm -rf', which permanently corrupts the storage driver."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "What is Live Restore in Docker?",
+"simple_explanation": "A daemon setting keeping containers running if the Docker engine updates.",
+"interview_answer": "When 'live-restore' is enabled in daemon.json, the Docker daemon separates container execution from the daemon process. This allows you to restart or upgrade the Docker service without causing any downtime for running containers.",
+"real_world_example": "Upgrading the Docker Engine on a production server without dropping any active web socket connections to the containers.",
+"common_mistake": "Restarting the Docker daemon on a production server without Live Restore, instantly killing all microservices."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "What is Docker BuildKit?",
+"simple_explanation": "A modern, high-performance image building engine.",
+"interview_answer": "BuildKit fundamentally overhauls how Docker builds images. It executes instructions concurrently, skips unused build stages, securely handles secrets without leaving traces, and significantly improves layer caching performance.",
+"real_world_example": "Using BuildKit to securely pass an SSH key to clone a private repo without embedding the key in the image.",
+"common_mistake": "Sticking to the legacy builder instead of enabling BuildKit (DOCKER_BUILDKIT=1) for faster, concurrent builds."
+},
+{
+"tool": "Docker",
+"difficulty": "Hard",
+"question": "How do you manage secrets in Docker Swarm?",
+"simple_explanation": "Use the 'docker secret' command to securely distribute sensitive data.",
+"interview_answer": "In Swarm, secrets are encrypted in transit and at rest. They are securely distributed only to nodes that require them and mounted in an in-memory tmpfs filesystem at /run/secrets inside the container.",
+"real_world_example": "Passing an AWS credential file to a container securely via /run/secrets/aws_key.",
+"common_mistake": "Passing secrets using the standard '-e' environment variable flag, which makes them visible via 'docker inspect'."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
 "question": "SIGTERM vs SIGKILL in Docker?",
-"simple_explanation": "SIGTERM asks the process to stop gracefully; SIGKILL forces it to terminate immediately.",
-"interview_answer": "When you run 'docker stop', Docker sends SIGTERM (signal 15) to PID 1, waits a grace period (default 10s), and if the process hasn't exited, sends SIGKILL (signal 9). 'docker kill' sends SIGKILL immediately.",
+"simple_explanation": "SIGTERM asks the process to stop gracefully; SIGKILL forces it immediately.",
+"interview_answer": "When running 'docker stop', Docker sends SIGTERM, waits a grace period (10s), and then sends SIGKILL if the process hasn't exited. 'docker kill' sends SIGKILL immediately, bypassing graceful shutdown.",
 "real_world_example": "A database successfully flushing data to disk after receiving SIGTERM from 'docker stop'.",
-"common_mistake": "Using 'docker kill' regularly, causing database corruption due to interrupted write operations."
+"common_mistake": "Using the shell form of CMD (CMD npm start). The shell swallows the SIGTERM, causing the app to be brutally SIGKILLed."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
 "question": "What is the '--read-only' flag?",
-"simple_explanation": "Mounts the container's root filesystem as read-only.",
-"interview_answer": "Running a container with '--read-only' prevents the application (and attackers) from writing to the container's filesystem. Any necessary writes must be redirected to specific tmpfs mounts or external volumes.",
+"simple_explanation": "Mounts the container's root filesystem as strictly read-only.",
+"interview_answer": "Running a container with '--read-only' prevents the application (and attackers) from modifying the container's filesystem. Any necessary writes must be explicitly redirected to specific tmpfs mounts or external volumes.",
 "real_world_example": "Securing an Nginx reverse proxy by making it read-only, preventing attackers from downloading malware into the container.",
-"common_mistake": "Using '--read-only' on an app that strictly expects to write logs to /var/log, causing immediate crashes."
+"common_mistake": "Using '--read-only' on an app that strictly expects to write logs to /var/log, causing immediate fatal crashes."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "How do you achieve Graceful Shutdown in a container?",
-"simple_explanation": "Ensure the app catches SIGTERM and finishes processing before exiting.",
-"interview_answer": "Graceful shutdown requires the application running as PID 1 to trap the SIGTERM signal, stop accepting new requests, finish processing current requests, close database connections, and then exit with code 0.",
-"real_world_example": "Programming a Node.js server to listen for process.on('SIGTERM') and close the HTTP server before calling process.exit().",
-"common_mistake": "Using the shell form of CMD (CMD npm start), which makes the shell PID 1. The shell swallows the SIGTERM, and the app is eventually brutally killed."
+"question": "What is a Tmpfs Mount?",
+"simple_explanation": "A temporary mount that stores data in the host's memory.",
+"interview_answer": "Tmpfs mounts create a temporary file system directly in the host's RAM. They are extremely fast and secure because data is never written to disk and is destroyed the moment the container stops.",
+"real_world_example": "Mounting a tmpfs volume for an application to store highly sensitive, short-lived encryption keys.",
+"common_mistake": "Using tmpfs mounts for a database directory, resulting in total, unrecoverable data loss upon restart."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "What is an AppArmor profile in Docker?",
-"simple_explanation": "A Linux kernel security module that restricts container capabilities via file paths.",
-"interview_answer": "Docker automatically generates and loads a default AppArmor profile for containers. AppArmor controls what files a process can read, write, or execute, providing a MAC (Mandatory Access Control) layer.",
-"real_world_example": "Restricting a container from writing to any system configuration files using a custom AppArmor profile.",
-"common_mistake": "Attempting to use AppArmor profiles on a system that relies on SELinux instead (like RHEL/CentOS)."
+"question": "How do you enforce Cache Invalidation in a Docker build?",
+"simple_explanation": "Use build arguments (ARG) to inject changing data, or '--no-cache'.",
+"interview_answer": "To force a rebuild from a specific layer downward, inject a dynamic ARG (like a timestamp or commit hash) right before the RUN command. Alternatively, pass the '--no-cache' flag to build entirely from scratch.",
+"real_world_example": "Passing the Git commit hash as an ARG right before 'RUN git clone' so Docker always pulls the latest code.",
+"common_mistake": "Adding '--no-cache' constantly, resulting in incredibly slow 20-minute builds instead of utilizing cached layers."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
 "question": "What is a Docker Context?",
-"simple_explanation": "A mechanism to manage and switch between different Docker daemon endpoints.",
-"interview_answer": "A context defines the endpoint (local, remote SSH, cloud provider) and security credentials required to connect to a Docker engine. You can switch endpoints quickly using 'docker context use'.",
-"real_world_example": "Switching from 'default' (local laptop) to 'prod-server' to deploy a container directly to an AWS EC2 instance using the local CLI.",
+"simple_explanation": "A mechanism to switch between different Docker daemon endpoints.",
+"interview_answer": "A context defines the endpoint (local, remote SSH, cloud provider) and security credentials required to connect to a Docker engine. You can switch control between different servers quickly using 'docker context use'.",
+"real_world_example": "Switching from 'default' (local laptop) to 'prod-server' to deploy a container directly to an AWS EC2 instance.",
 "common_mistake": "Setting DOCKER_HOST manually in bashrc instead of using the much safer and flexible Docker Contexts."
 },
 {
@@ -859,44 +868,35 @@
 "difficulty": "Hard",
 "question": "What is a Registry Mirror?",
 "simple_explanation": "A local caching proxy for public Docker registries like Docker Hub.",
-"interview_answer": "To bypass rate limits and speed up local image pulls across an organization, you can host a local registry mirror. When a user requests an image, the mirror serves it if cached, or pulls and caches it if not.",
+"interview_answer": "To bypass rate limits and speed up local image pulls across an organization, you can host a local registry mirror. When a user requests an image, the mirror serves the cache or fetches it.",
 "real_world_example": "Setting up a Nexus registry mirror in an enterprise network to avoid Docker Hub's 'Too Many Requests' rate limiting.",
-"common_mistake": "Configuring the mirror on the client CLI instead of correctly configuring the Docker daemon.json file."
+"common_mistake": "Configuring the mirror heavily but failing to secure it, exposing internal company container usage."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "What is Docker Content Trust (DCT)?",
-"simple_explanation": "A feature that enables digital signatures for data sent to and received from remote registries.",
-"interview_answer": "When DCT is enabled (export DOCKER_CONTENT_TRUST=1), Docker uses The Notary project to enforce image signing. You can only pull, run, or build with images that have been cryptographically signed by verified publishers.",
-"real_world_example": "Enabling DCT in a banking environment to guarantee no one injected malicious code into the 'alpine' image during network transit.",
-"common_mistake": "Enabling DCT and failing automated CI/CD pipelines because the local build runner lacks the private signing keys."
+"question": "How do you troubleshoot High CPU in a specific container?",
+"simple_explanation": "Use 'docker stats' then 'docker exec' with profiling tools.",
+"interview_answer": "Identify the container using 'docker stats'. Exec into the container and use tools like 'top' to find the exact thread. If it's an application issue, use language-specific profilers (like strace or pprof) to analyze.",
+"real_world_example": "Using strace inside a container to discover a Node.js process is stuck in an infinite synchronous loop.",
+"common_mistake": "Immediately restarting the host server without capturing a core dump or process trace for root cause analysis."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "What is a Tmpfs Mount?",
-"simple_explanation": "A temporary mount that stores data in the host's memory rather than on disk.",
-"interview_answer": "Tmpfs mounts create a temporary file system in the host's RAM. They are extremely fast and secure because the data is never written to the host's persistent storage, and is destroyed when the container stops.",
-"real_world_example": "Mounting a tmpfs volume for an application to store highly sensitive encryption keys temporarily.",
-"common_mistake": "Using tmpfs mounts for a database directory, resulting in total data loss upon restart."
+"question": "What is Ephemeral Storage Exhaustion?",
+"simple_explanation": "When a container writes too much temporary data to its writable layer.",
+"interview_answer": "If a container consumes excessive disk space in its writable layer (often via runaway logging or temporary files), it can exhaust the host's root partition. This causes Docker and other host services to crash.",
+"real_world_example": "An application writing massive debug files to '/tmp' causing the entire worker node's disk to fill up.",
+"common_mistake": "Failing to implement log rotation (max-size) for container logs, inevitably causing storage exhaustion."
 },
 {
 "tool": "Docker",
 "difficulty": "Hard",
-"question": "What does the '--privileged' flag do?",
-"simple_explanation": "Grants the container root capabilities and access to all host devices.",
-"interview_answer": "The privileged flag disables seccomp, AppArmor, and capability restrictions. It gives the container almost identical access to the host machine as a process running natively as root outside the container.",
-"real_world_example": "Using '--privileged' to run a VPN client container that needs to create raw TUN/TAP network interfaces.",
-"common_mistake": "Running a public-facing web app in privileged mode; if the app is compromised, the attacker essentially gains root over the host server."
-},
-{
-"tool": "Docker",
-"difficulty": "Hard",
-"question": "What is a Container Breakout?",
-"simple_explanation": "When an attacker escapes the container's isolation to access the host system.",
-"interview_answer": "A breakout occurs when a vulnerability in the kernel, Docker daemon runtime (like runc), or a misconfiguration (like privileged mode or exposed Docker socket) allows malicious code to interact directly with the host machine.",
-"real_world_example": "Mounting '/var/run/docker.sock' inside a container, which an attacker exploits to spin up a new privileged container and take over the host.",
-"common_mistake": "Believing containers are an absolute security boundary like hardware VMs, leading to relaxed security practices."
+"question": "How do you resolve Bridge Network IP conflicts?",
+"simple_explanation": "Configure custom subnet ranges in daemon.json.",
+"interview_answer": "If Docker's default bridge IP range overlaps with your corporate physical network, containers won't be able to route out. You must configure the 'bip' and 'default-address-pools' in daemon.json to use an alternative subnet.",
+"real_world_example": "Changing Docker's default 172.17.0.0/16 subnet because it conflicts with the company's internal VPN routing.",
+"common_mistake": "Trying to manually force container IPs without fixing the underlying Docker network subnet definitions."
 }
 ]

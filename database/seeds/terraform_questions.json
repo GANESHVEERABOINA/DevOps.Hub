@@ -1,0 +1,902 @@
+[
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is Terraform?",
+"simple_explanation": "Terraform is an open-source Infrastructure as Code (IaC) tool.",
+"interview_answer": "Terraform is an IaC tool by HashiCorp used to define and provision cloud infrastructure using declarative code. It is used to ensure environments are consistent and repeatable. A key point is it maintains a state file to track resource changes.",
+"real_world_example": "Provisioning a multi-tier AWS environment with EC2, VPC, and RDS using a single codebase.",
+"common_mistake": "Modifying cloud resources manually in the console instead of through Terraform, causing configuration drift."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is Infrastructure as Code (IaC)?",
+"simple_explanation": "IaC is the process of managing infrastructure using machine-readable definition files.",
+"interview_answer": "IaC replaces manual hardware configuration with code scripts. It is used to version-control infrastructure, automate deployments, and reduce human error. An important interview point is that IaC enables disaster recovery through code reproducibility.",
+"real_world_example": "Storing AWS infrastructure definitions in a Git repository alongside application code.",
+"common_mistake": "Writing IaC but never committing it to a version control system like Git."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is HCL?",
+"simple_explanation": "HCL stands for HashiCorp Configuration Language.",
+"interview_answer": "HCL is the declarative scripting language used by Terraform to define infrastructure. It is designed to be highly readable for humans and easily parsed by machines. A key point is that it supports JSON as an alternative syntax.",
+"real_world_example": "Writing a 'main.tf' file in HCL to declare an Azure virtual machine.",
+"common_mistake": "Trying to write imperative procedural logic (like loops or if-statements) as if HCL were Python."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does 'terraform init' do?",
+"simple_explanation": "It initializes a working directory containing Terraform configuration files.",
+"interview_answer": "The init command downloads required provider plugins and initializes the backend. It is the first command you must run after writing or cloning code. A vital point is it creates the hidden '.terraform' directory.",
+"real_world_example": "Running 'terraform init' to download the AWS provider plugin before creating an S3 bucket.",
+"common_mistake": "Trying to run 'terraform plan' without running 'init' first on a new project."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does 'terraform plan' do?",
+"simple_explanation": "It creates an execution plan showing what Terraform will do.",
+"interview_answer": "The plan command compares the desired state in your code with the actual remote infrastructure state. It is used as a dry run to verify changes. A key point is that it does not actually apply any changes.",
+"real_world_example": "Reviewing the output of 'terraform plan' to ensure only one server is added, not deleted.",
+"common_mistake": "Ignoring the plan output and directly applying changes, leading to accidental resource deletions."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does 'terraform apply' do?",
+"simple_explanation": "It applies the changes required to reach the desired state.",
+"interview_answer": "The apply command executes the actions proposed in the Terraform plan to provision or modify infrastructure. It requires manual confirmation by default. A key point is it updates the state file after execution.",
+"real_world_example": "Typing 'yes' after running 'terraform apply' to physically create a database in GCP.",
+"common_mistake": "Running apply in a production environment without carefully reviewing the preceding plan output."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does 'terraform destroy' do?",
+"simple_explanation": "It destroys all infrastructure managed by the current Terraform configuration.",
+"interview_answer": "The destroy command permanently tears down all resources tracked in the state file. It is used to clean up temporary environments and save costs. An important point is it uses dependency graphs to delete resources in the correct order.",
+"real_world_example": "Running 'terraform destroy' at the end of the day to delete an expensive testing environment.",
+"common_mistake": "Running destroy in the wrong directory and accidentally deleting production infrastructure."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a Terraform Provider?",
+"simple_explanation": "A plugin that lets Terraform interact with cloud platforms and APIs.",
+"interview_answer": "Providers translate HCL code into API calls for specific platforms like AWS, Azure, or Datadog. They are necessary to manage third-party resources. A key point is that multiple providers can be used in a single configuration.",
+"real_world_example": "Using the 'aws' provider to manage EC2 and the 'github' provider to manage repositories simultaneously.",
+"common_mistake": "Hardcoding cloud credentials directly into the provider block instead of using environment variables."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a Terraform Resource?",
+"simple_explanation": "A block defining a piece of infrastructure to be created.",
+"interview_answer": "A resource block declares a specific infrastructure component, like a virtual network or compute instance. It is the most important element in Terraform. A key point is each resource must have a type and a local name.",
+"real_world_example": "Defining an 'aws_instance' resource named 'web_server' to deploy a virtual machine.",
+"common_mistake": "Changing the resource's local name in the code, causing Terraform to destroy and recreate the resource."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a Data Source?",
+"simple_explanation": "It fetches read-only information about existing infrastructure.",
+"interview_answer": "Data sources allow Terraform to use information defined outside of the current configuration. They are used to reference existing resources dynamically. A vital point is they never create or modify infrastructure.",
+"real_world_example": "Using an 'aws_ami' data source to dynamically find the latest Ubuntu image ID for an EC2 instance.",
+"common_mistake": "Trying to use a resource block instead of a data block to reference a pre-existing database."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What are Input Variables?",
+"simple_explanation": "Variables used to pass external values into Terraform configurations.",
+"interview_answer": "Input variables make Terraform modules customizable and reusable. They act like function arguments, allowing dynamic assignment of values like instance types. A key point is they can be defined in a 'variables.tf' file.",
+"real_world_example": "Creating a 'region' variable so the same code can deploy to both US-East and EU-West.",
+"common_mistake": "Leaving sensitive variables unmasked, causing passwords to show up in plain text in logs."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What are Output Values?",
+"simple_explanation": "Values returned by a Terraform module after execution.",
+"interview_answer": "Outputs export useful information from your deployment, like IP addresses or endpoint URLs. They are used to display data to the user or pass data between modules. A key point is they are printed after 'terraform apply'.",
+"real_world_example": "Exporting the public IP address of a newly created web server so the user can access it.",
+"common_mistake": "Forgetting to output the database password, making it impossible to retrieve without inspecting the state file manually."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is the Terraform State file?",
+"simple_explanation": "A JSON file that maps your code to the real-world infrastructure.",
+"interview_answer": "The state file (terraform.tfstate) tracks resource metadata and performance. It is used by Terraform to determine what needs to be created, updated, or deleted. A critical point is it contains sensitive data in plain text.",
+"real_world_example": "Terraform checking the state file to realize an S3 bucket already exists, preventing duplicate creation.",
+"common_mistake": "Committing the local 'terraform.tfstate' file into a public Git repository, leaking cloud secrets."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a Terraform Module?",
+"simple_explanation": "A container for multiple resources that are used together.",
+"interview_answer": "Modules group related resources into reusable, logical components. They are used to organize code and enforce best practices across teams. An important point is that every Terraform configuration is technically a 'root module'.",
+"real_world_example": "Creating a 'network' module that deploys a VPC, subnets, and gateways consistently across all company projects.",
+"common_mistake": "Hardcoding values inside a module instead of using variables, ruining its reusability."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does 'terraform validate' do?",
+"simple_explanation": "It checks the syntax and validity of the configuration files.",
+"interview_answer": "The validate command verifies that the HCL code is syntactically correct and internally consistent. It is used as a fast, offline check before running a plan. A key point is it does not access remote cloud APIs.",
+"real_world_example": "Running validate in a CI pipeline to instantly catch missing brackets or undefined variables.",
+"common_mistake": "Assuming validate checks if cloud limits or permissions are correct; it only checks syntax."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does 'terraform fmt' do?",
+"simple_explanation": "It automatically formats Terraform configuration files.",
+"interview_answer": "The fmt command rewrites HCL files to a standard format and indentation style. It ensures code consistency across developer teams. A key point is the '-check' flag is commonly used in CI pipelines to enforce style.",
+"real_world_example": "Running 'terraform fmt' to align all equals signs and indentations perfectly before committing code.",
+"common_mistake": "Ignoring code formatting, leading to messy, unreadable pull requests for infrastructure code."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a 'terraform.tfvars' file?",
+"simple_explanation": "A file used to automatically assign values to input variables.",
+"interview_answer": "The tfvars file allows users to set variable values in a dedicated file rather than passing them via the CLI. Terraform loads 'terraform.tfvars' automatically. A key point is it keeps configurations clean and environment-specific.",
+"real_world_example": "Using 'prod.tfvars' to set the instance size to large, and 'dev.tfvars' to set it to small.",
+"common_mistake": "Committing a tfvars file containing secret API keys into version control."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is an Implicit Dependency?",
+"simple_explanation": "A dependency automatically inferred by Terraform.",
+"interview_answer": "Implicit dependencies happen when one resource references the attributes of another resource in the code. Terraform uses this to determine the exact order of creation. A key point is this is the preferred method over explicit dependencies.",
+"real_world_example": "An EC2 instance referencing a VPC ID automatically waits for the VPC to be created first.",
+"common_mistake": "Trying to manually specify creation order when Terraform already understands the implicit relationship."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is an Explicit Dependency?",
+"simple_explanation": "A forced dependency declared using the 'depends_on' argument.",
+"interview_answer": "Explicit dependencies force Terraform to wait for one resource to finish before starting another, even if they do not share data. It is used only when Terraform cannot infer the relationship itself.",
+"real_world_example": "Using 'depends_on' so an application server waits for a backend database script to finish running completely.",
+"common_mistake": "Overusing 'depends_on' unnecessarily, which slows down parallel resource creation during apply."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a Local Backend?",
+"simple_explanation": "Storing the Terraform state file on the local filesystem.",
+"interview_answer": "The local backend is the default behavior where 'terraform.tfstate' is stored on your local hard drive. It is used for quick solo testing. A vital interview point is that it is completely unsuitable for team collaboration.",
+"real_world_example": "A student learning Terraform and keeping the state file locally on their laptop.",
+"common_mistake": "Using a local backend in a team environment, leading to state conflicts and overwritten infrastructure."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does 'terraform show' do?",
+"simple_explanation": "It provides a human-readable output of a state or plan file.",
+"interview_answer": "The show command reads the current state file or a saved plan file and outputs it in a clean format. It is used to inspect exactly what Terraform is tracking. A key point is it parses the JSON state into HCL format.",
+"real_world_example": "Running 'terraform show' to check the specific IP address assigned to a running server.",
+"common_mistake": "Trying to read the raw 'terraform.tfstate' JSON file manually instead of using 'terraform show'."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What are Provisioners in Terraform?",
+"simple_explanation": "Scripts that run on a resource during creation or destruction.",
+"interview_answer": "Provisioners execute shell commands or scripts on local or remote machines. They are used to bootstrap software onto a server. A critical interview point is that HashiCorp considers them a 'last resort' alternative to configuration management.",
+"real_world_example": "Using a provisioner to run a bash script that installs Apache on a newly created EC2 instance.",
+"common_mistake": "Using provisioners extensively instead of robust tools like Ansible or cloud-native user-data scripts."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is the '-auto-approve' flag?",
+"simple_explanation": "It skips the interactive prompt during 'terraform apply' or 'destroy'.",
+"interview_answer": "The auto-approve flag forces Terraform to execute the plan immediately without asking the user to type 'yes'. It is essential for automating Terraform within CI/CD pipelines where manual interaction is impossible.",
+"real_world_example": "Adding '-auto-approve' to a Jenkins deployment script to fully automate infrastructure updates.",
+"common_mistake": "Using auto-approve locally during manual development, accidentally destroying or modifying unintended resources."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "How do you write comments in Terraform?",
+"simple_explanation": "Using '#', '//', or '/* */' syntaxes.",
+"interview_answer": "Comments are ignored by the Terraform parser and are used to document code for humans. Single-line comments use '#' or '//', while multi-line comments use '/* */'. A key point is that '#' is the most conventional.",
+"real_world_example": "Writing '# This deploys the frontend web server' above an AWS instance resource block.",
+"common_mistake": "Using XML or Python style docstrings, causing syntax errors during initialization."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is the 'terraform output' command?",
+"simple_explanation": "It displays the values of the output variables from the state file.",
+"interview_answer": "This command extracts and prints output values defined in your configuration directly from the state file. It is used to programmatically fetch data like IP addresses for use in external scripts.",
+"real_world_example": "Running 'terraform output db_password' to retrieve the generated database password for an application configuration.",
+"common_mistake": "Expecting to see outputs for variables that were never explicitly defined in an 'output' block."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a string variable?",
+"simple_explanation": "A variable type representing a sequence of text characters.",
+"interview_answer": "A string is the most basic variable type in Terraform, containing standard text enclosed in double quotes. It is used for names, IDs, and paths. An important point is that strings support interpolation.",
+"real_world_example": "Setting 'instance_type' to the string value 't2.micro'.",
+"common_mistake": "Forgetting double quotes around a string, causing Terraform to interpret it as a resource reference."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a list variable?",
+"simple_explanation": "A variable type representing an ordered sequence of values.",
+"interview_answer": "A list (or tuple) stores multiple values of the same type in a specific order, enclosed in square brackets. It is used when an argument expects multiple inputs, like security group IDs. Lists are zero-indexed.",
+"real_world_example": "Defining a list of allowed IP addresses: ['192.168.1.1', '10.0.0.1'].",
+"common_mistake": "Trying to use curly braces '{}' instead of square brackets '[]' to define a list."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is a map variable?",
+"simple_explanation": "A variable type representing key-value pairs.",
+"interview_answer": "A map (or object) stores data in key-value pairs, enclosed in curly braces. It is used to look up values dynamically or group related attributes together. Keys must always be strings.",
+"real_world_example": "Using a map to assign different AMI IDs based on the AWS region key.",
+"common_mistake": "Trying to access a map value using numerical indexes instead of its designated string key."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What does the '~>' symbol mean in versioning?",
+"simple_explanation": "It is the 'pessimistic constraint' operator for version control.",
+"interview_answer": "The '~>' operator allows only the rightmost version component to increment. It is used to automatically accept safe, backwards-compatible patch updates while blocking potentially breaking major updates.",
+"real_world_example": "Setting version '~> 3.1' allows '3.1.5' but completely blocks '3.2.0'.",
+"common_mistake": "Using exactly '=' for versioning, preventing you from receiving critical security patches automatically."
+},
+{
+"tool": "Terraform",
+"difficulty": "Easy",
+"question": "What is the '.terraform' directory?",
+"simple_explanation": "A hidden folder where Terraform stores cached plugins and modules.",
+"interview_answer": "Created during 'terraform init', this directory holds downloaded provider binaries and cloned module code. It is essential for local execution. A key interview point is that this folder should never be committed to version control.",
+"real_world_example": "Adding '.terraform/' to a '.gitignore' file so huge binary plugins aren't pushed to GitHub.",
+"common_mistake": "Committing the massive '.terraform' directory into Git, bloating the repository."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a Remote Backend?",
+"simple_explanation": "Storing the Terraform state file on a remote server or service.",
+"interview_answer": "Remote backends store the state file in a centralized location like AWS S3 or Azure Blob Storage. This enables team collaboration, ensures state file security, and prevents local data loss. It replaces the default local backend.",
+"real_world_example": "Configuring Terraform to save the state file securely in an encrypted AWS S3 bucket.",
+"common_mistake": "Failing to secure the remote backend, accidentally exposing the unencrypted state file to the public."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is State Locking?",
+"simple_explanation": "A mechanism to prevent concurrent operations on the same state file.",
+"interview_answer": "State locking ensures that if one team member is running an apply, nobody else can modify the state simultaneously. It prevents state corruption and race conditions. A key point is not all backends support locking natively.",
+"real_world_example": "A developer getting an error when running 'terraform apply' because a CI/CD pipeline is currently deploying.",
+"common_mistake": "Using a remote backend that doesn't support locking, leading to a severely corrupted state file."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "How does Terraform use DynamoDB?",
+"simple_explanation": "It is used in AWS to provide state locking for S3 backends.",
+"interview_answer": "When using an S3 remote backend, S3 alone cannot lock the file. Terraform uses a DynamoDB table to acquire and hold a temporary lock during operations. A vital point is the table must have a primary key named 'LockID'.",
+"real_world_example": "Adding a DynamoDB table reference to the backend configuration to safely collaborate on AWS infrastructure.",
+"common_mistake": "Creating the DynamoDB table with the wrong partition key name, causing the lock to fail silently."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a Terraform Workspace?",
+"simple_explanation": "A feature to manage multiple distinct state files from the same configuration directory.",
+"interview_answer": "Workspaces allow you to use the exact same Terraform code to deploy to different environments (like dev, staging, prod) by maintaining separate state files. A key point is it uses the 'terraform.workspace' variable for logic.",
+"real_world_example": "Switching to the 'prod' workspace to apply production-specific instance sizes using the same source code.",
+"common_mistake": "Using workspaces as a full substitute for isolating directory structures in complex, high-risk production environments."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'count' meta-argument?",
+"simple_explanation": "It allows you to create multiple identical resources from a single block.",
+"interview_answer": "The count argument accepts a whole number to deploy a resource multiple times. It is used to scale identical resources efficiently. A critical interview point is that elements are identified by their index list position.",
+"real_world_example": "Setting 'count = 3' to instantly spin up three identical web servers behind a load balancer.",
+"common_mistake": "Using count instead of 'for_each' for complex lists, causing massive recreation if a middle item is removed."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'for_each' meta-argument?",
+"simple_explanation": "It allows resource creation based on a map or set of strings.",
+"interview_answer": "Unlike count, 'for_each' uses key-value maps to create multiple resources. It assigns a unique string identifier to each resource instance rather than a numerical index, preventing accidental recreations when list orders change.",
+"real_world_example": "Using 'for_each' on a map of user names to safely create IAM users without relying on array order.",
+"common_mistake": "Trying to pass a simple list to 'for_each' without using 'toset()', which causes a type error."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a dynamic block?",
+"simple_explanation": "It dynamically generates repeatable nested blocks within a resource.",
+"interview_answer": "Dynamic blocks act like a 'for' loop inside a resource configuration, constructing repeatable sub-blocks (like ingress rules) based on a complex variable. They keep configurations DRY when dealing with multiple nested settings.",
+"real_world_example": "Iterating over a list of port numbers to dynamically generate 5 'ingress' rules inside an AWS Security Group.",
+"common_mistake": "Overusing dynamic blocks for simple configurations, making the code extremely hard to read and debug."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What are Local Values (locals)?",
+"simple_explanation": "They assign a name to an expression or value for reuse within a module.",
+"interview_answer": "Locals allow you to perform logic or string manipulation once and reuse the result multiple times throughout the code. Unlike input variables, locals are not exposed to the end user. They are used to simplify complex expressions.",
+"real_world_example": "Creating a local value 'common_tags' to automatically append a timestamp and environment tag to all resources.",
+"common_mistake": "Using locals to store values that should actually be configurable input variables."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "How do you mark a variable as sensitive?",
+"simple_explanation": "Add the 'sensitive = true' argument inside the variable block.",
+"interview_answer": "Marking a variable as sensitive prevents Terraform from displaying its value in the CLI output or plan logs. It is used to protect passwords and API tokens. However, the value is still stored in plaintext in the state file.",
+"real_world_example": "Marking a database password variable as sensitive so it isn't printed in the CI/CD console logs.",
+"common_mistake": "Assuming 'sensitive = true' encrypts the value in the state file. It only masks the UI output."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is custom variable validation?",
+"simple_explanation": "A rule block ensuring user inputs meet specific criteria before execution.",
+"interview_answer": "Validation blocks check if an input variable satisfies custom logic (like regex patterns or length limits) during the plan phase. If the condition fails, it throws a custom error message, preventing bad data deployments.",
+"real_world_example": "Validating that an environment variable only accepts the exact strings 'dev', 'test', or 'prod'.",
+"common_mistake": "Writing validation rules that are too strict, unexpectedly breaking legitimate deployments."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a Splat Expression (*)?",
+"simple_explanation": "It extracts a list of attributes from a list of resources.",
+"interview_answer": "The splat expression 'aws_instance.web[*].id' concisely captures the ID attribute from all instances created using the 'count' argument. It replaces writing complex 'for' loops to extract basic list data.",
+"real_world_example": "Outputting the public IP addresses of all 5 web servers using a single splat expression.",
+"common_mistake": "Trying to use a splat expression on resources created with 'for_each'; splat only works with lists, not maps."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What does 'apply -replace' (or 'taint') do?",
+"simple_explanation": "It forces Terraform to destroy and recreate a specific resource on the next apply.",
+"interview_answer": "Marking a resource for replacement is used when a resource has become degraded or manually corrupted, but Terraform's state doesn't realize it. It bypasses the standard update process to guarantee a fresh recreation.",
+"real_world_example": "Using '-replace' to force a fresh reinstall of an EC2 instance that got a corrupted software patch.",
+"common_mistake": "Manually deleting the resource in the cloud instead of using the replace flag to handle it gracefully."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'terraform import' command?",
+"simple_explanation": "It maps existing cloud resources into your Terraform state.",
+"interview_answer": "Import allows you to bring infrastructure created manually (or by other tools) under Terraform management without destroying it. A critical point is that it updates the state file, but you must manually write the HCL code for it.",
+"real_world_example": "Importing an old manually created S3 bucket into state so it can be managed via IaC.",
+"common_mistake": "Running import and forgetting to write the matching resource block in the code, causing plan errors."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What does 'terraform state list' do?",
+"simple_explanation": "It prints a list of all resources currently tracked in the state file.",
+"interview_answer": "This command provides a quick inventory of every resource address managed by the current configuration. It is primarily used to find the exact resource path needed for targeted applies, imports, or state manipulation.",
+"real_world_example": "Running 'state list' to find the exact index name of a specific server created in a 'for_each' loop.",
+"common_mistake": "Assuming 'state list' queries the cloud provider directly; it only reads the local or remote state file."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What does 'terraform state rm' do?",
+"simple_explanation": "It removes a resource from Terraform's tracking without destroying it in the cloud.",
+"interview_answer": "This command tells Terraform to stop managing a resource. The resource remains running in the cloud provider, but Terraform will no longer attempt to update or delete it. It is used when migrating resources between states.",
+"real_world_example": "Removing a database from a development state file so it can be safely imported into a production state file.",
+"common_mistake": "Using 'state rm' to delete cloud infrastructure, leaving orphaned, unmanaged resources accumulating cloud costs."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What does 'terraform state mv' do?",
+"simple_explanation": "It renames or moves a resource within the state file.",
+"interview_answer": "The state mv command is used when you rename a resource block in your HCL code. Without 'mv', Terraform would destroy the old name and recreate the new name. Moving it in state preserves the physical resource.",
+"real_world_example": "Moving a resource from 'aws_instance.old_name' to 'aws_instance.new_name' without rebooting the actual server.",
+"common_mistake": "Changing resource names in the code and running apply without doing a 'state mv', causing unwanted deletions."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'create_before_destroy' lifecycle rule?",
+"simple_explanation": "It forces Terraform to create the replacement resource before deleting the old one.",
+"interview_answer": "By default, Terraform destroys a resource before recreating it. This rule reverses that order, ensuring zero-downtime deployments. A key point is it is critical for resources like load balancers or auto-scaling groups.",
+"real_world_example": "Creating a new launch template version and verifying it works before Terraform tears down the previous one.",
+"common_mistake": "Using this on resources with strict naming constraints, causing the creation to fail due to name conflicts."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'prevent_destroy' lifecycle rule?",
+"simple_explanation": "It rejects any plan that attempts to destroy the resource.",
+"interview_answer": "This lifecycle block acts as a safety net against accidental deletions. If a configuration change requires destroying the resource, Terraform will immediately throw an error and halt the plan. It is used to protect critical databases.",
+"real_world_example": "Applying 'prevent_destroy' to a production RDS database to stop junior engineers from accidentally dropping it.",
+"common_mistake": "Leaving this enabled when intentionally trying to decommission an old environment, causing the destroy pipeline to fail."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'ignore_changes' lifecycle rule?",
+"simple_explanation": "It tells Terraform to ignore specific attribute changes made outside of Terraform.",
+"interview_answer": "This rule prevents Terraform from overwriting manual changes or external updates to a specific attribute (like auto-scaling sizes). It allows Terraform to manage the resource while ignoring drift on designated fields.",
+"real_world_example": "Ignoring 'desired_capacity' on an ASG so Terraform doesn't scale down instances that were spun up by a traffic alarm.",
+"common_mistake": "Ignoring all changes on a resource, effectively making Terraform useless for maintaining that resource's state."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'null_resource'?",
+"simple_explanation": "A resource that does nothing but allows you to run provisioners.",
+"interview_answer": "The null_resource is a virtual resource used to execute local or remote shell scripts via provisioners without creating physical cloud infrastructure. It uses 'triggers' to determine when it should re-run.",
+"real_world_example": "Running an Ansible playbook against an inventory file only when the EC2 instance IDs trigger an update.",
+"common_mistake": "Overusing null_resource for configuration management instead of using proper tools like Packer or Ansible."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'random' provider used for?",
+"simple_explanation": "It generates randomness for passwords, names, and identifiers.",
+"interview_answer": "The random provider creates random strings, integers, or pet names. It ensures globally unique naming conventions (like S3 buckets) and generates secure passwords for databases during provisioning. Its outputs are stored in the state.",
+"real_world_example": "Using 'random_password' to generate a secure string for a newly provisioned database instance.",
+"common_mistake": "Assuming random outputs are encrypted; they are stored in plaintext in the Terraform state file."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a 'local-exec' provisioner?",
+"simple_explanation": "It executes a script locally on the machine running Terraform.",
+"interview_answer": "The local-exec provisioner invokes a local executable after a resource is created. It is used to trigger local configuration management, update local IP inventories, or call external webhook APIs.",
+"real_world_example": "Running a curl command via local-exec to notify a Slack channel that the deployment has finished.",
+"common_mistake": "Using local-exec to perform heavy processing, tying up the Terraform runner machine unnecessarily."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a 'remote-exec' provisioner?",
+"simple_explanation": "It executes scripts on a remote resource after creation.",
+"interview_answer": "The remote-exec provisioner connects to a newly created server via SSH or WinRM to run commands directly on it. It is used for bootstrapping software, joining clusters, or basic configuration management.",
+"real_world_example": "Running a shell script to format and mount secondary EBS volumes directly on the remote Linux instance.",
+"common_mistake": "Failing to configure the connection block properly with SSH keys, causing the provisioner to time out."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What does 'terraform refresh' do?",
+"simple_explanation": "It updates the state file to match the real-world infrastructure.",
+"interview_answer": "The refresh command queries cloud provider APIs to reconcile the state file with actual reality, detecting manual drift. An important point is that modern Terraform implicitly performs a refresh during the 'plan' phase.",
+"real_world_example": "Running a refresh to update the state file after a teammate manually changed a security group rule in the AWS console.",
+"common_mistake": "Thinking 'refresh' alters the cloud resources to match the code; it actually alters the state file to match the cloud."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the Terraform Public Registry?",
+"simple_explanation": "A central repository hosting official and community providers and modules.",
+"interview_answer": "The Registry distributes plugins and pre-built infrastructure modules to simplify deployments. It is used to quickly consume verified, standardized code architectures. A key point is it eliminates reinventing the wheel for common setups.",
+"real_world_example": "Downloading the official 'terraform-aws-vpc' module from the Registry to deploy a secure network in minutes.",
+"common_mistake": "Blindly using unverified community modules in production without reviewing their source code for security risks."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "How do you use multiple configurations for the same provider (Aliases)?",
+"simple_explanation": "Use the 'alias' meta-argument inside the provider block.",
+"interview_answer": "Provider aliases allow you to configure the same provider multiple times, such as interacting with multiple AWS regions or accounts simultaneously. You reference the specific provider in the resource using the 'provider =' argument.",
+"real_world_example": "Deploying a primary database in 'us-east-1' and its read replica in 'us-west-2' using two aliased AWS providers.",
+"common_mistake": "Defining an alias but forgetting to explicitly assign it to the resource, which defaults back to the primary provider."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is the 'terraform console' command?",
+"simple_explanation": "An interactive command-line interface for evaluating Terraform expressions.",
+"interview_answer": "The console command opens an interactive shell where you can experiment with functions, variable interpolations, and test complex logic against the current state file. It is primarily used for debugging syntax without running a plan.",
+"real_world_example": "Using the console to test a 'split' or 'join' function on a string variable before hardcoding it into your script.",
+"common_mistake": "Trying to use the console to actually modify state or create resources; it is read-only evaluation."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is 'terraform force-unlock'?",
+"simple_explanation": "It manually removes a lock on the remote state file.",
+"interview_answer": "If a Terraform run crashes or loses network connection mid-apply, the remote state lock might not release. 'force-unlock' accepts the Lock ID to manually clear it. A critical point is doing this while another apply is running causes extreme state corruption.",
+"real_world_example": "Running force-unlock after a developer's laptop crashed during an apply, leaving the DynamoDB lock stuck.",
+"common_mistake": "Using force-unlock hastily without verifying that no other team members or pipelines are actively deploying."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "How do you upgrade a provider version?",
+"simple_explanation": "Change the version constraint and run 'terraform init -upgrade'.",
+"interview_answer": "You update the required_providers block to the new version and run the init command with the -upgrade flag. This ignores the lock file, pulls the new provider binary, and updates the dependency lock file.",
+"real_world_example": "Upgrading the AWS provider from 4.0 to 5.0 to gain access to a newly released AWS service resource.",
+"common_mistake": "Manually deleting the .terraform.lock.hcl file instead of properly running the -upgrade command."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a required_providers block?",
+"simple_explanation": "It declares the specific providers and versions needed for the configuration.",
+"interview_answer": "This block is used to strictly define the source location (e.g., hashicorp/aws) and the version constraints for providers. It ensures all developers and pipelines use the exact same provider binaries to prevent inconsistencies.",
+"real_world_example": "Pinning the 'azurerm' provider to version '~> 3.0' to ensure compatibility across a team of 10 developers.",
+"common_mistake": "Omitting the block in older codebases, forcing Terraform to guess the provider source and risking fetching malicious plugins."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is 'terraform graph'?",
+"simple_explanation": "It generates a visual representation of the resource dependency graph.",
+"interview_answer": "Terraform builds a dependency graph to determine the creation order. This command outputs that graph in DOT format, which can be visualized using external tools like Graphviz. It is used to debug complex dependency loops.",
+"real_world_example": "Generating a visual map to show stakeholders the exact deployment order of the networking and compute infrastructure.",
+"common_mistake": "Expecting the command to instantly output a PNG image; it only outputs the raw DOT language text."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a conditional expression?",
+"simple_explanation": "It uses the format 'condition ? true_val : false_val' to assign values.",
+"interview_answer": "Conditional expressions evaluate a boolean test to determine which value to assign. They are heavily used to toggle resource creation (count = var.create ? 1 : 0) or dynamically assign strings based on environments.",
+"real_world_example": "Setting an instance size to 't3.large' if in production, but 't3.micro' if in development.",
+"common_mistake": "Trying to write multiline if-else blocks; Terraform only supports this single-line ternary syntax."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "How do you reference module outputs?",
+"simple_explanation": "Using the syntax 'module.module_name.output_name'.",
+"interview_answer": "When a child module declares an output, the parent module can access that value using the 'module' prefix. This is the primary method for passing data, like an underlying VPC ID, from a networking module into a compute module.",
+"real_world_example": "Setting an instance's subnet_id argument to 'module.network.public_subnet_id'.",
+"common_mistake": "Attempting to access a module resource directly (e.g., module.network.aws_vpc.id) without explicitly defining an output block first."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a boolean variable?",
+"simple_explanation": "A true or false value.",
+"interview_answer": "Booleans are simple variables that accept either 'true' or 'false'. They are heavily used as feature flags to conditionally enable or disable resources and specific configuration blocks across different deployments.",
+"real_world_example": "Using a variable 'enable_monitoring = true' to decide if CloudWatch alarm resources should be provisioned.",
+"common_mistake": "Enclosing true or false in quotes ('true'), accidentally converting it into a string type."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a tuple in Terraform?",
+"simple_explanation": "A sequence of elements that can have mixed types.",
+"interview_answer": "Unlike a list where all elements must be identical data types (e.g., all strings), a tuple allows a predefined sequence of mixed types (e.g., string, number, boolean). It is used for highly specific, rigid data structures.",
+"real_world_example": "Defining a tuple type: type = tuple([string, number, bool]) to enforce strict parameter inputs.",
+"common_mistake": "Using a tuple when a flexible list is needed, causing validation errors when adding an extra element."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is an object data type?",
+"simple_explanation": "A structural type representing a map with fixed keys and mixed value types.",
+"interview_answer": "An object enforces a rigid schema where specific keys must exist, and each key has a strict data type. It is heavily used in module inputs to ensure users provide properly structured, complex configurations.",
+"real_world_example": "Defining an object for routing rules that requires an integer for 'port' and a string for 'protocol'.",
+"common_mistake": "Providing an empty block for an object that lacks default values, triggering type constraint errors."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "How do you handle multiple environments using tfvars?",
+"simple_explanation": "Create separate .tfvars files and pass them during the plan/apply commands.",
+"interview_answer": "By creating files like dev.tfvars and prod.tfvars, you can inject environment-specific variables into the same Terraform codebase. You pass them via the CLI using the '-var-file' flag to determine the target environment.",
+"real_world_example": "Running 'terraform apply -var-file=\"prod.tfvars\"' to deploy the production infrastructure.",
+"common_mistake": "Hardcoding environment names in the main code instead of passing them in via generic variables."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What happens if you lose the state file?",
+"simple_explanation": "Terraform loses mapping to real-world resources and cannot manage them.",
+"interview_answer": "If the state file is lost, Terraform thinks no resources exist. Running apply will attempt to recreate everything, causing massive conflicts. Recovery involves manual use of 'terraform import' to rebuild the state file from scratch.",
+"real_world_example": "A junior engineer deleting local state by accident and having to painstakingly import 50 AWS resources back into tracking.",
+"common_mistake": "Trying to fix a lost state file by simply running apply, causing duplication and severe production downtime."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a provider block?",
+"simple_explanation": "It configures the specific settings required for a provider plugin.",
+"interview_answer": "The provider block contains authentication details, target regions, and default tags needed to interact with the cloud API. An important interview point is that you should use environment variables rather than hardcoding credentials inside this block.",
+"real_world_example": "Specifying 'region = us-east-1' inside the AWS provider block to define where resources will launch.",
+"common_mistake": "Committing AWS Access Keys directly inside the provider block to a public Git repository."
+},
+{
+"tool": "Terraform",
+"difficulty": "Medium",
+"question": "What is a 'data' block's execution phase?",
+"simple_explanation": "Data blocks execute during the 'plan' phase.",
+"interview_answer": "Terraform attempts to read data sources during the plan phase to build an accurate dependency graph. A key point is if the data source relies on a resource that hasn't been created yet, its read is delayed until the apply phase.",
+"real_world_example": "Terraform retrieving a pre-existing VPC ID during the plan phase to validate subnet configurations.",
+"common_mistake": "Querying a data source that does not exist yet without utilizing 'depends_on', causing the plan to fail instantly."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you integrate Terraform into a CI/CD pipeline?",
+"simple_explanation": "Automate init, plan, and apply commands within runner jobs.",
+"interview_answer": "In a pipeline, you trigger 'terraform plan' on pull requests, posting the output to the PR comments. On merging to master, you run 'terraform apply -auto-approve'. This requires strict remote state and headless authentication setups.",
+"real_world_example": "Using GitHub Actions to run a plan against AWS infrastructure every time a developer proposes a code change.",
+"common_mistake": "Running apply without state locking, causing two parallel CI jobs to corrupt the infrastructure."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is Terraform Cloud?",
+"simple_explanation": "A managed service by HashiCorp that provides remote state, runs, and collaboration.",
+"interview_answer": "Terraform Cloud acts as a remote execution environment. It securely handles state, variables, and API secrets. It eliminates the need to build complex Jenkins pipelines by natively connecting to VCS repos to trigger infrastructure runs.",
+"real_world_example": "Linking a GitHub repo to Terraform Cloud to automatically execute a speculative plan when a PR is opened.",
+"common_mistake": "Assuming Terraform Cloud is free for massive enterprises; costs scale with concurrent runs and features."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What are Sentinel Policies?",
+"simple_explanation": "Policy-as-Code framework integrated into Terraform Enterprise and Cloud.",
+"interview_answer": "Sentinel defines and enforces granular logic rules on infrastructure changes before an apply can execute. It is used to enforce security and compliance natively, such as blocking the creation of unencrypted S3 buckets.",
+"real_world_example": "Writing a Sentinel rule that rejects any EC2 instance larger than 't3.large' to control costs.",
+"common_mistake": "Setting every policy to 'Hard Mandatory', bringing all developer deployments to a grinding halt due to minor compliance edge cases."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is Configuration Drift and how do you fix it?",
+"simple_explanation": "When actual cloud resources differ from the Terraform state and code.",
+"interview_answer": "Drift happens when manual changes are made in the cloud console. Terraform identifies this during a plan. To fix it, either update the Terraform code to match the manual change, or run apply to revert the cloud back to code.",
+"real_world_example": "A developer manually adding port 22 to a firewall, and Terraform removing it on the next run to resolve the drift.",
+"common_mistake": "Ignoring drift warnings for months until 'terraform apply' causes widespread, unexpected production damage."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you manage secrets in Terraform state?",
+"simple_explanation": "Use encrypted remote backends and strict IAM access controls.",
+"interview_answer": "Terraform saves state files, including passwords, in plaintext. To secure them, you must use an encrypted backend like AWS S3 with KMS encryption. Restrict read access strictly to the CI/CD pipeline using IAM roles.",
+"real_world_example": "Encrypting the S3 state bucket with a Customer Managed Key to ensure administrators cannot read the raw state file.",
+"common_mistake": "Believing 'sensitive = true' variables encrypt the data in the state file."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is Terragrunt?",
+"simple_explanation": "A thin wrapper for Terraform that provides extra tools for keeping configurations DRY.",
+"interview_answer": "Terragrunt manages remote backend configuration, enables executing commands across multiple modules concurrently, and prevents code duplication by allowing you to define variables in a single central file that cascades to all child environments.",
+"real_world_example": "Using a single terragrunt.hcl file to define the AWS backend, which 50 different microservice modules inherit automatically.",
+"common_mistake": "Using Terragrunt for extremely simple, single-environment deployments where native Terraform workspaces would suffice."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you execute zero-downtime deployments with Terraform?",
+"simple_explanation": "Use 'create_before_destroy' combined with health checks and load balancers.",
+"interview_answer": "To prevent downtime during immutable replacements, set 'create_before_destroy = true'. This forces Terraform to spin up the new resource, add it to the load balancer, wait for health checks to pass, and only then tear down the old resource.",
+"real_world_example": "Updating a Launch Template version so a new EC2 spins up and serves traffic before the old one is terminated.",
+"common_mistake": "Applying this rule to resources with globally unique name constraints (like S3 buckets), causing creation to fail."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you write a custom Terraform Provider?",
+"simple_explanation": "Using the Terraform Plugin SDK written in Golang.",
+"interview_answer": "Custom providers are written in Go and implement CRUD (Create, Read, Update, Delete) interfaces to interact with proprietary APIs. It compiles into a binary that Terraform invokes via RPC to manage internal, non-cloud systems.",
+"real_world_example": "Writing a custom provider to automate the creation of internal user accounts in a proprietary legacy HR system.",
+"common_mistake": "Trying to write a custom provider for an API that lacks proper 'Read' endpoints, making state tracking impossible."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is the Provider Plugin Protocol?",
+"simple_explanation": "The gRPC protocol used by Terraform Core to communicate with Provider plugins.",
+"interview_answer": "Terraform Core does not contain platform-specific logic. It communicates with compiled provider plugins via gRPC. This architecture allows providers to be developed, versioned, and distributed entirely independently from the core Terraform engine.",
+"real_world_example": "HashiCorp updating Terraform Core to 1.5 without needing AWS or Azure to rewrite their provider binaries.",
+"common_mistake": "Assuming Terraform plugins are interpreted scripts rather than compiled, standalone Go binaries."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you structure Terraform for a large enterprise?",
+"simple_explanation": "Isolate state files by environment and application boundary using a module-based structure.",
+"interview_answer": "Monolithic state files are slow and risky. Break architecture into layered states (e.g., networking, database, compute) per environment (dev, prod). Connect them using 'terraform_remote_state' or SSM parameter store data sources.",
+"real_world_example": "Deploying the core VPC network in one state file, and allowing microservice compute states to simply read the subnet IDs.",
+"common_mistake": "Putting 5,000 resources into a single production state file, causing 'terraform plan' to take 20 minutes to execute."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is 'terraform login'?",
+"simple_explanation": "It authenticates your local CLI to Terraform Cloud or Enterprise.",
+"interview_answer": "This command initiates an OAuth flow, prompting you to generate a secure API token in the web browser. The token is saved locally, allowing the CLI to securely push state and execute remote operations on Terraform Cloud.",
+"real_world_example": "Running 'terraform login' so you can seamlessly migrate local state to a remote Terraform Cloud workspace.",
+"common_mistake": "Sharing the generated token across a team instead of having each user run the login command for individual auditing."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you handle API rate limits during 'terraform apply'?",
+"simple_explanation": "Reduce the parallel execution limit using the '-parallelism' flag.",
+"interview_answer": "Terraform executes up to 10 operations concurrently by default. If provisioning massive infrastructure, this can trigger API throttling (HTTP 429) from the cloud provider. Use '-parallelism=N' to lower concurrency and prevent rate limits.",
+"real_world_example": "Setting '-parallelism=5' to stop AWS from aggressively throttling API requests during a 500-instance deployment.",
+"common_mistake": "Adding complex 'sleep' scripts instead of utilizing the native parallelism flag or exponential backoff in the provider."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you improve the performance of a large state file?",
+"simple_explanation": "Use targeted plans, split the state, or use '-refresh=false'.",
+"interview_answer": "To improve speed, heavily separate infrastructure into smaller state files. During development, use the '-target' flag to plan specific resources, or temporarily bypass the cloud API querying step by using the '-refresh=false' flag.",
+"real_world_example": "Splitting a monolithic state file into separate 'Network', 'Data', and 'Application' repositories to reduce plan times by 90%.",
+"common_mistake": "Continuing to use local CPU limitations to blame speed, when the bottleneck is actually the cloud API refresh process."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is the 'external' data source?",
+"simple_explanation": "It executes an external program and reads its JSON output into Terraform.",
+"interview_answer": "This data source integrates custom scripts (like Python or Bash) directly into a Terraform run. The script must return valid JSON. It is used as a bridge when native providers don't support a specific proprietary API.",
+"real_world_example": "Running a Python script to query an old on-premise CMDB and importing the returned server names into Terraform.",
+"common_mistake": "Using 'external' to make state-altering POST requests, violating the read-only expectation of data sources."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How does module caching work?",
+"simple_explanation": "Terraform caches modules in the local '.terraform' directory to speed up initialization.",
+"interview_answer": "When 'init' runs, remote modules are cloned and cached. If you modify a remote module's source code, Terraform won't download the update automatically unless the version changes or you force a refresh using 'terraform init -upgrade'.",
+"real_world_example": "Running 'terraform init -upgrade' to pull the latest unversioned 'master' branch changes from a custom Git module.",
+"common_mistake": "Modifying module code directly inside the '.terraform' cache and wondering why changes vanish on the next init."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is 'terraform-docs'?",
+"simple_explanation": "An open-source utility that automatically generates documentation for Terraform modules.",
+"interview_answer": "It parses HCL files and extracts inputs, outputs, and descriptions into a clean Markdown table. It is essential for enterprise module registries to ensure developers know exactly what variables are required to consume the module.",
+"real_world_example": "Using a pre-commit git hook to auto-generate the README.md table every time a variable is added to a module.",
+"common_mistake": "Manually writing Markdown tables for 50 variables, which inevitably becomes outdated the moment code changes."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is 'tflint'?",
+"simple_explanation": "A Terraform linter that finds possible errors and enforces best practices.",
+"interview_answer": "While 'terraform validate' only checks syntax, TFLint parses the code against cloud-specific rules. It can detect deep errors like choosing an invalid AWS EC2 instance type or forgetting to encrypt an S3 bucket before applying.",
+"real_world_example": "Failing a CI/CD pipeline because TFLint detected an unapproved, overly expensive GPU instance type in the code.",
+"common_mistake": "Only running syntax validation in pipelines without using deep semantic linters like TFLint."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you manually resolve a stuck state lock?",
+"simple_explanation": "Use 'terraform force-unlock <LOCK_ID>'.",
+"interview_answer": "A lock gets stuck when a process is killed mid-run. You must communicate with your team to ensure no one is actually applying. Then, retrieve the Lock ID from the error message and run the force-unlock command to release the backend.",
+"real_world_example": "Releasing a DynamoDB lock after a Jenkins pipeline crashed due to an out-of-memory error during deployment.",
+"common_mistake": "Unlocking the state blindly without checking CI/CD, causing two pipelines to overwrite each other simultaneously."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you migrate local state to a remote backend?",
+"simple_explanation": "Add the backend configuration block and run 'terraform init'.",
+"interview_answer": "Configure the 'backend' block in your Terraform settings with remote details (like an S3 bucket). When you execute 'terraform init', Terraform detects the change and prompts you to seamlessly migrate the local state data to the new remote backend.",
+"real_world_example": "Migrating a developer's local testing environment to an S3 backend so the whole team can collaborate on it.",
+"common_mistake": "Manually copying and pasting the raw JSON text from a local file into an S3 bucket, causing tracking errors."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you pass IAM cross-account roles to a Terraform provider?",
+"simple_explanation": "Use the 'assume_role' block within the AWS provider configuration.",
+"interview_answer": "You configure the primary provider with baseline credentials, then nest an 'assume_role' block pointing to the target account's Role ARN. Terraform automatically requests temporary STS credentials to provision infrastructure in the secondary account.",
+"real_world_example": "A centralized CI/CD server in Account A assuming a 'Deployer' role to create VPCs in Account B.",
+"common_mistake": "Hardcoding long-term access keys for every single account instead of using secure role assumption."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How does OIDC integration work with Terraform?",
+"simple_explanation": "It provides short-lived authentication credentials to pipelines without storing static secrets.",
+"interview_answer": "OpenID Connect allows tools like GitHub Actions to establish a trust relationship with a cloud provider (like AWS). Terraform requests a temporary, short-lived token via OIDC to perform the apply, entirely eliminating the risk of leaked permanent access keys.",
+"real_world_example": "GitHub Actions securely provisioning Azure infrastructure without holding any hardcoded Client Secret passwords.",
+"common_mistake": "Continuing to use static IAM users with long-lived access keys for CI/CD runners."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is the difference between a Hard Mandatory and Soft Mandatory Sentinel policy?",
+"simple_explanation": "Hard blocks execution entirely; Soft allows overrides by an administrator.",
+"interview_answer": "In Terraform Cloud, 'hard-mandatory' halts the apply process if the policy fails, with no exceptions. 'Soft-mandatory' pauses the run, but allows users with high-level override privileges to bypass the rule and deploy anyway, providing flexibility for emergency hotfixes.",
+"real_world_example": "Using soft-mandatory to flag missing tags, but hard-mandatory to absolutely block public database ports.",
+"common_mistake": "Applying hard-mandatory rules to trivial naming conventions, frustrating developers and halting critical hotfixes."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is Module Composition?",
+"simple_explanation": "Combining simple, single-purpose modules to build complex infrastructure.",
+"interview_answer": "Instead of creating a giant monolithic module that deploys a whole architecture, module composition creates highly focused modules (e.g., 'vpc', 'database', 'compute'). The parent configuration calls and links these modules together via outputs and inputs.",
+"real_world_example": "Passing the output ID of a 'VPC' module directly into the input variable of an 'EKS Cluster' module.",
+"common_mistake": "Building 'mega-modules' with hundreds of variables that are impossible to test, maintain, or reuse."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is Dependency Injection in Terraform?",
+"simple_explanation": "Passing resource IDs as variables rather than creating the resources inside the module.",
+"interview_answer": "To keep modules decoupled, you shouldn't create shared resources (like a VPC) inside a compute module. Instead, pass the pre-existing VPC ID as an input variable into the module. This adheres to inversion of control principles.",
+"real_world_example": "Injecting an existing IAM Role ARN into a Lambda module so the module doesn't force the creation of a new role.",
+"common_mistake": "Hardcoding infrastructure lookups inside a module, chaining it permanently to a specific environment structure."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you isolate state files between environments?",
+"simple_explanation": "Use completely separate directories with different backend keys.",
+"interview_answer": "While 'workspaces' isolate state, the best practice for production isolation is directory separation (e.g., /env/dev, /env/prod). Each directory has an explicit backend configuration pointing to a unique state file path, entirely eliminating the risk of cross-environment corruption.",
+"real_world_example": "Storing the dev state in 's3://bucket/dev/state' and prod in 's3://bucket/prod/state' via directory structure.",
+"common_mistake": "Using Workspaces to manage production and dev in the same folder, risking a simple typo destroying production."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is the 'merge' function used for?",
+"simple_explanation": "It combines multiple maps or objects into a single map.",
+"interview_answer": "The merge function takes two or more maps and merges their key-value pairs. It is heavily used for tagging strategies, allowing you to combine a map of 'default_tags' with a map of 'resource_specific_tags' natively.",
+"real_world_example": "merging(var.global_company_tags, { Environment = \"Prod\", Service = \"Frontend\" }) on an EC2 instance.",
+"common_mistake": "Assuming merge handles lists; it strictly operates on maps or objects."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What is OpenTofu?",
+"simple_explanation": "An open-source fork of Terraform created under the Linux Foundation.",
+"interview_answer": "After HashiCorp changed Terraform's license to the Business Source License (BSL), the community forked version 1.5 to maintain a truly open-source alternative. OpenTofu is designed to be a drop-in, highly compatible replacement for the Terraform CLI.",
+"real_world_example": "A massive enterprise migrating to OpenTofu to avoid legal licensing risks related to HashiCorp's BSL switch.",
+"common_mistake": "Believing OpenTofu requires entirely rewriting HCL code; it currently acts as a seamless CLI replacement."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you test Terraform code using Terratest?",
+"simple_explanation": "Write Go scripts to deploy, validate, and destroy Terraform code automatically.",
+"interview_answer": "Terratest is a Go library that provides patterns for infrastructure testing. It executes 'terraform apply', runs API validations (like checking if an HTTP endpoint returns 200 OK), and finally runs 'terraform destroy' to assert code quality.",
+"real_world_example": "Using a CI pipeline to deploy a mock VPC, verify the route tables via Go AWS SDK, and tear it down.",
+"common_mistake": "Running unit tests against live production infrastructure instead of spinning up ephemeral, isolated test stacks."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "What are Provider overriding and 'override.tf' files?",
+"simple_explanation": "Files used to force-override configurations in other Terraform files without altering them.",
+"interview_answer": "Terraform loads files ending in '_override.tf' last and merges their contents destructively over previous definitions. It is a highly specialized tool used in rare edge cases, like dynamically overriding a provider configuration strictly for CI/CD test runs.",
+"real_world_example": "Creating 'test_override.tf' to override the instance size to 'nano' during pipeline validation to save costs.",
+"common_mistake": "Using override files for normal environment deployments instead of using standardized input variables."
+},
+{
+"tool": "Terraform",
+"difficulty": "Hard",
+"question": "How do you handle Terraform version upgrades safely?",
+"simple_explanation": "Read release notes, upgrade progressively, and use the '0.12upgrade' tool for older code.",
+"interview_answer": "Version upgrades require checking provider compatibility and upgrading minor versions incrementally (e.g., 1.0 to 1.1). You isolate an environment, apply the new version binary to update the state file format, and fix any deprecation warnings before promoting.",
+"real_world_example": "Upgrading a development state file to Terraform 1.5 and reviewing the plan output to ensure zero resources are marked for replacement.",
+"common_mistake": "Upgrading the local CLI binary while team members still use older versions, locking them out due to state file version bumps."
+}
+]

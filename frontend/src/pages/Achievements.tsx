@@ -1,33 +1,45 @@
 import { useState } from 'react';
 
-// మార్కెట్ యూజర్ కోసం ఇక్కడ ఎంప్టీ లిస్ట్ ఉంటుంది (యూజర్ అచీవ్ చేస్తే వస్తుంది)
 export default function Achievements() {
-  const [achievements] = useState([]); // యూజర్ ఇంకా ఏమీ చేయకపోతే ఎంప్టీగా ఉంటుంది
+  // డెమో కోసం ఒక అచీవ్‌మెంట్ యాడ్ చేశాను, నీ దగ్గర డేటా వస్తే ఇది అప్‌డేట్ అవుతుంది
+  const [achievements] = useState([
+  ]);
 
   return (
-    <div className="max-w-4xl mx-auto p-8 text-white min-h-screen">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-3xl font-bold">Achievements</h1>
-        <button className="bg-purple-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-purple-700 transition">
+    <div className="max-w-6xl mx-auto p-4 md:p-8 text-white min-h-screen">
+      
+      {/* Header Section */}
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-12 gap-6">
+        <div>
+          <h1 className="text-3xl md:text-4xl font-extrabold mb-3">Achievements</h1>
+          <p className="text-gray-400 text-lg">Your milestones and unlocked badges.</p>
+        </div>
+        <button className="bg-white/10 hover:bg-white/20 border border-white/10 px-6 py-3 rounded-full font-bold transition-all backdrop-blur-md shadow-lg">
           + Add Achievement
         </button>
       </div>
       
+      {/* 1. Empty State (Glass Style) */}
       {achievements.length === 0 ? (
-        <div className="text-center bg-gray-900 border border-gray-800 p-16 rounded-3xl">
-          <div className="text-6xl mb-4">🚀</div>
-          <h3 className="text-2xl font-bold mb-2">No achievements yet</h3>
-          <p className="text-gray-400 max-w-sm mx-auto">
-            Complete your roadmaps and mock interviews to unlock your first badge!
-          </p>
+        <div className="relative bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-12 md:p-20 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.15)] flex flex-col items-center justify-center text-center max-w-4xl mx-auto overflow-hidden">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-purple-600/10 rounded-full blur-[80px] pointer-events-none"></div>
+          
+          <div className="relative z-10">
+            <div className="text-7xl mb-6">🚀</div>
+            <h3 className="text-2xl font-bold mb-4">No achievements yet</h3>
+            <p className="text-gray-400 max-w-sm mx-auto text-lg leading-relaxed">
+              Complete your roadmaps and mock interviews to unlock your first badge!
+            </p>
+          </div>
         </div>
       ) : (
-        <div className="grid md:grid-cols-2 gap-6">
+        /* 2. Achievements Grid (Glass Cards) */
+        <div className="grid md:grid-cols-2 gap-6 max-w-4xl">
           {achievements.map((item: any, index) => (
-            <div key={index} className="bg-gray-900 border border-gray-800 p-6 rounded-2xl flex items-center gap-4">
-              <div className="text-4xl">🏅</div>
+            <div key={index} className="group bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-6 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.1)] hover:bg-white/10 hover:border-white/20 transition-all duration-300 flex items-center gap-6">
+              <div className="text-5xl p-4 bg-white/5 rounded-2xl border border-white/10">🏅</div>
               <div>
-                <h3 className="font-bold">{item.title}</h3>
+                <h3 className="font-bold text-lg mb-1">{item.title}</h3>
                 <p className="text-sm text-gray-400">{item.date}</p>
               </div>
             </div>

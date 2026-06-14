@@ -1,0 +1,812 @@
+[
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is Apache HTTP Server?",
+"simple_explanation": "Apache is a widely used open-source web server.",
+"interview_answer": "Apache HTTP Server is an open-source web server that delivers web content over the internet. It is highly customizable through modules and relies on a process-driven architecture. A key point is it processes dynamic content like PHP natively.",
+"real_world_example": "Serving a traditional LAMP stack WordPress website.",
+"common_mistake": "Confusing Apache HTTP Server with the Apache Software Foundation, which manages hundreds of projects."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "How do you start the Apache service?",
+"simple_explanation": "You start Apache using the systemd service manager.",
+"interview_answer": "You start Apache using 'systemctl start apache2' on Debian/Ubuntu or 'systemctl start httpd' on RHEL/CentOS. It initializes the web server daemon. Always verify the status immediately after starting.",
+"real_world_example": "Running 'systemctl start apache2' after completing an initial server installation.",
+"common_mistake": "Using the wrong service name (apache2 vs httpd) depending on the Linux distribution."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "How do you gracefully reload Apache configuration?",
+"simple_explanation": "Use the reload command to apply changes without dropping active connections.",
+"interview_answer": "Use 'systemctl reload apache2' to apply configuration changes safely. Unlike a restart, a reload gracefully shuts down child processes only after they finish serving current requests, ensuring zero downtime.",
+"real_world_example": "Reloading Apache after adding a new VirtualHost to ensure current website visitors aren't disconnected.",
+"common_mistake": "Using 'restart' instead of 'reload', which abruptly drops all active user connections."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "Where is the main Apache configuration file located?",
+"simple_explanation": "It is typically located in /etc/apache2/ or /etc/httpd/.",
+"interview_answer": "The main configuration file is '/etc/apache2/apache2.conf' on Debian/Ubuntu and '/etc/httpd/conf/httpd.conf' on CentOS/RHEL. It controls global server settings, modules, and includes paths for virtual hosts.",
+"real_world_example": "Editing the main configuration file to change global KeepAlive or timeout settings.",
+"common_mistake": "Editing files in /usr/share/ instead of the standard /etc/ configuration directories."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is the default DocumentRoot in Apache?",
+"simple_explanation": "The default directory where website files are stored.",
+"interview_answer": "The DocumentRoot is the directory where Apache looks for files to serve. By default, it is usually '/var/www/html'. You must place your index.html or application files in this specific directory.",
+"real_world_example": "Placing an 'index.html' file in '/var/www/html' so it loads when users visit your server IP.",
+"common_mistake": "Placing files in the DocumentRoot but failing to grant the web server user read permissions."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is an Apache VirtualHost?",
+"simple_explanation": "A configuration block that allows hosting multiple websites on one server.",
+"interview_answer": "A VirtualHost block defines settings for a specific domain. It allows a single Apache server to host multiple websites using the same IP address by routing traffic based on the requested domain name.",
+"real_world_example": "Configuring one VirtualHost for 'siteA.com' and another for 'siteB.com' on the same physical server.",
+"common_mistake": "Forgetting to set the 'ServerName' directive inside the VirtualHost block, causing incorrect routing."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What does 'apachectl configtest' do?",
+"simple_explanation": "It checks the Apache configuration files for syntax errors.",
+"interview_answer": "The command 'apachectl configtest' (or 'apache2ctl -t') parses configuration files before reloading the server. It prevents bringing the server down due to simple typos like missing semicolons.",
+"real_world_example": "Running a syntax test in a CI/CD pipeline before pushing new Apache configurations to production.",
+"common_mistake": "Reloading the server without testing the configuration first, leading to immediate site outages."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is the default HTTP port for Apache?",
+"simple_explanation": "Apache listens on port 80 for standard HTTP traffic.",
+"interview_answer": "By default, Apache listens on TCP port 80 for unencrypted HTTP requests. It is the global standard for web browsing. You must ensure this port is open in your network firewall.",
+"real_world_example": "A user typing a URL without 'https://' connects to Apache on port 80.",
+"common_mistake": "Starting Apache but forgetting to open port 80 in the cloud provider's Security Group."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is the default HTTPS port for Apache?",
+"simple_explanation": "Apache listens on port 443 for secure HTTPS traffic.",
+"interview_answer": "Apache uses TCP port 443 for secure, TLS/SSL encrypted traffic. It protects data from eavesdropping. You must configure SSL certificates and explicitly listen on port 443 in the VirtualHost.",
+"real_world_example": "Serving a secure e-commerce checkout page over port 443.",
+"common_mistake": "Configuring an SSL VirtualHost but forgetting to actually define 'Listen 443' in the global config."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "Where are Apache access logs stored?",
+"simple_explanation": "Typically in /var/log/apache2/access.log or /var/log/httpd/access_log.",
+"interview_answer": "The access log records every HTTP request processed by the server, including client IP, timestamp, and HTTP status code. It is heavily used for tracking traffic patterns and security auditing.",
+"real_world_example": "Reviewing access.log to determine which IP address is aggressively scraping your website.",
+"common_mistake": "Leaving access logs enabled for massive static asset transfers, quickly filling up the hard drive."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "Where are Apache error logs stored?",
+"simple_explanation": "Typically in /var/log/apache2/error.log or /var/log/httpd/error_log.",
+"interview_answer": "The error log records diagnostic information, startup failures, and application errors encountered by Apache. It is the primary tool used for troubleshooting broken websites or 'Internal Server Errors'.",
+"real_world_example": "Checking error.log to find out why a PHP script crashed and returned a 500 status code.",
+"common_mistake": "Staring at the access log instead of the error log when trying to debug application crashes."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is the '.htaccess' file?",
+"simple_explanation": "A decentralized configuration file applied at the directory level.",
+"interview_answer": "The .htaccess file allows overriding server configurations on a per-directory basis without editing the main server config. It is heavily used for URL rewriting and password protection in shared hosting environments.",
+"real_world_example": "A developer putting a .htaccess file in an 'admin' folder to restrict access by IP address.",
+"common_mistake": "Expecting .htaccess to work when 'AllowOverride None' is set in the main server configuration."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What does the 'DirectoryIndex' directive do?",
+"simple_explanation": "It sets the default file Apache serves when a directory is requested.",
+"interview_answer": "The DirectoryIndex defines which file to look for when a user requests a bare directory URL. Apache checks the listed files in order from left to right and serves the first one it finds.",
+"real_world_example": "Setting 'DirectoryIndex index.php index.html' so Apache loads the PHP file before the HTML file.",
+"common_mistake": "Forgetting to add 'index.php' to the list, causing Apache to return a 403 Forbidden on directory requests."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is an Apache Module?",
+"simple_explanation": "A pluggable component that adds functionality to the base Apache server.",
+"interview_answer": "Apache uses a modular architecture. Modules (like mod_rewrite or mod_ssl) are loaded dynamically to provide features like URL manipulation, encryption, or security filtering without recompiling the entire server.",
+"real_world_example": "Enabling 'mod_rewrite' to change ugly URLs into clean, SEO-friendly URLs.",
+"common_mistake": "Trying to use a directive (like RewriteRule) without actually enabling the required module first."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "How do you enable an Apache module on Debian/Ubuntu?",
+"simple_explanation": "Use the 'a2enmod' command.",
+"interview_answer": "The 'a2enmod' (Apache2 Enable Module) command creates a symlink from the mods-available directory to the mods-enabled directory. It simplifies module management. You must restart or reload Apache afterward.",
+"real_world_example": "Running 'a2enmod ssl' to activate HTTPS capabilities on the server.",
+"common_mistake": "Running the command but forgetting to reload the Apache service to apply the change."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "How do you enable a site configuration on Debian/Ubuntu?",
+"simple_explanation": "Use the 'a2ensite' command.",
+"interview_answer": "The 'a2ensite' command creates a symlink from sites-available to sites-enabled. This activates a specific VirtualHost configuration safely. Use 'a2dissite' to disable a site without deleting its config file.",
+"real_world_example": "Running 'a2ensite mywebsite.conf' to bring a newly configured virtual host online.",
+"common_mistake": "Editing configuration files directly in 'sites-enabled' instead of managing them in 'sites-available'."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is mod_rewrite?",
+"simple_explanation": "A module used to manipulate requested URLs dynamically.",
+"interview_answer": "Mod_rewrite uses regular expressions to rewrite requested URLs on the fly. It is used to force HTTPS redirects, hide ugly query strings, or route traffic to front-controllers in modern web frameworks.",
+"real_world_example": "Rewriting '[site.com/product?id=5](https://www.google.com/search?q=https://site.com/product%3Fid%3D5)' to a clean '[site.com/product/5](https://www.google.com/search?q=https://site.com/product/5)'.",
+"common_mistake": "Writing complex regex rules that result in infinite redirect loops."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is mod_ssl?",
+"simple_explanation": "A module that provides cryptography for the Apache web server.",
+"interview_answer": "Mod_ssl enables Apache to use OpenSSL to serve traffic over secure HTTPS connections. It is mandatory for securing websites. You must configure paths to the SSL certificate and private key.",
+"real_world_example": "Loading mod_ssl to secure a login portal so passwords cannot be intercepted over the network.",
+"common_mistake": "Configuring paths to invalid or expired certificates, which prevents Apache from starting."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "Who is the default user that runs Apache processes?",
+"simple_explanation": "It runs as an unprivileged user, typically www-data or apache.",
+"interview_answer": "While the master Apache process runs as root to bind to port 80, the child worker processes run as an unprivileged user (like www-data). This is a critical security mechanism to limit damage if the web server is compromised.",
+"real_world_example": "Setting file ownership of the web directory to www-data so Apache can read and serve the files.",
+"common_mistake": "Running Apache child processes as the root user, creating a catastrophic security vulnerability."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is a 403 Forbidden error in Apache?",
+"simple_explanation": "The server understands the request but refuses to authorize it.",
+"interview_answer": "A 403 error means Apache lacks the necessary file system permissions to read the requested file, or a configuration rule explicitly denied access. Always check Linux file permissions and ownership first.",
+"real_world_example": "Getting a 403 because the 'index.html' file is owned by root and lacks read permissions for 'www-data'.",
+"common_mistake": "Assuming a 403 error is a network issue rather than a local file permission issue."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is a 404 Not Found error in Apache?",
+"simple_explanation": "The requested file or resource does not exist on the server.",
+"interview_answer": "A 404 error indicates Apache searched the DocumentRoot but could not find the file matching the requested URL. This is usually caused by broken links, deleted files, or incorrect URL paths.",
+"real_world_example": "A user clicking an old bookmark for an image that was deleted from the server last week.",
+"common_mistake": "Confusing a 404 error (file doesn't exist) with a 403 error (file exists but access is denied)."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is a 500 Internal Server Error?",
+"simple_explanation": "A generic error indicating the backend application or configuration failed.",
+"interview_answer": "A 500 error means Apache encountered an unexpected condition. It is most often caused by syntax errors in a .htaccess file, bad file permissions, or crashes in backend scripts like PHP.",
+"real_world_example": "A broken PHP script throwing a fatal error, which Apache translates into a 500 response.",
+"common_mistake": "Trying to fix Apache configurations without checking the 'error.log' to find the actual root cause."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What does the 'ServerAdmin' directive do?",
+"simple_explanation": "It sets the contact email address shown on server error pages.",
+"interview_answer": "The ServerAdmin directive defines the email address that Apache displays when it generates default error pages (like 500 errors). It is used to provide users a way to report problems.",
+"real_world_example": "Setting 'ServerAdmin webmaster@company.com' so users know who to email if the site crashes.",
+"common_mistake": "Leaving it as 'root@localhost', which is useless for external users trying to report issues."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is an Apache MPM?",
+"simple_explanation": "Multi-Processing Modules define how Apache handles concurrent network connections.",
+"interview_answer": "MPMs dictate the underlying architecture Apache uses to manage connections. The three main types are Prefork (process-based), Worker (thread-based), and Event (asynchronous). You can only run one MPM at a time.",
+"real_world_example": "Switching from Prefork to the Event MPM to handle higher concurrent traffic with less RAM.",
+"common_mistake": "Trying to run the memory-heavy Prefork MPM on a high-traffic site, leading to server crashes."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is the 'Listen' directive?",
+"simple_explanation": "It tells Apache which IP addresses and ports to bind to.",
+"interview_answer": "The Listen directive instructs the server to accept incoming requests on a specified port or IP/port combination. It is mandatory; if missing, Apache will not accept any network connections.",
+"real_world_example": "Setting 'Listen 8080' to run a secondary Apache instance on a non-standard port.",
+"common_mistake": "Using a port number below 1024 without starting the master process as the root user."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "How do you hide the Apache version number from public view?",
+"simple_explanation": "Set 'ServerTokens Prod' and 'ServerSignature Off'.",
+"interview_answer": "Hiding the version number prevents attackers from easily identifying known vulnerabilities in your specific Apache release. You configure 'ServerTokens Prod' and 'ServerSignature Off' in the global security configuration.",
+"real_world_example": "Removing the detailed 'Apache/2.4.41 (Ubuntu)' footer from default 404 error pages.",
+"common_mistake": "Leaving full ServerTokens enabled, inadvertently helping hackers fingerprint the server."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is the 'ServerName' directive?",
+"simple_explanation": "It defines the hostname and port the server uses to identify itself.",
+"interview_answer": "The ServerName directive establishes the primary domain name for a VirtualHost. When an incoming request matches this Host header, Apache routes the traffic to this specific VirtualHost block.",
+"real_world_example": "Setting 'ServerName [www.example.com](https://www.example.com)' inside a VirtualHost block.",
+"common_mistake": "Using IP addresses instead of DNS names in ServerName when trying to host multiple sites."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What is the 'ServerAlias' directive?",
+"simple_explanation": "It specifies alternate names for a host.",
+"interview_answer": "ServerAlias allows a single VirtualHost block to respond to multiple domain names. It is heavily used to ensure both the 'www' and 'non-www' versions of a site load the exact same content.",
+"real_world_example": "Setting 'ServerAlias example.com' alongside 'ServerName [www.example.com](https://www.example.com)'.",
+"common_mistake": "Creating two entirely separate VirtualHost blocks just to serve the 'www' and 'non-www' domains."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "What does the 'Options Indexes' directive do?",
+"simple_explanation": "It enables directory listing when no index file is present.",
+"interview_answer": "If a user visits a directory without an index.html file, 'Options Indexes' generates an automated HTML list of the directory's contents. While useful for file sharing, it is generally disabled for security.",
+"real_world_example": "Removing 'Indexes' from a directory block to prevent users from browsing internal application files.",
+"common_mistake": "Leaving 'Indexes' enabled on a production site, exposing sensitive source code files to the public."
+},
+{
+"tool": "Apache",
+"difficulty": "Easy",
+"question": "How do you redirect HTTP to HTTPS in Apache?",
+"simple_explanation": "Use a RewriteRule or the Redirect directive in the port 80 VirtualHost.",
+"interview_answer": "To secure traffic, you create a VirtualHost on port 80 that issues a 301 permanent redirect to the HTTPS version. The easiest way is using 'Redirect permanent / [https://domain.com/](https://domain.com/)'.",
+"real_world_example": "Forcing all users who type '[http://site.com](http://site.com)' to upgrade to '[https://site.com](https://www.google.com/search?q=https://site.com)' securely.",
+"common_mistake": "Creating complex mod_rewrite loops instead of using the much simpler and faster 'Redirect' directive."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "Explain the Prefork MPM.",
+"simple_explanation": "It creates a separate, isolated process for every incoming connection.",
+"interview_answer": "The Prefork Multi-Processing Module uses multiple child processes, each handling exactly one connection. It requires no thread-safe libraries, making it safe for older, non-thread-safe PHP modules. However, it consumes massive amounts of RAM under high concurrency.",
+"real_world_example": "Using Prefork to safely run mod_php on a legacy application environment.",
+"common_mistake": "Using Prefork on a high-traffic server, quickly exhausting system memory and crashing."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "Explain the Event MPM.",
+"simple_explanation": "An asynchronous MPM that handles multiple requests per thread.",
+"interview_answer": "The Event MPM delegates processing to threads and uses a dedicated listener thread to manage idle 'keep-alive' connections asynchronously. This prevents idle connections from tying up active worker threads, making it highly scalable and memory-efficient.",
+"real_world_example": "Switching to Event MPM to serve thousands of concurrent static image requests using minimal CPU.",
+"common_mistake": "Trying to use the Event MPM with the native 'mod_php' module, which is incompatible."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is mod_proxy?",
+"simple_explanation": "A module that allows Apache to act as a reverse or forward proxy.",
+"interview_answer": "Mod_proxy enables Apache to forward client requests to backend servers and return the responses. It is essential for Load Balancing or hiding backend application servers (like Tomcat or Node.js) behind Apache.",
+"real_world_example": "Proxying requests from Apache port 80 to an internal Java application running on port 8080.",
+"common_mistake": "Enabling 'ProxyRequests On' (Forward Proxy) by mistake, turning the server into an open proxy for attackers."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What does the 'AllowOverride' directive do?",
+"simple_explanation": "It controls whether .htaccess files can override server configurations.",
+"interview_answer": "The AllowOverride directive specifies which configuration settings declared in a .htaccess file are permitted to override the main configuration. Setting it to 'None' completely ignores .htaccess files, significantly improving server performance.",
+"real_world_example": "Setting 'AllowOverride All' so WordPress can use a .htaccess file for custom permalink routing.",
+"common_mistake": "Setting 'AllowOverride All' in the global root directory (/), causing massive security and performance overhead."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you implement Basic Authentication in Apache?",
+"simple_explanation": "Use 'AuthType Basic' and 'AuthUserFile' pointing to an htpasswd file.",
+"interview_answer": "Basic Authentication restricts access by requiring a username and password. You generate a password file using the 'htpasswd' command and configure the directory block to 'Require valid-user'. It should only be used over HTTPS.",
+"real_world_example": "Protecting a staging website from public access so only QA engineers with passwords can view it.",
+"common_mistake": "Placing the .htpasswd file inside the public DocumentRoot, allowing anyone to download the password hashes."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the 'KeepAlive' directive?",
+"simple_explanation": "It allows multiple requests to be sent over the same TCP connection.",
+"interview_answer": "KeepAlive keeps a client's TCP connection open for a specified time, eliminating the latency of creating new connections for subsequent requests (like loading images). It drastically improves page load speeds.",
+"real_world_example": "Setting 'KeepAlive On' so a browser can download an HTML file and 5 CSS files over one connection.",
+"common_mistake": "Setting the KeepAliveTimeout too high on a busy server, exhausting worker threads on idle clients."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What does 'MaxRequestWorkers' (or MaxClients) do?",
+"simple_explanation": "Sets the maximum number of simultaneous requests Apache will process.",
+"interview_answer": "This directive limits the maximum number of concurrent worker processes or threads. If connections exceed this limit, they are queued. Tuning this is critical to prevent Apache from consuming all available RAM and crashing.",
+"real_world_example": "Lowering MaxRequestWorkers to 150 on a 2GB RAM server to prevent Out-Of-Memory kernel kills.",
+"common_mistake": "Setting the limit artificially high, assuming it improves performance, while it actually destroys stability."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How does Apache process PHP code?",
+"simple_explanation": "Either via the embedded mod_php or via proxying to PHP-FPM.",
+"interview_answer": "Historically, Apache loaded the PHP interpreter inside each worker process (mod_php). The modern, scalable approach uses mod_proxy_fcgi to forward PHP requests to an independent PHP-FPM service, separating web and app execution.",
+"real_world_example": "Using ProxyPassMatch to route all requests ending in '.php' to the PHP-FPM socket.",
+"common_mistake": "Using mod_php with the Event MPM, which causes severe thread safety issues and crashes."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the difference between a Location block and a Directory block?",
+"simple_explanation": "Directory applies to filesystem paths; Location applies to requested URLs.",
+"interview_answer": "The  block enforces rules based on absolute paths on the server's physical hard drive. The  block enforces rules based on the URL path requested by the client in the browser. Always prefer Directory for local files.",
+"real_world_example": "Using  to restrict access to /var/www/html/admin, and  to proxy /api/ requests.",
+"common_mistake": "Using  to secure local files, which attackers can bypass by exploiting URL encoding."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the 'Require' directive used for?",
+"simple_explanation": "It controls access to resources based on authorization rules.",
+"interview_answer": "Introduced in Apache 2.4, the 'Require' directive manages access control. It replaces older 'Order, Allow, Deny' syntax. You can require specific IPs, valid authenticated users, or grant access universally with 'Require all granted'.",
+"real_world_example": "Using 'Require ip 192.168.1.0/24' to restrict access to an internal company subnet.",
+"common_mistake": "Mixing the deprecated Apache 2.2 'Order/Allow' syntax with the new 'Require' syntax, causing unpredictable access blocks."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you configure custom log formats?",
+"simple_explanation": "Use the 'LogFormat' directive to define a template, then apply it with 'CustomLog'.",
+"interview_answer": "The LogFormat directive defines exactly what data (like response time or User-Agent) is logged using internal variables. You give the format a nickname and apply it to a VirtualHost using the CustomLog directive.",
+"real_world_example": "Creating a JSON LogFormat to easily ship Apache access logs to Elasticsearch.",
+"common_mistake": "Modifying the global LogFormat but failing to update the CustomLog directive to actually use the new nickname."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the purpose of 'mod_deflate'?",
+"simple_explanation": "It compresses content sent to the client to save bandwidth.",
+"interview_answer": "Mod_deflate provides Gzip compression for text-based responses (HTML, CSS, JS) before transmitting them over the network. It significantly speeds up page load times at the cost of a slight increase in CPU usage.",
+"real_world_example": "Compressing a large 500KB CSS file down to 50KB before sending it to a mobile user.",
+"common_mistake": "Compressing already compressed formats like images or PDFs, wasting CPU cycles for zero gain."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What does 'ProxyPreserveHost On' do?",
+"simple_explanation": "Passes the original Host header from the client to the backend server.",
+"interview_answer": "When acting as a reverse proxy, Apache alters the Host header to match the backend IP. Enabling 'ProxyPreserveHost' forces Apache to forward the original client's Host header. This is essential for backend applications that host multiple virtual domains.",
+"real_world_example": "Ensuring a backend Tomcat server knows exactly which domain the user requested in their browser.",
+"common_mistake": "Leaving this off, causing the backend application to serve a default generic page instead of the requested tenant site."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What does 'mod_headers' do?",
+"simple_explanation": "It allows Apache to modify HTTP request and response headers.",
+"interview_answer": "Mod_headers is used to add, remove, or alter HTTP headers before they are sent to the client. It is primarily used to enforce security policies like HSTS, X-Frame-Options, or CORS.",
+"real_world_example": "Using 'Header always set Strict-Transport-Security' to force browsers to use HTTPS for a year.",
+"common_mistake": "Setting security headers globally but allowing a poorly configured VirtualHost to overwrite them entirely."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you mitigate slowloris attacks in Apache?",
+"simple_explanation": "By using the 'mod_reqtimeout' module.",
+"interview_answer": "Slowloris attacks hold connections open by sending data incredibly slowly, exhausting worker threads. The 'mod_reqtimeout' module drops connections if the client does not send the headers or body within a specified timeout limit.",
+"real_world_example": "Dropping a connection automatically if the client fails to send a complete HTTP request within 10 seconds.",
+"common_mistake": "Increasing global timeout settings to 'help' slow clients, which actually makes the server more vulnerable."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the difference between a 301 and 302 redirect?",
+"simple_explanation": "301 is permanent; 302 is temporary.",
+"interview_answer": "A 301 redirect tells browsers and search engines the page has permanently moved, passing SEO ranking to the new URL. A 302 tells them it's temporary, meaning the client should continue checking the original URL in the future.",
+"real_world_example": "Using a 301 redirect to permanently forward all traffic from an old company domain to a newly rebranded domain.",
+"common_mistake": "Using a 302 redirect for a permanent site move, which heavily damages SEO rankings."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the 'mod_status' module?",
+"simple_explanation": "It provides a web page containing real-time server performance statistics.",
+"interview_answer": "Mod_status generates a live HTML page detailing active connections, worker statuses, and uptime. It is a critical tool for DevOps engineers monitoring server load. Access must be strictly restricted by IP.",
+"real_world_example": "Viewing the '/server-status' page to see exactly how many worker threads are currently stuck processing requests.",
+"common_mistake": "Exposing the server-status page to the public internet, revealing internal infrastructure details to attackers."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you enable CORS in Apache?",
+"simple_explanation": "By injecting the 'Access-Control-Allow-Origin' header.",
+"interview_answer": "Cross-Origin Resource Sharing (CORS) is enabled using 'mod_headers' to add specific Access-Control response headers. This allows web browsers to securely execute API requests across different domain names.",
+"real_world_example": "Setting 'Header set Access-Control-Allow-Origin \"*\"' to make a public REST API accessible from any website.",
+"common_mistake": "Using a wildcard (*) for authenticated APIs with cookies, which browsers explicitly reject for security reasons."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is SNI (Server Name Indication)?",
+"simple_explanation": "A TLS extension allowing multiple SSL certificates to share one IP address.",
+"interview_answer": "During the SSL handshake, SNI allows the client to specify the domain it wants to connect to. Apache uses this to look up the correct VirtualHost and present the matching SSL certificate before establishing the connection.",
+"real_world_example": "Hosting site1.com and site2.com securely on a single EC2 instance using their respective SSL certificates.",
+"common_mistake": "Supporting legacy client devices that lack SNI capabilities, resulting in SSL mismatch warnings."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you test the performance of an Apache server?",
+"simple_explanation": "Using benchmarking tools like 'ab' (Apache Bench) or 'siege'.",
+"interview_answer": "Apache Bench ('ab') simulates high concurrency by firing rapid requests at a target URL. It is used to measure maximum requests per second, identify memory bottlenecks, and tune MaxRequestWorkers configurations.",
+"real_world_example": "Running 'ab -n 10000 -c 100 http://localhost/' to see how the server handles 100 concurrent users.",
+"common_mistake": "Running aggressive benchmarks on production servers during peak hours, effectively launching a self-inflicted DDoS attack."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What does 'EnableSendfile' do?",
+"simple_explanation": "It optimizes static file serving by copying data directly within the OS kernel.",
+"interview_answer": "EnableSendfile utilizes the Linux 'sendfile()' system call. It transfers file data directly from the disk to the network socket, entirely bypassing user-space memory buffers. This massively reduces CPU overhead for static file servers.",
+"real_world_example": "Enabling Sendfile on an Apache server hosting gigabytes of downloadable video assets.",
+"common_mistake": "Using EnableSendfile over unreliable network filesystems like NFS, which can cause corrupted file transfers."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the 'Alias' directive?",
+"simple_explanation": "It maps a URL path to a specific filesystem directory, bypassing the DocumentRoot.",
+"interview_answer": "The Alias directive allows you to serve documents from directories outside of the standard DocumentRoot. When the URL matches the alias, Apache drops the aliased URL path and uses the specified filesystem path.",
+"real_world_example": "Using 'Alias /images /data/storage/' to serve images stored on an external hard drive.",
+"common_mistake": "Forgetting the trailing slash rules. If the alias URL has a trailing slash, the target path must also have one."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is 'mod_expires'?",
+"simple_explanation": "It controls HTTP caching headers sent to the client browser.",
+"interview_answer": "Mod_expires sets the 'Expires' and 'Cache-Control' HTTP headers. It dictates how long a browser or CDN should cache static assets locally before requesting a fresh copy, drastically reducing server load.",
+"real_world_example": "Configuring Apache to tell browsers to cache image and CSS files locally for 30 days.",
+"common_mistake": "Setting excessively long cache expirations on dynamic HTML files, preventing users from seeing website updates."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What does the 'IncludeOptional' directive do?",
+"simple_explanation": "It includes configuration files but does not fail if the files are missing.",
+"interview_answer": "IncludeOptional imports external configuration files (often using wildcards). Unlike 'Include', it will not throw an error and crash Apache if no files match the specified pattern. It is perfect for modular configurations.",
+"real_world_example": "Using 'IncludeOptional sites-enabled/*.conf' to load all active VirtualHosts without crashing if the folder is empty.",
+"common_mistake": "Using the strict 'Include' directive on a wildcard path, causing Apache to fail to restart if no files exist."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you set environment variables in Apache?",
+"simple_explanation": "Using the 'SetEnv' or 'PassEnv' directives via 'mod_env'.",
+"interview_answer": "The SetEnv directive creates or overrides an environment variable that is passed to internal modules or backend CGI scripts. It is used to securely pass deployment modes or database configurations to backend applications.",
+"real_world_example": "Setting 'SetEnv APP_ENV production' to tell a PHP application to disable debug mode.",
+"common_mistake": "Assuming variables set via 'SetEnv' are automatically available to external shell scripts executed by the user."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the 'LimitRequestBody' directive?",
+"simple_explanation": "It limits the maximum size of an HTTP request payload.",
+"interview_answer": "LimitRequestBody defines the maximum bytes allowed in a client request body (e.g., file uploads). If exceeded, Apache returns a 413 Request Entity Too Large error. It mitigates Denial of Service attacks.",
+"real_world_example": "Setting 'LimitRequestBody 10485760' to restrict users from uploading files larger than 10MB.",
+"common_mistake": "Leaving the default limitless configuration, allowing an attacker to exhaust server memory by uploading a massive file."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you proxy WebSockets through Apache?",
+"simple_explanation": "By enabling mod_proxy_wstunnel and configuring an explicit RewriteRule.",
+"interview_answer": "WebSockets require upgrading an HTTP connection to a persistent TCP tunnel. In Apache, you must load 'mod_proxy_wstunnel' and configure a rule that intercepts the 'Upgrade: websocket' header to forward the tunnel correctly.",
+"real_world_example": "Proxying traffic to a real-time Node.js chat application running on a backend port.",
+"common_mistake": "Trying to proxy WebSockets using standard HTTP ProxyPass without handling the protocol upgrade headers."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the 'SSLCipherSuite' directive?",
+"simple_explanation": "It dictates which encryption algorithms Apache is allowed to use.",
+"interview_answer": "SSLCipherSuite explicitly defines the encryption ciphers supported during the TLS handshake. It is used to harden server security by disabling outdated, compromised ciphers (like RC4 or DES) and enforcing strong, modern encryption.",
+"real_world_example": "Updating the cipher suite to comply with strict banking PCI-DSS security requirements.",
+"common_mistake": "Using weak legacy ciphers to support outdated browsers, putting all secure traffic at risk."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "What is the 'ProxyPassReverse' directive?",
+"simple_explanation": "It rewrites URL headers in backend responses to match the proxy address.",
+"interview_answer": "When a backend server issues a redirect (e.g., Location headers), it often uses its internal IP address. ProxyPassReverse rewrites these internal URLs in the response header to match the public-facing Apache URL, ensuring clients don't break.",
+"real_world_example": "Fixing a backend application that redirects users to 'http://localhost:8080/login' instead of '[https://publicdomain.com/login](https://www.google.com/search?q=https://publicdomain.com/login)'.",
+"common_mistake": "Using ProxyPass to forward traffic but forgetting ProxyPassReverse, causing client redirects to time out."
+},
+{
+"tool": "Apache",
+"difficulty": "Medium",
+"question": "How do you view loaded Apache modules?",
+"simple_explanation": "Run the command 'apachectl -M' or 'httpd -M'.",
+"interview_answer": "The '-M' flag outputs a complete list of static and shared modules currently loaded into the active Apache memory space. It is a rapid diagnostic tool to verify if a required module is actually enabled.",
+"real_world_example": "Running 'apache2ctl -M | grep rewrite' to confirm URL rewriting capabilities are active.",
+"common_mistake": "Checking the 'mods-enabled' directory and assuming a module is active, without realizing Apache hasn't been restarted."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How does Apache handle the C10K problem compared to Nginx?",
+"simple_explanation": "Apache historically struggled with memory overhead, while Nginx used event-driven concurrency natively.",
+"interview_answer": "The C10K problem involves handling 10,000 concurrent connections. Apache's older Prefork/Worker MPMs allocated memory-heavy threads per connection, exhausting RAM quickly. Apache solved this modernly via the Event MPM, utilizing asynchronous I/O similar to Nginx.",
+"real_world_example": "Migrating a heavily trafficked server from Prefork to the Event MPM to handle 10x more connections without adding hardware.",
+"common_mistake": "Believing modern Apache is inherently incapable of handling high concurrency; the Event MPM is highly competitive."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is OCSP Stapling in Apache?",
+"simple_explanation": "A technique to optimize SSL validation by caching certificate revocation status.",
+"interview_answer": "Instead of forcing clients to query the Certificate Authority (CA) for revocation status, Apache periodically fetches the OCSP response, caches it, and 'staples' it directly to the TLS handshake. It significantly improves connection latency and privacy.",
+"real_world_example": "Enabling 'SSLUseStapling On' to shave milliseconds off the TLS negotiation for mobile users.",
+"common_mistake": "Enabling OCSP stapling but failing to configure a DNS resolver, causing the server's fetch attempts to fail."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you protect against DROWN attacks in Apache?",
+"simple_explanation": "By explicitly disabling the SSLv2 protocol.",
+"interview_answer": "The DROWN attack exploits vulnerabilities in the obsolete SSLv2 protocol to decrypt modern TLS sessions. Mitigation requires editing the SSL configuration to strictly forbid SSLv2 and SSLv3 using 'SSLProtocol all -SSLv2 -SSLv3'.",
+"real_world_example": "Hardening a web server to pass rigorous external penetration tests by strictly enforcing TLS 1.2 and TLS 1.3.",
+"common_mistake": "Leaving obsolete SSL protocols enabled under the false assumption that modern browsers will simply negotiate better ones."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you configure Apache to act as a Forward Proxy?",
+"simple_explanation": "Enable mod_proxy and configure the 'ProxyRequests On' directive.",
+"interview_answer": "A forward proxy handles requests from internal clients and fetches internet resources on their behalf. You set 'ProxyRequests On'. Crucially, you must strictly configure  block access controls to prevent anonymous internet users from routing traffic through your server.",
+"real_world_example": "Configuring Apache to allow isolated internal database servers to download OS patches via the proxy.",
+"common_mistake": "Enabling Forward Proxy on a public-facing server without IP restrictions, turning it into an open proxy exploited by hackers."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is 'mod_security'?",
+"simple_explanation": "An open-source Web Application Firewall (WAF) module for Apache.",
+"interview_answer": "Mod_security acts as an embedded WAF. It inspects incoming HTTP traffic against complex rulesets (like the OWASP Core Rule Set) to block advanced application-layer attacks like SQL injection and cross-site scripting before they reach the backend.",
+"real_world_example": "Blocking a malicious payload containing an automated exploit script attempting to access sensitive directories.",
+"common_mistake": "Deploying ModSecurity with strict rules immediately in production, blocking legitimate user traffic due to false positives."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is the 'MaxConnectionsPerChild' directive used for?",
+"simple_explanation": "It prevents memory leaks by recycling child processes periodically.",
+"interview_answer": "This directive limits the number of requests a single child process will handle before it voluntarily dies and is replaced by a fresh process. It is the primary defense against memory leaks introduced by unstable third-party modules or PHP scripts.",
+"real_world_example": "Setting 'MaxConnectionsPerChild 1000' so bloated worker processes are purged and RAM is returned to the OS.",
+"common_mistake": "Setting it to 0 (unlimited) on a server running heavy, unoptimized PHP code, causing eventual Out-Of-Memory crashes."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you implement mutual TLS (mTLS) authentication?",
+"simple_explanation": "Require clients to present a valid SSL certificate signed by a trusted CA.",
+"interview_answer": "mTLS secures APIs by requiring both server and client to authenticate. In Apache, you set 'SSLVerifyClient require' and configure 'SSLCACertificateFile' pointing to your internal Certificate Authority. Apache verifies the client certificate before proxying the request.",
+"real_world_example": "Restricting an internal payment microservice so only other microservices possessing valid internal certificates can call it.",
+"common_mistake": "Using self-signed certificates without properly configuring Apache to trust the specific issuing CA."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is the impact of the 'HostnameLookups' directive?",
+"simple_explanation": "It forces Apache to resolve IP addresses to domain names, causing severe latency.",
+"interview_answer": "If enabled, Apache performs a reverse DNS lookup on every single incoming client IP address to log their domain name. This introduces massive latency to every request. Best practice dictates it must remain 'Off'.",
+"real_world_example": "Disabling HostnameLookups and performing IP resolution offline in a log analysis tool later to save server CPU.",
+"common_mistake": "Turning it on to make log files 'easier to read', drastically slowing down the entire web server."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you perform load balancing with health checks in Apache?",
+"simple_explanation": "Use 'mod_proxy_balancer' and the 'hcheck' provider.",
+"interview_answer": "Using the <Proxy balancer://> block, you define backend members. To prevent routing traffic to dead nodes, you configure active health checks (requiring mod_proxy_hcheck) which constantly ping backend endpoints independently of user traffic.",
+"real_world_example": "Configuring Apache to ping '/healthz' every 5 seconds, removing backend servers from the pool automatically if they fail.",
+"common_mistake": "Using basic load balancing without health checks, meaning Apache will continuously send 50% of traffic to a crashed server."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How does Apache handle HTTP/2?",
+"simple_explanation": "By loading 'mod_http2' and enabling it via the Protocols directive.",
+"interview_answer": "HTTP/2 provides multiplexing, header compression, and server push. You enable it globally or per VirtualHost using 'Protocols h2 http/1.1'. It requires the Event MPM; it fundamentally will not work optimally with the Prefork MPM.",
+"real_world_example": "Speeding up a heavily unoptimized website by multiplexing 50 image downloads over a single HTTP/2 TCP connection.",
+"common_mistake": "Attempting to enable HTTP/2 over unencrypted HTTP, which is technically possible but rejected by all modern web browsers."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is the 'Timeout' directive and how does it relate to DoS attacks?",
+"simple_explanation": "It dictates how long Apache waits for network data before dropping a connection.",
+"interview_answer": "The Timeout directive governs how long Apache waits for TCP packets during read/write operations. Lowering this value from its high default mitigates resource exhaustion attacks (like Slowloris) by quickly dropping clients that fail to send complete requests.",
+"real_world_example": "Lowering the global timeout from 300 seconds to 30 seconds to quickly free up worker threads during network attacks.",
+"common_mistake": "Lowering the timeout too aggressively, causing legitimate users on slow 3G mobile networks to be constantly disconnected."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is 'mod_macro'?",
+"simple_explanation": "A module for creating reusable configuration templates.",
+"interview_answer": "Mod_macro allows administrators to define reusable blocks of Apache configuration containing variables. You instantiate the macro multiple times with different parameters. It keeps massive multi-tenant configurations extremely DRY (Don't Repeat Yourself).",
+"real_world_example": "Defining a standard VirtualHost macro and deploying 50 distinct customer websites using just one line of code each.",
+"common_mistake": "Duplicating 500 lines of standard VirtualHost config manually across files instead of using macros or Include directives."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you resolve 'Too many open files' errors in Apache?",
+"simple_explanation": "Increase the OS-level file descriptor limits (ulimit).",
+"interview_answer": "High-traffic servers hit the Linux kernel file descriptor limit. Apache logs 'Too many open files' and drops connections. You must increase the soft and hard limits in '/etc/security/limits.conf' and update the systemd service file (LimitNOFILE).",
+"real_world_example": "Increasing the limit from 1024 to 65535 so Apache can successfully maintain thousands of concurrent TCP sockets.",
+"common_mistake": "Tuning Apache's internal worker limits without increasing the underlying Linux OS limits, which results in the same failure."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you handle log rotation in high-volume Apache servers?",
+"simple_explanation": "By piping logs directly through the 'rotatelogs' utility.",
+"interview_answer": "Standard logrotate tools restart Apache, causing slight delays. For high-volume servers, Apache pipes log data directly to the built-in 'rotatelogs' executable within the CustomLog directive. This rotates logs automatically by file size or time without reloading the daemon.",
+"real_world_example": "CustomLog \"|/usr/bin/rotatelogs /var/log/apache2/access_%Y-%m-%d.log 86400\" combined",
+"common_mistake": "Allowing a single access log file to grow to 50GB, entirely freezing the server when text processing tools attempt to read it."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you implement Content Security Policy (CSP) in Apache?",
+"simple_explanation": "Using 'mod_headers' to append the Content-Security-Policy HTTP header.",
+"interview_answer": "CSP mitigates Cross-Site Scripting (XSS) attacks by telling the browser explicitly which domains are allowed to execute scripts. You enforce this in Apache by defining a strict 'Header set Content-Security-Policy' directive in the VirtualHost.",
+"real_world_example": "Header set Content-Security-Policy \"default-src 'self'; script-src 'self' https://trusted-cdn.com\"",
+"common_mistake": "Deploying strict CSP policies to production without using a reporting endpoint first, accidentally breaking legitimate website functionality."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "Explain 'mod_dumpio' and its use case.",
+"simple_explanation": "A module that dumps all raw network I/O data to the error log.",
+"interview_answer": "Mod_dumpio records the exact bytes received and sent by Apache before any processing occurs. It is an extreme, low-level debugging tool used to inspect malformed client headers, broken payloads, or SSL termination corruption.",
+"real_world_example": "Activating mod_dumpio temporarily to prove that a client application is sending malformed POST request bodies.",
+"common_mistake": "Leaving mod_dumpio enabled in production, which writes gigabytes of raw traffic to disk and obliterates server I/O performance."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you restrict access by HTTP method?",
+"simple_explanation": "Using the  or  blocks.",
+"interview_answer": "To protect REST APIs or static directories, you restrict HTTP verbs. The  block applies authorization controls to all methods EXCEPT the ones listed. It prevents attackers from using obscure methods like TRACE or DELETE.",
+"real_world_example": " Require all denied  to strictly lock down a public API endpoint.",
+"common_mistake": "Using  to allow GET, but forgetting that it leaves destructive methods like PUT or DELETE completely unrestricted."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is Server Name Indication (SNI) routing overlap, and how do you fix it?",
+"simple_explanation": "When Apache serves the wrong certificate because a requested domain lacks a specific VirtualHost.",
+"interview_answer": "If a client requests a domain that points to the server's IP, but Apache lacks a matching ServerName, it serves the default VirtualHost and its certificate, causing browser security warnings. Fix this by defining a strict default catch-all VirtualHost.",
+"real_world_example": "Creating a default VirtualHost that simply returns a 444 (No Response) to drop traffic for unconfigured domains.",
+"common_mistake": "Assuming Apache will automatically drop traffic for unknown domains; it always falls back to the first loaded VirtualHost."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is the difference between ProxyPass and ProxyPassMatch?",
+"simple_explanation": "ProxyPassMatch uses regular expressions for routing.",
+"interview_answer": "ProxyPass routes standard, static URI paths to a backend. ProxyPassMatch evaluates complex regular expressions to determine routing logic. Because regex evaluation is slower, standard ProxyPass should always be preferred unless dynamic pattern matching is strictly required.",
+"real_world_example": "Using ProxyPassMatch to route requests ending specifically in '.php' to a FastCGI backend pool.",
+"common_mistake": "Using ProxyPassMatch for static routes, adding unnecessary CPU overhead to every single incoming request."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you tune Apache to prevent swapping memory to disk?",
+"simple_explanation": "Calculate maximum memory footprint and tune MaxRequestWorkers accordingly.",
+"interview_answer": "Swapping destroys server performance. Determine the average RAM consumed by a single Apache worker process. Divide the total available system RAM (minus OS baseline) by that average. Set MaxRequestWorkers to this exact number to mathematically prevent memory exhaustion.",
+"real_world_example": "If a server has 2000MB free RAM, and each worker uses 20MB, setting MaxRequestWorkers to 100.",
+"common_mistake": "Using default configurations on small cloud instances, causing Apache to instantly consume all RAM and trigger kernel panics."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is Cache-Control: max-age and how do you configure it dynamically?",
+"simple_explanation": "It controls client-side caching limits, configured using mod_expires.",
+"interview_answer": "Max-age tells browsers how long an asset is valid. Instead of writing complex headers manually, use mod_expires to assign dynamic expiration dates based on file types. It automatically injects the correct Cache-Control headers.",
+"real_world_example": "ExpiresByType image/jpeg \"access plus 1 month\" to heavily cache images while keeping HTML responses dynamic.",
+"common_mistake": "Hardcoding 'Cache-Control' headers globally, inadvertently caching dynamic API JSON responses and serving stale data to users."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you configure a reverse proxy to handle WebSocket upgrades?",
+"simple_explanation": "Use 'RewriteRule' with the '[P]' flag to proxy websocket protocol upgrades.",
+"interview_answer": "WebSockets upgrade standard HTTP connections to long-lived TCP tunnels. You must load mod_proxy_wstunnel and configure a RewriteRule that detects the 'Upgrade: websocket' header, mapping the ws:// protocol directly to the backend.",
+"real_world_example": "Proxying traffic to a backend Node.js Socket.io server without severing the persistent connection.",
+"common_mistake": "Using standard ProxyPass without protocol upgrade handling, causing the connection to immediately drop."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is the purpose of 'SetEnvIf' in Apache logging?",
+"simple_explanation": "It conditionally sets environment variables to filter log output.",
+"interview_answer": "SetEnvIf evaluates request attributes (like source IP or User-Agent). If matched, it sets a variable. The CustomLog directive can then be configured to ignore requests carrying this variable, keeping access logs free of useless noise.",
+"real_world_example": "Setting an 'is_healthcheck' variable for ELB pings and configuring CustomLog to exclude it, saving gigabytes of disk space.",
+"common_mistake": "Logging every single load balancer health check ping, drowning out actual user traffic analytics in the access log."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you debug an SSL handshake failure using Apache logs?",
+"simple_explanation": "Increase the 'LogLevel' specifically for the ssl module to 'trace'.",
+"interview_answer": "Global log levels are too noisy. You can configure per-module logging: 'LogLevel warn ssl:trace8'. This outputs highly detailed cryptographic handshake stages directly into the error log without flooding it with core Apache debug messages.",
+"real_world_example": "Diagnosing why an older Android device fails to negotiate an acceptable cipher suite during the TLS handshake.",
+"common_mistake": "Setting the global LogLevel to 'debug' on a busy production server, which paralyzes the disk subsystem with massive writes."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is the 'AddOutputFilterByType' directive?",
+"simple_explanation": "It applies output filters (like compression) conditionally based on MIME types.",
+"interview_answer": "This directive allows administrators to dynamically manipulate responses before sending them. It is predominantly used with the DEFLATE filter to ensure only compressible text files are gzipped, leaving binary files alone.",
+"real_world_example": "AddOutputFilterByType DEFLATE text/html application/json application/javascript.",
+"common_mistake": "Applying the DEFLATE filter indiscriminately to all outputs, resulting in wasted CPU cycles attempting to compress MP4 video files."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you implement IP-based rate limiting in Apache?",
+"simple_explanation": "Using the external 'mod_ratelimit' or 'mod_evasive' modules.",
+"interview_answer": "While Nginx handles rate-limiting natively, Apache requires specific modules. 'mod_ratelimit' can throttle bandwidth per client. For request-per-second limits to stop brute forcing, you configure 'mod_evasive' to temporarily blacklist aggressive IPs.",
+"real_world_example": "Using mod_evasive to automatically drop IP addresses that hit the '/login' endpoint more than 5 times a second.",
+"common_mistake": "Relying on Apache alone for robust DDoS protection instead of shifting that burden to an edge CDN or firewall appliance."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "What is the 'Require expr' directive?",
+"simple_explanation": "It allows access control based on complex, dynamically evaluated boolean expressions.",
+"interview_answer": "Introduced in Apache 2.4, 'Require expr' evaluates sophisticated logic combining headers, IPs, and environment variables. It enables highly granular, conditional access control that goes far beyond simple IP whitelisting.",
+"real_world_example": "Require expr \"%{HTTP_USER_AGENT} =~ /MyCustomApp/ && -R '192.168.1.0/24'\"",
+"common_mistake": "Using complex expressions for simple IP blocking, introducing unnecessary computational overhead to every request."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you securely serve sensitive files using X-Sendfile?",
+"simple_explanation": "The backend application authenticates the user, then Apache serves the static file efficiently.",
+"interview_answer": "Serving large files via application code (like PHP) exhausts memory. X-Sendfile allows the backend script to authenticate the user and return an 'X-Sendfile' HTTP header. Apache intercepts this header and serves the local file efficiently using the kernel.",
+"real_world_example": "A Django application returning a header so Apache serves a 2GB paid video file securely and rapidly.",
+"common_mistake": "Failing to restrict the X-Sendfile path configuration, allowing malicious users to forge headers and download arbitrary server files like /etc/passwd."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you execute graceful degradation during a backend outage using mod_proxy?",
+"simple_explanation": "By utilizing 'ErrorDocument' and 'ProxyErrorOverride'.",
+"interview_answer": "If an upstream proxy target fails, Apache returns a generic 502/503. Enabling 'ProxyErrorOverride On' forces Apache to intercept backend errors and serve a predefined custom HTML page. This provides users a clean 'Maintenance' page rather than browser timeout errors.",
+"real_world_example": "Serving a branded 'We will be right back' static page when the backend Java application server is rebooting.",
+"common_mistake": "Serving the custom error document from the failing backend server itself, which obviously results in a broken page."
+},
+{
+"tool": "Apache",
+"difficulty": "Hard",
+"question": "How do you achieve Zero-Downtime log rotation on high-traffic Apache servers?",
+"simple_explanation": "By sending a 'graceful' signal (SIGUSR1) after moving the log files.",
+"interview_answer": "Standard log rotation renames the log file, but Apache continues writing to the old file descriptor. Sending a SIGUSR1 (graceful) signal forces worker processes to finish current requests, close the old file descriptors, and open the new log files without dropping traffic.",
+"real_world_example": "A logrotate cron script that renames the file and executes 'systemctl reload apache2' to cleanly instantiate new file handles.",
+"common_mistake": "Using SIGKILL or hard restarts during log rotation, randomly disconnecting active user sessions every midnight."
+}
+]
