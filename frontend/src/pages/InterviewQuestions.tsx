@@ -1,48 +1,50 @@
 import { useNavigate } from 'react-router-dom';
+import { PixelCategoryCard } from '../components/ui/pixel-canvas';
 
-// టూల్స్ ని కేటగిరీల వారీగా డివైడ్ చేశాను
+// ఇక్కడ ప్రతి కేటగిరీకి ఆ టూల్ కి సంబంధించిన కలర్స్ యాడ్ చేశాను.
+// ఉదాహరణకు: AWS కి ఆరెంజ్, Docker కి బ్లూ, Ansible కి రెడ్ ఇలా.
 const categorizedTools = {
   "Fundamentals & OS": [
-    { name: "Linux", path: "linux", icon: "🐧" },
-    { name: "Shell Scripting", path: "shell-scripting", icon: "🐚" },
-    { name: "Networking", path: "networking", icon: "🔗" },
-    { name: "Cloud Fundamentals", path: "cloud-fundamentals", icon: "🌐" },
+    { name: "Linux", path: "linux", icon: "🐧", colors: ["#F6E05E", "#FFFFFF", "#000000"] },
+    { name: "Shell Scripting", path: "shell-scripting", icon: "🐚", colors: ["#4ADE80", "#22C55E", "#16A34A"] },
+    { name: "Networking", path: "networking", icon: "🔗", colors: ["#60A5FA", "#3B82F6", "#2563EB"] },
+    { name: "Cloud Fundamentals", path: "cloud-fundamentals", icon: "🌐", colors: ["#A78BFA", "#60A5FA", "#818CF8"] },
   ],
   "Containers & Orchestration": [
-    { name: "Docker", path: "docker", icon: "🐳" },
-    { name: "Kubernetes", path: "kubernetes", icon: "☸️" },
+    { name: "Docker", path: "docker", icon: "🐳", colors: ["#38BDF8", "#2563EB", "#1D4ED8"] },
+    { name: "Kubernetes", path: "kubernetes", icon: "☸️", colors: ["#326CE5", "#3B82F6", "#1E3A8A"] },
   ],
   "CI/CD & Version Control": [
-    { name: "Git", path: "git", icon: "🌿" },
-    { name: "GitHub", path: "github", icon: "🐙" },
-    { name: "Jenkins", path: "jenkins", icon: "🤖" },
-    { name: "CI/CD", path: "cicd", icon: "🔄" },
-    { name: "GitOps", path: "gitops", icon: "♾️" },
+    { name: "Git", path: "git", icon: "🌿", colors: ["#F05032", "#EA580C", "#C2410C"] },
+    { name: "GitHub", path: "github", icon: "🐙", colors: ["#FFFFFF", "#9CA3AF", "#4B5563"] },
+    { name: "Jenkins", path: "jenkins", icon: "🤖", colors: ["#D24939", "#EF4444", "#DC2626"] },
+    { name: "CI/CD", path: "cicd", icon: "🔄", colors: ["#8B5CF6", "#6366F1", "#4F46E5"] },
+    { name: "GitOps", path: "gitops", icon: "♾️", colors: ["#EC4899", "#D946EF", "#C026D3"] },
   ],
   "Infrastructure & Configuration": [
-    { name: "Terraform", path: "terraform", icon: "🏗️" },
-    { name: "Ansible", path: "ansible", icon: "⚙️" },
+    { name: "Terraform", path: "terraform", icon: "🏗️", colors: ["#7B42BC", "#8B5CF6", "#6D28D9"] },
+    { name: "Ansible", path: "ansible", icon: "⚙️", colors: ["#EE0000", "#DC2626", "#991B1B"] },
   ],
   "Cloud & Web Servers": [
-    { name: "AWS", path: "aws", icon: "☁️" },
-    { name: "Apache", path: "apache", icon: "🏹" },
-    { name: "Nginx", path: "nginx", icon: "🖥️" },
+    { name: "AWS", path: "aws", icon: "☁️", colors: ["#FF9900", "#F59E0B", "#EA580C"] },
+    { name: "Apache", path: "apache", icon: "🏹", colors: ["#D22128", "#EF4444", "#B91C1C"] },
+    { name: "Nginx", path: "nginx", icon: "🖥️", colors: ["#009639", "#16A34A", "#15803D"] },
   ],
   "Monitoring & Observability": [
-    { name: "Prometheus", path: "prometheus", icon: "🔥" },
-    { name: "Grafana", path: "grafana", icon: "📊" },
+    { name: "Prometheus", path: "prometheus", icon: "🔥", colors: ["#E6522C", "#F97316", "#EA580C"] },
+    { name: "Grafana", path: "grafana", icon: "📊", colors: ["#F46800", "#F59E0B", "#D97706"] },
   ],
-  "Security, Code Quality & Scripting": [
-    { name: "Python for DevOps", path: "python-devops", icon: "🐍" },
-    { name: "SonarQube", path: "sonarqube", icon: "🎯" },
+  "Security & Scripting": [
+    { name: "Python for DevOps", path: "python-devops", icon: "🐍", colors: ["#3776AB", "#FFD43B", "#2563EB"] },
+    { name: "SonarQube", path: "sonarqube", icon: "🎯", colors: ["#4E9BCD", "#3B82F6", "#1D4ED8"] },
   ],
   "Non-Technical": [
-    { name: "HR Questions", path: "hr-questions", icon: "👥" },
-    { name: "Salary Negotiation", path: "salary-negotiation", icon: "💰" }
+    { name: "HR Questions", path: "hr-questions", icon: "👥", colors: ["#A78BFA", "#8B5CF6", "#7C3AED"] },
+    { name: "Salary Negotiation", path: "salary-negotiation", icon: "💰", colors: ["#34D399", "#22C55E", "#15803D"] },
   ],
-  "Next": [
-     { name: "DevSecOps", path: "devsecops", icon: "🛡️" },
-    { name: "Cybersecurity", path: "cybersecurity", icon: "🔒" },
+  "Next Steps": [
+    { name: "DevSecOps", path: "devsecops", icon: "🛡️", colors: ["#14B8A6", "#10B981", "#047857"] },
+    { name: "Cybersecurity", path: "cybersecurity", icon: "🔒", colors: ["#F43F5E", "#E11D48", "#BE123C"] },
   ]
 };
 
@@ -50,50 +52,44 @@ export default function InterviewQuestions() {
   const navigate = useNavigate();
 
   return (
-    // పైన ప్యాడింగ్ తగ్గించాను (ఎందుకంటే పైన ఆల్రెడీ మన కొత్త Dashboard Header ఉంది కదా)
-    <div className="text-white min-h-screen">
+    <div className="text-white min-h-screen max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-32">
       
-      {/* టైటిల్ సెక్షన్ కొంచెం క్లీన్ గా */}
-      <div className="mb-12">
-        <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 tracking-tight">Interview Q&A</h1>
-        <p className="text-gray-400 text-lg">Select a topic to start practicing interview questions</p>
+      {/* Title Section */}
+      <div className="mb-16 border-b border-white/10 pb-8">
+        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-tight">Interview Q&A</h1>
+        <p className="text-gray-400 text-lg">Select a topic to start practicing interview questions.</p>
       </div>
       
-      <div className="space-y-16">
+      {/* Grid Layout for Categories */}
+      <div className="flex flex-col gap-16">
         {Object.entries(categorizedTools).map(([category, tools]) => (
-          <div key={category}>
-            {/* Category Heading (Premium Style) */}
-            <h2 className="text-xl font-bold text-purple-400 mb-6 border-b border-white/10 pb-2 inline-block">
+          <div key={category} className="w-full">
+            
+            {/* Category Heading */}
+            <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-8 tracking-wide uppercase">
               {category}
             </h2>
             
-            {/* Category Cards (Apple Glassmorphism Grid) */}
-            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-              {tools.map((item, index) => (
-                <div 
-                  key={index} 
-                  onClick={() => navigate(`/questions/${item.path}`)}
-                  className="relative group bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 ease-out cursor-pointer overflow-hidden flex flex-col items-center text-center justify-center gap-4"
-                >
-                  {/* ఆపిల్ స్టైల్ సన్నని ఇన్నర్ గ్లో */}
-                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                  
-                  {/* ఐకాన్ హోవర్ యానిమేషన్ */}
-                  <div className="text-5xl group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-                    {item.icon}
-                  </div>
-                  
-                  {/* టెక్స్ట్ స్టైలింగ్ */}
-                  <h3 className="font-semibold text-white/90 group-hover:text-white transition-colors duration-300">
-                    {item.name}
-                  </h3>
-                </div>
-              ))}
+            {/* Cards Grid (Responsive 4 columns) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                {tools.map((item, index) => (
+                    <PixelCategoryCard
+                        key={index}
+                        name={item.name}
+                        icon={item.icon}
+                        path={item.path}
+                        description={`Top ${item.name} Questions`}
+                        date="Start Q&A →"
+                        colors={item.colors}
+                        onClick={() => navigate(`/questions/${item.path}`)}
+                    />
+                ))}
             </div>
-            
+
           </div>
         ))}
       </div>
+
     </div>
   );
 }

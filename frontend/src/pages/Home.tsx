@@ -1,95 +1,71 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
+import { BackgroundPaths } from '../components/ui/background-paths';
+import { Button } from '../components/ui/button';
+import VaporizeTextCycle, { Tag } from '../components/ui/vapour-text-effect';
 
 export default function Home() {
-  const entranceAnimationProps = {
-    initial: { opacity: 0, y: 40 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.8, ease: [0.22, 0.61, 0.36, 1] as any }
-  };
-
-  const continuousGlowProps = {
-    animate: {
-      scale: [1, 1.1, 0.95, 1], 
-      x: ["-50%", "-48%", "-51%", "-50%"],
-      y: ["-50%", "-51%", "-49%", "-50%"],
-      // 1. గ్లో మరీ ఎక్కువగా లేకుండా కొంచెం తగ్గించాను
-      opacity: [0.15, 0.25, 0.15, 0.15] 
-    },
-    transition: {
-      duration: 20,
-      repeat: Infinity,
-    }
-  };
-
   return (
-    // 2. ఇక్కడ bg-transparent తీసేసి bg-[#050505] (డార్క్ యాపిల్ థీమ్) పెట్టాను
     <div className="relative flex flex-col bg-[#050505] text-white min-h-screen overflow-x-hidden">
       
-      <motion.div
-        {...continuousGlowProps}
-        className="absolute top-1/2 left-1/2 w-[300px] md:w-[450px] h-[300px] md:h-[450px] bg-gradient-to-tr from-blue-600 via-purple-600 to-pink-600 blur-[100px] md:blur-[120px] rounded-full pointer-events-none z-0"
-      ></motion.div>
-
+      {/* 1. పైన హెడర్ */}
       <Header />
       
-      <main className="relative z-10 flex-grow flex flex-col">
-        <section className="flex-grow flex flex-col justify-center min-h-[calc(100vh-80px)] py-10">
-          <div className="max-w-6xl mx-auto px-4 text-center">
+      {/* 2. Main Animated Background Section */}
+      <main className="relative z-10 flex-grow flex flex-col min-h-[calc(100vh-80px)]">
+        {/* టైటిల్ ని ఎంప్టీ (" ") చేసి, చిల్డ్రన్ లో మన Vaporize ఎఫెక్ట్ పెట్టాను */}
+        <BackgroundPaths 
+            title=" "
+            subtitle="1200+ Interview Questions | 50+ Roadmaps | 100+ HR Questions | Projects | Mock Interviews | Salary Insights"
+        >
             
-            {/* Apple Style Glowing Heading */}
-            <motion.h1 
-              {...entranceAnimationProps}
-              transition={{ ...entranceAnimationProps.transition, delay: 0.2 }}
-              className="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight text-transparent bg-clip-text bg-gradient-to-b from-white to-white/70 drop-shadow-[0_0_40px_rgba(255,255,255,0.2)]"
-            >
-              MASTER DEVOPS.<br/>GET HIRED FASTER.
-            </motion.h1>
+            {/* Vaporize Text Effect Container */}
+            <div className="w-full h-[120px] md:h-[200px] flex justify-center items-center mb-6">
+                <VaporizeTextCycle
+                    texts={[
+                        "MASTER DEVOPS.", 
+                        "GET HIRED FASTER.", 
+                        "BUILD YOUR FUTURE."
+                    ]}
+                    font={{
+                        fontFamily: "Inter, sans-serif",
+                        fontSize: "80px", // డెస్క్‌టాప్ కోసం కొంచెం పెద్ద సైజు
+                        fontWeight: 900
+                    }}
+                    color="rgb(255, 255, 255)"
+                    spread={4}
+                    density={6}
+                    animation={{
+                        vaporizeDuration: 2.5, // ఎంత సేపు పొగలాగా ఎగరాలి
+                        fadeInDuration: 1.5,   // కొత్త అక్షరాలు రావడానికి ఎంత సేపు పట్టాలి
+                        waitDuration: 2        // చదవడానికి ఎంత సేపు ఆగాలి
+                    }}
+                    direction="left-to-right"
+                    alignment="center"
+                    tag={Tag.H1}
+                />
+            </div>
 
-            <motion.p 
-              {...entranceAnimationProps}
-              transition={{ ...entranceAnimationProps.transition, delay: 0.4 }}
-              className="text-base md:text-lg mb-10 text-white/70 font-medium max-w-3xl mx-auto"
-            >
-              1200+ Interview Questions | 50+ Roadmaps | 100+ HR Questions | Projects | Mock Interviews | Salary Insights
-            </motion.p>
+            {/* Buttons */}
+            <div className="flex justify-center gap-4 flex-wrap mt-4">
+                <Button asChild className="rounded-full px-10 py-7 text-lg font-bold shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] hover:-translate-y-1 transition-all duration-300 bg-white text-black hover:bg-gray-100">
+                    <Link to="/dashboard">Start Learning</Link>
+                </Button>
+                
+                <Button asChild variant="outline" className="rounded-full px-10 py-7 text-lg font-bold backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 text-white">
+                    <Link to="/roadmaps">Explore Roadmaps</Link>
+                </Button>
 
-            {/* Glassmorphism Buttons Area */}
-            <motion.div 
-              {...entranceAnimationProps}
-              transition={{ ...entranceAnimationProps.transition, delay: 0.6 }}
-              className="flex justify-center gap-6 flex-wrap"
-            >
-              {/* Start Learning (Primary Glowing Button) */}
-              <Link 
-                to="/dashboard" 
-                className="bg-white text-black px-10 py-4 rounded-full font-bold hover:scale-105 shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] transition-all duration-300"
-              >
-                Start Learning
-              </Link>
-              
-              {/* Explore Roadmaps (Glass Button) */}
-              <Link 
-                to="/roadmaps" 
-                className="bg-white/[0.02] backdrop-blur-2xl border border-white/10 text-white px-10 py-4 rounded-full font-bold hover:bg-white/10 hover:border-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)] transition-all duration-300"
-              >
-                Explore Roadmaps
-              </Link>
-              
-              {/* Watch Demo (Glass Button) */}
-              <button 
-                className="bg-white/[0.02] backdrop-blur-2xl border border-white/10 text-white px-10 py-4 rounded-full font-bold hover:bg-white/10 hover:border-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.2)] transition-all duration-300"
-              >
-                Watch Demo
-              </button>
-            </motion.div>
+                <Button variant="outline" className="rounded-full px-10 py-7 text-lg font-bold backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 text-white">
+                    Watch Demo
+                </Button>
+            </div>
             
-          </div>
-        </section>
+        </BackgroundPaths>
       </main>
 
+      {/* 3. కింద ఫూటర్ */}
       <Footer />
     </div>
   );
