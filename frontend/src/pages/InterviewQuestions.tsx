@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PixelCategoryCard } from '../components/ui/pixel-canvas';
+import { AuthUI } from '../components/ui/auth-fuse'; 
+import { X } from 'lucide-react'; 
 
-// ఇక్కడ ప్రతి కేటగిరీకి ఆ టూల్ కి సంబంధించిన కలర్స్ యాడ్ చేశాను.
-// ఉదాహరణకు: AWS కి ఆరెంజ్, Docker కి బ్లూ, Ansible కి రెడ్ ఇలా.
+// 1. ఇక్కడ పాత AuthContext తీసేసి, నీ అసలైన authStore ని ఇంపోర్ట్ చేసాను
+import { useAuthStore } from '../store/authStore'; 
+
 const categorizedTools = {
   "Fundamentals & OS": [
     { name: "Linux", path: "linux", icon: "🐧", colors: ["#F6E05E", "#FFFFFF", "#000000"] },
@@ -51,8 +55,25 @@ const categorizedTools = {
 export default function InterviewQuestions() {
   const navigate = useNavigate();
 
+  // 2. నీ స్టోర్ నుండి 'token' తెచ్చుకుని, దాన్ని బట్టి లాగిన్ స్టేట్ డిసైడ్ చేస్తున్నాం
+  const { token } = useAuthStore(); 
+  const isLoggedIn = !!token; // టోకెన్ ఉంటే true, లేకపోతే false
+  
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  // ఫ్రీగా యాక్సెస్ చేయగల టాపిక్స్ లిస్ట్
+  const freeTopics = ["linux", "shell-scripting"];
+
+  const handleCardClick = (path: string) => {
+    if (freeTopics.includes(path) || isLoggedIn) {
+      navigate(`/questions/${path}`); 
+    } else {
+      setShowLoginModal(true); 
+    }
+  };
+
   return (
-    <div className="text-white min-h-screen max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-32">
+    <div className="text-white min-h-screen max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-32 relative">
       
       {/* Title Section */}
       <div className="mb-16 border-b border-white/10 pb-8">
@@ -65,30 +86,57 @@ export default function InterviewQuestions() {
         {Object.entries(categorizedTools).map(([category, tools]) => (
           <div key={category} className="w-full">
             
-            {/* Category Heading */}
             <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-8 tracking-wide uppercase">
               {category}
             </h2>
             
-            {/* Cards Grid (Responsive 4 columns) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {tools.map((item, index) => (
-                    <PixelCategoryCard
-                        key={index}
-                        name={item.name}
-                        icon={item.icon}
-                        path={item.path}
-                        description={`Top ${item.name} Questions`}
-                        date="Start Q&A →"
-                        colors={item.colors}
-                        onClick={() => navigate(`/questions/${item.path}`)}
-                    />
-                ))}
+                {tools.map((item, index) => {
+                    const isFree = freeTopics.includes(item.path);
+
+                    return (
+                        <PixelCategoryCard
+                            key={index}
+                            name={item.name}
+                            icon={item.icon}
+                            path={item.path}
+                            description={`Top ${item.name} Questions`}
+                            date={(isFree || isLoggedIn) ? "Start Q&A →" : "🔒 Unlock Now"}
+                            colors={item.colors}
+                            onClick={() => handleCardClick(item.path)}
+                        />
+                    );
+                })}
             </div>
 
           </div>
         ))}
       </div>
+
+      {/* =========================================
+          LOGIN POPUP MODAL
+          ========================================= */}
+      {showLoginModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          
+          <div 
+            className="absolute inset-0 bg-[#050505]/80 backdrop-blur-md transition-opacity cursor-pointer"
+            onClick={() => setShowLoginModal(false)}
+          ></div>
+          
+          <div className="relative z-10 w-full max-w-md transform transition-all animate-in zoom-in-95 duration-200">
+            <button 
+              onClick={() => setShowLoginModal(false)}
+              className="absolute top-6 right-6 z-20 p-2 bg-white/10 hover:bg-white/20 rounded-full text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+            
+            <AuthUI onSuccess={() => setShowLoginModal(false)} />
+          </div>
+
+        </div>
+      )}
 
     </div>
   );

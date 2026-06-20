@@ -6,6 +6,9 @@ import InterviewQuestions from "../pages/InterviewQuestions";
 import QuestionDetails from "../pages/QuestionDetails";
 import Login from "../pages/Login";
 
+// New SignInPage Component
+import { SignInPage } from "../components/auth/SignInPage";
+
 // టూల్స్ ఇంపోర్ట్స్
 import Linux from "../pages/ToolQuestions/Linux";
 import Docker from "../pages/ToolQuestions/Docker";
@@ -51,6 +54,7 @@ import NotFound from "../pages/NotFound";
 const AppRouter = () => (
   <Routes>
     <Route path="/login" element={<Login />} />
+    <Route path="/sign-in" element={<SignInPage />} /> 
     <Route path="/" element={<Home />} />
     
     <Route element={<DashboardLayout />}>

@@ -1,26 +1,45 @@
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import { BackgroundPaths } from '../components/ui/background-paths';
 import { Button } from '../components/ui/button';
 import VaporizeTextCycle, { Tag } from '../components/ui/vapour-text-effect';
 
+// 1. మన స్టోర్, పాప్-అప్ కాంపోనెంట్ మరియు ఐకాన్ ఇంపోర్ట్ చేసుకుంటున్నాం
+import { useAuthStore } from '../store/authStore';
+import { AuthUI } from '../components/ui/auth-fuse';
+import { X } from 'lucide-react';
+
 export default function Home() {
+  const navigate = useNavigate();
+
+  // 2. లాగిన్ మోడల్ & ఆథెంటికేషన్ స్టేట్
+  const [showLoginModal, setShowLoginModal] = useState(false);
+  const { token } = useAuthStore();
+  const isLoggedIn = !!token;
+
+  // 3. "Start Learning" క్లిక్ చేసినప్పుడు లాజిక్
+  const handleStartLearning = () => {
+    if (isLoggedIn) {
+      navigate('/dashboard'); // లాగిన్ అయి ఉంటే నేరుగా డ్యాష్‌బోర్డ్‌కి వెళ్తుంది
+    } else {
+      setShowLoginModal(true); // లాగిన్ అవ్వకపోతే పాప్-అప్ ఓపెన్ అవుతుంది
+    }
+  };
+
   return (
     <div className="relative flex flex-col bg-[#050505] text-white min-h-screen overflow-x-hidden">
       
-      {/* 1. పైన హెడర్ */}
-      <Header />
+      {/* 4. పైన హెడర్ (దీనికి onLoginClick అనే ప్రాప్ పంపుతున్నాం) */}
+      <Header onLoginClick={() => setShowLoginModal(true)} />
       
-      {/* 2. Main Animated Background Section */}
       <main className="relative z-10 flex-grow flex flex-col min-h-[calc(100vh-80px)]">
-        {/* టైటిల్ ని ఎంప్టీ (" ") చేసి, చిల్డ్రన్ లో మన Vaporize ఎఫెక్ట్ పెట్టాను */}
         <BackgroundPaths 
             title=" "
             subtitle="1200+ Interview Questions | 50+ Roadmaps | 100+ HR Questions | Projects | Mock Interviews | Salary Insights"
         >
             
-            {/* Vaporize Text Effect Container */}
             <div className="w-full h-[120px] md:h-[200px] flex justify-center items-center mb-6">
                 <VaporizeTextCycle
                     texts={[
@@ -30,16 +49,16 @@ export default function Home() {
                     ]}
                     font={{
                         fontFamily: "Inter, sans-serif",
-                        fontSize: "80px", // డెస్క్‌టాప్ కోసం కొంచెం పెద్ద సైజు
+                        fontSize: "80px", 
                         fontWeight: 900
                     }}
                     color="rgb(255, 255, 255)"
                     spread={4}
                     density={6}
                     animation={{
-                        vaporizeDuration: 2.5, // ఎంత సేపు పొగలాగా ఎగరాలి
-                        fadeInDuration: 1.5,   // కొత్త అక్షరాలు రావడానికి ఎంత సేపు పట్టాలి
-                        waitDuration: 2        // చదవడానికి ఎంత సేపు ఆగాలి
+                        vaporizeDuration: 2.5, 
+                        fadeInDuration: 1.5,   
+                        waitDuration: 2        
                     }}
                     direction="left-to-right"
                     alignment="center"
@@ -47,10 +66,14 @@ export default function Home() {
                 />
             </div>
 
-            {/* Buttons */}
             <div className="flex justify-center gap-4 flex-wrap mt-4">
-                <Button asChild className="rounded-full px-10 py-7 text-lg font-bold shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] hover:-translate-y-1 transition-all duration-300 bg-white text-black hover:bg-gray-100">
-                    <Link to="/dashboard">Start Learning</Link>
+                
+                {/* 5. ఇక్కడ Link బదులు onClick ఫంక్షన్‌ని కాల్ చేస్తున్నాం */}
+                <Button 
+                    onClick={handleStartLearning} 
+                    className="rounded-full px-10 py-7 text-lg font-bold shadow-[0_0_30px_rgba(255,255,255,0.2)] hover:shadow-[0_0_50px_rgba(255,255,255,0.4)] hover:-translate-y-1 transition-all duration-300 bg-white text-black hover:bg-gray-100"
+                >
+                    Start Learning
                 </Button>
                 
                 <Button asChild variant="outline" className="rounded-full px-10 py-7 text-lg font-bold backdrop-blur-md bg-white/5 border border-white/10 hover:bg-white/10 hover:-translate-y-1 transition-all duration-300 text-white">
@@ -65,8 +88,33 @@ export default function Home() {
         </BackgroundPaths>
       </main>
 
-      {/* 3. కింద ఫూటర్ */}
       <Footer />
+
+      {/* 6. =========================================
+          LOGIN POPUP MODAL
+          ========================================= */}
+      {showLoginModal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* బ్యాక్‌గ్రౌండ్ బ్లర్ */}
+          <div 
+            className="absolute inset-0 bg-[#050505]/80 backdrop-blur-md transition-opacity cursor-pointer"
+            onClick={() => setShowLoginModal(false)}
+          ></div>
+          
+          <div className="relative z-10 w-full max-w-md transform transition-all animate-in zoom-in-95 duration-200">
+            {/* క్లోజ్ బటన్ */}
+            <button 
+              onClick={() => setShowLoginModal(false)}
+              className="absolute top-6 right-6 z-20 p-2 bg-white/10 hover:bg-white/20 rounded-full text-gray-400 hover:text-white transition-colors"
+            >
+              <X size={20} />
+            </button>
+            
+            <AuthUI onSuccess={() => setShowLoginModal(false)} />
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }
