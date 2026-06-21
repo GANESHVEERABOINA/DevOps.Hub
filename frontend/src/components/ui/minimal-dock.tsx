@@ -10,7 +10,6 @@ interface DockItem {
   path: string;
 }
 
-// నీ పాత సైడ్‌బార్ లింక్స్ అన్నీ ఇక్కడ యాడ్ చేశాను
 const dockItems: DockItem[] = [
   { id: 'dashboard', icon: <Home size={22} />, label: 'Dashboard', path: '/dashboard' },
   { id: 'questions', icon: <Compass size={22} />, label: 'Interview Q&A', path: '/questions' },
@@ -27,7 +26,6 @@ export const MinimalistDock: React.FC = () => {
   const location = useLocation();
 
   return (
-    // డ్యాష్‌బోర్డ్ లేఅవుట్‌కి తగ్గట్టుగా ఎడమవైపు (Left Side) వర్టికల్‌గా ఉండేలా మార్చాను
     <div className="h-[calc(100vh-80px)] w-24 flex flex-col items-center justify-center fixed left-0 top-20 z-40 bg-transparent pointer-events-none">
       <div className="relative pointer-events-auto">
         
@@ -59,7 +57,8 @@ export const MinimalistDock: React.FC = () => {
                     w-12 h-12 rounded-xl
                     transition-all duration-300 ease-out
                     cursor-pointer
-                    ${isActive ? 'bg-gradient-to-tr from-purple-600 to-pink-600 border-transparent shadow-[0_0_15px_rgba(168,85,247,0.5)]' : 'bg-white/5 border border-white/10'}
+                    /* ఇక్కడే మార్పు చేశాను: పర్పుల్ గ్రేడియంట్ తీసేసి వైట్ గ్లాస్ బాక్స్ (bg-white/20) పెట్టాను */
+                    ${isActive ? 'bg-white/20 border border-white/30 shadow-[0_0_15px_rgba(255,255,255,0.2)]' : 'bg-white/5 border border-white/10'}
                     ${isHovered && !isActive ? 'scale-110 bg-white/10 border-white/20 -translate-x-1 shadow-lg shadow-white/5' : ''}
                     ${!isHovered && !isActive ? 'hover:scale-105 hover:bg-white/10' : ''}
                   `}
@@ -67,13 +66,14 @@ export const MinimalistDock: React.FC = () => {
                   <div className={`
                     text-white transition-all duration-300
                     ${isHovered ? 'scale-110 drop-shadow-[0_0_8px_rgba(255,255,255,0.5)]' : 'opacity-70'}
-                    ${isActive ? 'opacity-100 scale-105' : ''}
+                    /* యాక్టివ్ గా ఉన్నప్పుడు ఐకాన్ 100% వైట్ గా మెరిసేలా మార్చాను */
+                    ${isActive ? 'opacity-100 scale-105 drop-shadow-[0_0_5px_rgba(255,255,255,0.8)]' : ''}
                   `}>
                     {item.icon}
                   </div>
                 </div>
                 
-                {/* Tooltip (Right side of icon) */}
+                {/* Tooltip */}
                 <div className={`
                   absolute top-1/2 -translate-y-1/2 left-full ml-4
                   px-3 py-1.5 rounded-lg

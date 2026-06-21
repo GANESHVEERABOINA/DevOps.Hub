@@ -5,7 +5,7 @@ export default function Footer() {
         
         {/* Brand & Quote */}
         <div>
-          <h3 className="text-white text-xl font-bold mb-2 tracking-wider">DEVOPS<span className="text-purple-500">.HUB</span></h3>
+          <h3 className="text-white text-xl font-bold mb-2 tracking-wider">DEVOPS<span className="text-white-500">.HUB</span></h3>
           <p className="text-xs italic text-gray-400 mb-2">
             "If you're a beginner aiming for a DevOps career, this platform is a gold mine..."
           </p>

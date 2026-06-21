@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { PixelCategoryCard } from '../components/ui/pixel-canvas';
-import { AuthUI } from '../components/ui/auth-fuse'; 
 import { X } from 'lucide-react'; 
-
-// 1. ఇక్కడ పాత AuthContext తీసేసి, నీ అసలైన authStore ని ఇంపోర్ట్ చేసాను
 import { useAuthStore } from '../store/authStore'; 
+
+// ఇక్కడ మన కొత్త 3D లాగిన్ కార్డ్ ని ఇంపోర్ట్ చేస్తున్నాం 
+import { SignInCard } from '../components/ui/sign-in-card';
 
 const categorizedTools = {
   "Fundamentals & OS": [
@@ -54,14 +54,10 @@ const categorizedTools = {
 
 export default function InterviewQuestions() {
   const navigate = useNavigate();
-
-  // 2. నీ స్టోర్ నుండి 'token' తెచ్చుకుని, దాన్ని బట్టి లాగిన్ స్టేట్ డిసైడ్ చేస్తున్నాం
   const { token } = useAuthStore(); 
-  const isLoggedIn = !!token; // టోకెన్ ఉంటే true, లేకపోతే false
+  const isLoggedIn = !!token; 
   
   const [showLoginModal, setShowLoginModal] = useState(false);
-
-  // ఫ్రీగా యాక్సెస్ చేయగల టాపిక్స్ లిస్ట్
   const freeTopics = ["linux", "shell-scripting"];
 
   const handleCardClick = (path: string) => {
@@ -73,24 +69,22 @@ export default function InterviewQuestions() {
   };
 
   return (
-    <div className="text-white min-h-screen max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-32 relative">
+    <div className="text-white min-h-screen bg-transparent max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-32 relative z-10">
       
-      {/* Title Section */}
-      <div className="mb-16 border-b border-white/10 pb-8">
+      <div className="mb-16 border-b border-white/10 pb-8 bg-transparent">
         <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-tight">Interview Q&A</h1>
         <p className="text-gray-400 text-lg">Select a topic to start practicing interview questions.</p>
       </div>
       
-      {/* Grid Layout for Categories */}
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-16 bg-transparent">
         {Object.entries(categorizedTools).map(([category, tools]) => (
-          <div key={category} className="w-full">
+          <div key={category} className="w-full bg-transparent">
             
-            <h2 className="text-xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-500 mb-8 tracking-wide uppercase">
+            <h2 className="text-xl font-bold text-white mb-8 tracking-wide uppercase">
               {category}
             </h2>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 bg-transparent">
                 {tools.map((item, index) => {
                     const isFree = freeTopics.includes(item.path);
 
@@ -114,27 +108,28 @@ export default function InterviewQuestions() {
       </div>
 
       {/* =========================================
-          LOGIN POPUP MODAL
+          కొత్త 3D LOGIN POPUP MODAL
           ========================================= */}
       {showLoginModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+          {/* బ్యాక్‌గ్రౌండ్ బ్లర్ - దీనివల్ల వెనక ఉన్న వెబ్‌సైట్ డాట్స్ అలాగే మసకగా కనిపిస్తాయి */}
           <div 
-            className="absolute inset-0 bg-[#050505]/80 backdrop-blur-md transition-opacity cursor-pointer"
+            className="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity cursor-pointer"
             onClick={() => setShowLoginModal(false)}
           ></div>
           
-          <div className="relative z-10 w-full max-w-md transform transition-all animate-in zoom-in-95 duration-200">
+          <div className="relative z-10 w-full max-w-md">
+            {/* క్లోజ్ బటన్ */}
             <button 
               onClick={() => setShowLoginModal(false)}
-              className="absolute top-6 right-6 z-20 p-2 bg-white/10 hover:bg-white/20 rounded-full text-gray-400 hover:text-white transition-colors"
+              className="absolute -top-12 right-0 z-20 p-2 text-gray-400 hover:text-white transition-colors"
             >
-              <X size={20} />
+              <X size={24} />
             </button>
             
-            <AuthUI onSuccess={() => setShowLoginModal(false)} />
+            {/* మన కొత్త 3D లాగిన్ కార్డ్ */}
+            <SignInCard onSuccess={() => setShowLoginModal(false)} />
           </div>
-
         </div>
       )}
 
