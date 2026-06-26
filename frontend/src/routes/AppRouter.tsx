@@ -39,6 +39,8 @@ import Cybersecurity from "../pages/ToolQuestions/Cybersecurity";
 // ఇతర పేజీలు
 import Roadmaps from "../pages/Roadmaps";
 import Projects from "../pages/Projects";
+// 🚀 కొత్తగా Resources పేజీని ఇక్కడ ఇంపోర్ట్ చేశాను
+import Resources from "../pages/Resources";
 import MockInterview from "../pages/MockInterview";
 import HRQuestions from "../pages/HRQuestions";
 import SalaryInsights from "../pages/SalaryInsights";
@@ -94,9 +96,11 @@ const AppRouter = () => (
       {/* ఇతర పేజీలు */}
       <Route path="/roadmaps" element={<Roadmaps />} />
       <Route path="/projects" element={<Projects />} />
+      {/* 🚀 ఇక్కడ Resources రూట్ యాడ్ చేశాను */}
+      <Route path="/resources" element={<Resources />} />
       <Route path="/mock-interview" element={<MockInterview />} />
       <Route path="/hr-questions" element={<HRQuestions />} />
-      <Route path="/salary-insights" element={<SalaryInsights />} />
+      <Route path="/salary" element={<SalaryInsights />} />
       <Route path="/resume-builder" element={<ResumeBuilder />} />
       <Route path="/bookmarks" element={<Bookmarks />} />
       <Route path="/achievements" element={<Achievements />} />

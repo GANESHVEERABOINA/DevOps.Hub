@@ -1,7 +1,12 @@
 @import "tailwindcss";
 
-/* Apple Premium Deep Glow Effect Global Background */
 @layer base {
+  html {
+    /* పేజీ మారినా సరే స్క్రోల్ బార్ ఎప్పటికీ మాయం కాకుండా Force చేస్తుంది */
+    overflow-y: scroll !important;
+    scrollbar-gutter: stable !important;
+  }
+
   body {
     background-color: #050505;
     color: #ffffff;
@@ -12,5 +17,8 @@
     );
     background-attachment: fixed;
     min-height: 100vh;
+    /* అడ్డంగా ఎప్పుడూ స్క్రోల్ అవ్వకుండా ఆపుతుంది */
+    overflow-x: hidden !important; 
+    width: 100%;
   }
 }

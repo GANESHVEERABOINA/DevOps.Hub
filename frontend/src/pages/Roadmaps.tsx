@@ -1,50 +1,49 @@
+import { PixelCategoryCard } from '../components/ui/pixel-canvas';
+
+// రోడ్‌మ్యాప్స్ డేటా, ఐకాన్స్, మరియు వాటి సొంత రంగులు
+const roadmapsData = [
+  { name: "DevOps", url: "https://roadmap.sh/devops", icon: "🚀", colors: ["#8B5CF6", "#6366F1", "#4F46E5"] },
+  { name: "Cybersecurity", url: "https://roadmap.sh/cyber-security", icon: "🛡️", colors: ["#F43F5E", "#E11D48", "#BE123C"] },
+  { name: "Linux", url: "https://roadmap.sh/linux", icon: "🐧", colors: ["#F6E05E", "#FFFFFF", "#000000"] },
+  { name: "Docker", url: "https://roadmap.sh/docker", icon: "🐳", colors: ["#38BDF8", "#2563EB", "#1D4ED8"] },
+  { name: "Kubernetes", url: "https://roadmap.sh/kubernetes", icon: "☸️", colors: ["#326CE5", "#3B82F6", "#1E3A8A"] },
+  { name: "Terraform", url: "https://roadmap.sh/terraform", icon: "🏗️", colors: ["#7B42BC", "#8B5CF6", "#6D28D9"] },
+  { name: "AWS", url: "https://roadmap.sh/aws", icon: "☁️", colors: ["#FF9900", "#F59E0B", "#EA580C"] },
+];
+
 export default function Roadmaps() {
-  const allRoadmaps = [
-    { name: 'DevOps', link: 'https://roadmap.sh/devops', icon: '🚀' },
-    { name: 'Cybersecurity', link: 'https://roadmap.sh/cyber-security', icon: '🛡️' },
-    { name: 'Linux', link: 'https://roadmap.sh/linux', icon: '🐧' },
-    { name: 'Docker', link: 'https://roadmap.sh/docker', icon: '🐳' },
-    { name: 'Kubernetes', link: 'https://roadmap.sh/kubernetes', icon: '☸️' },
-    { name: 'Terraform', link: 'https://roadmap.sh/terraform', icon: '🏗️' },
-    { name: 'AWS', link: 'https://roadmap.sh/aws', icon: '☁️' },
-  ];
+  
+  // కార్డ్ మీద క్లిక్ చేస్తే కొత్త ట్యాబ్ లో రోడ్‌మ్యాప్ వెబ్‌సైట్ ఓపెన్ అవుతుంది
+  const handleCardClick = (url: string) => {
+    window.open(url, "_blank"); 
+  };
 
   return (
-    <div className="max-w-6xl mx-auto p-4 md:p-8 text-white min-h-screen">
+    <div className="text-white min-h-screen bg-transparent max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-6 md:pt-8 pb-32 relative z-10 w-full overflow-hidden flex flex-col items-center md:items-start">
       
-      {/* టైటిల్ సెక్షన్ */}
-      <div className="mb-12">
-        <h1 className="text-3xl md:text-4xl font-extrabold mb-3 tracking-tight">Mastery Roadmaps</h1>
-        <p className="text-gray-400 text-lg">Select a roadmap to start learning from roadmap.sh</p>
+      {/* పేజీ హెడ్డింగ్ */}
+      <div className="mb-10 md:mb-16 border-b border-white/10 pb-6 md:pb-8 bg-transparent w-full text-center md:text-left">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 md:mb-3 tracking-tight">Mastery Roadmaps</h1>
+        <p className="text-gray-400 text-sm md:text-lg">Select a roadmap to start learning from roadmap.sh</p>
       </div>
       
-      {/* గ్లాస్ కార్డ్స్ గ్రిడ్ */}
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
-        {allRoadmaps.map((rm) => (
-          <a 
-            key={rm.name} 
-            href={rm.link} 
-            target="_blank" 
-            rel="noreferrer"
-            // పాత bg-gray-900 తీసేసి గ్లాస్ ఎఫెక్ట్ యాడ్ చేశాను
-            className="relative group bg-white/[0.03] backdrop-blur-3xl border border-white/10 p-8 rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.15)] hover:bg-white/10 hover:border-white/20 hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col items-center justify-center gap-4 text-center overflow-hidden"
-          >
-            {/* ఆపిల్ స్టైల్ ఇన్నర్ లైట్ గ్లో (హోవర్ చేసినప్పుడు వస్తుంది) */}
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
-            {/* ఐకాన్ (జూమ్ ఎఫెక్ట్) */}
-            <div className="text-5xl group-hover:scale-110 transition-transform duration-500 drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-              {rm.icon}
-            </div>
-            
-            {/* టెక్స్ట్ */}
-            <h3 className="text-lg font-semibold text-white/90 group-hover:text-white transition-colors duration-300">
-              {rm.name}
-            </h3>
-          </a>
+      {/* కార్డ్స్ గ్రిడ్ (Interview Q&A పేజీలో ఉన్నట్టే సేమ్ అలైన్‌మెంట్) */}
+      <div className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 justify-items-center bg-transparent">
+        {roadmapsData.map((item, index) => (
+          <div key={index} className="w-full flex justify-center h-full">
+            <PixelCategoryCard
+              name={item.name}
+              icon={item.icon}
+              path={item.url}
+              description={`Complete ${item.name} Path`}
+              date="VIEW ROADMAP ↗"
+              colors={item.colors}
+              onClick={() => handleCardClick(item.url)}
+            />
+          </div>
         ))}
       </div>
-      
+
     </div>
   );
 }

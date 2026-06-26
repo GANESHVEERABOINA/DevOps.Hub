@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { PixelCategoryCard } from '../components/ui/pixel-canvas';
 import { X } from 'lucide-react'; 
 import { useAuthStore } from '../store/authStore'; 
-
-// ఇక్కడ మన కొత్త 3D లాగిన్ కార్డ్ ని ఇంపోర్ట్ చేస్తున్నాం 
 import { SignInCard } from '../components/ui/sign-in-card';
 
 const categorizedTools = {
@@ -69,36 +67,38 @@ export default function InterviewQuestions() {
   };
 
   return (
-    <div className="text-white min-h-screen bg-transparent max-w-7xl mx-auto px-4 md:px-8 pt-8 pb-32 relative z-10">
+    <div className="text-white min-h-screen bg-transparent max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-6 md:pt-8 pb-32 relative z-10 w-full overflow-hidden flex flex-col items-center md:items-start">
       
-      <div className="mb-16 border-b border-white/10 pb-8 bg-transparent">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-3 tracking-tight">Interview Q&A</h1>
-        <p className="text-gray-400 text-lg">Select a topic to start practicing interview questions.</p>
+      <div className="mb-10 md:mb-16 border-b border-white/10 pb-6 md:pb-8 bg-transparent w-full text-center md:text-left">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-white mb-2 md:mb-3 tracking-tight">Interview Q&A</h1>
+        <p className="text-gray-400 text-sm md:text-lg">Select a topic to start practicing interview questions.</p>
       </div>
       
-      <div className="flex flex-col gap-16 bg-transparent">
+      <div className="flex flex-col gap-10 md:gap-16 bg-transparent w-full">
         {Object.entries(categorizedTools).map(([category, tools]) => (
-          <div key={category} className="w-full bg-transparent">
+          <div key={category} className="w-full bg-transparent flex flex-col items-center md:items-start">
             
-            <h2 className="text-xl font-bold text-white mb-8 tracking-wide uppercase">
+            <h2 className="text-lg sm:text-xl font-bold text-white mb-6 md:mb-8 tracking-wide uppercase text-center md:text-left">
               {category}
             </h2>
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 bg-transparent">
+            {/* ఇక్కడే మ్యాజిక్: grid-cols-2 అని ఇచ్చాను, అంటే ఏ స్క్రీన్ లో అయినా మినిమమ్ 2 కార్డ్స్ వస్తాయి. గ్యాప్ కూడా gap-3 కి తగ్గించాను */}
+            <div className="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-6 justify-items-center bg-transparent">
                 {tools.map((item, index) => {
                     const isFree = freeTopics.includes(item.path);
 
                     return (
-                        <PixelCategoryCard
-                            key={index}
-                            name={item.name}
-                            icon={item.icon}
-                            path={item.path}
-                            description={`Top ${item.name} Questions`}
-                            date={(isFree || isLoggedIn) ? "Start Q&A →" : "🔒 Unlock Now"}
-                            colors={item.colors}
-                            onClick={() => handleCardClick(item.path)}
-                        />
+                        <div key={index} className="w-full flex justify-center h-full">
+                            <PixelCategoryCard
+                                name={item.name}
+                                icon={item.icon}
+                                path={item.path}
+                                description={`Top ${item.name} Questions`}
+                                date={(isFree || isLoggedIn) ? "Start Q&A →" : "🔒 Unlock Now"}
+                                colors={item.colors}
+                                onClick={() => handleCardClick(item.path)}
+                            />
+                        </div>
                     );
                 })}
             </div>
@@ -107,27 +107,20 @@ export default function InterviewQuestions() {
         ))}
       </div>
 
-      {/* =========================================
-          కొత్త 3D LOGIN POPUP MODAL
-          ========================================= */}
       {showLoginModal && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
-          {/* బ్యాక్‌గ్రౌండ్ బ్లర్ - దీనివల్ల వెనక ఉన్న వెబ్‌సైట్ డాట్స్ అలాగే మసకగా కనిపిస్తాయి */}
           <div 
             className="absolute inset-0 bg-black/60 backdrop-blur-md transition-opacity cursor-pointer"
             onClick={() => setShowLoginModal(false)}
           ></div>
           
           <div className="relative z-10 w-full max-w-md">
-            {/* క్లోజ్ బటన్ */}
             <button 
               onClick={() => setShowLoginModal(false)}
               className="absolute -top-12 right-0 z-20 p-2 text-gray-400 hover:text-white transition-colors"
             >
               <X size={24} />
             </button>
-            
-            {/* మన కొత్త 3D లాగిన్ కార్డ్ */}
             <SignInCard onSuccess={() => setShowLoginModal(false)} />
           </div>
         </div>

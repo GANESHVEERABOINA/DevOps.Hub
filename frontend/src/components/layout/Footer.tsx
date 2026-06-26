@@ -1,45 +1,72 @@
+// ఇక్కడ కేవలం Rocket, Briefcase మాత్రమే ఇంపోర్ట్ చేస్తున్నాం (ఎందుకంటే ఇవి ముందే పనిచేస్తున్నాయి కాబట్టి)
+import { Rocket, Briefcase } from "lucide-react"
+import { Footer as FooterComponent } from "../ui/footer"
+
+// 🚀 MASTER TRICK: lucide-react తో పనిలేకుండా డైరెక్ట్ గా ఒరిజినల్ Github ఐకాన్ క్రియేట్ చేశాం!
+const GithubIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" />
+    <path d="M9 18c-4.51 2-5-2-7-2" />
+  </svg>
+);
+
+// 🚀 MASTER TRICK: డైరెక్ట్ ఒరిజినల్ Linkedin ఐకాన్!
+const LinkedinIcon = ({ className }: { className?: string }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
 export default function Footer() {
   return (
-    <footer className="bg-black text-white py-6 mt-auto border-t border-gray-800">
-      <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
-        
-        {/* Brand & Quote */}
-        <div>
-          <h3 className="text-white text-xl font-bold mb-2 tracking-wider">DEVOPS<span className="text-white-500">.HUB</span></h3>
-          <p className="text-xs italic text-gray-400 mb-2">
-            "If you're a beginner aiming for a DevOps career, this platform is a gold mine..."
-          </p>
-          {/* Ikkada mee peru add chesanu */}
-          <p className="text-xs text-gray-400">Created with AI </p>
-        </div>
-
-        {/* Quick Links */}
-        <div>
-          <h4 className="text-white font-semibold mb-2 text-sm uppercase tracking-wider">Quick Links</h4>
-          <ul className="space-y-1 text-xs text-gray-300">
-            <li><a href="/roadmaps" className="hover:text-white transition-colors">DevOps Roadmaps</a></li>
-            <li><a href="/questions" className="hover:text-white transition-colors">Interview Q&A</a></li>
-            <li><a href="/projects" className="hover:text-white transition-colors">Real-time Projects</a></li>
-            <li><a href="/mock-interview" className="hover:text-white transition-colors">Mock Interviews</a></li>
-          </ul>
-        </div>
-
-        {/* Connect */}
-        <div>
-          <h4 className="text-white font-semibold mb-2 text-sm uppercase tracking-wider">Connect</h4>
-          <ul className="space-y-1 text-xs text-gray-300">
-            {/* Ikkada Portfolio link add chesanu */}
-            <li><a href="#" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">Portfolio</a></li>
-            <li><a href="https://www.linkedin.com/in/ganesh-veeraboina/" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">LinkedIn</a></li>
-            <li><a href="https://github.com/GANESHVEERABOINA" target="_blank" rel="noreferrer" className="hover:text-white transition-colors">GitHub</a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <div className="border-t border-gray-800 mt-6 pt-3 text-center text-xs text-gray-500">
-        <p>&copy; {new Date().getFullYear()} Ganesh Veeraboina. All rights reserved.</p>
-      </div>
-    </footer>
-  );
+    <div className="w-full relative z-20 mt-10">
+      <FooterComponent
+        logo={<Rocket className="h-6 w-6 text-white" />}
+        brandName={
+          <>DEVOPS<span className="text-white">.HUB</span></>
+        }
+        description={
+          <div className="text-[10px] sm:text-xs text-white mt-2">
+            <p className="italic">"If you're a beginner aiming for a DevOps career, this platform is a gold mine..."</p>
+            <p>Created with AI</p>
+          </div>
+        }
+        socialLinks={[
+          {
+            icon: <Briefcase className="h-4 w-4" />,
+            href: "#",
+            label: "Portfolio",
+          },
+          {
+            // పైన క్రియేట్ చేసిన LinkedinIcon వాడుతున్నాం
+            icon: <LinkedinIcon className="h-4 w-4" />,
+            href: "https://www.linkedin.com/in/ganesh-veeraboina/",
+            label: "LinkedIn",
+          },
+          {
+            // పైన క్రియేట్ చేసిన GithubIcon వాడుతున్నాం
+            icon: <GithubIcon className="h-4 w-4" />,
+            href: "https://github.com/GANESHVEERABOINA",
+            label: "GitHub",
+          },
+        ]}
+        mainLinks={[
+          { href: "/roadmaps", label: "DevOps Roadmaps" },
+          { href: "/questions", label: "Interview Q&A" },
+          { href: "/projects", label: "Real-time Projects" },
+          { href: "/mock-interview", label: "Mock Interviews" },
+        ]}
+        legalLinks={[
+          { href: "/privacy", label: "Privacy Policy" },
+          { href: "/terms", label: "Terms of Service" },
+        ]}
+        copyright={{
+          text: `© ${new Date().getFullYear()} Ganesh Veeraboina.`,
+          license: "All rights reserved.",
+        }}
+      />
+    </div>
+  )
 }

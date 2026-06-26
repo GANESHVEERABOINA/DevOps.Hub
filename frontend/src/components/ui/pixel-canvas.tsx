@@ -192,7 +192,7 @@ export function PixelCanvas({ colors, gap = 5, speed = 30 }: PixelCanvasProps) {
 }
 
 // ==========================================
-// Category Card Component (Fixed Size & Swap Animation)
+// Category Card Component (Responsive Size & Fluid Text for 2-column Mobile)
 // ==========================================
 export function PixelCategoryCard({ 
     name, icon, path, description, date, colors, onClick 
@@ -203,8 +203,8 @@ export function PixelCategoryCard({
     <div
       onClick={onClick}
       className={cn(
-        // ఇక్కడ min-h తీసేసి, కచ్చితమైన ఎత్తు (h-[180px]) మరియు వెడల్పు (w-full) పెట్టాను.
-        "group relative flex flex-col justify-center items-center text-center p-4 h-[180px] w-full overflow-hidden bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl cursor-pointer select-none isolate transition-all duration-300",
+        // ప్యాడింగ్ p-2 (మొబైల్), p-4 (డెస్క్ టాప్). హైట్ 130px (మొబైల్)
+        "group relative flex flex-col justify-center items-center text-center p-2 sm:p-4 w-full h-[130px] sm:h-[160px] md:h-[180px] overflow-hidden bg-[#0a0a0a]/90 backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-3xl cursor-pointer select-none isolate transition-all duration-300",
         "hover:scale-[1.02] hover:-translate-y-1 hover:z-10",
         "hover:shadow-[0_8px_30px_-8px_color-mix(in_srgb,var(--brand)_40%,transparent),0_0_0_1px_color-mix(in_srgb,var(--brand)_50%,transparent)]"
       )}
@@ -212,28 +212,26 @@ export function PixelCategoryCard({
     >
       <PixelCanvas colors={colors} gap={6} speed={40} />
       
-      {/* కార్డ్ కంటెంట్ */}
-      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
+      <div className="relative z-10 flex flex-col items-center justify-center w-full h-full space-y-1 sm:space-y-3">
         
-        {/* ఎమోజీ ఐకాన్ */}
-        <span className="text-4xl drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] group-hover:scale-110 transition-transform duration-300 mb-3">
+        {/* ఎమోజీ ఐకాన్: మొబైల్ లో 2-కాలమ్స్ కి తగ్గట్టు కొంచెం చిన్నగా (text-2xl) */}
+        <span className="text-2xl sm:text-4xl drop-shadow-[0_0_15px_rgba(255,255,255,0.2)] group-hover:scale-110 transition-transform duration-300">
             {icon}
         </span>
         
-        {/* కేటగిరీ టైటిల్ */}
-        <h3 className="text-lg font-bold text-white group-hover:text-[var(--brand)] transition-colors duration-300 mb-1 leading-tight line-clamp-1 px-2">
+        {/* కేటగిరీ టైటిల్: text-[13px] (మొబైల్), text-lg (డెస్క్ టాప్) */}
+        <h3 className="text-[13px] sm:text-lg font-bold text-white group-hover:text-[var(--brand)] transition-colors duration-300 leading-tight line-clamp-2 sm:line-clamp-1 px-1">
             {name}
         </h3>
         
-        {/* కింది భాగం: టెక్స్ట్ స్వ్యాప్ (మౌస్ పెడితే మారుతుంది) */}
-        <div className="relative w-full h-8 flex justify-center items-center mt-1">
-            {/* మామూలుగా ఉన్నప్పుడు కనిపించే డిస్క్రిప్షన్ (మౌస్ పెడితే హైడ్ అవుతుంది) */}
-            <p className="text-[11px] text-gray-400 group-hover:opacity-0 transition-opacity duration-300 absolute w-full px-2 line-clamp-2">
+        <div className="relative w-full h-6 flex justify-center items-center mt-1">
+            {/* డిస్క్రిప్షన్ */}
+            <p className="text-[9px] sm:text-[11px] text-gray-400 group-hover:opacity-0 transition-opacity duration-300 absolute w-full px-1 line-clamp-1">
                 {description}
             </p>
             
-            {/* మౌస్ పెట్టినప్పుడు కనిపించే 'START Q&A' బటన్ టెక్స్ట్ */}
-            <span className="text-[11px] font-bold uppercase tracking-widest text-[var(--brand)] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute">
+            {/* START Q&A బటన్ టెక్స్ట్ */}
+            <span className="text-[9px] sm:text-[11px] font-bold uppercase tracking-widest text-[var(--brand)] opacity-0 group-hover:opacity-100 transform translate-y-2 group-hover:translate-y-0 transition-all duration-300 absolute">
                 {date}
             </span>
         </div>
